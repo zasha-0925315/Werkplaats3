@@ -13,5 +13,10 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
+@app.route("/teapot")
+def teapot():
+    return render_template("teapot.html"), 418
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
