@@ -8,26 +8,33 @@ FLASK_DEBUG = True
 
 app = Flask(__name__)
 
+
 # Main route
 @app.route("/")
 def index():
     return render_template("index.html", title=index)
 
+
 # Url for QR Code scanning
 @app.route('/QR')
-def QR():
-    return render_template("QR.html", title=QR-Code)
+def qr():
+    return render_template("QR.html", title=qr)
+
 
 @app.route('/meeting', methods=["POST, GET"])
-def Meeting():
+def meeting():
     match request.method:
         case 'GET':
             return render_template('meeting.html')
         case 'POST':
             print("POST")
+        case _:
+            return render_template('meeting.html')
+
+
 
 @app.route('/meeting/<meetingId>', methods=["PUT, PATCH, DELETE"])
-def MeetingId():
+def meetingid():
     match request.method:
         case 'PUT':
             print("PUT")
@@ -36,11 +43,13 @@ def MeetingId():
         case 'DELETE':
             print("DELETE")
 
+
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
-def MeetingForTeacher():
+def meetingforteacher():
     match request.method:
         case 'GET':
             return render_template('meetingid.html')
+
 
 @app.route('/student', methods=["GET, POST"])
 def student():
@@ -50,13 +59,15 @@ def student():
         case 'POST':
             print("POST")
 
+
 @app.route('/student/<studentId>', methods=["GET, DELETE"])
-def studentId():
+def studentid():
     match request.method:
         case 'GET':
             return render_template('studentid.html')
         case 'DELETE':
             print("DELETE")
+
 
 @app.route('/teacher', methods=["GET, POST"])
 def teacher():
@@ -66,8 +77,9 @@ def teacher():
         case 'POST':
             print("POST")
 
+
 @app.route('/teacher/<teacherId>', methods=["GET, PUT, DELETE"])
-def teacherId():
+def teacherid():
     match request.method:
         case 'GET':
             return render_template('teacherid.html')
@@ -75,6 +87,7 @@ def teacherId():
             print("PUT")
         case 'DELETE':
             print("DELTE")
+
 
 @app.route('/class', methods=["GET, POST"])
 def studentclass():
@@ -84,7 +97,8 @@ def studentclass():
         case 'POST':
             print("POST")
 
-@app.route("class/<classId>", methods=["GET, PATCH, DELETE"])
+
+@app.route("/class/<classId>", methods=["GET, PATCH, DELETE"])
 def studentclassid():
     match request.method:
         case 'GET':
@@ -94,6 +108,6 @@ def studentclassid():
         case 'DELETE':
             print("DELTE")
 
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
-
