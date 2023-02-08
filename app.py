@@ -14,6 +14,9 @@ app = Flask(__name__)
 def index():
     return render_template("index.html", title=index)
 
+@app.route("/base")
+def base():
+    return render_template("base_template.html")
 
 # Url for QR Code scanning
 @app.route('/QR')
