@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/static/basic.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <!-- https://github.com/neocotic/qrious -->
+</head>
+<body>
+    <main>
+        <h1>QR Code</h1>
+        <div id="test">
+            <form>
+                <input type="text" id="text"/>
+                <button type="button" onclick="generateCode()">aaaa</button>
+                <br/>
+            </form>
+        </div>
+        <div id="qrcontainer">
+            <canvas id="qr"></canvas>
+        </div>
+        <script>
+            function generateCode(){
+                let getText = document.getElementById("text").value;
+                
+                if(getText){ //laat pas de QR code zien als er daadwerkelijk text is ingevoerd
+                    let qr = new QRious({
+                        foreground: "#D30F4C",
+                        background: "#FFFFFF",
+                        backgroundAlpha: 0.1,
+                        size: 500,
+                        level: "H",
+                        padding: 25,
+                        element: document.getElementById("qr"),
+                        value: getText
+                    })
+                } else {
+                    alert("Geen text ingevoerd!");
+                }
+            }
+        </script>
+    </main>
+</body>
+</html>
