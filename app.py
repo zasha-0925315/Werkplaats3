@@ -22,7 +22,7 @@ def QR():
 def Meeting():
     match request.method:
         case 'GET':
-            print("GET")
+            return render_template('meeting.html')
         case 'POST':
             print("POST")
 
@@ -40,13 +40,13 @@ def MeetingId():
 def MeetingForTeacher():
     match request.method:
         case 'GET':
-            print("GET")
+            return render_template('meetingid.html')
 
 @app.route('/student', methods=["GET, POST"])
 def student():
     match request.method:
         case 'GET':
-            print("GET")
+            return render_template('student.html')
         case 'POST':
             print("POST")
 
@@ -54,7 +54,7 @@ def student():
 def studentId():
     match request.method:
         case 'GET':
-            print("GET")
+            return render_template('studentid.html')
         case 'DELETE':
             print("DELETE")
 
@@ -62,7 +62,7 @@ def studentId():
 def teacher():
     match request.method:
         case 'GET':
-            print("GET")
+            return render_template('teacher.html')
         case 'POST':
             print("POST")
 
@@ -70,7 +70,7 @@ def teacher():
 def teacherId():
     match request.method:
         case 'GET':
-            print("GET")
+            return render_template('teacherid.html')
         case 'PUT':
             print("PUT")
         case 'DELETE':
@@ -80,17 +80,15 @@ def teacherId():
 def studentclass():
     match request.method:
         case 'GET':
-            print("GET")
+            return render_template('class.html')
         case 'POST':
             print("POST")
 
-
-
-@app.route("class/<clasId>", methods=["GET, PATCH, DELETE"])
+@app.route("class/<classId>", methods=["GET, PATCH, DELETE"])
 def studentclassid():
     match request.method:
         case 'GET':
-            print("GET")
+            return render_template('classid.html')
         case 'PATCH':
             print("PATCH")
         case 'DELETE':
