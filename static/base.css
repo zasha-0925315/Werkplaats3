@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "header.css";
 
 :root{
     --main-font: 'Poppins', sans-serif;
     --bg-color: #f8f5ee;
     --hr-red: #d30f4c;
     --white: #fff;
+    --font-size: 15px;
 }
 
 * {
@@ -12,77 +14,3 @@
     background-color: var(--bg-color);
     margin: 0;
 }
-
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--hr-red);
-    height: 75px;
-    padding: 0 20px;
-}
-
-header * {
-    background-color: transparent;
-}
-
-header div {
-    display: flex;
-    align-items: center;
-}
-
-header button {
-    background-color: rgba(0, 0, 0, 0.2);
-    color: var(--white);
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 16px;
-    border-radius: 6px;
-    padding: 10px;
-    margin-left: 4px;
-    border: none;
-    text-decoration: none;
-}
-
-header button:hover {
-    background-color: var(--white);
-    color: var(--hr-red);
-    transition: all 200ms;
-}
-
-#logo_text {
-    margin-left: 16px;
-}
-
-#header_burger_menu {
-    display: none;
-}
-
-#burger_menu_button {
-    display: none;
-}
-
-#burger_menu_button button {
-    padding: 8px;
-}
-
-#burger_menu_button:hover #burger_icon {
-    fill: var(--hr-red);
-    transition: all 200ms;
-}
-
-@media (pointer:coarse) {
-    #header {
-        height: 200px;
-    }
-
-    #header_menu {
-        display: none;
-    }
-
-    #burger_menu_button {
-        display: block;
-    }
-}
-
-
