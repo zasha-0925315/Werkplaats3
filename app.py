@@ -108,6 +108,9 @@ def studentclassid():
         case 'DELETE':
             print("DELTE")
 
+@app.route("/screen")
+def screen():
+    return render_template('screen.html', title=screen)
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
