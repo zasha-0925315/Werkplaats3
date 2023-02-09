@@ -1,5 +1,5 @@
 // Timer JS functions for screen.html //
-Vardate = ("February 17, 2023 01:00:00")
+Vardate = ("February 9, 2023 13:39:00")
 let countDownDate = new Date(Vardate).getTime();
 
 // Run myfunc every second
@@ -27,6 +27,6 @@ let myfunc = setInterval(function () {
         document.getElementById("hours").innerHTML = ""
         document.getElementById("mins").innerHTML = ""
         document.getElementById("secs").innerHTML = ""
-        document.getElementById("end").innerHTML = "Time is up!!";
+        document.getElementById("end").innerHTML = "Check-in is gesloten";
     }
 }, 1000);

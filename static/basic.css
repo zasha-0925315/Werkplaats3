@@ -19,7 +19,7 @@
 
 @font-face {
     font-family: digital;
-    src: url("/static/fonts/DIGITALDREAM.ttf");
+    src: url("/static/fonts/UnisansHeavyItalic.otf");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -306,7 +306,11 @@ body {
     font-family: 'digital';
     border-style: ridge;
     justify-content: center;
-    width: 20%;
+    width: 13%;
     border-radius: 50%;
     background-color: lightgreen;
+}
+
+.p5 {
+    font-size: 25px;
 }
