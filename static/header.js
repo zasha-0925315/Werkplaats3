@@ -16,6 +16,13 @@ function burgerMenuFoldOut() {
     burger_toggle =! burger_toggle;
     burgerMenuButton.style.backgroundColor = burger_toggle ? white : transperant;
     burgerIcon.style.fill = burger_toggle ? hrRed : white;
+    burgerIcon.innerHTML = burger_toggle ?
+        "<rect x=\"-5\" y=\"0\" width=\"100\" height=\"15\" rx=\"8\" transform=\"rotate(45)\"></rect>\n" +
+        "<rect x=\"-57.5\" y=\"37.5\" width=\"100\" height=\"15\" rx=\"8\" transform=\"rotate(-45)\"></rect>"
+        :
+        "<rect width=\"100\" height=\"15\" rx=\"8\" ></rect>" +
+        "<rect y=\"30\" width=\"100\" height=\"15\" rx=\"8\" ></rect>" +
+        "<rect y=\"60\" width=\"100\" height=\"15\" rx=\"8\" ></rect>";
     slideMenu.style.width = burger_toggle ? "100vw" : "0";
     slideButtons.style.display = burger_toggle ? "flex" : "none";
     logoOutside.style.fill = burger_toggle ? hrRed : white;

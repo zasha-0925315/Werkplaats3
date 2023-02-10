@@ -12,7 +12,7 @@ header {
     align-items: center;
     justify-content: space-between;
     height: 75px;
-    z-index: 1;
+    z-index: 2;
 }
 
 header * {
@@ -58,6 +58,7 @@ header button:hover {
 
 #burger_menu_button {
     display: block;
+    transition: all 300ms;
 }
 
 #burger_menu_button button {
@@ -79,18 +80,35 @@ header button:hover {
     right: 0;
     height: 100vh;
     width: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     background-color: var(--white);
     transition: all 300ms;
+    z-index: 1;
 }
 
 #slide_buttons {
     display: none;
     flex-direction: column;
+}
 
+#slide_buttons button {
+    background-color: var(--white);
+    color: var(--gray);
+    border-radius: 0;
+    margin-bottom: 100px;
+}
+
+#slide_buttons button:hover {
+    color: var(--hr-dark-blue);
+    border-left: var(--hr-red) solid 3px;
 }
 
 #slide_buttons span {
     text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 400;
 }
 
 @media (pointer:coarse) {
@@ -101,6 +119,7 @@ header button:hover {
     #header_container {
         height: 200px;
     }
+
 
     #logo {
         transform: scale(2);
@@ -125,5 +144,14 @@ header button:hover {
 
     #burger_menu button span {
         font-size: calc(var(--font-size) * 5);
+    }
+
+    table {
+        transform: scale(2);
+        transform-origin: top;
+    }
+
+    #slide_buttons {
+        transform: scale(2);
     }
 }
