@@ -15,6 +15,11 @@ def index():
     return render_template("index.html", title=index)
 
 
+@app.route("/base")
+def base():
+    return render_template("base_template.html")
+
+
 # Url for QR Code scanning
 @app.route('/QR')
 def qr():
@@ -30,7 +35,6 @@ def meeting():
             print("POST")
         case _:
             return render_template('meeting.html')
-
 
 
 @app.route('/meeting/<meetingId>', methods=["PUT, PATCH, DELETE"])
