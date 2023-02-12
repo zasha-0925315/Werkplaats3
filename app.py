@@ -116,5 +116,13 @@ def studentclassid():
 def screen():
     return render_template('screen.html', title=screen)
 
+@app.route("/login")
+def login():
+    return render_template('login.html', title=login)
+
+@app.route("/register")
+def register():
+    return render_template('register.html', title=register)    
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
