@@ -1,7 +1,5 @@
-@font-face {
-    font-family: digital;
-    src: url("/static/fonts/UnisansHeavyItalic.otf");
-}
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@600&display=swap");
+
 
 /* Count box design */
 
@@ -28,7 +26,7 @@
 .timer {
     display: flex;
     font-size: 30px;
-    font-family: 'digital';
+    font-family: 'Oswald', sans-serif;
     border-style: ridge;
     justify-content: center;
     width: 13%;
