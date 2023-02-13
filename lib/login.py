@@ -11,7 +11,7 @@ class Login:
         if not os.path.exists(self.db_file):
             raise FileNotFoundError(f"F in the chat for {db_file}")
 
-    def login(self, usn, pwd):
+    def login_user(self, usn, pwd):
         try:
             conn = sqlite3.connect()
             cursor = conn.cursor()

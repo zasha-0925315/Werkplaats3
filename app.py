@@ -1,4 +1,8 @@
+import os.path
+
 from flask import Flask, render_template, request
+
+from lib.login import Login
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -6,7 +10,12 @@ FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
 FLASK_DEBUG = True
 
+# other important stuffs
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "yeet"
+DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
+
+login = Login(DB_FILE)
 
 
 # Main route
@@ -118,6 +127,7 @@ def screen():
 
 @app.route("/login")
 def login():
+    #todo: add login logic
     return render_template('login.html', title=login)
 
 @app.route("/register")
