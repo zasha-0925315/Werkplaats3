@@ -124,5 +124,13 @@ def login():
 def register():
     return render_template('register.html', title=register)    
 
+@app.route("/testqr")
+def testqr():
+    return render_template("qrgen.html")
+
+@app.route("/teapot")
+def teapot():
+    return render_template("teapot.html"), 418
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
