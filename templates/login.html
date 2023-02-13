@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>base template</title>
+        <link rel="stylesheet" href="/static/base.css" type="text/css">
+    </head>
+    <body>
+        {% include 'header.html' %}
+        <main>
+          <!-- <div class="login-container"> -->
+            <form action="/handle_login" method="POST">
+                <div class="login-square">
+                 <div class="centered_div">
+                        <p class="login-header"><b>Log in</b></p>
+                        <p class="message">{{ message }}</p>
+                        <p class="username-field">
+                            <label for="username"><b>Student number or personnel code</b></label><br>
+                            <input id="username" type="text" name="username" class="login-field">
+                        </p><br>
+                        <p class="password-field">
+                            <label for="password"><b>Password</b></label><br>
+                            <input id="password" type="password" name="password" class="login-field">
+                        </p><br>
+                        <p class="submit-btn5">
+                            <input id="submit" type="submit" value="Login" class="submit">
+                        </p>
+                    </form>
+                </div>
+               </div>
+            </div>
+
+        </main>
+    </body>
+<script src="../static/header.js"></script>
+</html>
