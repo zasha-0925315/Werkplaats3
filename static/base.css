@@ -92,5 +92,7 @@
 }
 
 .submit-btn5 :hover {
-    background-color: #ff7f7f;
+    background-color: var(--white);
+    color: var(--hr-red);
+    transition: all 200ms;
 }
