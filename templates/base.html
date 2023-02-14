@@ -11,5 +11,8 @@
         {% include 'header.html' %}
         <div id="content">{% block content %}{% endblock %}</div>
     </body>
-<script src="../static/header.js"></script>
+    {% block script %}
+        <script src="../static/index.js"></script>
+    {% endblock script %}
 </html>
++

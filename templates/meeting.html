@@ -4,5 +4,25 @@
     {{ super() }}
 {% endblock head %}
 {% block content %}
-hi
+    <form method="post">
+        <label>Naam les:<br>
+            <input placeholder="Naam les">
+        </label>
+        <label>Datum:<br>
+            <input id="meeting_datetime" type="datetime-local" min>
+        </label>
+        <label>Locatie:<br>
+            <input>
+        </label>
+        <label>Docent(en):<br>
+            <input>
+        </label>
+        <label>Klassen:<br>
+            <input type="checkbox" name="">
+        </label>
+        <button class="button1">Plan in</button>
+    </form>
 {% endblock %}
+{% block script %}
+    <script src="../static/meeting.js"></script>
+{% endblock script %}

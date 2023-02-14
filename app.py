@@ -1,4 +1,8 @@
+import os.path
+
 from flask import Flask, render_template, request
+
+from lib.meeting import DatabaseModel
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -8,6 +12,13 @@ FLASK_DEBUG = True
 
 app = Flask(__name__)
 
+# This command creates the "<application directory>/databases/testcorrect_vragen.db" path
+DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
+
+# Check if the database file exists.
+if not os.path.isfile(DATABASE_FILE):
+    print(f"Could not find database {DATABASE_FILE}, creating a demo database.")
+dbm = DatabaseModel(DATABASE_FILE)
 
 # Main route
 @app.route("/")
@@ -30,13 +41,15 @@ def qr():
     # , methods=["POST, GET"]
            )
 def meeting():
+    tables = dbm.get_table_list()
+
     match request.method:
         case 'GET':
             return render_template('meeting.html')
         case 'POST':
             print("POST")
         case _:
-            return render_template('meeting.html')
+            return render_template('meeting.html', tables=tables)
 
 
 @app.route('/meeting/<meetingId>', methods=["PUT, PATCH, DELETE"])
