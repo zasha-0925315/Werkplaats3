@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block head %}
+            <meta charset="UTF-8">
+            <title>{% block title %}{% endblock %}</title>
+            <link rel="stylesheet" href="/static/base.css" type="text/css">
+        {% endblock head %}
+    </head>
+    <body>
+        {% include 'header.html' %}
+        <div id="content">{% block content %}{% endblock %}</div>
+    </body>
+<script src="../static/header.js"></script>
+</html>

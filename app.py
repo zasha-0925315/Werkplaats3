@@ -17,7 +17,7 @@ def index():
 
 @app.route("/base")
 def base():
-    return render_template("base_template.html")
+    return render_template("base.html")
 
 
 # Url for QR Code scanning
@@ -26,7 +26,9 @@ def qr():
     return render_template("QR.html", title=qr)
 
 
-@app.route('/meeting', methods=["POST, GET"])
+@app.route('/meeting'
+    # , methods=["POST, GET"]
+           )
 def meeting():
     match request.method:
         case 'GET':
