@@ -6,23 +6,25 @@
 {% block content %}
     <form method="post">
         <label>Naam les:<br>
-            <input placeholder="Naam les">
+            <input name="meeting_name" placeholder="Naam les">
         </label>
         <label>Datum:<br>
-            <input id="meeting_datetime" type="datetime-local" min>
+            <input id="meeting_datetime" name="meeting_datetime" type="date">
         </label>
         <label>Locatie:<br>
-            <input>
+            <input name="meeting_location">
         </label>
-        <label>Docent(en):<br>
-{#            {{ teachers }}#}
-            {{ teacherid }}
+        <label for="meeting_teacher">Docent(en):<br>
             {% for teacher in teachers %}
-                <input type="checkbox" name="{{ teacher }}">
+                <input type="checkbox" name="meeting_teacher" value="{{ teacher[0] }}">
+                <label for="meeting_teacher">{{ teacher[1] }} {{ teacher[2] }}</label><br>
             {% endfor %}
         </label>
-        <label>Klassen:<br>
-            <input type="checkbox" name="">
+        <label for="meeting_class">Klassen:<br>
+            {% for class in classes %}
+                <input type="checkbox" name="meeting_class" value="{{ class[0] }}">
+                <label for="meeting_class">{{ class[0] }}</label><br>
+            {% endfor %}
         </label>
         <button class="button1">Plan in</button>
     </form>

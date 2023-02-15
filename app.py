@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from lib.forms import LoginForm
 from lib.login import Login
 from lib.manageteacher import TeacherManagement
+from lib.manageclass import ClassManagement
+from lib.meeting import AddMeeting
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -25,6 +27,8 @@ DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
 login = Login(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
+classdb = ClassManagement(DB_FILE)
+meetingdb = AddMeeting(DB_FILE)
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
@@ -51,25 +55,46 @@ def qr():
     return render_template("QR.html", title=qr)
 
 
-@app.route('/meeting'
-    # , methods=["POST, GET"]
-           )
+@app.route('/meeting', methods=["GET", "POST"])
 def meeting():
 
     match request.method:
         case 'GET':
             teacher_list = teacherdb.get_teacher()
-            return render_template('meeting.html', teachers=teacher_list)
+            class_list = classdb.get_class()
+            print(class_list)
+
+            return render_template('meeting.html', teachers=teacher_list, classes=class_list)
         case 'POST':
-            print("POST")
+            meeting_name = str(request.form.get('meeting_name'))
+            meeting_datetime = request.form.get('meeting_datetime')
+            meeting_location = str(request.form.get('meeting_location'))
+            meeting_teacher = str(request.form.getlist('meeting_teacher'))
+            meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
+            meeting_students = str(meetingdb.get_students_by_class(meeting_classes))
+            print(meeting_name)
+            print(meeting_datetime)
+            print(meeting_location)
+            print(meeting_teacher)
+            print(meeting_classes)
+            print(meeting_students)
+
+            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+
         case _:
-            teacher_list = teacherdb.get_teacher()
-            teacherid = teacher_list[0]
+            print("nope")
 
-            return render_template('meeting.html', teachers=teacher_list, teacherid=teacherid)
+@app.route('/test', methods=["GET", "POST"])
+def test():
+    token = ["1B"]
+    token2 = str(token).replace("[", "").replace("]", "")
+    token3 = token2.replace("[", "").replace("]", "")
 
+    meeting_students = meetingdb.get_students_by_class(token2)
+    print(token3)
+    return render_template('index.html', students=meeting_students)
 
-@app.route('/meeting/<meetingId>', methods=["PUT, PATCH, DELETE"])
+@app.route('/meeting/<meetingId>', methods=["PUT", "PATCH", "DELETE"])
 def meetingid():
     match request.method:
         case 'PUT':
@@ -87,7 +112,7 @@ def meetingforteacher():
             return render_template('meetingid.html')
 
 
-@app.route('/student', methods=["GET, POST"])
+@app.route('/student', methods=["GET", "POST"])
 def student():
     match request.method:
         case 'GET':
@@ -96,7 +121,7 @@ def student():
             print("POST")
 
 
-@app.route('/student/<studentId>', methods=["GET, DELETE"])
+@app.route('/student/<studentId>', methods=["GET", "DELETE"])
 def studentid():
     match request.method:
         case 'GET':
@@ -105,7 +130,7 @@ def studentid():
             print("DELETE")
 
 
-@app.route('/teacher', methods=["GET, POST"])
+@app.route('/teacher', methods=["GET", "POST"])
 def teacher():
     match request.method:
         case 'GET':
@@ -114,7 +139,7 @@ def teacher():
             print("POST")
 
 
-@app.route('/teacher/<teacherId>', methods=["GET, PUT, DELETE"])
+@app.route('/teacher/<teacherId>', methods=["GET", "PUT", "DELETE"])
 def teacherid():
     match request.method:
         case 'GET':
@@ -125,7 +150,7 @@ def teacherid():
             print("DELTE")
 
 
-@app.route('/class', methods=["GET, POST"])
+@app.route('/class', methods=["GET", "POST"])
 def studentclass():
     match request.method:
         case 'GET':
@@ -134,7 +159,7 @@ def studentclass():
             print("POST")
 
 
-@app.route("/class/<classId>", methods=["GET, PATCH, DELETE"])
+@app.route("/class/<classId>", methods=["GET", "PATCH", "DELETE"])
 def studentclassid():
     match request.method:
         case 'GET':
@@ -157,7 +182,7 @@ def show_login():
     #         return redirect(url_for("home"))
     return render_template("login.html")
 
-@app.route("/handle_login", methods=["GET","POST"])
+@app.route("/handle_login", methods=["GET", "POST"])
 def handle_login():
     if request.form["password"] == "password" and request.form["username"] == "admin":
         session["logged_in"] = True

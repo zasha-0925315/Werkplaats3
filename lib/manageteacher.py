@@ -25,4 +25,5 @@ class TeacherManagement:
         except OperationalError as e:
             print("yeet")
             raise e
+
         return teacher
