@@ -3,12 +3,15 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from lib.forms import LoginForm
 from lib.meeting import DatabaseModel
 
+from lib.login import Login
+
 # Flask server
 LISTEN_ALL = "0.0.0.0"
 FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
 FLASK_DEBUG = True
 
+# other important stuffs
 app = Flask(__name__)
 app.config['SECRET_KEY'] ='sfsfl446klxjaasdksldklfgg'
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
@@ -18,6 +21,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 #     if request.endpoint not in ["static"]:
 #         if not session.get("logged_in"):
 #             return redirect(url_for('show_login'))
+app.config["SECRET_KEY"] = "yeet"
+DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
+
+login = Login(DB_FILE)
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
