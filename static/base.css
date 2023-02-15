@@ -69,6 +69,8 @@ form input {
     padding-bottom: 5px;
     padding-left: 0;
     padding-right: 0;
+    padding: 5px 0;
+    padding: 5px 0 5px 0;
     border-radius: 0;
     border: 0;
     border-bottom: 2px solid #001e48;
@@ -107,7 +109,7 @@ form input {
 .login-field {
     width: 300px;
     background-color: rgb(232, 240, 254);
-    border-width: 0px 0px 2px 0px;
+    border-width: 0 0px 2px 0px;
     border-color: black;
 
 }
