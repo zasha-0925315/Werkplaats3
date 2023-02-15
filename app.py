@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, session, redirect, url_for
-
+from forms import LoginForm, RegistrationForm
+from flask_sqlalchemy import SQLAlchemy
 
 
 # Flask server
@@ -14,12 +15,13 @@ FLASK_DEBUG = True
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] ='sfsfl446klxjaasdksldklfgg'
-
-# @app.before_request
-# def check_login():
-#     if request.endpoint not in ["static"]:
-#         if not session.get("logged_in"):
-#             return redirect(url_for('show_login'))
+app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
+ 
+@app.before_request
+def check_login():
+    if request.endpoint not in ["static"]:
+        if not session.get("logged_in"):
+            return redirect(url_for('show_login'))
 
 # Main route
 @app.route("/")
