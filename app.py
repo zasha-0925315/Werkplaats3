@@ -10,7 +10,7 @@ FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
 FLASK_DEBUG = True
 
-
+db = SQLAlchemy()
 
 
 app = Flask(__name__)
@@ -165,6 +165,10 @@ def testqr():
 @app.route("/teapot")
 def teapot():
     return render_template("teapot.html"), 418
+
+@app.route("/link")
+def link():
+    return render_template('link.html')    
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)

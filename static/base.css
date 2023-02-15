@@ -3,6 +3,7 @@
 @import "table.css";
 @import "meeting.css";
 @import "login.css";
+@import "links.css";
 
 :root {
     --main-font: 'Poppins', sans-serif;

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+
+</style>
+<body>
+    <div id="meeting-div">Meetings
+    </div>
+  <div id="maih">
+    <div id="div1"> 
+    </div>    
+    <div class= "Greet-Balk"> <br>
+        {% if session.logged_in %}
+        Hoi, {{ session.username }}
+        {% else %}
+        {% endif %}
+    </div>
+    
+
+  </div>
+</body>
+{% endblock content %}

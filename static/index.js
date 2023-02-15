@@ -1,5 +1,5 @@
 // Timer JS functions for screen.html //
-Vardate = ("February 11, 2023 13:39:00")
+Vardate = ("February 17, 2023 13:39:00")
 let countDownDate = new Date(Vardate).getTime();
 
 // Run myfunc every second
