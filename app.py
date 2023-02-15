@@ -1,9 +1,6 @@
 import os
 from flask import Flask, render_template, request, session, redirect, url_for
-from forms import LoginForm, RegistrationForm
-from flask_sqlalchemy import SQLAlchemy
-
-
+from lib.forms import LoginForm
 from lib.meeting import DatabaseModel
 
 # Flask server
@@ -16,11 +13,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] ='sfsfl446klxjaasdksldklfgg'
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
-@app.before_request
-def check_login():
-    if request.endpoint not in ["static"]:
-        if not session.get("logged_in"):
-            return redirect(url_for('show_login'))
+# @app.before_request
+# def check_login():
+#     if request.endpoint not in ["static"]:
+#         if not session.get("logged_in"):
+#             return redirect(url_for('show_login'))
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
