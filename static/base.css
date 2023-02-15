@@ -2,6 +2,7 @@
 @import "header.css";
 @import "table.css";
 @import "meeting.css";
+@import "login.css";
 
 :root {
     --main-font: 'Poppins', sans-serif;
@@ -18,82 +19,4 @@
     font-family: var(--main-font);
     background-color: var(--bg-color);
     margin: 0;
-}
-
-/* This is the css for the input field for login.html */
-.input__input {
-    display: block;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 0;
-    padding-right: 0;
-    border-radius: 0;
-    border: 0;
-    border-bottom: 2px solid #001e48;
-    box-shadow: 0 0 0 0 #001e48 inset;
-    background-color: transparent;
-    line-height: 1.38;
-    font-size: 2.2rem;
-    font-weight: 500;
-}
-
-.login-square {
-    display: flex;
-    justify-content: center;
-    width: 350px;
-    height: 250px;
-    margin: 0 auto;
-    margin-top: 50px;
-    padding-top: 20px;
-
-}
-
-.login-header {
-    display: flex;
-    justify-content: center;
-    font-size: 40px;
-    padding-bottom: 15px;
-}
-
-.centered-div {
-    border-style: ridge;
-    border-color: red;
-
-
-}
-
-.login-field {
-    width: 300px;
-    background-color: rgb(232, 240, 254);
-    border-width: 0px 0px 2px 0px;
-    border-color: black;
-
-}
-
-.submit-btn5 {
-    display: flex;
-    justify-content: center;
-}
-
-.submit {
-    font-size: 22px;
-    cursor: pointer;
-    padding: 12.5px 60px;
-    border-radius: 500px;
-    color: #ffffff;
-    background-color: #d30f4c;
-    border: none;
-    border-color: transparent;
-    transition: 300ms;
-    margin-top: 10px;
-
-}
-
-.submit-btn5 :hover {
-    background-color: var(--white);
-    color: var(--hr-red);
-    transition: all 200ms;
 }
