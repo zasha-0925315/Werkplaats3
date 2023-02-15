@@ -1,9 +1,8 @@
 import os
 from flask import Flask, render_template, request, session, redirect, url_for
 from lib.forms import LoginForm
-from lib.meeting import DatabaseModel
-
 from lib.login import Login
+from lib.manageteacher import TeacherManagement
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -13,7 +12,7 @@ FLASK_DEBUG = True
 
 # other important stuffs
 app = Flask(__name__)
-app.config['SECRET_KEY'] ='sfsfl446klxjaasdksldklfgg'
+app.config['SECRET_KEY'] = 'sfsfl446klxjaasdksldklfgg'
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
 # @app.before_request
@@ -25,6 +24,7 @@ app.config["SECRET_KEY"] = "yeet"
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
 login = Login(DB_FILE)
+teacherdb = TeacherManagement(DB_FILE)
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
@@ -32,7 +32,7 @@ DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
 # Check if the database file exists.
 if not os.path.isfile(DATABASE_FILE):
     print(f"Could not find database {DATABASE_FILE}, creating a demo database.")
-dbm = DatabaseModel(DATABASE_FILE)
+
 
 # Main route
 @app.route("/")
@@ -55,15 +55,18 @@ def qr():
     # , methods=["POST, GET"]
            )
 def meeting():
-    tables = dbm.get_table_list()
 
     match request.method:
         case 'GET':
-            return render_template('meeting.html')
+            teacher_list = teacherdb.get_teacher()
+            return render_template('meeting.html', teachers=teacher_list)
         case 'POST':
             print("POST")
         case _:
-            return render_template('meeting.html', tables=tables)
+            teacher_list = teacherdb.get_teacher()
+            teacherid = teacher_list[0]
+
+            return render_template('meeting.html', teachers=teacher_list, teacherid=teacherid)
 
 
 @app.route('/meeting/<meetingId>', methods=["PUT, PATCH, DELETE"])

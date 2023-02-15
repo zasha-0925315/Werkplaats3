@@ -15,7 +15,11 @@
             <input>
         </label>
         <label>Docent(en):<br>
-            <input type="checkbox" name="">
+{#            {{ teachers }}#}
+            {{ teacherid }}
+            {% for teacher in teachers %}
+                <input type="checkbox" name="{{ teacher }}">
+            {% endfor %}
         </label>
         <label>Klassen:<br>
             <input type="checkbox" name="">
