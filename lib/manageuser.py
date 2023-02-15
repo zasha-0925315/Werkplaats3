@@ -13,7 +13,7 @@ class UserManagement:
 
     def create_user(self):
         try:
-            conn = sqlite3.connect()
+            conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
             cursor.execute("")
@@ -27,7 +27,7 @@ class UserManagement:
 
     def get_user(self):
         try:
-            conn = sqlite3.connect()
+            conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
             cursor.execute("")
@@ -41,7 +41,7 @@ class UserManagement:
 
     def update_user(self):
         try:
-            conn = sqlite3.connect()
+            conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
             cursor.execute("")
@@ -55,7 +55,7 @@ class UserManagement:
 
     def delete_user(self):
         try:
-            conn = sqlite3.connect()
+            conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
             cursor.execute("")

@@ -13,7 +13,7 @@ class StudentManagement:
 
     def get_student(self):
         try:
-            conn = sqlite3.connect()
+            conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM student")

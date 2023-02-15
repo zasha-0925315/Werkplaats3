@@ -13,7 +13,7 @@ class ClassManagement:
 
     def get_class(self):
         try:
-            conn = sqlite3.connect()
+            conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM klas")
@@ -27,7 +27,7 @@ class ClassManagement:
 
     def get_enrollment(self):
         try:
-            conn = sqlite3.connect()
+            conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM enrollment")
