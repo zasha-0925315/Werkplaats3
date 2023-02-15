@@ -25,3 +25,4 @@ class Login:
         except OperationalError as e:
             print("yeet")
             raise e
+        return user
