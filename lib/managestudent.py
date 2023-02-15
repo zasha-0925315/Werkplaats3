@@ -4,7 +4,7 @@ from sqlite3 import OperationalError
 
 
 class StudentManagement:
-    """regelt de users enzo"""
+    """regelt de studenten enzo"""
 
     def __init__(self, db_file):
         self.db_file = db_file
