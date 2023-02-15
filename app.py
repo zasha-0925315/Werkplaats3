@@ -1,6 +1,8 @@
-import os.path
+import os
+from flask import Flask, render_template, request, session, redirect, url_for
+from forms import LoginForm, RegistrationForm
+from flask_sqlalchemy import SQLAlchemy
 
-from flask import Flask, render_template, request
 
 from lib.meeting import DatabaseModel
 
@@ -11,6 +13,14 @@ FLASK_PORT = 81
 FLASK_DEBUG = True
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] ='sfsfl446klxjaasdksldklfgg'
+app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
+
+@app.before_request
+def check_login():
+    if request.endpoint not in ["static"]:
+        if not session.get("logged_in"):
+            return redirect(url_for('show_login'))
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
@@ -125,15 +135,32 @@ def studentclassid():
         case 'PATCH':
             print("PATCH")
         case 'DELETE':
-            print("DELTE")
+            print("DELETE")
 
 @app.route("/screen")
 def screen():
     return render_template('screen.html', title=screen)
 
-@app.route("/login")
-def login():
-    return render_template('login.html', title=login)
+
+@app.route('/login', methods=["GET", "POST"])
+def show_login():
+    session["username"] = request.form.get("username")
+    #     if username in users and users[username][1]== password:
+    #         session["username"] = username
+    #         return redirect(url_for("home"))
+    return render_template("login.html")
+
+@app.route("/handle_login", methods=["GET","POST"])
+def handle_login():
+    if request.form["password"] == "password" and request.form["username"] == "admin":
+        session["logged_in"] = True
+    # if request.method == "POST":
+    #     username = request.form.get("username")
+    #     password = request.form.get("password")
+    #     session["logged_in"] = True
+    else:
+        return render_template("login.html", message="Invalid Password or Username.")
+    return redirect(url_for('base'))
 
 @app.route("/register")
 def register():
