@@ -4,7 +4,7 @@ from sqlite3 import OperationalError
 
 
 class TeacherManagement:
-    """regelt de users enzo"""
+    """regelt de docenten enzo"""
 
     def __init__(self, db_file):
         self.db_file = db_file
@@ -13,7 +13,7 @@ class TeacherManagement:
 
     def get_teacher(self):
         try:
-            conn = sqlite3.connect()
+            conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM docent")
