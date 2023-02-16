@@ -16,18 +16,19 @@
     filter: brightness(150%);
 }
 
-#div1 {
-    background-color: #ffffff;
+#meeting-border {
+    background-color: darkcyan;
     width: 1000px;
     height: 500px;
     margin-top: 10px;
     border-radius: 15%;
+    font-size: 50px;
+    font-family: 'Oswald', 'Sans Serif';
+
 }
 
-#meeting-div {
-    display: flex;
-    justify-content: left;
-    margin-left: 30px;
+#meeting-header {
+    margin-left: 225px;
     margin-top: 45px;
     font-size: 50px;
     font-family: 'Oswald', 'Sans Serif';
@@ -35,7 +36,85 @@
 }
 
 #maih {
-    padding: 10px;
-
+    padding: 50px;
     display: flex;
 }
+
+#meeting1:hover,
+#meeting2:hover,
+#meeting3:hover {
+    transform: scale(1.05);
+
+}
+
+#meeting1 {
+    display: flex;
+    justify-self: center;
+    width: 60%;
+    height: 20%;
+    border-style: ridge;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    border-radius: 25px;
+}
+
+#meeting2 {
+    width: 60%;
+    height: 20%;
+    border-style: ridge;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    border-radius: 25px;
+}
+
+#meeting3 {
+    width: 60%;
+    height: 20%;
+    border-style: ridge;
+    margin-left: 15px;
+    border-radius: 25px;
+}
+
+#check-meeting-button {
+    display: flex;
+    float: right;
+    position: right;
+    width: 30%;
+    height: 55%;
+    border-style: ridge;
+    border-color: aquamarine;
+    margin-right: 25px;
+    border-radius: 25px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+#check-meeting-button:hover {
+    filter: brightness(75%);
+    transform: scale(1.05);
+
+
+}
+
+.Planning-text {
+    color: black;
+    text-align: center;
+}
+
+/* #create-meeting-button {
+    height: 12%;
+    width: 20%;
+    border-style: ridge;
+    border-radius: 25px;
+    background-color: red;
+    position: relative;
+    bottom: -300px;
+    left: -20px;
+    transition: 0.5ms
+} */
+
+
+/* #create-meeting-button:hover {
+    top: -10px;
+} */
