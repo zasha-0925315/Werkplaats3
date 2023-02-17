@@ -31,12 +31,12 @@ class AddMeeting:
 
     def add_meeting(self, meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students):
         try:
-            params = ("2", meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+            params = (meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"INSERT INTO meeting (id, naam, datum, locatie, organisator, deelnemer) "
-                           f"VALUES(?, ?, datetime(?), ?, ?, ?)", params)
+            cursor.execute(f"INSERT INTO meeting (naam, datum, locatie, organisator, deelnemer) "
+                           f"VALUES(?, datetime(?), ?, ?, ?)", params)
             conn.commit()
 
             conn.close()
