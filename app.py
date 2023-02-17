@@ -72,6 +72,7 @@ def meeting():
             meeting_teacher = str(request.form.getlist('meeting_teacher'))
             meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
             meeting_students = str(meetingdb.get_students_by_class(meeting_classes))
+            print(meeting_students)
 
             meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
 
