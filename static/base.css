@@ -52,10 +52,25 @@ form {
     align-items: baseline;
 }
 
+form div {
+    display: flex;
+    height: fit-content;
+}
+
+form div label {
+    display: flex;
+    align-items: baseline;
+
+}
+
 form input {
     margin-bottom: 10px;
     border-radius: 50px;
     background-color: var(--white);
     border: none;
     padding: 10px 20px;
+}
+
+form input[type="checkbox"] {
+    margin-right: 5px;
 }

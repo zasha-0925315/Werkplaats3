@@ -62,7 +62,6 @@ def meeting():
         case 'GET':
             teacher_list = teacherdb.get_teacher()
             class_list = classdb.get_class()
-            print(class_list)
 
             return render_template('meeting.html', teachers=teacher_list, classes=class_list)
         case 'POST':
@@ -72,7 +71,6 @@ def meeting():
             meeting_teacher = str(request.form.getlist('meeting_teacher'))
             meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
             meeting_students = str(meetingdb.get_students_by_class(meeting_classes))
-            print(meeting_students)
 
             meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
 
