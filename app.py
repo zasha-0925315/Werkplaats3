@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from lib.forms import LoginForm
 from lib.login import Login
 from lib.manageteacher import TeacherManagement
@@ -72,14 +72,10 @@ def meeting():
             meeting_teacher = str(request.form.getlist('meeting_teacher'))
             meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
             meeting_students = str(meetingdb.get_students_by_class(meeting_classes))
-            print(meeting_name)
-            print(meeting_datetime)
-            print(meeting_location)
-            print(meeting_teacher)
-            print(meeting_classes)
-            print(meeting_students)
 
             meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+
+            return redirect(url_for('index'))
 
         case _:
             print("nope")
