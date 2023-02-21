@@ -1,7 +1,12 @@
 import os
+
 from flask import Flask, render_template, request, session, redirect, url_for
+from dotenv import load_dotenv
 from forms import LoginForm, RegistrationForm
-from flask_sqlalchemy import SQLAlchemy
+from flaskext.mysql import MySQL
+#from flask_sqlalchemy import SQLAlchemy
+
+from lib.login import Login
 
 
 # Flask server
@@ -10,18 +15,26 @@ FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
 FLASK_DEBUG = True
 
+MYSQL = MySQL()
 
-
-
+#other important stuff
 app = Flask(__name__)
-app.config['SECRET_KEY'] ='sfsfl446klxjaasdksldklfgg'
-app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
+#MYSQL.init_app(app)
+#app.config['SECRET_KEY'] ='yeet'
+#app.config['MYSQL_HOST'] = 'localhost'
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = ''
+#app.config['MYSQL_DB'] = 'demo_data'
+#app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
+
+DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
+login = Login(DB_FILE)
  
-@app.before_request
-def check_login():
-    if request.endpoint not in ["static"]:
-        if not session.get("logged_in"):
-            return redirect(url_for('show_login'))
+#@app.before_request
+#def check_login():
+#    if request.endpoint not in ["static"]:
+#        if not session.get("logged_in"):
+#            return redirect(url_for('show_login'))
 
 # Main route
 @app.route("/")
