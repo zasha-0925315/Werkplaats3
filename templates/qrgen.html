@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Home</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="/static/basic.css" type="text/css">
+{% extends "base.html" %}
+
+{% block title %}QR Test{% endblock %}
+{% block head %}
+    {{super()}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <!-- https://github.com/neocotic/qrious -->
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <main>
         <h1>QR Code</h1>
         <div id="test">
@@ -42,5 +40,4 @@
             }
         </script>
     </main>
-</body>
-</html>
+{% endblock %}
