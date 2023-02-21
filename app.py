@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, render_template, request, session, redirect, url_for, request
+from flask_restful import Resource, Api
 #from forms import LoginForm, RegistrationForm
 #from flaskext.mysql import MySQL
 #from flask_sqlalchemy import SQLAlchemy
@@ -17,6 +18,7 @@ FLASK_DEBUG = True
 
 # Flask
 app = Flask(__name__)
+aapje = Api(app)
 app.config.from_pyfile('config.py')
 
 #MYSQL.init_app(app)
