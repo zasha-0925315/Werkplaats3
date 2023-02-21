@@ -1,4 +1,5 @@
 Flask
+Flask-RESTful
 Flask-SQLAlchemy
 Flask-WTF
 mysql-connector-python
