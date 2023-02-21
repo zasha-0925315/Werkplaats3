@@ -1,13 +1,13 @@
 import os
 
-from flask import Flask, render_template, request, session, redirect, url_for
-from dotenv import load_dotenv
-from forms import LoginForm, RegistrationForm
-from flaskext.mysql import MySQL
+from flask import Flask, render_template, request, session, redirect, url_for, request
+#from forms import LoginForm, RegistrationForm
+#from flaskext.mysql import MySQL
 #from flask_sqlalchemy import SQLAlchemy
 
 from lib.login import Login
 
+#MYSQL = MySQL()
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -15,10 +15,10 @@ FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
 FLASK_DEBUG = True
 
-MYSQL = MySQL()
-
-#other important stuff
+# Flask
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
+
 #MYSQL.init_app(app)
 #app.config['SECRET_KEY'] ='yeet'
 #app.config['MYSQL_HOST'] = 'localhost'
@@ -32,14 +32,16 @@ login = Login(DB_FILE)
  
 #@app.before_request
 #def check_login():
-#    if request.endpoint not in ["static"]:
-#        if not session.get("logged_in"):
+#    if request.endpoint not in ["login", "index"]:
+#        if not session.get("logged_in", "username"):
 #            return redirect(url_for('show_login'))
 
 # Main route
 @app.route("/")
 @app.route("/index")
 def index():
+    #if not session.get('logged_in')
+    #    return redirect(url_for('login'))
     return render_template("index.html", title=index)
 
 
@@ -157,14 +159,14 @@ def show_login():
 
 @app.route("/handle_login", methods=["GET","POST"])
 def handle_login():
-    if request.form["password"] == "password" and request.form["username"] == "admin":
-        session["logged_in"] = True
+   # if request.form["password"] == "password" and request.form["username"] == "admin":
+   #     session["logged_in"] = True
     # if request.method == "POST":
     #     username = request.form.get("username")
     #     password = request.form.get("password")
     #     session["logged_in"] = True
-    else:
-        return render_template("login.html", message="Invalid Password or Username.")
+    #else:
+    #    return render_template("login.html", message="Invalid Password or Username.")
     return redirect(url_for('base'))
 
 @app.route("/register")
