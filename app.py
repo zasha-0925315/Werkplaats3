@@ -2,13 +2,17 @@ import os
 
 from flask import Flask, render_template, request, session, redirect, url_for, request
 from flask_restful import Resource, Api
+from os import environ, path
+from dotenv import load_dotenv
 #from forms import LoginForm, RegistrationForm
-#from flaskext.mysql import MySQL
 #from flask_sqlalchemy import SQLAlchemy
 
 from lib.login import Login
+from lib.meeting import MeetingManagement
 
-#MYSQL = MySQL()
+# no touchy
+projpath = path.join(path.dirname(__file__), '.env')
+load_dotenv(projpath)
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -16,19 +20,16 @@ FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
 FLASK_DEBUG = True
 
+# DB
+DB_INFO = {'host' : environ.get("DB_HOST"), 'user' : environ.get("DB_USER"), 'password' : environ.get("DB_PASSWORD"), 'database': environ.get("DB_NAME")}
+print(DB_INFO)
+
 # Flask
 app = Flask(__name__)
 aapje = Api(app)
-app.config.from_pyfile('config.py')
+SECRET_KEY = environ.get('SECRET_KEY')
 
-#MYSQL.init_app(app)
-#app.config['SECRET_KEY'] ='yeet'
-#app.config['MYSQL_HOST'] = 'localhost'
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = ''
-#app.config['MYSQL_DB'] = 'demo_data'
-#app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
-
+meet = MeetingManagement(DB_INFO)
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 login = Login(DB_FILE)
  
