@@ -17,11 +17,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] ='sfsfl446klxjaasdksldklfgg'
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
  
-@app.before_request
-def check_login():
-    if request.endpoint not in ["static"]:
-        if not session.get("logged_in"):
-            return redirect(url_for('show_login'))
+# @app.before_request
+# def check_login():
+#     if request.endpoint not in ["static"]:
+#         if not session.get("logged_in"):
+#             return redirect(url_for('show_login'))
 
 # Main route
 @app.route("/")
@@ -152,7 +152,7 @@ def handle_login():
     #     session["logged_in"] = True
     else:
         return render_template("login.html", message="Invalid Password or Username.")
-    return redirect(url_for('base'))
+    return redirect(url_for('link'))
 
 @app.route("/register")
 def register():

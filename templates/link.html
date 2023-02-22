@@ -19,10 +19,13 @@
         </div>
         <div id="meeting3" name="meeting3">
        </div>
-     </div>    
+     </div>  
+       
     <div class= "Greet-Balk" id="Greet-Balk"> <br>
         {% if session.logged_in %}
-        Hoi, {{ session.username }}
+        <p class="Greet-Text">
+          Hoi, {{ session.username }}
+        </p>
         {% else %}
         {% endif %}
     </div>

@@ -16,6 +16,12 @@
     filter: brightness(150%);
 }
 
+.Greet-Text {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
 #meeting-border {
     background-color: darkcyan;
     width: 1000px;
@@ -103,6 +109,8 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-top: 40px;
 }
+
+
 
 /* #create-meeting-button {
     height: 12%;
