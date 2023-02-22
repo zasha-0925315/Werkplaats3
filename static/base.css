@@ -3,6 +3,8 @@
 @import "table.css";
 @import "meeting.css";
 @import "login.css";
+@import "button.css";
+@import "form.css";
 
 :root {
     --main-font: 'Poppins', sans-serif;
@@ -25,3 +27,10 @@ body {
     background-color: var(--bg-color);
     margin: 0;
 }
+
+
+#content {
+    display: flex;
+    justify-content: center;
+}
+

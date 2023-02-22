@@ -12,6 +12,10 @@ table {
     color: var(--hr-dark-blue);
 }
 
+th {
+    background-color: var(--bg-color);
+}
+
 tr {
     background-color: var(--white);
 }
