@@ -1,0 +1,17 @@
+.button1 {
+    background-color: var(--hr-red);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius-button);
+    height: fit-content;
+    width: fit-content;
+    line-height: 16px;
+    padding: 10px;
+    margin-left: 4px;
+    text-decoration: none;
+}
+
+.button1:hover {
+    background-color: var(--hr-darker-red);
+    transition: all 200ms;
+}

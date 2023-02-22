@@ -79,16 +79,6 @@ def meeting():
         case _:
             print("nope")
 
-@app.route('/test', methods=["GET", "POST"])
-def test():
-    token = ["1B"]
-    token2 = str(token).replace("[", "").replace("]", "")
-    token3 = token2.replace("[", "").replace("]", "")
-
-    meeting_students = meetingdb.get_students_by_class(token2)
-    print(token3)
-    return render_template('index.html', students=meeting_students)
-
 @app.route('/meeting/<meetingId>', methods=["PUT", "PATCH", "DELETE"])
 def meetingid():
     match request.method:
@@ -98,6 +88,32 @@ def meetingid():
             print("PATCH")
         case 'DELETE':
             print("DELETE")
+
+@app.route('/oneOnOne', methods=["GET", "POST"])
+def oneOnOne():
+
+    match request.method:
+        case 'GET':
+
+            class_list = classdb.get_class()
+            # selected_class =
+            # student_list = meetingdb.get_students_by_class(selected_class)
+
+            return render_template('oneOnOne.html', classes=class_list)
+        case 'POST':
+            meeting_name = str(request.form.get('meeting_name'))
+            meeting_datetime = request.form.get('meeting_datetime')
+            meeting_location = str(request.form.get('meeting_location'))
+            meeting_teacher = str(request.form.getlist('meeting_teacher'))
+            meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
+            meeting_students = str(meetingdb.get_students_by_class(meeting_classes))
+
+            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+
+            return redirect(url_for('index'))
+
+        case _:
+            print("nope")
 
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
