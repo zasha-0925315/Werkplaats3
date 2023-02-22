@@ -17,6 +17,9 @@
 
 * {
     font-family: var(--main-font);
+}
+
+body {
     background-color: var(--bg-color);
     margin: 0;
 }
