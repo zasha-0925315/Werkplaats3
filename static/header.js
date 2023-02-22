@@ -19,8 +19,10 @@ const semiTransperant = "rgba(0, 0, 0, 0.2)";
 const transperant = "rgba(0, 0, 0, 0)"
 
 const crossLine1 = {x: -5, y: 0, transform: "rotate(45)"}
+const crossLine2 = {height: 0}
 const crossLine3 = {x: -57.5, y: 37.5, transform: "rotate(-45)"}
 const burgerLine1 = {x: 0, y: 0, transform: "rotate(0)"}
+const burgerLine2 = {height: 15}
 const burgerLine3 = {x: 0, y: 60, transform: "rotate(0)"}
 let burger_toggle = false;
 
@@ -30,13 +32,49 @@ function setAttributes(element, attributes) {
     });
 }
 
+function hoverOn(element, color1, color2) {
+  element.addEventListener("mouseover", function () {
+    element.style.backgroundColor = color1;
+    element.style.color = color2;
+  })
+}
+
+function hoverOff(element, color1, color2) {
+  element.addEventListener("mouseout", function () {
+    element.style.backgroundColor = color1;
+    element.style.color = color2;
+  })
+}
+
+function hoverOnIcon(element1, element2, color1, color2) {
+  element1.addEventListener("mouseover", function () {
+    element1.style.backgroundColor = color1;
+    element2.style.fill = color2;
+  })
+}
+
+function hoverOffIcon(element1, element2, color1, color2) {
+  element1.addEventListener("mouseout", function () {
+    element1.style.backgroundColor = color1;
+    element2.style.fill = color2;
+  })
+}
+
+Array.from(headerButtons).forEach((button) => {
+  hoverOn(button, white, hrRed)
+  hoverOff(button, semiTransperant, white)
+});
+
+hoverOnIcon(burgerMenuButton, burgerIcon, white, hrRed);
+hoverOffIcon(burgerMenuButton, burgerIcon, semiTransperant, white);
+
 function burgerMenuFoldOut() {
     burger_toggle =! burger_toggle;
     burgerMenuButton.style.backgroundColor = burger_toggle ? white : semiTransperant;
     burgerIcon.style.fill = burger_toggle ? hrRed : white;
 
     burger_toggle ? setAttributes(burgerIconLine1, crossLine1) : setAttributes(burgerIconLine1, burgerLine1);
-    burgerIconLine2.style.fill = burger_toggle ? transperant : white;
+    burger_toggle ? setAttributes(burgerIconLine2, crossLine2) : setAttributes(burgerIconLine2, burgerLine2);
     burger_toggle ? setAttributes(burgerIconLine3, crossLine3) : setAttributes(burgerIconLine3, burgerLine3);
 
     slideMenu.style.width = burger_toggle ? "100vw" : "0";
@@ -47,6 +85,11 @@ function burgerMenuFoldOut() {
 
     Array.from(headerButtons).forEach((button) => {
         button.style.backgroundColor = burger_toggle ? white : semiTransperant;
-        button.style.color = burger_toggle ? hrRed : white
+        button.style.color = burger_toggle ? hrRed : white;
+        burger_toggle ? hoverOn(button, semiTransperant, hrRed) : hoverOn(button, white, hrRed)
+        burger_toggle ? hoverOff(button, white, hrRed) : hoverOff(button, semiTransperant, white)
     });
+
+    burger_toggle ? hoverOnIcon(burgerMenuButton, burgerIcon, semiTransperant, hrRed) : hoverOnIcon(burgerMenuButton, burgerIcon, white, hrRed);
+    burger_toggle ? hoverOffIcon(burgerMenuButton, burgerIcon, white, hrRed) : hoverOffIcon(burgerMenuButton, burgerIcon, semiTransperant, white);
 }
