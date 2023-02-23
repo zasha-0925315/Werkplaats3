@@ -28,16 +28,16 @@
     height: 500px;
     margin-top: 10px;
     border-radius: 15%;
-    font-size: 50px;
-    font-family: 'Oswald', 'Sans Serif';
+    font-size: 40px;
+
 
 }
 
 #meeting-header {
-    margin-left: 225px;
+    margin-left: 25px;
     margin-top: 45px;
     font-size: 50px;
-    font-family: 'Oswald', 'Sans Serif';
+
 
 }
 
@@ -84,8 +84,6 @@
 
 #check-meeting-button {
     display: flex;
-    float: right;
-    position: right;
     width: 30%;
     height: 55%;
     border-style: ridge;
@@ -106,25 +104,48 @@
 .Planning-text {
     color: black;
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-top: 40px;
 }
 
 
 
-/* #create-meeting-button {
-    height: 12%;
-    width: 20%;
-    border-style: ridge;
+#Select-Planning-button {
+    height: 40px;
+    width: 40px;
+    border-style: none;
     border-radius: 25px;
-    background-color: red;
-    position: relative;
-    bottom: -300px;
-    left: -20px;
-    transition: 0.5ms
-} */
+    background-color: rgb(211, 15, 76);
+    transition: 0.5ms;
+    margin-left: 20px;
+    outline: 0;
+    cursor: pointer;
+}
 
+#Select-Planning-button:hover {
+    background-color: var(--white);
+    transition: all 200ms;
+}
 
-/* #create-meeting-button:hover {
-    top: -10px;
-} */
+#Select-Planning-button:hover .plus-knop {
+    fill: var(--hr-red);
+    transition: all 200ms;
+}
+
+.plus-knop {
+    height: 45%;
+    margin: 0 auto;
+    margin-top: 2px;
+}
+
+.plus-knop:hover {
+    background-color: var(--white);
+    fill: var(--hr-red);
+    transition: all 200ms;
+}
+
+#meeting-and-plan {
+    display: flex;
+    justify-content: space-between;
+}
+
+#meeting-table {}

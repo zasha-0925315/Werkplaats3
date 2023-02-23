@@ -29,6 +29,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 def index():
     return render_template("index.html", title=index)
 
+@app.route("/test-ajax.html", methods = ['GET'])
+def testajax():
+    return render_template("test-ajax.html")
 
 @app.route("/base")
 def base():

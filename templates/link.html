@@ -5,28 +5,42 @@
     </div> -->
   <div id="maih">
     <div id="meeting-border">
-        <div id="meeting-header">
-         Meetings
+      <div id="meeting-header">
+        Meetings
+        <button id="Select-Planning-button" type="button"> <svg  class="plus-knop" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFE" viewBox="0 0 18 18"><path d="M18 10h-8v8H8v-8H0V8h8V0h2v8h8v2z"></path></svg>
+        </button>
+      </div>
+       
+        <div id= "meeting-and-plan">
+          <div id="meeting-table">
+            <table>
+              <thead>
+              <tbody>
+                <tr>
+                  <td>hond</td>
+                </tr>
+                <tr>
+                  <td>kat</td>
+                </tr>
+                <tr>
+                  <td>doggo</td>
+                </tr>
+              </tbody>
+            </table>
+            
          </div>
          <div id="check-meeting-button">
           <a href="{{ url_for('show_login')}}"class="Planning-text">Check Planning</a>
-          <div id="create-meeting-button">
-          </div>
         </div>
-        <div id="meeting1" name="meeting1">
         </div>
-        <div id="meeting2" name="meeting2">
-        </div>
-        <div id="meeting3" name="meeting3">
-       </div>
-     </div>  
-       
+      </div>  
+      <div>
+    </div>
     <div class= "Greet-Balk" id="Greet-Balk"> <br>
         {% if session.logged_in %}
         <p class="Greet-Text">
           Hoi, {{ session.username }}
         </p>
-        {% else %}
         {% endif %}
     </div>
   </div>
