@@ -1,5 +1,6 @@
+import ast
 import os
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify
+from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify
 from lib.forms import LoginForm
 from lib.login import Login
 from lib.managestudent import StudentManagement
@@ -66,6 +67,7 @@ def meeting():
             class_list = classdb.get_class()
 
             return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
+
         case 'POST':
             meeting_name = str(request.form.get('meeting_name'))
             meeting_datetime = request.form.get('meeting_datetime')
@@ -87,12 +89,9 @@ def meetingid(meetingId):
     match request.method:
         case 'GET':
             meeting_info = meetingdb.get_meeting(meetingId)
-            meeting_dict = {"info": meeting_info}
-            # print("GET")
-            # print(meeting_info)
-            # print(meeting_dict)
-            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info)
-            # return jsonify(meeting_dict)
+            student_list = ast.literal_eval(meeting_info[0]["student"])
+
+            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
 
         case 'PUT':
             print("PUT")
@@ -100,6 +99,18 @@ def meetingid(meetingId):
             print("PATCH")
         case 'DELETE':
             print("DELETE")
+
+
+@app.route('/api/<meetingId>', methods=["GET"])
+def api_get_meeting(meetingId):
+
+    meeting_info = meetingdb.get_meeting(meetingId)
+    student_list = ast.literal_eval(meeting_info[0]["student"])
+
+    return json.jsonify({
+
+    })
+
 
 @app.route('/oneOnOne', methods=["GET", "POST"])
 def oneOnOne():

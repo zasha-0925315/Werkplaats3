@@ -2,7 +2,6 @@ const get_meeting = async () => {
     try {
         const  response = await fetch('https://ffxivcollect.com/api/mounts/186', {
             method: 'GET',
-            // body: "some body",
             headers: {
                 'Content-type': 'application/json'
             }
@@ -15,18 +14,16 @@ const get_meeting = async () => {
         } else if (!response.ok) {
             console.log("Some non-200 HTTP response code")
         } else {
-            if (data.length > 0) {
+
+            if (data["name"].length > 0) {
                 const meetingInfo = document.querySelector("#test_div")
                 meetingInfo.replaceChildren()
-                data.forEach(function (item) {
-                    meetingInfo.innerHTML +="<dt>" + item["name"] + "</dt><dd>" + item["location"] + "</dd>"
-                })
+                meetingInfo.innerHTML += data["name"] + data["id"]
             } else {
-                const strjson = JSON.stringify(data["name"])
-                console.log(strjson)
+                console.log(data.length)
                 const meetingInfo = document.querySelector("#test_div")
                 meetingInfo.replaceChildren()
-                meetingInfo.innerHTML = strjson
+                meetingInfo.innerHTML = "nope"
             }
         }
     } catch (e) {

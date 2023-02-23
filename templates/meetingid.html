@@ -4,17 +4,35 @@
     {{ super() }}
 {% endblock head %}
 {% block content %}
-{#    {{ meetingId }}#}
-{#    {{ meeting_info }}#}
-    <div id="test_div">
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-        <p>4</p>
-        <p>5</p>
-        <p>6</p>
+
+    <div id="meeting_info">
+    <div>
+        <button onclick="get_meeting()">Get from API</button>
+        <div id="test_div"></div>
     </div>
-    <button onclick="get_meeting()"></button>
+        <h1>{{ meeting_info[0]["name"] }}</h1>
+        <h2>{{ meeting_info[0]["date"] }}</h2>
+        <h3>{{ meeting_info[0]["location"] }}</h3>
+        <h4>{{ meeting_info[0]["teacher"] }}</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Aanwezigheid</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in student_list %}
+                    <tr>
+                        <td>{{ student|replace("(", "")|replace(")", "")|replace("'", "")|replace(",", "") }}<br></td>
+                        <td>?</td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 {% endblock %}
 {% block script %}
     {{ super() }}
