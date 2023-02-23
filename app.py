@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, session, redirect, url_for
 from forms import LoginForm, RegistrationForm
 from flask_sqlalchemy import SQLAlchemy
+from lib.manageteacher import TeacherManagement
 
 
 # Flask server
@@ -17,6 +18,15 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] ='sfsfl446klxjaasdksldklfgg'
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
  
+app.config["SECRET_KEY"] = "yeet"
+DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
+
+# login = Login(DB_FILE)
+# studentdb = StudentManagement(DB_FILE)
+teacherdb = TeacherManagement(DB_FILE)
+# classdb = ClassManagement(DB_FILE)
+# meetingdb = MeetingManagement(DB_FILE)
+
 # @app.before_request
 # def check_login():
 #     if request.endpoint not in ["static"]:
@@ -171,7 +181,10 @@ def teapot():
 
 @app.route("/link")
 def link():
-    return render_template('link.html')    
+    match request.method:
+        case 'GET':
+            teacher_list = teacherdb.get_teacher() 
+    return render_template('link.html', teachers= teacher_list)    
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)

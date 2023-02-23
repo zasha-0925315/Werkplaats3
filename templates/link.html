@@ -10,10 +10,16 @@
         <button id="Select-Planning-button" type="button"> <svg  class="plus-knop" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFE" viewBox="0 0 18 18"><path d="M18 10h-8v8H8v-8H0V8h8V0h2v8h8v2z"></path></svg>
         </button>
       </div>
-       
+      <!-- De dropdown lijst voor andere docenten -->
+      <select name="Select-Teacher" id="Select-Teacher">
+        {% for teacher in teachers %}
+       <option value="{{ teacher[0] }}">{{ teacher[0] }}</option>
+       {% endfor %}
+      </select>
+
         <div id= "meeting-and-plan">
           <div id="meeting-table">
-            <table>
+            <table width ="400px">
               <thead>
               <tbody>
                 <tr>
@@ -29,9 +35,25 @@
             </table>
             
          </div>
-         <div id="check-meeting-button">
+          <div id="Docent-Planning">
+            <table width ="400px">
+              <thead>
+              <tbody>
+                <tr>
+                  <td>Mark</td>
+                </tr>
+                <tr>
+                  <td>Veysel</td>
+                </tr>
+                <tr>
+                  <td>Diederik</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+         <!-- <div id="check-meeting-button">
           <a href="{{ url_for('show_login')}}"class="Planning-text">Check Planning</a>
-        </div>
+        </div> -->
         </div>
       </div>  
       <div>
