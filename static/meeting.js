@@ -17,27 +17,32 @@
 
                 if (data["presence_list"].length > 0) {
                     const meetingInfo = document.querySelector("#presence_table")
+                    const meetingFooter = document.querySelector("#presence_table_footer")
                     const presence_length = data["presence_list"].length
-                    let n = 0
+                    let student_count = 0
+                    let student_presence = 0
                     meetingInfo.replaceChildren()
-                    while ( n < presence_length) {
-                        if (data["presence_list"][n]["presence"] === 1) {
+                    while ( student_count < presence_length) {
+                        if (data["presence_list"][student_presence]["presence"] === 1) {
                             meetingInfo.innerHTML +=
-                            "<td>" + data["presence_list"][n]["first name"] + " " + data["presence_list"][n]["last name"] + "</td>" +
+                            "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
                             "<td class='yes_presence'>" + "aanwezig" + "</td>"
-                            n++
+                            student_count++
+                            student_presence++
                         } else {
                             meetingInfo.innerHTML +=
-                            "<td>" + data["presence_list"][n]["first name"] + " " + data["presence_list"][n]["last name"] + "</td>" +
+                            "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
                             "<td class='no_presence'>" + "afwezig" + "</td>"
-                            n++
+                            student_count++
                         }
-
                     }
+                    meetingFooter.replaceChildren()
+                    meetingFooter.innerHTML = "<td>" + "</td>" + "<td>" + student_presence + "/" + student_count + " " + "aanwezig" + "</td>"
+
 
                 } else {
                     console.log(data.length)
-                    const meetingInfo = document.querySelector("#test_div")
+                    const meetingInfo = document.querySelector("#presence_table")
                     meetingInfo.replaceChildren()
                     meetingInfo.innerHTML = "nope"
                 }

@@ -4,7 +4,7 @@
     {{ super() }}
 {% endblock head %}
 {% block content %}
-    <div id="meeting_info_content">
+    <div id="meeting_info_content">+
         <div id="meeting_info">
             <h1>{{ meeting_info[0]["name"] }}</h1>
             <h2>{{ meeting_info[0]["date"] }}</h2>
@@ -20,7 +20,9 @@
                         <th>Aanwezigheid</th>
                     </tr>
                 </thead>
-                <tbody id="presence_table"></tbody>
+                <tbody id="presence_table">
+                </tbody>
+                <tfoot id="presence_table_footer"></tfoot>
             </table>
         </div>
     </div>
