@@ -24,3 +24,21 @@ class StudentManagement:
         except OperationalError as e:
             print("yeet")
             raise e
+
+    def get_students_by_class(self, meeting_classes):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"SELECT student.id "
+                           f"FROM inschrijving INNER JOIN student "
+                           f"ON inschrijving.student=student.id AND inschrijving.klas IN ({meeting_classes})")
+            students = cursor.fetchall()
+            conn.commit()
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return students

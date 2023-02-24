@@ -1,10 +1,13 @@
+import ast
 import os
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify
 from lib.forms import LoginForm
 from lib.login import Login
+from lib.managestudent import StudentManagement
 from lib.manageteacher import TeacherManagement
 from lib.manageclass import ClassManagement
-from lib.meeting import AddMeeting
+from lib.meeting import MeetingManagement
+from lib.presence import PresenceManagement
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -26,12 +29,14 @@ app.config["SECRET_KEY"] = "yeet"
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
 login = Login(DB_FILE)
+studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
-meetingdb = AddMeeting(DB_FILE)
+meetingdb = MeetingManagement(DB_FILE)
+presencedb = PresenceManagement(DB_FILE)
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
-DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
+DATABASE_FILE = os.path.join(app.root_path, 'databases', 'databases/demo_data.db')
 
 # Check if the database file exists.
 if not os.path.isfile(DATABASE_FILE):
@@ -63,31 +68,52 @@ def meeting():
             teacher_list = teacherdb.get_teacher()
             class_list = classdb.get_class()
 
-            return render_template('meeting.html', teachers=teacher_list, classes=class_list)
+            return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
+
         case 'POST':
             meeting_name = str(request.form.get('meeting_name'))
             meeting_datetime = request.form.get('meeting_datetime')
             meeting_location = str(request.form.get('meeting_location'))
             meeting_teacher = str(request.form.getlist('meeting_teacher'))
             meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
-            meeting_students = str(meetingdb.get_students_by_class(meeting_classes))
+            meeting_students = str(studentdb.get_students_by_class(meeting_classes))
+            meeting_students2 = studentdb.get_students_by_class(meeting_classes)
 
-            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2)
 
-            return redirect(url_for('index'))
+            return redirect(url_for('meeting'))
 
         case _:
-            print("nope")
+            return render_template('create_meeting.html')
 
-@app.route('/meeting/<meetingId>', methods=["PUT", "PATCH", "DELETE"])
-def meetingid():
+
+@app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH", "DELETE"])
+def meetingid(meetingId):
     match request.method:
+        case 'GET':
+            meeting_info = meetingdb.get_meeting(meetingId)
+            student_list = ast.literal_eval(meeting_info[0]["student"])
+
+            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
+
         case 'PUT':
             print("PUT")
         case 'PATCH':
             print("PATCH")
         case 'DELETE':
             print("DELETE")
+
+
+@app.route('/api/<meetingId>', methods=["GET"])
+def api_get_meeting(meetingId):
+
+    presence_list = presencedb.get_presence(meetingId)
+    print(presence_list)
+
+    return json.jsonify({
+        'presence_list': presence_list
+    })
+
 
 @app.route('/oneOnOne', methods=["GET", "POST"])
 def oneOnOne():
