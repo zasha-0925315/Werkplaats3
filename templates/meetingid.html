@@ -21,15 +21,7 @@
                     <th>Aanwezigheid</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for student in student_list %}
-                    <tr>
-                        <td>{{ student|replace("(", "")|replace(")", "")|replace("'", "")|replace(",", "") }}<br></td>
-                        <td>?</td>
-                    </tr>
-
-                {% endfor %}
-            </tbody>
+            <tbody id="presence_table"></tbody>
         </table>
     </div>
 

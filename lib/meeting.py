@@ -13,18 +13,25 @@ class MeetingManagement:
 
     def add_meeting(self, meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2):
         try:
-            print(meeting_students2[12])
-            params = (meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+
+            params_meeting = (meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"INSERT INTO meeting (naam, datum, locatie, organisator, deelnemer) "
-                           f"VALUES(?, datetime(?), ?, ?, ?)", params)
+            cursor.execute(f"INSERT INTO meeting (naam, datum, locatie, organisator, deelnemer)"
+                           f"VALUES(?, datetime(?), ?, ?, ?)", params_meeting)
             conn.commit()
 
-            for students in meeting_students2:
-                cursor.execute(f"INSERT INTO aanwezigheid (aanwezigheid) VALUES()")
-                conn.commit()
+            cursor.execute(f"SELECT last_insert_rowid()")
+            meetingid = cursor.fetchall()
+            meetingid2 = str(meetingid).replace("(", "").replace(")", "").replace("[", "").replace("]", "").replace(",", "")
+            print(meetingid2)
+
+            for student in meeting_students2:
+                student2 = str(student).replace("(", "").replace(")", "").replace(",", "")
+                cursor.execute(f"INSERT INTO aanwezigheid (aanwezigheid, student, meeting) "
+                               f"VALUES(0, ?, ?)", (student2, meetingid2))
+            conn.commit()
 
             conn.close()
 

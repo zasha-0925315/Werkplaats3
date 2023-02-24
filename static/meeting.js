@@ -1,24 +1,33 @@
 const get_meeting = async () => {
     try {
-        const  response = await fetch('https://ffxivcollect.com/api/mounts/186', {
+        url = window.location.pathname.split('/')
+        urlId = url[2]
+        console.log(urlId)
+        const  response = await fetch('../api/'+ urlId, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json'
             }
         });
-        console.log(response)
         const data = await response.json();
-        console.log(data)
         if (response.error) {
             console.log("oopsie")
         } else if (!response.ok) {
             console.log("Some non-200 HTTP response code")
         } else {
 
-            if (data["name"].length > 0) {
-                const meetingInfo = document.querySelector("#test_div")
+            if (data["presence_list"].length > 0) {
+                const meetingInfo = document.querySelector("#presence_table")
+                const presence_length = data["presence_list"].length
+                let n = 0
                 meetingInfo.replaceChildren()
-                meetingInfo.innerHTML += data["name"] + data["id"]
+                while ( n < presence_length) {
+                    meetingInfo.innerHTML +=
+                        "<td>" + data["presence_list"][n]["first name"] + " " + data["presence_list"][n]["last name"] + "</td>" +
+                        "<td>" + data["presence_list"][n]["presence"] + "</td>"
+                    n++
+                }
+
             } else {
                 console.log(data.length)
                 const meetingInfo = document.querySelector("#test_div")
@@ -29,6 +38,6 @@ const get_meeting = async () => {
     } catch (e) {
         console.log("Some error with fetching JSON from meeting server: " + e)
     } finally {
-        setTimeout(get_meeting, 500000)
+        setTimeout(get_meeting, 5000)
     }
 }

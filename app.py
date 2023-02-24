@@ -7,6 +7,7 @@ from lib.managestudent import StudentManagement
 from lib.manageteacher import TeacherManagement
 from lib.manageclass import ClassManagement
 from lib.meeting import MeetingManagement
+from lib.presence import PresenceManagement
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -32,6 +33,7 @@ studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
 meetingdb = MeetingManagement(DB_FILE)
+presencedb = PresenceManagement(DB_FILE)
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 DATABASE_FILE = os.path.join(app.root_path, 'databases', 'databases/demo_data.db')
@@ -79,7 +81,7 @@ def meeting():
 
             meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2)
 
-            return redirect(url_for('index'))
+            return redirect(url_for('meeting'))
 
         case _:
             return render_template('create_meeting.html')
@@ -105,11 +107,11 @@ def meetingid(meetingId):
 @app.route('/api/<meetingId>', methods=["GET"])
 def api_get_meeting(meetingId):
 
-    meeting_info = meetingdb.get_meeting(meetingId)
-    student_list = ast.literal_eval(meeting_info[0]["student"])
+    presence_list = presencedb.get_presence(meetingId)
+    print(presence_list)
 
     return json.jsonify({
-
+        'presence_list': presence_list
     })
 
 
