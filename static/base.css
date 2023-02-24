@@ -1,20 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "header.css";
 @import "table.css";
+@import "creat_meeting.css";
 @import "meeting.css";
 @import "login.css";
-@import "links.css";
-@import "basic.css";
+@import "button.css";
+@import "form.css";
 
 :root {
     --main-font: 'Poppins', sans-serif;
     --bg-color: #f8f5ee;
     --hr-red: #d30f4c;
+    --hr-darker-red: #c50e47;
     --white: #fff;
     --hr-dark-blue: #001e48;
     --hr-light-gray: #f5f5f5;
     --gray: #696969;
     --font-size: 15px;
+    --border-radius-button: 6px;
 }
 
 * {
@@ -24,4 +27,9 @@
 body {
     background-color: var(--bg-color);
     margin: 0;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
 }

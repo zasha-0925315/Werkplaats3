@@ -1,0 +1,16 @@
+#meeting_info_content {
+    display: flex;
+    margin-top: 50px;
+}
+
+#meeting_table {
+    margin-left: 50px;
+}
+
+.no_presence {
+    color: red;
+}
+
+.yes_presence {
+    color: green;
+}
