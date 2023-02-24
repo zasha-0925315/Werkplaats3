@@ -30,7 +30,7 @@ class StudentManagement:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"SELECT student.voornaam, student.achternaam, inschrijving.klas  "
+            cursor.execute(f"SELECT student.voornaam, student.achternaam  "
                            f"FROM inschrijving INNER JOIN student "
                            f"ON inschrijving.student=student.id AND inschrijving.klas IN ({meeting_classes})")
             students = cursor.fetchall()

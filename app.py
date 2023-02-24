@@ -34,7 +34,7 @@ classdb = ClassManagement(DB_FILE)
 meetingdb = MeetingManagement(DB_FILE)
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
-DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
+DATABASE_FILE = os.path.join(app.root_path, 'databases', 'databases/demo_data.db')
 
 # Check if the database file exists.
 if not os.path.isfile(DATABASE_FILE):
@@ -75,8 +75,9 @@ def meeting():
             meeting_teacher = str(request.form.getlist('meeting_teacher'))
             meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
             meeting_students = str(studentdb.get_students_by_class(meeting_classes))
+            meeting_students2 = studentdb.get_students_by_class(meeting_classes)
 
-            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2)
 
             return redirect(url_for('index'))
 
