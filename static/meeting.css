@@ -1,0 +1,71 @@
+#meeting_form {
+    margin-top: 50px;
+}
+
+#meeting_form_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#meeting_form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#meeting_form #inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+#meeting_form #fields {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
+
+#meeting_form form #lists {
+    display: flex;
+    flex-direction: column;
+}
+
+#meeting_form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+#meeting_form label label {
+    display: flex;
+    flex-direction: row;
+    font-weight: normal;
+}
+#meeting_form #button {
+    display: flex;
+    margin-top: 20px;
+}
+
+
+
+@media (pointer:coarse) {
+
+    #meeting_form {
+        transform: scale(2.5);
+        transform-origin: top;
+    }
+
+    #meeting_form #inputs {
+        flex-direction: column;
+    }
+
+    #meeting_form #button {
+        margin-top: 50px;
+    }
+
+    #meeting_form #button button {
+        transform: scale(1.5);
+        width: 150px;
+    }
+}

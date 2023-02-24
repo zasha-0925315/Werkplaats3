@@ -3,16 +3,20 @@
 @import "table.css";
 @import "meeting.css";
 @import "login.css";
+@import "button.css";
+@import "form.css";
 
 :root {
     --main-font: 'Poppins', sans-serif;
     --bg-color: #f8f5ee;
     --hr-red: #d30f4c;
+    --hr-darker-red: #c50e47;
     --white: #fff;
     --hr-dark-blue: #001e48;
     --hr-light-gray: #f5f5f5;
     --gray: #696969;
     --font-size: 15px;
+    --border-radius-button: 6px;
 }
 
 * {
@@ -23,3 +27,9 @@ body {
     background-color: var(--bg-color);
     margin: 0;
 }
+
+#content {
+    display: flex;
+    justify-content: center;
+}
+
