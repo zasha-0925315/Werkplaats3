@@ -1,8 +1,7 @@
 const get_meeting = async () => {
     try {
-        url = window.location.pathname.split('/')
-        urlId = url[2]
-        console.log(urlId)
+        const url = window.location.pathname.split('/')
+        const urlId = url[2]
         const  response = await fetch('../api/'+ urlId, {
             method: 'GET',
             headers: {
