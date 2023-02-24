@@ -4,27 +4,26 @@
     {{ super() }}
 {% endblock head %}
 {% block content %}
-
-    <div id="meeting_info">
-    <div>
-        <button onclick="get_meeting()">Get from API</button>
-        <div id="test_div"></div>
+    <div id="meeting_info_content">
+        <div id="meeting_info">
+            <h1>{{ meeting_info[0]["name"] }}</h1>
+            <h2>{{ meeting_info[0]["date"] }}</h2>
+            <h3>{{ meeting_info[0]["location"] }}</h3>
+            <h4>{{ meeting_info[0]["teacher"] }}</h4>
+            <button class="button1">Laat QR code zien</button>
+        </div>
+        <div id="meeting_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Aanwezigheid</th>
+                    </tr>
+                </thead>
+                <tbody id="presence_table"></tbody>
+            </table>
+        </div>
     </div>
-        <h1>{{ meeting_info[0]["name"] }}</h1>
-        <h2>{{ meeting_info[0]["date"] }}</h2>
-        <h3>{{ meeting_info[0]["location"] }}</h3>
-        <h4>{{ meeting_info[0]["teacher"] }}</h4>
-        <table>
-            <thead>
-                <tr>
-                    <th>Student</th>
-                    <th>Aanwezigheid</th>
-                </tr>
-            </thead>
-            <tbody id="presence_table"></tbody>
-        </table>
-    </div>
-
 {% endblock %}
 {% block script %}
     {{ super() }}
