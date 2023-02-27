@@ -14,3 +14,7 @@
 .yes_presence {
     color: green;
 }
+
+.maybe_presence {
+    color: goldenrod;
+}

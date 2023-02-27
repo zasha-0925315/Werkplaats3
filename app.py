@@ -120,8 +120,8 @@ def api_get_meeting(meetingId):
     })
 
 
-@app.route('/oneOnOne', methods=["GET", "POST"])
-def oneOnOne():
+@app.route('/oneonone', methods=["GET", "POST"])
+def oneonone():
 
     match request.method:
         case 'GET':
@@ -146,6 +146,11 @@ def oneOnOne():
         case _:
             print("nope")
 
+
+@app.route('/checkin')
+def checkin():
+
+    return render_template('checkin.html')
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
