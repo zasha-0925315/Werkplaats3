@@ -1,6 +1,10 @@
 import ast
 import os
+
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify
+from os import environ, path
+from dotenv import load_dotenv
+
 from lib.forms import LoginForm
 from lib.login import Login
 from lib.managestudent import StudentManagement
@@ -8,6 +12,10 @@ from lib.manageteacher import TeacherManagement
 from lib.manageclass import ClassManagement
 from lib.meeting import MeetingManagement
 from lib.presence import PresenceManagement
+
+# no touchy
+projpath = path.join(path.dirname(__file__), '.env')
+load_dotenv(projpath)
 
 # Flask server
 LISTEN_ALL = "0.0.0.0"
@@ -17,11 +25,9 @@ FLASK_DEBUG = True
 
 # other important stuffs
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'sfsfl446klxjaasdksldklfgg'
+SECRET_KEY = environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
-    
-app.config["SECRET_KEY"] = "yeet"
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
 login = Login(DB_FILE)
@@ -41,7 +47,7 @@ if not os.path.isfile(DATABASE_FILE):
 
 @app.before_request
 def check_login():
-    if request.endpoint not in ["static","index","show_login", "handle_login"]:
+    if request.endpoint not in ["index","show_login", "handle_login"]:
         if not session.get("logged_in"):
             return redirect(url_for('show_login'))
 
@@ -58,12 +64,10 @@ def testajax():
 def base():
     return render_template("base.html")
 
-
 # Url for QR Code scanning
 @app.route('/QR')
 def qr():
     return render_template("QR.html", title=qr)
-
 
 @app.route('/meeting', methods=["GET", "POST"])
 def meeting():
