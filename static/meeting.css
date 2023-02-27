@@ -1,0 +1,32 @@
+#meeting_info_content {
+    display: flex;
+    margin-top: 50px;
+}
+
+#meeting_table {
+    margin-left: 50px;
+}
+
+.no_presence {
+    color: red;
+}
+
+.yes_presence {
+    color: green;
+}
+
+.maybe_presence {
+    color: goldenrod;
+}
+
+@media (pointer:coarse) {
+    #meeting_info_content {
+        flex-direction: column;
+        align-items: center;
+    }
+    #meeting_info {
+        transform: scale(2);
+        transform-origin: top;
+        margin-bottom: 300px;
+    }
+}

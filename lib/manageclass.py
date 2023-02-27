@@ -17,6 +17,7 @@ class ClassManagement:
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM klas")
+            classes = cursor.fetchall()
             conn.commit() 
 
             conn.close()
@@ -24,6 +25,8 @@ class ClassManagement:
         except OperationalError as e:
             print("yeet")
             raise e
+
+        return classes
 
     def get_enrollment(self):
         try:

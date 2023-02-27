@@ -13,7 +13,7 @@
                 </svg>
             </div>
         </div>
-
+        {% if session.logged_in %}
         <div id="header_menu">
             <div id="header_menu_buttons">
                 <button><span>Teacher</span></button>
@@ -29,16 +29,18 @@
                     </svg>
 
 
+
                 </button>
             </div>
         </div>
     </div>
-
     <div id="slide_menu">
         <div id="slide_buttons">
             <button><span>Teacher</span></button>
             <button><span>Student</span></button>
             <button><span>Class</span></button>
+            <button><span><a class="logout-button" href="/logout">Log Out</a></span></button>
+             {% endif %}
         </div>
 
     </div>

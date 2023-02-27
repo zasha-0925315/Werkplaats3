@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Check In{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div id="checkin_content">
+        <form>
+            {% if question is not none %}
+                <div id="answer_box">
+                    <h3>{{ question }}</h3>
+                    <label>
+                        <input>
+                    </label>
+                </div>
+            {% endif %}
+            <button class="button1">Ik ben aan wezig</button>
+        </form>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}

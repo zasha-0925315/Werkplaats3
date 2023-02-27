@@ -17,6 +17,7 @@ class TeacherManagement:
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM docent")
+            teacher = cursor.fetchall()
             conn.commit() 
 
             conn.close()
@@ -24,3 +25,5 @@ class TeacherManagement:
         except OperationalError as e:
             print("yeet")
             raise e
+
+        return teacher

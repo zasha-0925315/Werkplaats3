@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Gesprek{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div id="meeting_form">
+        <div id="meeting_form_title">
+            <h1>Maak nieuw gesprek</h1>
+        </div>
+        <form method="post">
+            <div id="inputs">
+                <div id="fields">
+                    <label>Naam gesprek:<br>
+                        <input name="meeting_name" placeholder="Naam gesprek">
+                    </label>
+                    <label>Datum:<br>
+                        <input id="meeting_datetime" name="meeting_datetime" type="datetime-local" min="{{ current_datetime }}">
+                    </label>
+                    <label>Locatie:<br>
+                        <input name="meeting_location" placeholder="Naam locatie">
+                    </label>
+                </div>
+                <div id="lists">
+                    <label for="class_select">Klassen:<br>
+                        <select name="class_select">
+                            {% for class in classes %}
+                                <option value="{{ class[0] }}">{{ class[0] }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label>Studenten:<br>
+                        <select>
+                            {% for student in students %}
+                                <option value="{{ class[0] }}">{{ class[0] }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div id="button">
+                <button class="button1">Plan in</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/meeting.js"></script>
+{% endblock script %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Meeting{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div id="meeting_form">
+        <div id="meeting_form_title">
+            <h1>Maak nieuwe meeting</h1>
+        </div>
+        <form method="post">
+            <div id="inputs">
+                <div id="fields">
+                    <label>Naam les:<br>
+                        <input name="meeting_name" placeholder="Naam les">
+                    </label>
+                    <label>Datum:<br>
+                        <input id="meeting_datetime" name="meeting_datetime" type="datetime-local" min="{{ current_datetime }}">
+                    </label>
+                    <label>Locatie:<br>
+                        <input name="meeting_location" placeholder="Naam locatie">
+                    </label>
+                </div>
+                <div id="lists">
+                    <label for="meeting_teacher">Docent(en):<br>
+                        {% for teacher in teachers %}
+                            <div>
+                                <label for="meeting_teacher">
+                                    <input type="checkbox" name="meeting_teacher" value="{{ teacher[0] }}">
+                                    <span>{{ teacher[1] }} {{ teacher[2] }}</span>
+                                </label><br>
+                            </div>
+
+                        {% endfor %}
+                    </label>
+                    <label>Klas(sen):<br>
+                        {% for class in classes %}
+                            <div>
+                                <label for="meeting_class">
+                                    <input type="checkbox" name="meeting_class" value="{{ class[0] }}">
+                                    <span>{{ class[0] }}</span>
+                                </label><br>
+                            </div>
+
+                        {% endfor %}
+                    </label>
+                </div>
+            </div>
+            <div id="button">
+                <button class="button1">Plan in</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/meeting.js"></script>
+    <script src="../static/get_datetime.js"></script>
+{% endblock script %}
