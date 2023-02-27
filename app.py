@@ -25,7 +25,7 @@ FLASK_DEBUG = True
 
 # other important stuffs
 app = Flask(__name__)
-SECRET_KEY = environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
