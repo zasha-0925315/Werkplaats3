@@ -246,12 +246,15 @@ def testqr():
 def teapot():
     return render_template("teapot.html"), 418
 
-@app.route("/link")
+@app.route("/link", methods=["GET","POST"])
 def link():
     match request.method:
         case 'GET':
             teacher_list = teacherdb.get_teacher() 
-    return render_template('link.html', teachers= teacher_list)    
+            
+
+
+    return render_template('link.html', teachers=teacher_list)    
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
