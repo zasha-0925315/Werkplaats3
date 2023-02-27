@@ -39,11 +39,11 @@ if not os.path.isfile(DATABASE_FILE):
     print(f"Could not find database {DATABASE_FILE}, creating a demo database.")
 
 
-# @app.before_request
-# def check_login():
-#     if request.endpoint not in ["static"]:
-#         if not session.get("logged_in"):
-#             return redirect(url_for('show_login'))
+@app.before_request
+def check_login():
+    if request.endpoint not in ["static","index","show_login", "handle_login"]:
+        if not session.get("logged_in"):
+            return redirect(url_for('show_login'))
 
 # Main route
 @app.route("/")
@@ -219,11 +219,12 @@ def screen():
 @app.route('/login', methods=["GET", "POST"])
 def show_login():
     session["username"] = request.form.get("username")
-    #     if username in users and users[username][1]== password:
-    #         session["username"] = username
-    #         return redirect(url_for("home"))
-    return render_template("login.html")
-
+    if session.get('logged_in'):
+        return redirect(url_for("link"))
+    else:
+        return render_template('login.html')
+      
+  
 @app.route("/handle_login", methods=["GET", "POST"])
 def handle_login():
     if request.form["password"] == "password" and request.form["username"] == "admin":
@@ -260,7 +261,7 @@ def link():
 
 @app.route("/logout")
 def logout():
-    session.clear()
+    session.pop('logged_in', None)
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
