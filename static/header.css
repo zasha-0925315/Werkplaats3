@@ -58,6 +58,7 @@ header button:hover {
 #burger_menu_button {
     display: block;
 }
+
 #burger_menu_button rect {
     transition: all 300ms;
 }
@@ -152,4 +153,10 @@ header button:hover {
     #slide_buttons {
         transform: scale(2);
     }
+}
+
+.logout-button {
+    color: var(--gray);
+    outline: none;
+    text-decoration: none;
 }

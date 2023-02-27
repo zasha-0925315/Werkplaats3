@@ -20,11 +20,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'sfsfl446klxjaasdksldklfgg'
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
-# @app.before_request
-# def check_login():
-#     if request.endpoint not in ["static"]:
-#         if not session.get("logged_in"):
-#             return redirect(url_for('show_login'))
+    
 app.config["SECRET_KEY"] = "yeet"
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
@@ -42,6 +38,12 @@ DATABASE_FILE = os.path.join(app.root_path, 'databases', 'databases/demo_data.db
 if not os.path.isfile(DATABASE_FILE):
     print(f"Could not find database {DATABASE_FILE}, creating a demo database.")
 
+
+# @app.before_request
+# def check_login():
+#     if request.endpoint not in ["static"]:
+#         if not session.get("logged_in"):
+#             return redirect(url_for('show_login'))
 
 # Main route
 @app.route("/")
@@ -255,6 +257,11 @@ def link():
 
 
     return render_template('link.html', teachers=teacher_list)    
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
