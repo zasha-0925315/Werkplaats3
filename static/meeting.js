@@ -23,17 +23,31 @@
                     let student_presence = 0
                     meetingInfo.replaceChildren()
                     while ( student_count < presence_length) {
-                        if (data["presence_list"][student_presence]["presence"] === 1) {
-                            meetingInfo.innerHTML +=
-                            "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
-                            "<td class='yes_presence'>" + "aanwezig" + "</td>"
-                            student_count++
-                            student_presence++
-                        } else {
-                            meetingInfo.innerHTML +=
-                            "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
-                            "<td class='no_presence'>" + "afwezig" + "</td>"
-                            student_count++
+                        switch (data["presence_list"][student_presence]["presence"]) {
+                            case 0:
+                                meetingInfo.innerHTML +=
+                                "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
+                                "<td class='no_presence'>" + "Afwezig" + "</td>"
+                                student_count++;
+                                break;
+                            case 1:
+                                meetingInfo.innerHTML +=
+                                "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
+                                "<td class='yes_presence'>" + "aanwezig" + "</td>"
+                                student_count++
+                                student_presence++;
+                                break;
+                            case 2:
+                                meetingInfo.innerHTML +=
+                                "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
+                                "<td class='maybe_presence'>" + "afgemeld" + "</td>"
+                                student_count++;
+                                break;
+                            default:
+                                meetingInfo.innerHTML +=
+                                "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
+                                "<td>" + "error" + "</td>"
+                                student_count++;
                         }
                     }
                     meetingFooter.replaceChildren()
