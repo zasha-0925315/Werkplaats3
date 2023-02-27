@@ -21,8 +21,6 @@ class PresenceManagement:
             presence_db_info = cursor.fetchall()
             conn.close()
 
-            print(presence_db_info)
-
             presence_info = []
             for info in presence_db_info:
                 presence_info.append({

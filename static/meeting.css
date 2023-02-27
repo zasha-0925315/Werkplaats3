@@ -18,3 +18,15 @@
 .maybe_presence {
     color: goldenrod;
 }
+
+@media (pointer:coarse) {
+    #meeting_info_content {
+        flex-direction: column;
+        align-items: center;
+    }
+    #meeting_info {
+        transform: scale(2);
+        transform-origin: top;
+        margin-bottom: 300px;
+    }
+}
