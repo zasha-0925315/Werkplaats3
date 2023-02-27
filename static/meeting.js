@@ -29,6 +29,7 @@
                                 "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
                                 "<td class='no_presence'>" + "Afwezig" + "</td>"
                                 student_count++;
+                                console.log(data["presence_list"][student_presence]["first name"])
                                 break;
                             case 1:
                                 meetingInfo.innerHTML +=
@@ -52,7 +53,6 @@
                     }
                     meetingFooter.replaceChildren()
                     meetingFooter.innerHTML = "<td>" + "</td>" + "<td>" + student_presence + "/" + student_count + " " + "aanwezig" + "</td>"
-
 
                 } else {
                     console.log(data.length)
