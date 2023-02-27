@@ -23,36 +23,36 @@
                     let student_presence = 0
                     meetingInfo.replaceChildren()
                     while ( student_count < presence_length) {
-                        switch (data["presence_list"][student_presence]["presence"]) {
+                        switch (data["presence_list"][student_count]["presence"]) {
                             case 0:
                                 meetingInfo.innerHTML +=
-                                "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
+                                "<td>" + data["presence_list"][student_count]["first name"] + " " + data["presence_list"][student_count]["last name"] + "</td>" +
                                 "<td class='no_presence'>" + "Afwezig" + "</td>"
                                 student_count++;
-                                console.log(data["presence_list"][student_presence]["first name"])
                                 break;
                             case 1:
                                 meetingInfo.innerHTML +=
-                                "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
+                                "<td>" + data["presence_list"][student_count]["first name"] + " " + data["presence_list"][student_count]["last name"] + "</td>" +
                                 "<td class='yes_presence'>" + "aanwezig" + "</td>"
                                 student_count++
                                 student_presence++;
                                 break;
                             case 2:
                                 meetingInfo.innerHTML +=
-                                "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
+                                "<td>" + data["presence_list"][student_count]["first name"] + " " + data["presence_list"][student_count]["last name"] + "</td>" +
                                 "<td class='maybe_presence'>" + "afgemeld" + "</td>"
                                 student_count++;
                                 break;
                             default:
                                 meetingInfo.innerHTML +=
-                                "<td>" + data["presence_list"][student_presence]["first name"] + " " + data["presence_list"][student_presence]["last name"] + "</td>" +
+                                "<td>" + data["presence_list"][student_count]["first name"] + " " + data["presence_list"][student_count]["last name"] + "</td>" +
                                 "<td>" + "error" + "</td>"
                                 student_count++;
                         }
                     }
                     meetingFooter.replaceChildren()
                     meetingFooter.innerHTML = "<td>" + "</td>" + "<td>" + student_presence + "/" + student_count + " " + "aanwezig" + "</td>"
+
 
                 } else {
                     console.log(data.length)
