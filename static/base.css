@@ -6,6 +6,7 @@
 @import "login.css";
 @import "button.css";
 @import "form.css";
+@import "links.css";
 
 :root {
     --main-font: 'Poppins', sans-serif;
@@ -33,4 +34,3 @@ body {
     display: flex;
     justify-content: center;
 }
-

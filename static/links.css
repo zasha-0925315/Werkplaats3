@@ -1,0 +1,170 @@
+.Greet-Balk {
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    width: 25%;
+    height: 500px;
+    background-color: darkblue;
+    margin-top: 10px;
+    margin-left: 50px;
+    text-align: center;
+    font-size: 50px;
+    color: #ffffff;
+}
+
+.Greet-Balk:hover {
+    filter: brightness(150%);
+}
+
+.Greet-Text {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#meeting-border {
+    background-color: darkcyan;
+    width: 1000px;
+    height: 500px;
+    margin-top: 10px;
+    border-radius: 15%;
+    font-size: 40px;
+
+
+}
+
+#meeting-header {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 50px;
+
+
+}
+
+#maih {
+    padding: 50px;
+    display: flex;
+}
+
+#meeting1:hover,
+#meeting2:hover,
+#meeting3:hover {
+    transform: scale(1.05);
+
+}
+
+#meeting1 {
+    display: flex;
+    justify-self: center;
+    width: 60%;
+    height: 20%;
+    border-style: ridge;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    border-radius: 25px;
+}
+
+*/ #meeting2 {
+    width: 60%;
+    height: 20%;
+    border-style: ridge;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    border-radius: 25px;
+}
+
+#meeting3 {
+    width: 60%;
+    height: 20%;
+    border-style: ridge;
+    margin-left: 15px;
+    border-radius: 25px;
+}
+
+#check-meeting-button {
+    display: flex;
+    width: 30%;
+    height: 55%;
+    border-style: ridge;
+    border-color: aquamarine;
+    margin-right: 25px;
+    border-radius: 25px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+#check-meeting-button:hover {
+    filter: brightness(75%);
+    transform: scale(1.05);
+
+
+}
+
+.Planning-text {
+    color: black;
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+
+#Select-Planning-button {
+    height: 40px;
+    width: 40px;
+    border-style: none;
+    border-radius: 25px;
+    background-color: rgb(211, 15, 76);
+    transition: 0.5ms;
+    margin-left: 20px;
+    outline: 0;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+#Select-Planning-button:hover {
+    background-color: var(--white);
+    transition: all 200ms;
+}
+
+#Select-Planning-button:hover .plus-knop {
+    fill: var(--hr-red);
+    transition: all 200ms;
+}
+
+.plus-knop {
+    height: 45%;
+    margin: 0 auto;
+    margin-top: 2px;
+}
+
+.plus-knop:hover {
+    background-color: var(--white);
+    fill: var(--hr-red);
+    transition: all 200ms;
+}
+
+#meeting-and-plan {
+    display: flex;
+    justify-content: space-between;
+}
+
+#meeting-table {
+    margin-left: 50px;
+    margin-top: 40px;
+
+}
+
+#Docent-Planning {
+    margin-right: 50px;
+    margin-top: 40px;
+}
+
+#Select-Teacher {
+    display: flex;
+    margin-left: auto;
+    margin-right: 37%;
+
+}

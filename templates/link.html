@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <!-- <div id="meeting-div">Meetings
+    </div> -->
+  <div id="maih">
+    <div id="meeting-border">
+      <div id="meeting-header">
+        Meetings
+        <button id="Select-Planning-button" type="button"> <svg  class="plus-knop" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFE" viewBox="0 0 18 18"><path d="M18 10h-8v8H8v-8H0V8h8V0h2v8h8v2z"></path></svg>
+        </button>
+      </div>
+      <!-- De dropdown lijst voor andere docenten -->
+      <select name="Select-Teacher" id="Select-Teacher">
+        {% for teacher in teachers %}
+       <option value="{{ teacher[0] }}">{{ teacher[0] }}</option>
+       {% endfor %}
+      </select>
+
+        <div id= "meeting-and-plan">
+          <div id="meeting-table">
+            <table width ="400px">
+              <thead>
+              <tbody>
+                <th> Eigen Agenda </th>
+                <tr>
+                  <td>hond</td>
+                </tr>
+                <tr>
+                  <td>kat</td>
+                </tr>
+                <tr>
+                  <td>doggo</td>
+                </tr>
+              </tbody>
+            </table>
+            
+         </div>
+          <div id="Docent-Planning">
+            <table width ="400px">
+              <thead>
+              <tbody id="#data-output">
+                <th>Docent</th>
+                <tr>
+                  <td id="td1">Mark</td>
+                </tr>
+                <tr>
+                  <td>Veysel</td>
+                </tr>
+                <tr>
+                  <td>Diederik</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+         <!-- <div id="check-meeting-button">
+          <a href="{{ url_for('show_login')}}"class="Planning-text">Check Planning</a>
+        </div> -->
+        </div>
+      </div>  
+      <div>
+    </div>
+    <div class= "Greet-Balk" id="Greet-Balk"> <br>
+        {% if session.logged_in %}
+        <p class="Greet-Text">
+          Hoi, {{ session.username }}
+        </p>
+        {% endif %}
+    </div>
+  </div>
+  <button onclick="set_Meeting()">clickkk</button>
+</body>
+{% endblock content %}
+
+{% block script %}
+{{ super() }}
+<script src="static/link.js">
+</script>
+{% endblock script %}

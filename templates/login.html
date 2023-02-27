@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,12 +8,11 @@
         <link rel="stylesheet" href="/static/base.css" type="text/css">
     </head>
     <body>
-        {% include 'header.html' %}
         <main>
           <!-- <div class="login-container"> -->
             <form action="/handle_login" method="POST">
                 <div class="login-square">
-                 <div class="centered_div">
+                 <div class="centered">
                         <p class="login-header"><b>Log in</b></p>
                         <p class="message">{{ message }}</p>
                         <p class="username-field">
@@ -32,5 +33,5 @@
 
         </main>
     </body>
-<script src="../static/header.js"></script>
+    {% endblock content %}
 </html>

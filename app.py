@@ -48,6 +48,9 @@ if not os.path.isfile(DATABASE_FILE):
 def index():
     return render_template("index.html", title=index)
 
+@app.route("/test-ajax.html", methods = ['GET'])
+def testajax():
+    return render_template("test-ajax.html")
 
 @app.route("/base")
 def base():
@@ -229,7 +232,7 @@ def handle_login():
     #     session["logged_in"] = True
     else:
         return render_template("login.html", message="Invalid Password or Username.")
-    return redirect(url_for('base'))
+    return redirect(url_for('link'))
 
 @app.route("/register")
 def register():
@@ -242,6 +245,16 @@ def testqr():
 @app.route("/teapot")
 def teapot():
     return render_template("teapot.html"), 418
+
+@app.route("/link", methods=["GET","POST"])
+def link():
+    match request.method:
+        case 'GET':
+            teacher_list = teacherdb.get_teacher() 
+            
+
+
+    return render_template('link.html', teachers=teacher_list)    
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
