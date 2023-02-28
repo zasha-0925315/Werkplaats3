@@ -2,17 +2,18 @@
 {% block title %}QR scan{% endblock %}
 {% block head %}
     {{ super() }}
+    <script src="https://raw.githubusercontent.com/nimiq/qr-scanner/master/qr-scanner.min.js"></script>
     <!-- https://github.com/nimiq/qr-scanner -->
 {% endblock head %}
 {% block content %}
     <main>
-        <h1>QR Code</h1>
+        <h1>Scan QR Code</h1>
         <div id="qrscan-container">
             <video id="qrscan"></video>
         </div>
 
         <script type="module">
-            import QrScanner from "static/qr-scanner.min.js";
+            import QrScanner from "/static/qr-scanner.min.js";
 
             const video = document.getElementById("qrscan-container");
             const videoContainer = document.getElementById("qrscan");
