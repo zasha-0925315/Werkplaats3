@@ -92,7 +92,7 @@ def meeting():
             return render_template('create_meeting.html')
 
 
-@app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH", "DELETE"])
+@app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH"])
 def meetingid(meetingId):
     match request.method:
         case 'GET':
@@ -104,9 +104,9 @@ def meetingid(meetingId):
         case 'PUT':
             print("PUT")
         case 'PATCH':
+            jsonData = request.get_json()
+            print(jsonData)
             print("PATCH")
-        case 'DELETE':
-            print("DELETE")
 
 
 @app.route('/api/<meetingId>', methods=["GET"])

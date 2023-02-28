@@ -34,3 +34,26 @@ class PresenceManagement:
             print("yeet")
             raise e
         return presence_info
+
+    def patch_presence(self):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"")
+            presence_db_info = cursor.fetchall()
+            conn.close()
+
+            presence_info = []
+            for info in presence_db_info:
+                presence_info.append({
+                    "presence": info[0],
+                    "student": info[1],
+                    "meeting": info[2],
+                    "first name": info[3],
+                    "last name": info[4]
+                })
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return presence_info

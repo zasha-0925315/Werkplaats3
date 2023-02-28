@@ -19,6 +19,54 @@
     color: goldenrod;
 }
 
+.presence_options form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.presence_options form input {
+    margin: 0;
+    padding: 0;
+}
+
+.presence_options input {
+    border: none;
+    border-radius: 3px;
+}
+
+.presence_options input:hover {
+    color: var(--white);
+    transition: 200ms;
+}
+
+.button_presence_no {
+    background-color: transparent;
+    color: red;
+}
+
+.button_presence_no:hover {
+    background-color: red;
+}
+
+.button_presence_yes {
+    background-color: transparent;
+    color: green;
+}
+
+.button_presence_yes:hover {
+    background-color: green;
+}
+
+.button_presence_maybe {
+    background-color: transparent;
+    color: goldenrod;
+}
+
+.button_presence_maybe:hover {
+    background-color: goldenrod;
+}
+
 @media (pointer:coarse) {
     #meeting_info_content {
         flex-direction: column;
