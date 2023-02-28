@@ -2,26 +2,47 @@
 {% block title %}QR scan{% endblock %}
 {% block head %}
     {{ super() }}
-    <script src="https://raw.githubusercontent.com/nimiq/qr-scanner/master/qr-scanner.min.js"></script>
-    <!-- https://github.com/nimiq/qr-scanner -->
+    <!-- https://github.com/zxing-js/library-->
 {% endblock head %}
 {% block content %}
     <main>
         <h1>Scan QR Code</h1>
+        <div id="test">
+            <form>
+                <input type="text" id="text"/>
+                <button type="button" onclick="startScan()">start</button>
+                <br/>
+            </form>
+        </div>
+
         <div id="qrscan-container">
             <video id="qrscan"></video>
         </div>
 
-        <script type="module">
-            import QrScanner from "/static/qr-scanner.min.js";
+        <div id="qrresult">
+            <p id="qrres">yeet</p>
+        </div>
 
-            const video = document.getElementById("qrscan-container");
-            const videoContainer = document.getElementById("qrscan");
+        <script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js">
+            window.addEventListener('load', function(){
+                const qrReader = new ZXing.BrowserQrCodeReader()
+                console.log('test')
+            });
+            
+            
 
-            const scanner = new QrScanner(video)
+            //const video = document.getElementById("qrscan-container");
+            //const videoContainer = document.getElementById("qrscan");
+            //const qrResult = document.getElementById("qrres");
+
+            //const scanner = new QrScanner(video, result => console.log(result), {returnDetailedScanResult: true});
+
+            function startScan(){
+                scanner.start;
+            }
 
             function doSomething(){
-                console.log("HELP");
+                console.log("HELP ");
             }
 
             doSomething();
