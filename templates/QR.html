@@ -2,11 +2,28 @@
 {% block title %}QR scan{% endblock %}
 {% block head %}
     {{ super() }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <!-- https://github.com/neocotic/qrious -->
+    <!-- https://github.com/nimiq/qr-scanner -->
 {% endblock head %}
 {% block content %}
     <main>
-        
+        <h1>QR Code</h1>
+        <div id="qrscan-container">
+            <video id="qrscan"></video>
+        </div>
+
+        <script type="module">
+            import QrScanner from "static/qr-scanner.min.js";
+
+            const video = document.getElementById("qrscan-container");
+            const videoContainer = document.getElementById("qrscan");
+
+            const scanner = new QrScanner(video)
+
+            function doSomething(){
+                console.log("HELP");
+            }
+
+            doSomething();
+        </script>
     </main>
 {% endblock content %}
