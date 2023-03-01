@@ -1,0 +1,10 @@
+#qrscan-container {
+    width: 350px;
+    height: 350px;
+    border: 1px solid gray;
+}
+
+#qrscan {
+    max-width: 350px;
+    max-height: 350px;
+}

@@ -2,16 +2,13 @@
 {% block title %}QR scan{% endblock %}
 {% block head %}
     {{ super() }}
-    <!-- https://github.com/zxing-js/library-->
+    <script src="https://unpkg.com/@zxing/library@latest"></script>
+    <!-- https://github.com/mebjas/html5-qrcode -->
 {% endblock head %}
 {% block content %}
     <main>
         <h1>Scan QR Code</h1>
         <div id="test">
-            <form>
-                <button type="button" onclick="startScan()">start</button>
-                <br/>
-            </form>
         </div>
 
         <div id="qrscan-container">
@@ -22,21 +19,21 @@
             <p id="qrres">yeet</p>
         </div>
 
-        <script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js">
-            window.addEventListener('load', function(){
-                const qrReader = new ZXing.BrowserQrCodeReader()
-                console.log('test')
-            });
-            
-            function startScan(){
-                //aaaaaaaaaaaaa
-                alert("boop");
-            }
+        <script>
+            const qrReader = new ZXing.BrowserQRCodeReader();
+            const inputId = undefined;
 
+            function decode(qrReader, selectedDeviceId){
+                qrReader.decodeOnceFromVideoDevice(selectedDeviceId, 'qrscan')
+                .then(result => console.log(result.text))
+                .catch(err => console.error(err));
+            }
+            
             function doSomething(){
                 console.log("HELP");
             }
-
+            
+            decode(qrReader, inputId);
             doSomething();
         </script>
     </main>
