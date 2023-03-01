@@ -3,7 +3,7 @@
 {% block head %}
     {{ super() }}
     <script src="https://unpkg.com/@zxing/library@latest"></script>
-    <!-- https://github.com/mebjas/html5-qrcode -->
+    <!-- https://github.com/zxing-js/library -->
 {% endblock head %}
 {% block content %}
     <main>
@@ -21,18 +21,19 @@
 
         <script>
             const qrReader = new ZXing.BrowserQRCodeReader();
-            const inputId = undefined;
+            const inputId = undefined; //dit meegeven zodat ie op een mobile device altijd de achterste camera pakt
+            const qrRes = document.getElementById('qrres');
 
             function decode(qrReader, selectedDeviceId){
                 qrReader.decodeOnceFromVideoDevice(selectedDeviceId, 'qrscan')
-                .then(result => console.log(result.text))
+                .then(result => console.log(result.text), qrRes.textContent=result.text)
                 .catch(err => console.error(err));
             }
             
             function doSomething(){
-                console.log("HELP");
+                console.warn("camera ded");
             }
-            
+
             decode(qrReader, inputId);
             doSomething();
         </script>
