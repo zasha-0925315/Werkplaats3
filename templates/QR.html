@@ -26,8 +26,13 @@
 
             function decode(qrReader, selectedDeviceId){
                 qrReader.decodeOnceFromVideoDevice(selectedDeviceId, 'qrscan')
-                .then(result => console.log(result.text), qrRes.textContent=result.text)
-                .catch(err => console.error(err));
+                .then((result) => {
+                    console.log(result)
+                    qrRes.textContent = result.text
+                })
+                .catch((err) => {
+                    console.error(err) 
+                    qrRes.textContent = err});
             }
             
             function doSomething(){
