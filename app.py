@@ -1,7 +1,7 @@
 import ast
 import os
-from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify
-from lib.forms import LoginForm
+from flask import Flask, render_template, request, session, redirect, url_for, json
+# from lib.forms import LoginForm
 from lib.login import Login
 from lib.managestudent import StudentManagement
 from lib.manageteacher import TeacherManagement
@@ -50,9 +50,9 @@ def check_login():
 def index():
     return render_template("index.html", title=index)
 
-@app.route("/test-ajax.html", methods = ['GET'])
-def testajax():
-    return render_template("test-ajax.html")
+# @app.route("/test-ajax.html", methods = ['GET'])
+# def testajax():
+#     return render_template("test-ajax.html")
 
 @app.route("/base")
 def base():
@@ -104,16 +104,14 @@ def meetingid(meetingId):
         case 'PUT':
             print("PUT")
         case 'PATCH':
-            jsonData = request.get_json()
-            print(jsonData)
-            print("PATCH")
-
+            json_data = request.get_json()
+            presencedb.update_presence(json_data)
+            return json.jsonify()
 
 @app.route('/api/<meetingId>', methods=["GET"])
 def api_get_meeting(meetingId):
 
     presence_list = presencedb.get_presence(meetingId)
-    print(presence_list)
 
     return json.jsonify({
         'presence_list': presence_list

@@ -18,52 +18,45 @@
 .maybe_presence {
     color: goldenrod;
 }
-
-.presence_options form {
+.presence_options {
     display: flex;
-    flex-direction: row;
     justify-content: space-evenly;
 }
 
-.presence_options form input {
-    margin: 0;
-    padding: 0;
-}
-
-.presence_options input {
+.presence_options div {
     border: none;
     border-radius: 3px;
 }
 
-.presence_options input:hover {
+.presence_options div:hover {
     color: var(--white);
     transition: 200ms;
 }
 
-.button_presence_no {
+#button_presence_no {
     background-color: transparent;
     color: red;
 }
 
-.button_presence_no:hover {
+#button_presence_no:hover {
     background-color: red;
 }
 
-.button_presence_yes {
+#button_presence_yes {
     background-color: transparent;
     color: green;
 }
 
-.button_presence_yes:hover {
+#button_presence_yes:hover {
     background-color: green;
 }
 
-.button_presence_maybe {
+#button_presence_maybe {
     background-color: transparent;
     color: goldenrod;
 }
 
-.button_presence_maybe:hover {
+#button_presence_maybe:hover {
     background-color: goldenrod;
 }
 

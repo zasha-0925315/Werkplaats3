@@ -18,6 +18,7 @@ class PresenceManagement:
                            f"student.voornaam, student.achternaam "
                            f"FROM aanwezigheid INNER JOIN student "
                            f"ON aanwezigheid.student=student.id AND aanwezigheid.meeting IN ({meetingid})")
+
             presence_db_info = cursor.fetchall()
             conn.close()
 
@@ -35,25 +36,22 @@ class PresenceManagement:
             raise e
         return presence_info
 
-    def patch_presence(self):
+    def update_presence(self, json_data):
         try:
+            json_presence = json_data["presence"]
+            json_student = json_data["student"]
+            json_meeting = json_data["meeting"]
+            print(json_meeting)
+            print(json_presence)
+            print(json_student)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"")
-            presence_db_info = cursor.fetchall()
+            cursor.execute(f"UPDATE aanwezigheid SET aanwezigheid = ? "
+                           f"WHERE student = ? AND meeting = ?", (json_presence, json_student, json_meeting))
+            conn.commit()
             conn.close()
 
-            presence_info = []
-            for info in presence_db_info:
-                presence_info.append({
-                    "presence": info[0],
-                    "student": info[1],
-                    "meeting": info[2],
-                    "first name": info[3],
-                    "last name": info[4]
-                })
         except OperationalError as e:
             print("yeet")
             raise e
-        return presence_info
