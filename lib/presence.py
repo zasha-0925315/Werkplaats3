@@ -41,9 +41,6 @@ class PresenceManagement:
             json_presence = json_data["presence"]
             json_student = json_data["student"]
             json_meeting = json_data["meeting"]
-            print(json_meeting)
-            print(json_presence)
-            print(json_student)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 

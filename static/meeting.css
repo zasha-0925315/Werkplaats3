@@ -24,12 +24,14 @@
 }
 
 .presence_options div {
-    border: none;
+    display: flex;
+    justify-content: center;
     border-radius: 3px;
+    width: 25px;
+    font-weight: bold;
 }
 
 .presence_options div:hover {
-    color: var(--white);
     transition: 200ms;
 }
 
@@ -40,6 +42,7 @@
 
 #button_presence_no:hover {
     background-color: red;
+    color: var(--white);
 }
 
 #button_presence_yes {
@@ -49,6 +52,7 @@
 
 #button_presence_yes:hover {
     background-color: green;
+    color: var(--white);
 }
 
 #button_presence_maybe {
@@ -58,6 +62,7 @@
 
 #button_presence_maybe:hover {
     background-color: goldenrod;
+    color: var(--white);
 }
 
 @media (pointer:coarse) {
