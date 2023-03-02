@@ -25,7 +25,6 @@ class MeetingManagement:
             cursor.execute(f"SELECT last_insert_rowid()")
             meetingid = cursor.fetchall()
             meetingid2 = str(meetingid).replace("(", "").replace(")", "").replace("[", "").replace("]", "").replace(",", "")
-            print(meetingid2)
 
             for student in meeting_students2:
                 student2 = str(student).replace("(", "").replace(")", "").replace(",", "")
