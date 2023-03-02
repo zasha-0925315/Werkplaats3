@@ -22,6 +22,7 @@ LISTEN_ALL = "0.0.0.0"
 FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
 FLASK_DEBUG = True
+FLASK_RUN_CERT = "adhoc"
 
 # other important stuffs
 app = Flask(__name__)
@@ -274,4 +275,5 @@ def logout():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
+    #ctx = ('zeehond.crt', 'zeehond.key')
+    app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG, ssl_context=FLASK_RUN_CERT)

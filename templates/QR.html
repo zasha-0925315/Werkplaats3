@@ -25,6 +25,8 @@
             const qrRes = document.getElementById('qrres');
 
             function decode(qrReader, selectedDeviceId){
+                /*console.log(selectedDeviceId)
+                qrRes.textContent = selectedDeviceId;*/
                 qrReader.decodeOnceFromVideoDevice(selectedDeviceId, 'qrscan')
                 .then((result) => {
                     console.log(result)
