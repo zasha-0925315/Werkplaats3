@@ -17,6 +17,7 @@ class StudentManagement:
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM student")
+            student = cursor.fetchall()
             conn.commit() 
 
             conn.close()
@@ -24,6 +25,7 @@ class StudentManagement:
         except OperationalError as e:
             print("yeet")
             raise e
+        return student
 
     def get_students_by_class(self, meeting_classes):
         try:

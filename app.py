@@ -77,7 +77,7 @@ def meeting():
     
     return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
 
-@app.post('/meeting')
+@app.post('/meeting') # shortcut voor methods = ["POST"]
 def meeting_post():
     meeting_name = str(request.form.get('meeting_name'))
     meeting_datetime = request.form.get('meeting_datetime')
@@ -159,15 +159,17 @@ def meetingforteacher():
             return render_template('meetingid.html')
 
 
-@app.route('/student', methods=["GET", "POST"])
+@app.route('/student')
 def student():
-    match request.method:
-        case 'GET':
-            return render_template('student.html')
-        case 'POST':
-            print("POST")
+    s_list = studentdb.get_student()
+    print(s_list)
+    #jsonify
+    return render_template('student.html', students=s_list), jsonify(s_list)
 
-
+@app.post('/student') # shortcut voor methods = ["POST"]
+def student_post():
+    return render_template('student.html')
+   
 @app.route('/student/<studentId>', methods=["GET", "DELETE"])
 def studentid():
     match request.method:
@@ -177,13 +179,14 @@ def studentid():
             print("DELETE")
 
 
-@app.route('/teacher', methods=["GET", "POST"])
+@app.route('/teacher')
 def teacher():
-    match request.method:
-        case 'GET':
-            return render_template('teacher.html')
-        case 'POST':
-            print("POST")
+    t_list = teacherdb.get_teacher()
+    return render_template('teacher.html', teachers=t_list)
+
+@app.post('/teacher') # shortcut voor methods = ["POST"]
+def teacher_post():
+    return render_template('teacher.html')
 
 
 @app.route('/teacher/<teacherId>', methods=["GET", "PUT", "DELETE"])
@@ -197,14 +200,14 @@ def teacherid():
             print("DELTE")
 
 
-@app.route('/class', methods=["GET", "POST"])
+@app.route('/class')
 def studentclass():
-    match request.method:
-        case 'GET':
-            return render_template('class.html')
-        case 'POST':
-            print("POST")
+    class_list = classdb.get_class()
+    return render_template('class.html', classes=class_list)
 
+@app.post('/class') # shortcut voor methods = ["POST"]
+def studentclass_post():
+    return render_template('class.html')
 
 @app.route("/class/<classId>", methods=["GET", "PATCH", "DELETE"])
 def studentclassid():
