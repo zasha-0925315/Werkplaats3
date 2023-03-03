@@ -126,9 +126,10 @@ def api_get_docentmeeting(meetingId):
 
     docent_meeting = meetingdb.get_meeting(meetingId)
     print(docent_meeting)
+    
 
     return json.jsonify({
-        'meeting_info' : docent_meeting
+        'meeting_info' : docent_meeting, 
     })
 
 @app.route('/oneonone', methods=["GET", "POST"])
@@ -270,7 +271,8 @@ def link():
     match request.method:
         case 'GET':
             teacher_list = teacherdb.get_teacher() 
-
+            
+           
     return render_template('link.html', teachers=teacher_list)
 
 

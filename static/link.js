@@ -1,4 +1,4 @@
-
+let max = 3
 
 const get_meeting = async () => {
     try {
@@ -7,7 +7,7 @@ const get_meeting = async () => {
         const response = await fetch('../api/class/' + urlId, {
             method: 'GET',
             headers: {
-                'Content-type': 'application/json'
+                'Content-Type': 'application/json'
             }
         });
 
@@ -17,10 +17,13 @@ const get_meeting = async () => {
         } else if (!response.ok) {
             console.log("Some non-200 HTTP response code or something")
         } else {
-            if (data["meeting_info"].length > 0) {
+            if (data["meeting_info"].length > 0, data["meeting_info"].length < 3) {
                 const table = document.getElementById("Docent-Table")
                 const tbody = document.querySelector("tbody")
-                table.innerHTML += data['date']
+                table.innerHTML += data["meeting_info"][0]["name"] + " " + data["meeting_info"][0]["date"]
+                if (data["meeting_info" === 3]) {
+                    return;
+                }
             }
 
         }
