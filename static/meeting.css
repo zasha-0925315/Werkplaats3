@@ -13,6 +13,7 @@
 
 #meeting_table tr {
     display: flex;
+    margin-bottom: 5px;
 }
 
 #meeting_table td:nth-child(1), #meeting_table th:nth-child(1) {
@@ -90,7 +91,10 @@
 }
 
 .afgemeld_reason {
+    display: flex;
+    justify-content: center;
     flex-basis: 100%;
+    height: fit-content;
 }
 
 @media (pointer:coarse) {

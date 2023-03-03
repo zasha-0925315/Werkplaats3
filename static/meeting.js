@@ -24,6 +24,9 @@ const get_meeting = async () => {
                 meetingInfo.replaceChildren()
                 while ( student_count < presence_length) {
                     let afgemeld_reason = data["presence_list"][student_count]["afgemeld reason"]
+                    if (afgemeld_reason === null) {
+                        afgemeld_reason = "Geen reden"
+                    }
                     let student_name = "<td>" + data["presence_list"][student_count]["first name"] + " " + data["presence_list"][student_count]["last name"] + "</td>"
                     let student_afwezig = "<td class='no_presence'>Afwezig</td>"
                     let student_aanwezig = "<td class='yes_presence'>Aanwezig</td>"
@@ -76,7 +79,8 @@ const get_meeting = async () => {
                             body : JSON.stringify( {
                                 'presence' : presence,
                                 'meeting' : data["presence_list"][student]["meeting"],
-                                'student' : data["presence_list"][student]["student"]
+                                'student' : data["presence_list"][student]["student"],
+                                'reason' : "Verandert door leraar"
                             }),
                             headers: {
                             'Content-type': 'application/json'
@@ -90,7 +94,7 @@ const get_meeting = async () => {
     } catch (e) {
         console.log("Some error with fetching JSON from meeting server: " + e)
     } finally {
-        setTimeout(get_meeting, 500000000)
+        setTimeout(get_meeting, 5000)
     }
 }
 document.addEventListener('DOMContentLoaded', get_meeting)
