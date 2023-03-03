@@ -15,7 +15,7 @@ class PresenceManagement:
             cursor = conn.cursor()
 
             cursor.execute(f"SELECT aanwezigheid.aanwezigheid, aanwezigheid.student, aanwezigheid.meeting, "
-                           f"student.voornaam, student.achternaam "
+                           f"aanwezigheid.afgemeld_reden, student.voornaam, student.achternaam "
                            f"FROM aanwezigheid INNER JOIN student "
                            f"ON aanwezigheid.student=student.id AND aanwezigheid.meeting IN ({meetingid})")
 
@@ -28,8 +28,9 @@ class PresenceManagement:
                     "presence": info[0],
                     "student": info[1],
                     "meeting": info[2],
-                    "first name": info[3],
-                    "last name": info[4]
+                    "afgemeld reason": info[3],
+                    "first name": info[4],
+                    "last name": info[5]
                 })
         except OperationalError as e:
             print("yeet")

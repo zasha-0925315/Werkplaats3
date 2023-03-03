@@ -7,6 +7,26 @@
     margin-left: 50px;
 }
 
+#meeting_table table {
+    width: 500px;
+}
+
+#meeting_table tr {
+    display: flex;
+}
+
+#meeting_table td:nth-child(1), #meeting_table th:nth-child(1) {
+    width: 250px;
+}
+
+#meeting_table td:nth-child(2), #meeting_table th:nth-child(2) {
+    width: 125px;
+}
+
+#meeting_table td:nth-child(3), #meeting_table th:nth-child(3) {
+    width: 125px;
+}
+
 .no_presence {
     color: red;
 }
@@ -63,6 +83,14 @@
 #button_presence_maybe:hover {
     background-color: goldenrod;
     color: var(--white);
+}
+
+.afgemeld_row {
+    flex-wrap: wrap;
+}
+
+.afgemeld_reason {
+    flex-basis: 100%;
 }
 
 @media (pointer:coarse) {
