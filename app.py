@@ -1,7 +1,7 @@
 import ast
 import os
 
-from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify
+from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 from os import environ, path
 from dotenv import load_dotenv
 
@@ -88,6 +88,7 @@ def meeting_post():
     meeting_students2 = studentdb.get_students_by_class(meeting_classes)
     meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2)
 
+    flash("Meeting toegevoegd!", "info")
     return redirect(url_for('meeting'))
 
 
