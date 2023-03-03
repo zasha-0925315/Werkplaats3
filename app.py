@@ -39,7 +39,7 @@ meetingdb = MeetingManagement(DB_FILE)
 presencedb = PresenceManagement(DB_FILE)
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
-DATABASE_FILE = os.path.join(app.root_path, 'databases', 'databases/demo_data.db')
+DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
 
 # Check if the database file exists.
 if not os.path.isfile(DATABASE_FILE):
@@ -70,31 +70,25 @@ def base():
 def qr():
     return render_template("QR.html", title=qr)
 
-@app.route('/meeting', methods=["GET", "POST"])
+@app.route('/meeting')
 def meeting():
+    teacher_list = teacherdb.get_teacher()
+    class_list = classdb.get_class()
+    
+    return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
 
-    match request.method:
-        case 'GET':
-            teacher_list = teacherdb.get_teacher()
-            class_list = classdb.get_class()
+@app.post('/meeting')
+def meeting_post():
+    meeting_name = str(request.form.get('meeting_name'))
+    meeting_datetime = request.form.get('meeting_datetime')
+    meeting_location = str(request.form.get('meeting_location'))
+    meeting_teacher = str(request.form.getlist('meeting_teacher'))
+    meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
+    meeting_students = str(studentdb.get_students_by_class(meeting_classes))
+    meeting_students2 = studentdb.get_students_by_class(meeting_classes)
+    meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2)
 
-            return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
-
-        case 'POST':
-            meeting_name = str(request.form.get('meeting_name'))
-            meeting_datetime = request.form.get('meeting_datetime')
-            meeting_location = str(request.form.get('meeting_location'))
-            meeting_teacher = str(request.form.getlist('meeting_teacher'))
-            meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
-            meeting_students = str(studentdb.get_students_by_class(meeting_classes))
-            meeting_students2 = studentdb.get_students_by_class(meeting_classes)
-
-            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2)
-
-            return redirect(url_for('meeting'))
-
-        case _:
-            return render_template('create_meeting.html')
+    return redirect(url_for('meeting'))
 
 
 @app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH", "DELETE"])
@@ -114,7 +108,7 @@ def meetingid(meetingId):
             print("DELETE")
 
 
-@app.route('/api/<meetingId>', methods=["GET"])
+@app.route('/api/<meetingId>')
 def api_get_meeting(meetingId):
 
     presence_list = presencedb.get_presence(meetingId)
@@ -264,9 +258,6 @@ def link():
     match request.method:
         case 'GET':
             teacher_list = teacherdb.get_teacher() 
-            
-
-
     return render_template('link.html', teachers=teacher_list)    
 
 @app.route("/logout")
