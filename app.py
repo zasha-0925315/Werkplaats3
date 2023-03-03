@@ -115,19 +115,16 @@ def api_get_meeting(meetingId):
     presence_list = presencedb.get_presence(meetingId)
     print(presence_list)
 
-
-
     return json.jsonify({
         'presence_list': presence_list
     })
 
-@app.route('/api/class/<meetingId>', methods=["GET"])
-def api_get_docentmeeting(meetingId):
+@app.route('/api/class/json', methods=["GET"])
+def api_get_docentmeeting():
 
-    docent_meeting = meetingdb.get_meeting(meetingId)
+    docent_meeting = meetingdb.get_all_meetings()
     print(docent_meeting)
     
-
     return json.jsonify({
         'meeting_info' : docent_meeting, 
     })

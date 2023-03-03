@@ -1,10 +1,8 @@
-let max = 3
+const url = '../api/class/json'
 
 const get_meeting = async () => {
     try {
-        const url = window.location.pathname.split('/')
-        const urlId = [1]
-        const response = await fetch('../api/class/' + urlId, {
+        const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -17,17 +15,20 @@ const get_meeting = async () => {
         } else if (!response.ok) {
             console.log("Some non-200 HTTP response code or something")
         } else {
-            if (data["meeting_info"].length > 0, data["meeting_info"].length < 3) {
+            if (data["meeting_info"].length > 0) {
                 const table = document.getElementById("Docent-Table")
-                const tbody = document.querySelector("tbody")
-                table.innerHTML += data["meeting_info"][0]["name"] + " " + data["meeting_info"][0]["date"]
-                if (data["meeting_info" === 3]) {
-                    return;
+                const tbody = document.querySelector("#docent-body")
+                planning_length = 0
+                tbody.replaceChildren()
+                while (planning_length < 2) {
+                    tbody.innerHTML += " <td> " + data["meeting_info"][0]["name"] + " " + data["meeting_info"][0]["date"] + "</td>";
+                    tbody++
                 }
-            }
 
+            }
         }
-    } catch (e) {
+    }
+    catch (e) {
         console.log("Some error with fetching JSON from Meetings server: " + e)
     }
 }
