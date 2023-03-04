@@ -20,9 +20,10 @@
         <div id= "meeting-and-plan">
           <div id="meeting-table">
             <table width ="400px">
-              <thead>
+              <thead> 
+              <th> Eigen Agenda </th>
+              </thead>
               <tbody>
-                <th> Eigen Agenda </th>
                 <tr>
                   <td>hond</td>
                 </tr>
@@ -37,12 +38,13 @@
             
          </div>
           <div id="Docent-Planning">
-            <table width ="400px">
+            <table width ="400px" id="Docent-Table">
               <thead>
-              <tbody id="#data-output">
-                <th>Docent</th>
+               <th>Docent</th>
+              </thead>
+              <tbody id="docent-body">
                 <tr>
-                  <td id="td1">Mark</td>
+                  <td>Mark</td>
                 </tr>
                 <tr>
                   <td>Veysel</td>
@@ -68,7 +70,7 @@
         {% endif %}
     </div>
   </div>
-  <button onclick="set_Meeting()">clickkk</button>
+  <button onclick="">clickkk</button>
 </body>
 {% endblock content %}
 
