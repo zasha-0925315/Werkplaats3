@@ -16,7 +16,6 @@ const hrRed = "#d30f4c";
 const hrRed2 = "#C03";
 const white = "#fff";
 const semiTransperant = "rgba(0, 0, 0, 0.2)";
-const transperant = "rgba(0, 0, 0, 0)"
 
 const crossLine1 = {x: -5, y: 0, transform: "rotate(45)"}
 const crossLine2 = {height: 0}
