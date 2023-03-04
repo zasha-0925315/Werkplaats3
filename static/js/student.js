@@ -14,9 +14,24 @@ async function get_students(){
 
 function fill_table(obj){
     const table = document.getElementById('table');
-    const tb = document.createElement('tbody');
     const students = obj.studenten;
+    const th = document.createElement('theader');
+    const tb = document.createElement('tbody');
+    const thr = document.createElement('tr');
+    const thh = document.createElement('th');
+    const thh2 = document.createElement('th');
+    const thh3 = document.createElement('th');
 
+    thh.textContent = "studentennummer";
+    thh2.textContent = "voornaam";
+    thh3.textContent = "achternaam";
+   
+    th.appendChild(thr);
+    thr.appendChild(thh);
+    thr.appendChild(thh2);
+    thr.appendChild(thh3);
+    
+    table.appendChild(th);
     table.appendChild(tb);
     
     for(const student of students){

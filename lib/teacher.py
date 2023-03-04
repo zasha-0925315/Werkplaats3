@@ -27,3 +27,27 @@ class TeacherManagement:
             raise e
 
         return teacher
+    
+    def get_teacher_json(self):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+            cursor.row_factory = sqlite3.Row
+
+            cursor.execute("SELECT * FROM docent")
+            teacher = cursor.fetchall()
+
+            t_list = []
+            for teachers in teacher:
+                t_list.append({t: teachers[t] for t in teachers.keys()})
+            print(t_list)
+
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+
+        return t_list

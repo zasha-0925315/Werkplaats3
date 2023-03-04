@@ -7,7 +7,12 @@
     <main>
         <h1>Klassen</h1>
         <div id="test">
-            <p>some text</p>
+            <table id="table">
+            </table>
         </div>
     </main>
 {% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/klas.js"></script>
+{% endblock script %}

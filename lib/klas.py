@@ -34,6 +34,7 @@ class ClassManagement:
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM enrollment")
+            enrollment = cursor.fetchall()
             conn.commit() 
 
             conn.close()
@@ -41,3 +42,4 @@ class ClassManagement:
         except OperationalError as e:
             print("yeet")
             raise e
+        return enrollment

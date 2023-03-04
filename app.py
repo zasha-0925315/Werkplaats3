@@ -162,7 +162,7 @@ def meetingforteacher():
 
 @app.route('/api/student')
 def api_get_students():
-    s_list = studentdb.get_student()
+    s_list = studentdb.get_student_json()
     print(s_list)
     # ik weet niet wat ik aan het doen ben, help
     #return json.dumps(s_list)
@@ -187,6 +187,16 @@ def studentid():
             print("DELETE")
 
 
+@app.route('/api/teacher')
+def api_get_teachers():
+    t_list = teacherdb.get_teacher_json()
+    print(t_list)
+    # ik weet niet wat ik aan het doen ben, help
+    #return json.dumps(s_list)
+    return jsonify({ # oke, mooi. wat doe ik nu hier mee?
+        'docenten' : t_list
+    })
+
 @app.route('/teacher')
 def teacher():
     t_list = teacherdb.get_teacher()
@@ -207,6 +217,15 @@ def teacherid():
         case 'DELETE':
             print("DELTE")
 
+@app.route('/api/klas')
+def api_get_class():
+    class_list = classdb.get_class()
+    print(class_list)
+    # ik weet niet wat ik aan het doen ben, help
+    #return json.dumps(s_list)
+    return jsonify({ # oke, mooi. wat doe ik nu hier mee?
+        'klassen' : class_list
+    })
 
 @app.route('/class')
 def studentclass():

@@ -15,6 +15,22 @@ class StudentManagement:
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
+
+            cursor.execute("SELECT * FROM student")
+            students = cursor.fetchall()
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return students
+    
+    def get_student_json(self):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
             cursor.row_factory = sqlite3.Row #geen idee wat dit is, but whatever works
 
             cursor.execute("SELECT * FROM student")
