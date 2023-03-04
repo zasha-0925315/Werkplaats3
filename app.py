@@ -159,12 +159,21 @@ def meetingforteacher():
             return render_template('meetingid.html')
 
 
+@app.route('/api/student')
+def api_get_students():
+    s_list = studentdb.get_student()
+    print(s_list)
+    # ik weet niet wat ik aan het doen ben, help
+    return json.jsonify({ # oke, mooi. wat doe ik nu hier mee?
+        'student_list': s_list
+    })
+
 @app.route('/student')
 def student():
     s_list = studentdb.get_student()
     print(s_list)
-    #jsonify
-    return render_template('student.html', students=s_list), jsonify(s_list)
+    
+    return render_template('student.html', students=s_list)
 
 @app.post('/student') # shortcut voor methods = ["POST"]
 def student_post():
