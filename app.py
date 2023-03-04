@@ -22,7 +22,7 @@ LISTEN_ALL = "0.0.0.0"
 FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
 FLASK_DEBUG = True
-FLASK_RUN_CERT = "adhoc"
+#FLASK_RUN_CERT = "adhoc"
 
 # other important stuffs
 app = Flask(__name__)
@@ -165,16 +165,14 @@ def api_get_students():
     s_list = studentdb.get_student()
     print(s_list)
     # ik weet niet wat ik aan het doen ben, help
+    #return json.dumps(s_list)
     return jsonify({ # oke, mooi. wat doe ik nu hier mee?
         'studenten' : s_list
     })
 
 @app.route('/student')
 def student():
-    s_list = studentdb.get_student()
-    print(s_list)
-    
-    return render_template('student.html', students=s_list)
+    return render_template('student.html')
 
 @app.post('/student') # shortcut voor methods = ["POST"]
 def student_post():
@@ -281,4 +279,5 @@ def logout():
 
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')
-    app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG, ssl_context=FLASK_RUN_CERT)
+    app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
+    #app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG, ssl_context=FLASK_RUN_CERT)
