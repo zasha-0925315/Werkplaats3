@@ -4,7 +4,7 @@
         {% block head %}
             <meta charset="UTF-8">
             <title>{% block title %}{% endblock %}</title>
-            <link rel="stylesheet" href="/static/base.css" type="text/css">
+            <link rel="stylesheet" href="/static/css/base.css" type="text/css">
              <!-- icon voor tablad bovenaan -->
             <link rel="icon" type="image/x-icon" href="{{url_for ('static', filename='hr.ico') }}">
         {% endblock head %}
@@ -14,7 +14,7 @@
         <div id="content">{% block content %}{% endblock %}{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category, message in messages %}<div class="flash-{{category}}"><p><strong>{{ message }}</strong></p></div>{% endfor %}{% endif %}{% endwith %}</div>
     </body>
     {% block script %}
-        <script src="../static/header.js"></script>
+        <script src="../static/js/header.js"></script>
     {% endblock script %}
 </html>
 
