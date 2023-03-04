@@ -17,5 +17,8 @@
             </table>
         </div>
     </main>
-    <script src="../static/student.js"></script>
 {% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/student.js"></script>
+{% endblock script %}
