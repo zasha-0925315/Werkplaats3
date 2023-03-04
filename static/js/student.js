@@ -13,24 +13,24 @@ async function get_students(){
 }
 
 function fill_table(obj){
-    const table = document.getElementById('table');
+    const table = document.getElementById('tabel');
     const students = obj.studenten;
     const th = document.createElement('theader');
     const tb = document.createElement('tbody');
     const thr = document.createElement('tr');
-    const thh = document.createElement('th');
-    const thh2 = document.createElement('th');
-    const thh3 = document.createElement('th');
+    const studentennummer = document.createElement('th');
+    const voornaam = document.createElement('th');
+    const achternaam = document.createElement('th');
 
-    thh.textContent = "studentennummer";
-    thh2.textContent = "voornaam";
-    thh3.textContent = "achternaam";
+    studentennummer.textContent = "studentennummer";
+    voornaam.textContent = "voornaam";
+    achternaam.textContent = "achternaam";
    
     th.appendChild(thr);
-    thr.appendChild(thh);
-    thr.appendChild(thh2);
-    thr.appendChild(thh3);
-    
+    thr.appendChild(studentennummer);
+    thr.appendChild(voornaam);
+    thr.appendChild(achternaam);
+
     table.appendChild(th);
     table.appendChild(tb);
     

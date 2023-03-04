@@ -13,26 +13,26 @@ async function get_teachers(){
 }
 
 function fill_table(obj){
-    const table = document.getElementById('table');
+    const table = document.getElementById('tabel');
     const docenten = obj.docenten;
     const th = document.createElement('theader');
     const tb = document.createElement('tbody');
     const thr = document.createElement('tr');
-    const thh = document.createElement('th');
-    const thh2 = document.createElement('th');
-    const thh3 = document.createElement('th');
-    const thh4 = document.createElement('th');
+    const dcode = document.createElement('th');
+    const voornaam = document.createElement('th');
+    const achternaam = document.createElement('th');
+    const email = document.createElement('th');
 
-    thh.textContent = "docentencode";
-    thh2.textContent = "voornaam";
-    thh3.textContent = "achternaam";
-    thh4.textContent = "email";
+    dcode.textContent = "docentencode";
+    voornaam.textContent = "voornaam";
+    achternaam.textContent = "achternaam";
+    email.textContent = "email";
    
     th.appendChild(thr);
-    thr.appendChild(thh);
-    thr.appendChild(thh2);
-    thr.appendChild(thh3);
-    thr.appendChild(thh4);
+    thr.appendChild(dcode);
+    thr.appendChild(voornaam);
+    thr.appendChild(achternaam);
+    thr.appendChild(email);
     
     table.appendChild(th);
     table.appendChild(tb);

@@ -13,17 +13,17 @@ async function get_classes(){
 }
 
 function fill_table(obj){
-    const table = document.getElementById('table');
+    const table = document.getElementById('tabel');
     const klassen = obj.klassen;
     const th = document.createElement('theader');
     const tb = document.createElement('tbody');
     const thr = document.createElement('tr');
-    const thh = document.createElement('th');
+    const klas = document.createElement('th');
 
-    thh.textContent = "klas";
+    klas.textContent = "klas";
 
     th.appendChild(thr);
-    thr.appendChild(thh);
+    thr.appendChild(klas);
 
     
     table.appendChild(th);
