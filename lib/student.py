@@ -15,9 +15,16 @@ class StudentManagement:
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
+            cursor.row_factory = sqlite3.Row #geen idee wat dit is, but whatever works
 
             cursor.execute("SELECT * FROM student")
             student = cursor.fetchall()
+            
+            s_list = []
+            for students in student:
+                s_list.append({s: students[s] for s in students.keys()})
+            print(s_list)
+
             conn.commit() 
 
             conn.close()
@@ -25,7 +32,7 @@ class StudentManagement:
         except OperationalError as e:
             print("yeet")
             raise e
-        return student
+        return s_list
 
     def get_students_by_class(self, meeting_classes):
         try:

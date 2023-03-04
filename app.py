@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 
 from lib.forms import LoginForm
 from lib.login import Login
-from lib.managestudent import StudentManagement
-from lib.manageteacher import TeacherManagement
-from lib.manageclass import ClassManagement
+from lib.student import StudentManagement
+from lib.teacher import TeacherManagement
+from lib.klas import ClassManagement
 from lib.meeting import MeetingManagement
 from lib.presence import PresenceManagement
 
@@ -27,6 +27,7 @@ FLASK_RUN_CERT = "adhoc"
 # other important stuffs
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
+app.config['JSON_SORT_KEYS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
@@ -164,8 +165,8 @@ def api_get_students():
     s_list = studentdb.get_student()
     print(s_list)
     # ik weet niet wat ik aan het doen ben, help
-    return json.jsonify({ # oke, mooi. wat doe ik nu hier mee?
-        'student_list': s_list
+    return jsonify({ # oke, mooi. wat doe ik nu hier mee?
+        'studenten' : s_list
     })
 
 @app.route('/student')
