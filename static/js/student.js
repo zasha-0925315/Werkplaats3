@@ -14,17 +14,18 @@ async function get_students(){
 
 function fill_table(obj){
     const table = document.getElementById('table');
+    const tb = document.createElement('tbody');
     const students = obj.studenten;
+
+    table.appendChild(tb);
     
     for(const student of students){
         
-        const tb = document.createElement('tbody');
         let tr = document.createElement('tr');
         tr.innerHTML = '<td>' + student.id + '</td>'
         + '<td>' + student.voornaam + '</td>' +
         '<td>' + student.achternaam + '</td>';
         tb.appendChild(tr);
-        table.appendChild(tb);
         
         //const snr = obj.id;
         //const voornaam = obj.voornaam;
