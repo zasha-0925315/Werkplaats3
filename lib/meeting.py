@@ -23,7 +23,6 @@ class MeetingManagement(Database):
             cursor.execute(f"SELECT last_insert_rowid()")
             meetingid = cursor.fetchall()
             meetingid2 = str(meetingid).replace("(", "").replace(")", "").replace("[", "").replace("]", "").replace(",", "")
-            print(meetingid2)
 
             for student in meeting_students2:
                 student2 = str(student).replace("(", "").replace(")", "").replace(",", "")
@@ -60,3 +59,28 @@ class MeetingManagement(Database):
             print("yeet")
             raise e
         return meeting_info
+    
+    def get_all_meetings(self):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"SELECT * FROM meeting")
+            meeting_db_info = cursor.fetchall()
+            meeting_info = []
+            for info in meeting_db_info:
+                meeting_info.append({
+                    "id": info[0],
+                    "name": info[1],
+                    "date": info[2],
+                    "location": info[3],
+                    "teacher": info[4],
+                    "student": info[5]
+                })
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return meeting_info
+    
