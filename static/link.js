@@ -16,16 +16,17 @@ const get_meeting = async () => {
         } else if (!response.ok) {
             console.log("Some non-200 HTTP response code or something")
         } else {
-            let futureDate = new Date(data["meeting_info"][0]["date"])
+            id = 0
+            let futureDate = new Date(data["meeting_info"][3]["date"])
             let currentDate = new Date();
             console.log(futureDate)
-            if (data["meeting_info"].length > 0) {
+            if ((data["meeting_info"].length > 0) && (futureDate > currentDate)) {
                 const tbody = document.querySelector("#docent-body")
                 let planning_length = 0
-                let meeting_info = data["meeting_info"].length
+                let max_length = 3
                 tbody.replaceChildren()
-                while (planning_length < meeting_info) {
-                    tbody.innerHTML += " <td> " + data["meeting_info"][planning_length]["name"] + " " + data["meeting_info"][planning_length]["date"] + "</td>";
+                while (planning_length < max_length) {
+                    tbody.innerHTML += " <td><strong> " + data["meeting_info"][planning_length]["name"] + "</strong> <small>" + data["meeting_info"][planning_length]["date"] + "</small> </td>";
                     planning_length++
                 }
             }
