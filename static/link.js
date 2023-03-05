@@ -10,28 +10,34 @@ const get_meeting = async () => {
         });
 
         const data = await response.json();
+        console.log(data)
         if (response.error) {
             console.log("ouwh error")
         } else if (!response.ok) {
             console.log("Some non-200 HTTP response code or something")
         } else {
+            let futureDate = new Date(data["meeting_info"][0]["date"])
+            let currentDate = new Date();
+            console.log(futureDate)
             if (data["meeting_info"].length > 0) {
-                const table = document.getElementById("Docent-Table")
                 const tbody = document.querySelector("#docent-body")
-                planning_length = 0
+                let planning_length = 0
+                let meeting_info = data["meeting_info"].length
                 tbody.replaceChildren()
-                while (planning_length < 2) {
-                    tbody.innerHTML += " <td> " + data["meeting_info"][0]["name"] + " " + data["meeting_info"][0]["date"] + "</td>";
-                    tbody++
+                while (planning_length < meeting_info) {
+                    tbody.innerHTML += " <td> " + data["meeting_info"][planning_length]["name"] + " " + data["meeting_info"][planning_length]["date"] + "</td>";
+                    planning_length++
                 }
-
             }
         }
     }
+
+
     catch (e) {
         console.log("Some error with fetching JSON from Meetings server: " + e)
     }
 }
+
 
 get_meeting()
 
