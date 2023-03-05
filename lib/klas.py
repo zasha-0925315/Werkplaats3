@@ -24,7 +24,6 @@ class ClassManagement(Database):
         except OperationalError as e:
             print("yeet")
             raise e
-
         return classes
 
     def get_enrollment(self):
