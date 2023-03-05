@@ -39,7 +39,6 @@ classdb = ClassManagement(DB_FILE)
 meetingdb = MeetingManagement(DB_FILE)
 presencedb = PresenceManagement(DB_FILE)
 
-
 # routes
 @app.before_request
 def check_login():
@@ -114,29 +113,27 @@ def api_get_meeting(meetingId):
         'presence_list': presence_list
     })
 
+@app.route('/api/class/json', methods=["GET"])
+def api_get_docentmeeting():
+
+    docent_meeting = meetingdb.get_all_meetings()
+    print(docent_meeting)
+
+    return json.jsonify({
+        'meeting_info' : docent_meeting, 
+    })
 
 @app.route('/oneonone', methods=["GET", "POST"])
 def oneonone():
-
     match request.method:
         case 'GET':
-
             class_list = classdb.get_class()
             # selected_class =
             # student_list = meetingdb.get_students_by_class(selected_class)
 
             return render_template('oneOnOne.html', classes=class_list)
         case 'POST':
-            meeting_name = str(request.form.get('meeting_name'))
-            meeting_datetime = request.form.get('meeting_datetime')
-            meeting_location = str(request.form.get('meeting_location'))
-            meeting_teacher = str(request.form.getlist('meeting_teacher'))
-            meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
-            meeting_students = str(meetingdb.get_students_by_class(meeting_classes))
-
-            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
-
-            return redirect(url_for('index'))
+            print("POST")
 
         case _:
             print("nope")
@@ -254,10 +251,6 @@ def show_login():
 def handle_login():
     if request.form["password"] == "password" and request.form["username"] == "admin":
         session["logged_in"] = True
-    # if request.method == "POST":
-    #     username = request.form.get("username")
-    #     password = request.form.get("password")
-    #     session["logged_in"] = True
     else:
         return render_template("login.html", message="Invalid Password or Username.")
     return redirect(url_for('link'))
