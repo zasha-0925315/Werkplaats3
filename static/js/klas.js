@@ -21,18 +21,8 @@ async function get_classes(){
 function fill_table(obj){
     const table = document.getElementById('tabel');
     const klassen = obj.klassen;
-    const th = document.createElement('theader');
     const tb = document.createElement('tbody');
-    const thr = document.createElement('tr');
-    const klas = document.createElement('th');
-
-    klas.textContent = "klas";
-
-    th.appendChild(thr);
-    thr.appendChild(klas);
-
     
-    table.appendChild(th);
     table.appendChild(tb);
     
     for(const klas of klassen){

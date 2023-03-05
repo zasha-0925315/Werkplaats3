@@ -16,9 +16,8 @@ th {
     text-align: center;
     color: var(--white);
     height: 50px;
-    background-color: var(--hr-dark-blue);
-    width: 25%;
-    border: 1px solid black;
+    background-color: var(--hr-red);
+    border: 1px solid var(--hr-darker-red);
 }
 
 td {
