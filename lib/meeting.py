@@ -1,15 +1,13 @@
 import os
 import sqlite3
 from sqlite3 import OperationalError
+from lib.db import Database
 
-
-class MeetingManagement:
+class MeetingManagement(Database):
     """regelt de docenten enzo"""
 
     def __init__(self, db_file):
-        self.db_file = db_file
-        if not os.path.exists(self.db_file):
-            raise FileNotFoundError(f"F in the chat for {db_file}")
+        super().__init__(db_file)
 
     def add_meeting(self, meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2):
         try:

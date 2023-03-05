@@ -8,6 +8,12 @@ async function get_classes(){
         fill_table(klas);
 
     } catch(error) {
+        const err = document.getElementById('test');
+        const txt = document.createElement('p');
+
+        txt.textContent = error;
+        err.appendChild(txt);
+
         console.log(error);
     }
 }
@@ -37,4 +43,4 @@ function fill_table(obj){
     }
 }
 
-get_classes();
+document.addEventListener('DOMContentLoaded', get_classes());

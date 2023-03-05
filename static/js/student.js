@@ -8,6 +8,12 @@ async function get_students(){
         fill_table(student);
 
     } catch(error) {
+        const err = document.getElementById('test');
+        const txt = document.createElement('p');
+
+        txt.textContent = error;
+        err.appendChild(txt);
+
         console.log(error);
     }
 }
@@ -58,4 +64,4 @@ function fill_table(obj){
     }
 }
 
-get_students();
+document.addEventListener('DOMContentLoaded', get_students());

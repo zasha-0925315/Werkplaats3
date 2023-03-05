@@ -1,15 +1,13 @@
 import os
 import sqlite3
 from sqlite3 import OperationalError
+from lib.db import Database
 
-
-class UserManagement:
+class UserManagement(Database):
     """regelt de users enzo"""
 
     def __init__(self, db_file):
-        self.db_file = db_file
-        if not os.path.exists(self.db_file):
-            raise FileNotFoundError(f"F in the chat for {db_file}")
+        super().__init__(db_file)
 
     def create_user(self):
         try:

@@ -39,14 +39,8 @@ classdb = ClassManagement(DB_FILE)
 meetingdb = MeetingManagement(DB_FILE)
 presencedb = PresenceManagement(DB_FILE)
 
-# This command creates the "<application directory>/databases/testcorrect_vragen.db" path
-DATABASE_FILE = os.path.join(app.root_path, 'databases', 'demo_data.db')
 
-# Check if the database file exists.
-if not os.path.isfile(DATABASE_FILE):
-    print(f"Could not find database {DATABASE_FILE}, creating a demo database.")
-
-
+# routes
 @app.before_request
 def check_login():
     if request.endpoint not in ["index","show_login", "handle_login"]:
@@ -163,7 +157,7 @@ def meetingforteacher():
 @app.route('/api/student')
 def api_get_students():
     s_list = studentdb.get_student_json()
-    print(s_list)
+    #print(s_list)
     # ik weet niet wat ik aan het doen ben, help
     #return json.dumps(s_list)
     return jsonify({ # oke, mooi. wat doe ik nu hier mee?
@@ -190,10 +184,9 @@ def studentid():
 @app.route('/api/teacher')
 def api_get_teachers():
     t_list = teacherdb.get_teacher_json()
-    print(t_list)
-    # ik weet niet wat ik aan het doen ben, help
-    #return json.dumps(s_list)
-    return jsonify({ # oke, mooi. wat doe ik nu hier mee?
+    #print(t_list)
+
+    return jsonify({
         'docenten' : t_list
     })
 
@@ -220,10 +213,9 @@ def teacherid():
 @app.route('/api/klas')
 def api_get_class():
     class_list = classdb.get_class()
-    print(class_list)
-    # ik weet niet wat ik aan het doen ben, help
-    #return json.dumps(s_list)
-    return jsonify({ # oke, mooi. wat doe ik nu hier mee?
+    #print(class_list)
+
+    return jsonify({
         'klassen' : class_list
     })
 
