@@ -12,12 +12,17 @@ table {
     color: var(--hr-dark-blue);
 }
 
-theader {
-    background-color: var(--bg-color);
+th {
+    text-align: center;
+    color: var(--white);
+    height: 50px;
+    background-color: var(--hr-dark-blue);
+    width: 25%;
+    border: 1px solid black;
 }
 
-th {
-    background-color: var(--bg-color);
+td {
+    text-align: center;
 }
 
 tr {
@@ -29,6 +34,10 @@ tr td{
     padding: 5px;
 }
 
+tbody tr :hover {
+    background-color: var(--gray);
+    color: var(--white);
+}
 tr td:first-child {
     border-radius: 6px 0 0 0;
 }
