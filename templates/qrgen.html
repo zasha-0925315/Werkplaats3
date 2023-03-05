@@ -11,32 +11,16 @@
         <div id="test">
             <form>
                 <input type="text" id="text"/>
-                <button type="button" onclick="generateCode()">genereer qr</button>
+                <button type="button" id="qr-gen">genereer qr</button>
                 <br/>
             </form>
         </div>
         <div id="qrcontainer">
             <canvas id="qr"></canvas>
         </div>
-        <script>
-            function generateCode(){
-                let getText = document.getElementById("text").value;
-                
-                if(getText){ //laat pas de QR code zien als er daadwerkelijk text is ingevoerd
-                    let qr = new QRious({
-                        foreground: "#D30F4C",
-                        background: "#FFFFFF",
-                        backgroundAlpha: 0.1,
-                        size: 500,
-                        level: "H",
-                        padding: 25,
-                        element: document.getElementById("qr"),
-                        value: getText
-                    })
-                } else {
-                    alert("Geen text ingevoerd!");
-                }
-            }
-        </script>
     </main>
 {% endblock content %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/qrgen.js"></script>
+{% endblock script %}
