@@ -87,7 +87,7 @@ def meeting_post():
     return redirect(url_for('meeting'))
 
 
-@app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH"])
+@app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH", "DELETE"])
 def meetingid(meetingId):
     match request.method:
         case 'GET':
@@ -108,20 +108,12 @@ def meetingid(meetingId):
 def api_get_meeting(meetingId):
 
     presence_list = presencedb.get_presence(meetingId)
+    print(presence_list)
 
     return json.jsonify({
         'presence_list': presence_list
     })
 
-@app.route('/api/class/json', methods=["GET"])
-def api_get_docentmeeting():
-
-    docent_meeting = meetingdb.get_all_meetings()
-    print(docent_meeting)
-    
-    return json.jsonify({
-        'meeting_info' : docent_meeting, 
-    })
 
 @app.route('/oneonone', methods=["GET", "POST"])
 def oneonone():
@@ -135,7 +127,16 @@ def oneonone():
 
             return render_template('oneOnOne.html', classes=class_list)
         case 'POST':
-            print("POST")
+            meeting_name = str(request.form.get('meeting_name'))
+            meeting_datetime = request.form.get('meeting_datetime')
+            meeting_location = str(request.form.get('meeting_location'))
+            meeting_teacher = str(request.form.getlist('meeting_teacher'))
+            meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
+            meeting_students = str(meetingdb.get_students_by_class(meeting_classes))
+
+            meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+
+            return redirect(url_for('index'))
 
         case _:
             print("nope")
@@ -241,7 +242,6 @@ def studentclassid():
 def screen():
     return render_template('screen.html', title=screen)
 
-
 @app.route('/login', methods=["GET", "POST"])
 def show_login():
     session["username"] = request.form.get("username")
@@ -250,7 +250,6 @@ def show_login():
     else:
         return render_template('login.html')
       
-  
 @app.route("/handle_login", methods=["GET", "POST"])
 def handle_login():
     if request.form["password"] == "password" and request.form["username"] == "admin":
@@ -280,9 +279,6 @@ def link():
     match request.method:
         case 'GET':
             teacher_list = teacherdb.get_teacher() 
-            
-
-
     return render_template('link.html', teachers=teacher_list)    
 
 @app.route("/logout")
