@@ -117,14 +117,14 @@ def api_get_meeting(meetingId):
         'presence_list': presence_list
     })
 
-@app.route('/api/class/<meetingId>', methods=["GET"])
-def api_get_docentmeeting(meetingId):
+@app.route('/api/class/json', methods=["GET"])
+def api_get_docentmeeting():
 
-    docent_meeting = meetingdb.get_meeting(meetingId)
+    docent_meeting = meetingdb.get_all_meetings()
     print(docent_meeting)
-
+    
     return json.jsonify({
-        'meeting_info' : docent_meeting
+        'meeting_info' : docent_meeting, 
     })
 
 @app.route('/oneonone', methods=["GET", "POST"])
