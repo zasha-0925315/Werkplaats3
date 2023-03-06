@@ -11,15 +11,15 @@ class MeetingManagement:
         if not os.path.exists(self.db_file):
             raise FileNotFoundError(f"F in the chat for {db_file}")
 
-    def add_meeting(self, meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2):
+    def add_meeting(self, meeting_name, meeting_date, meeting_start_time, meeting_end_time, meeting_location, meeting_teacher, meeting_students, meeting_students2):
         try:
 
-            params_meeting = (meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+            params_meeting = (meeting_name, meeting_date, meeting_start_time, meeting_end_time, meeting_location, meeting_teacher, meeting_students)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"INSERT INTO meeting (naam, datum, locatie, organisator, deelnemer)"
-                           f"VALUES(?, datetime(?), ?, ?, ?)", params_meeting)
+            cursor.execute(f"INSERT INTO meeting (naam, datum, start_tijd, eind_tijd, locatie, organisator, deelnemer)"
+                           f"VALUES(?, date(?), ?, ?, ?, ?, ?)", params_meeting)
             conn.commit()
 
             cursor.execute(f"SELECT last_insert_rowid()")
@@ -53,7 +53,9 @@ class MeetingManagement:
                     "date": info[2],
                     "location": info[3],
                     "teacher": info[4],
-                    "student": info[5]
+                    "student": info[5],
+                    "start_time": info[6],
+                    "end_time": info[7]
                 })
             conn.close()
 
