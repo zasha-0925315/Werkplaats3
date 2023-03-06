@@ -12,6 +12,7 @@
       </div>
       <!-- De dropdown lijst voor andere docenten -->
       <select name="Select-Teacher" id="Select-Teacher">
+        <option select="disabled">Selecteer Docent</option>
         {% for teacher in teachers %}
        <option value="{{ teacher[0] }}">{{ teacher[0] }}</option>
        {% endfor %}

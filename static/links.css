@@ -165,10 +165,19 @@
 #Select-Teacher {
     display: flex;
     margin-left: auto;
-    margin-right: 37%;
+    margin-right: 33%;
 
 }
 
 .meeting-link {
     margin-top: -5px;
+}
+
+#Select-Teacher {
+    appearance: none;
+    height: 7%;
+    width: 15%;
+    text-align: center;
+    color: #ffffff;
+    background-color: red;
 }
