@@ -1,5 +1,7 @@
 const url = '../api/class/json'
 
+function get_meeting_info(meetingdata) { }
+
 const get_meeting = async () => {
     try {
         const response = await fetch(url, {
@@ -20,7 +22,7 @@ const get_meeting = async () => {
             let futureDate = new Date(data["meeting_info"][3]["date"])
             let currentDate = new Date();
             console.log(futureDate)
-            if ((data["meeting_info"].length > 0) && (futureDate > currentDate)) {
+            if (data["meeting_info"].length > 0) {
                 const tbody = document.querySelector("#docent-body")
                 let planning_length = 0
                 let max_length = 3
@@ -38,6 +40,26 @@ const get_meeting = async () => {
         console.log("Some error with fetching JSON from Meetings server: " + e)
     }
 }
+
+
+document.querySelector("#Select-Teacher").addEventListener("change", function () {
+    if (this.value == "MEYEF") {
+        console.log("MEYEF");
+    } else if (this.value == "KNUFI") {
+        console.log("KNUFI");
+    } else {
+        console.log('dog')
+    }
+});
+
+
+
+
+
+// lijst = document.querySelector('#Select-Teacher')
+// lijst.addEventListener("change", docentLijst()); {
+
+// };
 
 
 get_meeting()
