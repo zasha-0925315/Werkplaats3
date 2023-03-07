@@ -52,9 +52,22 @@ document.querySelector("#Select-Teacher").addEventListener("change", function ()
     }
 });
 
+function dropMenu() {
+    document.getElementById('menu').style.display = 'initial'
+}
 
-
-
+// window.onclick = function (event) {
+//     if (!event.target.matches('.Select-Planning-button')) {
+//         let dropdowns = document.getElementsByClassName("menu");
+//         let i;
+//         for (i = 0; i < dropdowns.length; i++) {
+//             var openDropdown = dropdowns[i];
+//             if (openDropdown.style.display = 'initial') {
+//                 (openDropdown.style.display = 'none')
+//             }
+//         }
+//     }
+// }
 
 // lijst = document.querySelector('#Select-Teacher')
 // lijst.addEventListener("change", docentLijst()); {
