@@ -161,9 +161,12 @@ def meetingforteacher():
 def student():
     match request.method:
         case 'GET':
-            return render_template('student.html')
+            class_list = classdb.get_class()
+            student_list = str(studentdb.get_student())
+            return render_template('student.html', classes=class_list, students=student_list)            
         case 'POST':
             print("POST")
+            return render_template ('student.html')
 
 
 @app.route('/student/<studentId>', methods=["GET", "DELETE"])

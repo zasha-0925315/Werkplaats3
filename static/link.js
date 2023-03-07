@@ -19,7 +19,7 @@ const get_meeting = async () => {
             console.log("Some non-200 HTTP response code or something")
         } else {
             id = 0
-            let futureDate = new Date(data["meeting_info"][3]["date"])
+            let futureDate = new Date(data["meeting_info"][2]["date"])
             let currentDate = new Date();
             console.log(futureDate)
             if (data["meeting_info"].length > 0) {
