@@ -163,11 +163,8 @@ def api_get_students():
 
 @app.route('/student')
 def student():
-    match request.method:
-        case 'GET':
-            return render_template('student.html')
-        case 'POST':
-            print("POST")
+    return render_template('student.html')
+
 
 @app.post('/student') # shortcut voor methods = ["POST"]
 def student_post():
