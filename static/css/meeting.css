@@ -8,7 +8,7 @@
 }
 
 #meeting_table table {
-    width: 500px;
+    width: 450px;
 }
 
 #meeting_table tr {
@@ -17,15 +17,21 @@
 }
 
 #meeting_table td:nth-child(1), #meeting_table th:nth-child(1) {
-    width: 250px;
+    width: 200px;
 }
 
 #meeting_table td:nth-child(2), #meeting_table th:nth-child(2) {
     width: 125px;
+    text-align: center;
 }
 
 #meeting_table td:nth-child(3), #meeting_table th:nth-child(3) {
-    width: 125px;
+    width: 50px;
+    text-align: center;
+}
+
+#meeting_table td:nth-child(4), #meeting_table th:nth-child(4) {
+    width: 75px;
 }
 
 .no_presence {

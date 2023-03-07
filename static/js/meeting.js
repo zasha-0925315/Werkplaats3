@@ -104,7 +104,7 @@ const get_meeting = async () => {
     } catch (e) {
         console.log("Some error with fetching JSON from meeting server: " + e)
     } finally {
-        setTimeout(get_meeting, 5000000)
+        setTimeout(get_meeting, 5000)
     }
 }
 document.addEventListener('DOMContentLoaded', get_meeting)
