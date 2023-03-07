@@ -20,7 +20,6 @@ const get_meeting = async () => {
                 const presence_length = data["presence_list"].length
                 let student_count = 0
                 let student_presence = 0
-                console.log(data["presence_list"])
                 meetingInfo.replaceChildren()
                 while ( student_count < presence_length) {
 
