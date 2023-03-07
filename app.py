@@ -165,7 +165,6 @@ def api_get_students():
 def student():
     return render_template('student.html')
 
-
 @app.post('/student') # shortcut voor methods = ["POST"]
 def student_post():
     return render_template('student.html')
