@@ -1,0 +1,10 @@
+#class-filter {
+    padding: 50px;
+    display: flex;
+}
+
+.filter-button {
+    background-color: var(--white);
+    transition: all 200ms;
+    border: none;
+}
