@@ -12,7 +12,7 @@ class PresenceManagement(Database):
             cursor = conn.cursor()
 
             cursor.execute(f"SELECT aanwezigheid.aanwezigheid, aanwezigheid.student, aanwezigheid.meeting, "
-                           f"student.voornaam, student.achternaam "
+                           f"aanwezigheid.afgemeld_reden, student.voornaam, student.achternaam "
                            f"FROM aanwezigheid INNER JOIN student "
                            f"ON aanwezigheid.student=student.id AND aanwezigheid.meeting IN ({meetingid})")
 
@@ -26,8 +26,9 @@ class PresenceManagement(Database):
                     "presence": info[0],
                     "student": info[1],
                     "meeting": info[2],
-                    "first name": info[3],
-                    "last name": info[4]
+                    "afgemeld reason": info[3],
+                    "first name": info[4],
+                    "last name": info[5]
                 })
         except OperationalError as e:
             print("yeet")
@@ -37,13 +38,14 @@ class PresenceManagement(Database):
     def update_presence(self, json_data):
         try:
             json_presence = json_data["presence"]
+            json_reden = json_data["reason"]
             json_student = json_data["student"]
             json_meeting = json_data["meeting"]
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"UPDATE aanwezigheid SET aanwezigheid = ? "
-                           f"WHERE student = ? AND meeting = ?", (json_presence, json_student, json_meeting))
+            cursor.execute(f"UPDATE aanwezigheid SET aanwezigheid = ?, afgemeld_reden = ? "
+                           f"WHERE student = ? AND meeting = ?", (json_presence, json_reden, json_student, json_meeting))
             conn.commit()
             conn.close()
 

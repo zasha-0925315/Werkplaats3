@@ -1,5 +1,7 @@
 const url = '../api/class/json'
 
+function get_meeting_info(meetingdata) { }
+
 const get_meeting = async () => {
     try {
         const response = await fetch(url, {
@@ -10,28 +12,68 @@ const get_meeting = async () => {
         });
 
         const data = await response.json();
+        console.log(data)
         if (response.error) {
             console.log("ouwh error")
         } else if (!response.ok) {
             console.log("Some non-200 HTTP response code or something")
         } else {
+            id = 0
+            let futureDate = new Date(data["meeting_info"][2]["date"])
+            let currentDate = new Date();
+            console.log(futureDate)
             if (data["meeting_info"].length > 0) {
-                const table = document.getElementById("Docent-Table")
                 const tbody = document.querySelector("#docent-body")
-                planning_length = 0
+                let planning_length = 0
+                let max_length = 3
                 tbody.replaceChildren()
-                while (planning_length < 2) {
-                    tbody.innerHTML += " <td> " + data["meeting_info"][0]["name"] + " " + data["meeting_info"][0]["date"] + "</td>";
-                    tbody++
+                while (planning_length < max_length) {
+                    tbody.innerHTML += " <td><strong> " + data["meeting_info"][planning_length]["name"] + "</strong> <small>" + data["meeting_info"][planning_length]["date"] + "</small> </td>";
+                    planning_length++
                 }
-
             }
         }
     }
+
+
     catch (e) {
         console.log("Some error with fetching JSON from Meetings server: " + e)
     }
 }
+
+
+document.querySelector("#Select-Teacher").addEventListener("change", function () {
+    if (this.value == "MEYEF") {
+        console.log("MEYEF");
+    } else if (this.value == "KNUFI") {
+        console.log("KNUFI");
+    } else {
+        console.log('dog')
+    }
+});
+
+function dropMenu() {
+    document.getElementById('menu').style.display = 'initial'
+}
+
+// window.onclick = function (event) {
+//     if (!event.target.matches('.Select-Planning-button')) {
+//         let dropdowns = document.getElementsByClassName("menu");
+//         let i;
+//         for (i = 0; i < dropdowns.length; i++) {
+//             var openDropdown = dropdowns[i];
+//             if (openDropdown.style.display = 'initial') {
+//                 (openDropdown.style.display = 'none')
+//             }
+//         }
+//     }
+// }
+
+// lijst = document.querySelector('#Select-Teacher')
+// lijst.addEventListener("change", docentLijst()); {
+
+// };
+
 
 get_meeting()
 

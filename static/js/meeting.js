@@ -23,10 +23,14 @@ const get_meeting = async () => {
 
                 meetingInfo.replaceChildren()
                 while ( student_count < presence_length) {
+                    let afgemeld_reason = data["presence_list"][student_count]["afgemeld reason"]
+                    if (afgemeld_reason === null) {
+                        afgemeld_reason = "Geen reden"
+                    }
                     let student_name = "<td>" + data["presence_list"][student_count]["first name"] + " " + data["presence_list"][student_count]["last name"] + "</td>"
-                    let student_afwezig = "<td class='no_presence'>" + "Afwezig" + "</td>"
-                    let student_aanwezig = "<td class='yes_presence'>" + "aanwezig" + "</td>"
-                    let student_afgemeld = "<td class='maybe_presence'>" + "afgemeld" + "</td>"
+                    let student_afwezig = "<td class='no_presence'>Afwezig</td>"
+                    let student_aanwezig = "<td class='yes_presence'>Aanwezig</td>"
+                    let student_afgemeld = "<td class='maybe_presence'>Afgemeld</td>"
                     let student_error = "<td>" + "error" + "</td>"
                     let presence_options =
                         "<td class='presence_options'>" +
@@ -44,7 +48,8 @@ const get_meeting = async () => {
                             student_presence++
                             break
                         case 2:
-                            meetingInfo.innerHTML += student_name + student_afgemeld + presence_options
+                            meetingInfo.innerHTML += "<tr class='afgemeld_row'>" + student_name + student_afgemeld + presence_options +
+                               "<td class='afgemeld_reason'>" + afgemeld_reason + "</td>" + "</tr>"
                             break
                         default:
                             meetingInfo.innerHTML += student_name + student_error + presence_options
@@ -74,7 +79,8 @@ const get_meeting = async () => {
                             body : JSON.stringify( {
                                 'presence' : presence,
                                 'meeting' : data["presence_list"][student]["meeting"],
-                                'student' : data["presence_list"][student]["student"]
+                                'student' : data["presence_list"][student]["student"],
+                                'reason' : "Verandert door leraar"
                             }),
                             headers: {
                             'Content-type': 'application/json'
