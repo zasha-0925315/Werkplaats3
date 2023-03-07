@@ -95,6 +95,7 @@ def meeting_post():
         meeting_teacher,
         meeting_students,
         meeting_students2)
+
     flash("Meeting toegevoegd!", "info")
     return redirect(url_for('meeting'))
 
