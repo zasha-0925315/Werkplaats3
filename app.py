@@ -165,11 +165,11 @@ def api_get_students():
 def student():
     return render_template('student.html')
 
-@app.route('/student2')
-def student2():
+@app.route('/student')
+def student():
     match request.method:
         case 'GET':
-            return render_template('student2.html')
+            return render_template('student.html')
         case 'POST':
             print("POST")
 
