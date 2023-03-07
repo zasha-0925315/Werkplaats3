@@ -161,6 +161,10 @@ def api_get_students():
         'studenten' : s_list
     })
 
+@app.route('/student')
+def student():
+    return render_template('student.html')
+
 @app.route('/student2')
 def student2():
     match request.method:
