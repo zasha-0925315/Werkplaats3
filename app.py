@@ -112,9 +112,9 @@ def meetingid(meetingId):
         case 'PUT':
             print("PUT")
         case 'PATCH':
-            print("PATCH")
-        case 'DELETE':
-            print("DELETE")
+            json_data = request.get_json()
+            presencedb.update_presence(json_data)
+            return json.jsonify()
 
 
 @app.route('/api/<meetingId>')
