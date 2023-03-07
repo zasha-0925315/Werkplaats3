@@ -37,10 +37,19 @@ header button {
     text-decoration: none;
 }
 
+header button a {
+    color: var(--white);
+    text-decoration: none;
+}
+
 header button:hover {
     background-color: var(--white);
     color: var(--hr-red);
     transition: 200ms;
+}
+
+header button a:hover {
+    color: var(--hr-red);
 }
 
 #logo path {
@@ -102,9 +111,17 @@ header button:hover {
     margin: 30px 0;
 }
 
+#slide_buttons button a {
+    color: var(--gray);
+}
+
 #slide_buttons button:hover {
     color: var(--hr-dark-blue);
     border-left: var(--hr-red) solid 3px;
+}
+
+#slide_buttons button a:hover {
+    color: var(--hr-dark-blue);
 }
 
 #slide_buttons span {

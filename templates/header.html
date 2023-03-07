@@ -16,9 +16,9 @@
         {% if session.logged_in %}
         <div id="header_menu">
             <div id="header_menu_buttons">
-                <button><span>Teacher</span></button>
-                <button><span>Student</span></button>
-                <button><span>Class</span></button>
+                <button><span><a href="/teacher">Teacher</a></span></button>
+                <button><span><a href="student">Student</a></span></button>
+                <button><span><a href="/class">Class</a></span></button>
             </div>
             <div id="burger_menu_button">
                 <button onclick="burgerMenuFoldOut()">
@@ -27,18 +27,15 @@
                         <rect id="burger_line2" y="30" width="100" height="15" rx="8" ></rect>
                         <rect id="burger_line3" y="60" width="100" height="15" rx="8" ></rect>
                     </svg>
-
-
-
                 </button>
             </div>
         </div>
     </div>
     <div id="slide_menu">
         <div id="slide_buttons">
-            <button><span>Teacher</span></button>
-            <button><span>Student</span></button>
-            <button><span>Class</span></button>
+            <button><span><a href="/teacher">Teacher</a></span></button>
+                <button><span><a href="student">Student</a></span></button>
+                <button><span><a href="/class">Class</a></span></button>
             <button><span><a class="logout-button" href="/logout">Log Out</a></span></button>
              {% endif %}
         </div>

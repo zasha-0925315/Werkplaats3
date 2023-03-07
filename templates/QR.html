@@ -1,12 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}QR scan{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="https://unpkg.com/@zxing/library@latest"></script>
+    <!-- https://github.com/zxing-js/library -->
+{% endblock head %}
+{% block content %}
+    <main>
+        <h1>Scan QR Code</h1>
+        <div id="test">
+        </div>
+
+        <div id="qrscan-container">
+            <video id="qrscan"></video>
+        </div>
+
+        <div id="qrresult">
+            <p id="qrres">yeet</p>
+        </div>
+    </main>
+{% endblock content %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/qr.js"></script>
+{% endblock script %}
