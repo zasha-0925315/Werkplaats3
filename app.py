@@ -163,6 +163,10 @@ def api_get_students():
 
 @app.route('/student')
 def student():
+    return render_template('student.html')
+
+@app.route('/student')
+def student():
     match request.method:
         case 'GET':
             return render_template('student.html')
