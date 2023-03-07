@@ -1,27 +1,34 @@
+import os
 import sqlite3
 from sqlite3 import OperationalError
-from lib.db import Database
 
-class MeetingManagement(Database):
+
+class MeetingManagement:
     """regelt de docenten enzo"""
 
     def __init__(self, db_file):
-        super().__init__(db_file)
+        self.db_file = db_file
+        if not os.path.exists(self.db_file):
+            raise FileNotFoundError(f"F in the chat for {db_file}")
 
-    def add_meeting(self, meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2):
+    def add_meeting(self, meeting_name, meeting_date, meeting_start_time, meeting_end_time, meeting_location,
+                    meeting_teacher, meeting_students, meeting_students2):
         try:
 
-            params_meeting = (meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students)
+            params_meeting = (
+            meeting_name, meeting_date, meeting_start_time, meeting_end_time, meeting_location, meeting_teacher,
+            meeting_students)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"INSERT INTO meeting (naam, datum, locatie, organisator, deelnemer)"
-                           f"VALUES(?, datetime(?), ?, ?, ?)", params_meeting)
+            cursor.execute(f"INSERT INTO meeting (naam, datum, start_tijd, eind_tijd, locatie, organisator, deelnemer)"
+                           f"VALUES(?, date(?), ?, ?, ?, ?, ?)", params_meeting)
             conn.commit()
 
             cursor.execute(f"SELECT last_insert_rowid()")
             meetingid = cursor.fetchall()
-            meetingid2 = str(meetingid).replace("(", "").replace(")", "").replace("[", "").replace("]", "").replace(",", "")
+            meetingid2 = str(meetingid).replace("(", "").replace(")", "").replace("[", "").replace("]", "").replace(",",
+                                                                                                                    "")
 
             for student in meeting_students2:
                 student2 = str(student).replace("(", "").replace(")", "").replace(",", "")
@@ -50,7 +57,9 @@ class MeetingManagement(Database):
                     "date": info[2],
                     "location": info[3],
                     "teacher": info[4],
-                    "student": info[5]
+                    "student": info[5],
+                    "start_time": info[6],
+                    "end_time": info[7]
                 })
             conn.close()
 
@@ -58,7 +67,7 @@ class MeetingManagement(Database):
             print("yeet")
             raise e
         return meeting_info
-    
+
     def get_all_meetings(self):
         try:
             conn = sqlite3.connect(self.db_file)
@@ -82,4 +91,3 @@ class MeetingManagement(Database):
             print("yeet")
             raise e
         return meeting_info
-    
