@@ -30,9 +30,7 @@ const get_meeting = async () => {
                     }
 
                     let student_check_in_time = "<td>" + data["presence_list"][student_count]["check-in time"] + "</td>"
-                    console.log(data["presence_list"][student_count]["check-in time"])
                     if (data["presence_list"][student_count]["check-in time"] === null) {
-                        console.log("why")
                         student_check_in_time = "<td></td>"
                     }
 

@@ -16,22 +16,25 @@
     margin-bottom: 5px;
 }
 
-#meeting_table td:nth-child(1), #meeting_table th:nth-child(1) {
+#meeting_table td:nth-child(1) {
+    width: 200px;
+    text-align: left;
+}
+
+#meeting_table th:nth-child(1) {
     width: 200px;
 }
 
 #meeting_table td:nth-child(2), #meeting_table th:nth-child(2) {
     width: 125px;
-    text-align: center;
 }
 
 #meeting_table td:nth-child(3), #meeting_table th:nth-child(3) {
     width: 50px;
-    text-align: center;
 }
 
 #meeting_table td:nth-child(4), #meeting_table th:nth-child(4) {
-    width: 75px;
+    width: 100px;
 }
 
 .no_presence {
