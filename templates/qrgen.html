@@ -8,6 +8,7 @@
 {% block content %}
 <main>  
    <body>
+    <!-- Everything related to QR code / buttons -->
        <div id="QR-Text">
            <h1>QR Code</h1>
        </div>
@@ -16,22 +17,26 @@
                <div id="test">
                    <form>
                        <input type="text" id="text"/>
-                       <button type="button" id="qr-gen">genereer qr</button>
+                       <button type="button" id="qr-gen">Genereer qr</button>
                        <br/>
                    </form>
-               </div>
-               <div id="qrcontainer">
-                   <canvas id="qr"></canvas>
-            </div>
-           <div class="timer-border">
-            <div class="timer" name="timer">
-              <p id ="days"></p>
-              <p id ="hours"></p>
-              <p id ="mins"></p>
-              <p id ="secs"></p>
-              <p id ="end" class="p5"></p>
+                    <!-- The timer function for Check-In -->
+                 <div id="timer-border">
+                <div class="timer" name="timer">
+                 <span id ="days"></p></span>
+                 <span id ="hours"></p></span>
+                 <span id ="mins"></p></span>
+                 <span id ="secs"></p></span>
+                 <span id ="end" class="p5"></span>
             </div>
        </div>
+                </div>
+               <div id="qrcontainer">
+                <canvas id="qr"></canvas>
+               </div>
+            </div>
+        </div>
+
    </body>
 </main>
 {% endblock %}
