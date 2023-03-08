@@ -57,6 +57,16 @@ let myfunc = setInterval(function () {
     }
 }, 1000);
 
+// This makes the element #timer-border invisible/ nonexistant.
+let timer = document.querySelector('#timer-border');
+timer.style.display = 'None'
+
+// Clicking on the button will trigger it to appear again below the QR generate button.
+let generatebutton = document.querySelector('#qr-gen')
+generatebutton.addEventListener("click", function () {
+    timer.style.display = ''
+});
+
 get_meeting()
 
 let interval_id = setInterval(get_meeting, 5000)
