@@ -74,13 +74,27 @@ def meeting():
 @app.post('/meeting') # shortcut voor methods = ["POST"]
 def meeting_post():
     meeting_name = str(request.form.get('meeting_name'))
-    meeting_datetime = request.form.get('meeting_datetime')
+    meeting_date = request.form.get('meeting_date')
+    meeting_start_time = request.form.get('meeting_start_time')
+    meeting_end_time = request.form.get('meeting_end_time')
     meeting_location = str(request.form.get('meeting_location'))
     meeting_teacher = str(request.form.getlist('meeting_teacher'))
     meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
     meeting_students = str(studentdb.get_students_by_class(meeting_classes))
     meeting_students2 = studentdb.get_students_by_class(meeting_classes)
-    meetingdb.add_meeting(meeting_name, meeting_datetime, meeting_location, meeting_teacher, meeting_students, meeting_students2)
+    print(meeting_date)
+    print(meeting_start_time)
+    print(meeting_end_time)
+
+    meetingdb.add_meeting(
+        meeting_name,
+        meeting_date,
+        meeting_start_time,
+        meeting_end_time,
+        meeting_location,
+        meeting_teacher,
+        meeting_students,
+        meeting_students2)
 
     flash("Meeting toegevoegd!", "info")
     return redirect(url_for('meeting'))
@@ -98,9 +112,9 @@ def meetingid(meetingId):
         case 'PUT':
             print("PUT")
         case 'PATCH':
-            print("PATCH")
-        case 'DELETE':
-            print("DELETE")
+            json_data = request.get_json()
+            presencedb.update_presence(json_data)
+            return json.jsonify()
 
 
 @app.route('/api/<meetingId>')
