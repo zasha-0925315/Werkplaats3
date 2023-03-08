@@ -12,15 +12,19 @@
 #QR-Box {
     display: flex;
     justify-content: center;
+
 }
 
 #QR-Content {
     display: flex;
     justify-content: center;
+    margin-left: 10%;
 }
 
 #QR-Text {
     margin: 0 auto;
+    margin-top: 50px;
+    margin-left: 10%;
 }
 
 #qr-gen {

@@ -1,7 +1,31 @@
 const url = '../api/class/json'
 
+const get_meeting = async () => {
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data)
+        if (response.error) {
+            console.log("ouwh error")
+        } else if (!response.ok) {
+            console.log("Some non-200 HTTP response code or something")
+        } else {
+            console.log('peepoclap')
+        }
+    }
+
+    catch (e) {
+        console.log("Some error with fetching JSON from Meetings server: " + e)
+    }
+}
+
 // Timer JS functions for QRgen.html //
-Vardate = ()
+Vardate = new Date('04-27-2023 12:00:00');
 let countDownDate = new Date(Vardate).getTime();
 
 // Run myfunc every second
@@ -32,3 +56,7 @@ let myfunc = setInterval(function () {
         document.getElementById("end").innerHTML = "Check-in is gesloten";
     }
 }, 1000);
+
+get_meeting()
+
+let interval_id = setInterval(get_meeting, 5000)
