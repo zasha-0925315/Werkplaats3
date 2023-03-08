@@ -108,7 +108,9 @@ def meetingid(meetingId):
             student_list = ast.literal_eval(meeting_info[0]["student"])
 
             return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
-
+        case 'POST':
+             meeting_info = meetingdb.get_meeting(meetingId)
+             return redirect('QRgen', meetingId=meetingId)
         case 'PUT':
             print("PUT")
         case 'PATCH':
