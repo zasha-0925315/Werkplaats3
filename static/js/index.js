@@ -1,5 +1,7 @@
-// Timer JS functions for screen.html //
-Vardate = ("February 17, 2023 13:39:00")
+const url = '../api/class/json'
+
+// Timer JS functions for QRgen.html //
+Vardate = ()
 let countDownDate = new Date(Vardate).getTime();
 
 // Run myfunc every second

@@ -91,3 +91,30 @@ class MeetingManagement:
             print("yeet")
             raise e
         return meeting_info
+    
+    def get_meeting(self, meetingid):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"SELECT * FROM meeting WHERE id = {meetingid}")
+            meeting_db_info = cursor.fetchall()
+            meeting_info = []
+            for info in meeting_db_info:
+                meeting_info.append({
+                    "id": info[0],
+                    "name": info[1],
+                    "date": info[2],
+                    "location": info[3],
+                    "teacher": info[4],
+                    "student": info[5],
+                    "start_time": info[6],
+                    "end_time": info[7]
+                })
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return meeting_info
+    

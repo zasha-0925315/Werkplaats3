@@ -281,9 +281,10 @@ def handle_login():
 def register():
     return render_template('register.html', title=register)    
 
-@app.route("/testqr")
-def testqr():
-    return render_template("qrgen.html")
+@app.route("/QRgen/<meetingId>", methods = ["GET"])
+def qrgen(meetingId):
+    meeting_list = meetingdb.get_meeting(meetingId)
+    return render_template("qrgen.html", meetings=meeting_list, meetingId=meetingId)
 
 @app.route("/teapot")
 def teapot():
