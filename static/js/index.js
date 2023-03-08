@@ -61,10 +61,14 @@ let myfunc = setInterval(function () {
 let timer = document.querySelector('#timer-border');
 timer.style.display = 'None'
 
-// Clicking on the button will trigger it to appear again below the QR generate button.
+/* Clicking on the QR button will return the style.display back to before.
+We put an if condition as we want the timer to only appear if the text field has any value */
+let input = document.querySelector('#text1')
 let generatebutton = document.querySelector('#qr-gen')
 generatebutton.addEventListener("click", function () {
-    timer.style.display = ''
+    if (input.value !== '') {
+        timer.style.display = ''
+    }
 });
 
 get_meeting()

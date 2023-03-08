@@ -1,9 +1,9 @@
 const btn = document.querySelector("#qr-gen");
 
-function generateCode(){
-    let getText = document.getElementById("text").value;
-    
-    if(getText){ //laat pas de QR code zien als er daadwerkelijk text is ingevoerd
+function generateCode() {
+    let getText = document.getElementById("text1").value;
+
+    if (getText) { //laat pas de QR code zien als er daadwerkelijk text is ingevoerd
         let qr = new QRious({
             foreground: "#D30F4C",
             background: "#FFFFFF",
