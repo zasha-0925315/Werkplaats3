@@ -156,7 +156,7 @@ def oneonone():
 @app.route('/checkin')
 def checkin():
 
-    return render_template('checkin.html', question = 'hallo')
+    return render_template('checkin.html')
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():

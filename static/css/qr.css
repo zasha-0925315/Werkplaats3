@@ -8,3 +8,36 @@
     max-width: 350px;
     max-height: 350px;
 }
+
+#QR-Box {
+    display: flex;
+    justify-content: center;
+}
+
+#QR-Content {
+    display: flex;
+    justify-content: center;
+}
+
+#QR-Text {
+    margin: 0 auto;
+}
+
+#qr-gen {
+    font-size: 17px;
+    cursor: pointer;
+    padding: 12.5px 60px;
+    border-radius: 400px;
+    color: #ffffff;
+    background-color: #d30f4c;
+    border: none;
+    border-color: transparent;
+    transition: 300ms;
+    margin-top: 10px;
+}
+
+#qr-gen:hover {
+    background-color: var(--white);
+    color: var(--hr-red);
+    transition: all 200ms;
+}
