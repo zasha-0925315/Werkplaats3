@@ -7,8 +7,9 @@
     <div id="meeting_info_content">
         <div id="meeting_info">
             <h1>{{ meeting_info[0]["name"] }}</h1>
-            <h2>{{ meeting_info[0]["date"] }}</h2>
-            <h3>{{ meeting_info[0]["location"] }}</h3>
+            <h4>{{ meeting_info[0]["date"] }}</h4>
+            <h4>{{ meeting_info[0]["start_time"] }}-{{ meeting_info[0]["end_time"] }}</h4>
+            <h4>{{ meeting_info[0]["location"] }}</h4>
             <h4>{{ meeting_info[0]["teacher"] }}</h4>
             <button class="button1">Laat QR code zien</button>
         </div>
@@ -18,11 +19,11 @@
                     <tr>
                         <th>Student</th>
                         <th>Aanwezigheid</th>
+                        <th>tijd</th>
                         <th>Aanpassen</th>
                     </tr>
                 </thead>
-                <tbody id="presence_table">
-                </tbody>
+                <tbody id="presence_table"></tbody>
                 <tfoot id="presence_table_footer"></tfoot>
             </table>
         </div>
@@ -30,5 +31,5 @@
 {% endblock %}
 {% block script %}
     {{ super() }}
-        <script src="../static/js/meeting.js"></script>
+    <script src="../static/js/meeting.js"></script>
 {% endblock script %}
