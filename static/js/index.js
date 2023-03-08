@@ -1,5 +1,31 @@
-// Timer JS functions for screen.html //
-Vardate = ("February 17, 2023 13:39:00")
+const url = '../api/class/json'
+
+const get_meeting = async () => {
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data)
+        if (response.error) {
+            console.log("ouwh error")
+        } else if (!response.ok) {
+            console.log("Some non-200 HTTP response code or something")
+        } else {
+            console.log('peepoclap')
+        }
+    }
+
+    catch (e) {
+        console.log("Some error with fetching JSON from Meetings server: " + e)
+    }
+}
+
+// Timer JS functions for QRgen.html //
+Vardate = new Date('04-27-2023 12:00:00');
 let countDownDate = new Date(Vardate).getTime();
 
 // Run myfunc every second
@@ -30,3 +56,17 @@ let myfunc = setInterval(function () {
         document.getElementById("end").innerHTML = "Check-in is gesloten";
     }
 }, 1000);
+
+// This makes the element #timer-border invisible/ nonexistant.
+let timer = document.querySelector('#timer-border');
+timer.style.display = 'None'
+
+// Clicking on the button will trigger it to appear again below the QR generate button.
+let generatebutton = document.querySelector('#qr-gen')
+generatebutton.addEventListener("click", function () {
+    timer.style.display = ''
+});
+
+get_meeting()
+
+let interval_id = setInterval(get_meeting, 5000)

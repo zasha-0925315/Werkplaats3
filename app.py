@@ -108,7 +108,9 @@ def meetingid(meetingId):
             student_list = ast.literal_eval(meeting_info[0]["student"])
 
             return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
-
+        case 'POST':
+             meeting_info = meetingdb.get_meeting(meetingId)
+             return redirect('QRgen', meetingId=meetingId)
         case 'PUT':
             print("PUT")
         case 'PATCH':
@@ -156,7 +158,7 @@ def oneonone():
 @app.route('/checkin')
 def checkin():
 
-    return render_template('checkin.html', question = 'hallo')
+    return render_template('checkin.html')
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
@@ -281,9 +283,10 @@ def handle_login():
 def register():
     return render_template('register.html', title=register)    
 
-@app.route("/testqr")
-def testqr():
-    return render_template("qrgen.html")
+@app.route("/QRgen/<meetingId>", methods = ["GET"])
+def qrgen(meetingId):
+    meeting_list = meetingdb.get_meeting(meetingId)
+    return render_template("qrgen.html", meetings=meeting_list, meetingId=meetingId)
 
 @app.route("/teapot")
 def teapot():
