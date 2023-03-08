@@ -11,6 +11,11 @@
     text-decoration: none;
 }
 
+.button1 a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .button1:hover {
     background-color: var(--hr-darker-red);
     transition: all 200ms;
