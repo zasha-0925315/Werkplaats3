@@ -164,12 +164,11 @@ def student_post():
 
 
 @app.route('/student/<studentId>', methods=["GET", "DELETE"])
-def studentid():
-    match request.method:
-        case 'GET':
-            return render_template('studentid.html')
-        case 'DELETE':
-            print("DELETE")
+def studentid(studentId):
+
+
+    return render_template('studentid.html')
+
 
 
 @app.route('/api/student')
@@ -182,6 +181,13 @@ def api_get_students():
         'studenten' : s_list
     })
 
+@app.route('/api/student/<studentId>')
+def api_get_student_presence(studentId):
+    p_s_list = presencedb.get_presence_student(studentId)
+
+    return jsonify({
+        'studenten' : p_s_list
+    })
 
 @app.route('/api/teacher')
 def api_get_teachers():

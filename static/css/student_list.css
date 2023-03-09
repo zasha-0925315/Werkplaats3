@@ -1,0 +1,3 @@
+#student_table tbody tr:hover {
+    background-color: var(--hr-light-gray);
+}+

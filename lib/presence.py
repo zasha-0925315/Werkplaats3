@@ -56,3 +56,31 @@ class PresenceManagement:
         except OperationalError as e:
             print("yeet")
             raise e
+
+    def get_presence_student(self, student_id):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+            cursor.row_factory = sqlite3.Row
+
+            cursor.execute(f"SELECT student.voornaam, student.achternaam, "
+                           f"meeting.naam, meeting.datum, "
+                           f"aanwezigheid.aanwezigheid "
+                           f"FROM aanwezigheid "
+                           f"INNER JOIN student ON aanwezigheid.student=student.id "
+                           f"INNER JOIN meeting ON aanwezigheid.meeting=meeting.id "
+                           f"AND aanwezigheid.student IN ({student_id})")
+
+            presence_student = cursor.fetchall()
+
+            p_s_list = []
+            for presence in presence_student:
+                p_s_list.append({p: presence[p] for p in presence.keys()})
+
+            conn.commit()
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return p_s_list

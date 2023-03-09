@@ -51,16 +51,23 @@ function fill_table(student_list){
     const tb = document.querySelector("#student_table tbody");
     // empty the table
     tb.replaceChildren()
-    // place the filtered student_list rows on the table
+    // place the filtered student_list rows in the table
     table.appendChild(tb);
     for(const student of student_list){
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + student.id + '</td>'
+        tr.innerHTML = '<td>' + student["id"] + '</td>'
         + '<td>' + student["voornaam"] + '</td>'
         + '<td>' + student["achternaam"] + '</td>'
         + '<td>' + student["klas"] + '</td>';
         tb.appendChild(tr);
     }
+// a click function for all rows that redirects to the student page of the selected row
+document.querySelectorAll("#student_table tbody tr").forEach(row => {
+    row.addEventListener("click", function (){
+        window.location.replace("/student/" + this.cells[0].innerHTML)
+    }, false)
+})
+
 }
 
 document.addEventListener('DOMContentLoaded', get_students());

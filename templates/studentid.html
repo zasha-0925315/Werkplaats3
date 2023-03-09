@@ -1,8 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Title{% endblock %}
+{% block title %}Student{% endblock %}
 {% block head %}
     {{ super() }}
 {% endblock head %}
 {% block content %}
-    
+    <div>
+        <h1><i>Input student name here</i></h1>
+        {{ p_s_list }}
+        <div id="table-student_presence">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Meeting</th>
+                        <th>Dag</th>
+                        <th>Aanwezigheid</th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 {% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}
