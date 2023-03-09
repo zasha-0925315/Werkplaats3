@@ -2,7 +2,7 @@ const get_meeting = async () => {
     try {
         const url = window.location.pathname.split('/')
         const urlId = url[2]
-        const  response = await fetch('../api/'+ urlId, {
+        const response = await fetch('../api/' + urlId, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json'
@@ -21,7 +21,7 @@ const get_meeting = async () => {
                 let student_count = 0
                 let student_presence = 0
                 meetingInfo.replaceChildren()
-                while ( student_count < presence_length) {
+                while (student_count < presence_length) {
 
                     let afgemeld_reason = data["presence_list"][student_count]["afgemeld reason"]
                     if (afgemeld_reason === null) {
@@ -56,7 +56,7 @@ const get_meeting = async () => {
                             break
                         case 2:
                             meetingInfo.innerHTML += "<tr class='afgemeld_row'>" + student_name + student_afgemeld + student_check_in_time + presence_options +
-                               "<td class='afgemeld_reason'>" + afgemeld_reason + "</td>" + "</tr>"
+                                "<td class='afgemeld_reason'>" + afgemeld_reason + "</td>" + "</tr>"
                             break
                         default:
                             meetingInfo.innerHTML += student_name + student_error + presence_options
@@ -77,20 +77,20 @@ const get_meeting = async () => {
         document.querySelectorAll(".button_presence").forEach(presence_option => {
             presence_option.addEventListener(
                 "click",
-                function (){
+                function () {
                     let student = this.dataset.count
                     let presence = parseInt(this.dataset.value)
                     if (data["presence_list"][student]["presence"] !== presence) {
                         fetch('/meeting/' + urlId, {
-                            method : 'PATCH',
-                            body : JSON.stringify( {
-                                'presence' : presence,
-                                'meeting' : data["presence_list"][student]["meeting"],
-                                'student' : data["presence_list"][student]["student"],
-                                'reason' : "Verandert door leraar"
+                            method: 'PATCH',
+                            body: JSON.stringify({
+                                'presence': presence,
+                                'meeting': data["presence_list"][student]["meeting"],
+                                'student': data["presence_list"][student]["student"],
+                                'reason': "Veranderd door leraar"
                             }),
                             headers: {
-                            'Content-type': 'application/json'
+                                'Content-type': 'application/json'
                             }
                         })
                     }

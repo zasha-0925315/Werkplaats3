@@ -1,26 +1,47 @@
 {% extends "base.html" %}
-{% block title %}QR gen{% endblock %}
+{% block title %}QR-Generator{% endblock %}
 {% block head %}
     {{ super() }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <!-- https://github.com/neocotic/qrious -->
 {% endblock head %}
 {% block content %}
-    <main>
-        <h1>QR Code</h1>
-        <div id="test">
-            <form>
-                <input type="text" id="text"/>
-                <button type="button" id="qr-gen">genereer qr</button>
-                <br/>
-            </form>
+<main>  
+   <body>
+    <!-- Everything related to QR code / buttons -->
+       <div id="QR-Text">
+           <h1>QR Code</h1>
+       </div>
+       <div id="QR-Box">
+           <div id="QR-Content">
+               <div id="test">
+                   <form>
+                       <input type="text" id="text1"/>
+                       <button type="button" id="qr-gen">Genereer qr</button>
+                   </form>
+                   <p>
+                    <!-- The timer function for Check-In -->
+                 <div id="timer-border">
+                <div class="timer" name="timer">
+                 <span id ="days"></span>
+                 <span id ="hours"></span>
+                 <span id ="mins"></span>
+                 <span id ="secs"></span>
+                 <span id ="end" class="p5"></span>
+            </div>
+       </div>
+                </div>
+               <div id="qrcontainer">
+                <canvas id="qr"></canvas>
+               </div>
+            </div>
         </div>
-        <div id="qrcontainer">
-            <canvas id="qr"></canvas>
-        </div>
-    </main>
-{% endblock content %}
+
+   </body>
+</main>
+{% endblock %}
 {% block script %}
     {{ super() }}
     <script src="../static/js/qrgen.js"></script>
+    <script src="../static/js/index.js"></script>
 {% endblock script %}
