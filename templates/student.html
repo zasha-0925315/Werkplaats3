@@ -7,9 +7,7 @@
     <main>
         <h1>Studenten</h1>
         <div id="search_container">
-            <label>Zoek
-               <input type="search" id="search_input">
-            </label>
+            <input type="search" id="search_input">
         </div>
         <div id="student_table">
             <table>
@@ -26,4 +24,7 @@
         </div>
     </main>
 {% endblock %}
-
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/student.js"></script>
+{% endblock script %}
