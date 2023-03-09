@@ -139,21 +139,6 @@ def api_get_docentmeeting():
         'meeting_info' : docent_meeting, 
     })
 
-@app.route('/oneonone', methods=["GET", "POST"])
-def oneonone():
-    match request.method:
-        case 'GET':
-            class_list = classdb.get_class()
-            # selected_class =
-            # student_list = meetingdb.get_students_by_class(selected_class)
-
-            return render_template('oneOnOne.html', classes=class_list)
-        case 'POST':
-            print("POST")
-
-        case _:
-            print("nope")
-
 
 @app.route('/checkin')
 def checkin():
@@ -176,6 +161,25 @@ def meetingforteacher():
             return render_template('meetingid.html')
 
 
+@app.route('/student')
+def student():
+    return render_template('student.html')
+
+
+@app.post('/student') # shortcut voor methods = ["POST"]
+def student_post():
+    return render_template('student.html')
+
+
+@app.route('/student/<studentId>', methods=["GET", "DELETE"])
+def studentid():
+    match request.method:
+        case 'GET':
+            return render_template('studentid.html')
+        case 'DELETE':
+            print("DELETE")
+
+
 @app.route('/api/student')
 def api_get_students():
     s_list = studentdb.get_student_json()
@@ -185,30 +189,6 @@ def api_get_students():
     return jsonify({ # oke, mooi. wat doe ik nu hier mee?
         'studenten' : s_list
     })
-
-@app.route('/student')
-def student():
-    return render_template('student.html')
-
-@app.route('/student2')
-def student2():
-    match request.method:
-        case 'GET':
-            return render_template('student2.html')
-        case 'POST':
-            print("POST")
-
-@app.post('/student') # shortcut voor methods = ["POST"]
-def student_post():
-    return render_template('student.html')
-   
-@app.route('/student/<studentId>', methods=["GET", "DELETE"])
-def studentid():
-    match request.method:
-        case 'GET':
-            return render_template('studentid.html')
-        case 'DELETE':
-            print("DELETE")
 
 
 @app.route('/api/teacher')

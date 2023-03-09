@@ -1,17 +1,31 @@
-{% extends 'base.html' %}
-{% block title %}Student{% endblock %}
+{% extends "base.html" %}
+{% block title %}Studenten{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
 {% block content %}
-<div id="class-filter">
-    <div>
-    {% for class in classes %}
-    <button class="filter-button">
-        {{class[0]}}
-    </button>
-    {% endfor %}
-</div>
-<div>
-    <!-- {% for student in students %}
-    {{student}}
-    {% endfor %} -->
-</div>
-{% endblock content %}
+    <main>
+        <h1>Studenten</h1>
+        <div id="search_container">
+            <input type="search" id="search_input">
+        </div>
+        <div id="student_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Studentennummer</th>
+                        <th>Voornaam</th>
+                        <th>Achternaam</th>
+                        <th>Klas</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/student.js"></script>
+    <script src="/static/js/search.js"></script>
+{% endblock script %}
