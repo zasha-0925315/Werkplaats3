@@ -28,7 +28,7 @@ class StudentManagement(Database):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
-            cursor.row_factory = sqlite3.Row #geen idee wat dit is, but whatever works
+            cursor.row_factory = sqlite3.Row  # geen idee wat dit is, but whatever works
 
             cursor.execute(f"SELECT student.id, student.voornaam, student.achternaam, inschrijving.klas "
                            f"FROM student INNER JOIN inschrijving "
@@ -38,10 +38,8 @@ class StudentManagement(Database):
             s_list = []
             for students in student:
                 s_list.append({s: students[s] for s in students.keys()})
-            print(s_list)
 
-            conn.commit() 
-
+            conn.commit()
             conn.close()
 
         except OperationalError as e:

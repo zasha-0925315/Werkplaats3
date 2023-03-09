@@ -20,7 +20,6 @@ const get_meeting = async () => {
                 const presence_length = data["presence_list"].length
                 let student_count = 0
                 let student_presence = 0
-                console.log(data["presence_list"])
                 meetingInfo.replaceChildren()
                 while ( student_count < presence_length) {
 
@@ -30,9 +29,7 @@ const get_meeting = async () => {
                     }
 
                     let student_check_in_time = "<td>" + data["presence_list"][student_count]["check-in time"] + "</td>"
-                    console.log(data["presence_list"][student_count]["check-in time"])
                     if (data["presence_list"][student_count]["check-in time"] === null) {
-                        console.log("why")
                         student_check_in_time = "<td></td>"
                     }
 
