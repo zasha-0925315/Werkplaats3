@@ -62,7 +62,7 @@ def base():
 # Url for QR Code scanning
 @app.route('/QR')
 def qr():
-    return render_template("QR.html", title=qr)
+    return render_template("QRscan.html")
 
 @app.route('/meeting')
 def meeting():
@@ -157,8 +157,17 @@ def oneonone():
 
 @app.route('/checkin')
 def checkin():
-
     return render_template('checkin.html')
+
+@app.route('/checkin/<meetingId>', methods=["GET", "POST"])
+def checkin_id(meetingId):
+    match request.method:
+        case 'GET':
+         meeting_list = meetingdb.get_meeting(meetingId)
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
+        case 'POST':
+         # placeholder #
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
@@ -285,7 +294,9 @@ def register():
 
 @app.route("/QRgen/<meetingId>", methods = ["GET"])
 def qrgen(meetingId):
-    meeting_list = meetingdb.get_meeting(meetingId)
+    match request.method:
+      case 'GET':
+       meeting_list = meetingdb.get_meeting(meetingId)
     return render_template("qrgen.html", meetings=meeting_list, meetingId=meetingId, message='dog')
 
 @app.route("/teapot")

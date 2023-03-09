@@ -57,9 +57,16 @@ let myfunc = setInterval(function () {
     }
 }, 1000);
 
-// This makes the element #timer-border invisible/ nonexistant.
+// This makes the elements #timer-border and Checkin-Sluit invisible/ nonexistant.
+qrgen = document.querySelector("#qr-gen")
+qrcode = document.querySelector("#qr")
+qrtext = document.querySelector("#QR-Text").innerHTML;
+
 let timer = document.querySelector('#timer-border');
 timer.style.display = 'None'
+
+let checkin = document.querySelector("#Checkin-sluit")
+checkin.style.display = 'None'
 
 /* Clicking on the QR button will return the style.display back to before.
 We put an if condition as we want the timer to only appear if the text field has any value */
@@ -67,10 +74,24 @@ let input = document.querySelector('#text1')
 let generatebutton = document.querySelector('#qr-gen')
 generatebutton.addEventListener("click", function () {
     if (input.value !== '') {
-        timer.style.display = ''
+        timer.style.display = '';
+        checkin.style.display = '';
+        input.style.display = 'None';
+        qrgen.style.display = 'None';
+        document.querySelector("#QR-Text").innerHTML = qrtext.replace("QR Code", "Welkom Bij HR!")
     }
 });
 
+// For check-in Button //
+checkin.addEventListener("click", function () {
+    checkin.style.display = 'None';
+    qrcode.style.display = 'None';
+    timer.style.width = "500px";
+    timer.style.height = "100px";
+    timer.style.font = "30px";
+    timer.innerHTML = 'Check-in is gesloten!';
+    timer.style.fontSize = "42px";
+});
 get_meeting()
 
 let interval_id = setInterval(get_meeting, 5000)

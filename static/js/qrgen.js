@@ -2,6 +2,7 @@ const btn = document.querySelector("#qr-gen");
 
 function generateCode() {
     let getText = document.getElementById("text1").value;
+    let getValue = document.querySelector("valuecheck")
 
     if (getText) { //laat pas de QR code zien als er daadwerkelijk text is ingevoerd
         let qr = new QRious({
@@ -18,5 +19,7 @@ function generateCode() {
         alert("Geen text ingevoerd!");
     }
 }
+
+
 
 btn.addEventListener('click', generateCode);
