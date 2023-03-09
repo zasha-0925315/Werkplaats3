@@ -47,9 +47,16 @@ def check_login():
             return redirect(url_for('show_login'))
 
 # Main route
-@app.route("/")
-def index():
-    return render_template("index.html", title=index)
+# @app.route("/")
+# def index():
+#     return render_template("index.html", title=index)
+
+@app.route("/", methods=["GET","POST"])
+def link():
+    match request.method:
+        case 'GET':
+            teacher_list = teacherdb.get_teacher()
+    return render_template('link.html', teachers=teacher_list)
 
 @app.route("/test-ajax.html", methods = ['GET'])
 def testajax():
@@ -278,13 +285,6 @@ def qrgen(meetingId):
 @app.route("/teapot")
 def teapot():
     return render_template("teapot.html"), 418
-
-@app.route("/link", methods=["GET","POST"])
-def link():
-    match request.method:
-        case 'GET':
-            teacher_list = teacherdb.get_teacher() 
-    return render_template('link.html', teachers=teacher_list)    
 
 @app.route("/logout")
 def logout():
