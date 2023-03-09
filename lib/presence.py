@@ -65,7 +65,7 @@ class PresenceManagement:
 
             cursor.execute(f"SELECT student.voornaam, student.achternaam, "
                            f"meeting.naam, meeting.datum, "
-                           f"aanwezigheid.aanwezigheid "
+                           f"aanwezigheid.aanwezigheid, aanwezigheid.meeting "
                            f"FROM aanwezigheid "
                            f"INNER JOIN student ON aanwezigheid.student=student.id "
                            f"INNER JOIN meeting ON aanwezigheid.meeting=meeting.id "

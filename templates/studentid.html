@@ -5,22 +5,22 @@
 {% endblock head %}
 {% block content %}
     <div>
-        <h1><i>Input student name here</i></h1>
-        {{ p_s_list }}
-        <div id="table-student_presence">
+        <h1 id="student_name">Input student name here</h1>
+        <div id="table_student_presence">
             <table>
                 <thead>
                     <tr>
                         <th>Meeting</th>
                         <th>Dag</th>
                         <th>Aanwezigheid</th>
-
                     </tr>
                 </thead>
+                <tbody></tbody>
             </table>
         </div>
     </div>
 {% endblock %}
 {% block script %}
     {{ super() }}
+    <script src="/static/js/student_presence.js" defer></script>
 {% endblock script %}

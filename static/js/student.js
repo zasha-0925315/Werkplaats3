@@ -64,7 +64,7 @@ function fill_table(student_list){
 // a click function for all rows that redirects to the student page of the selected row
 document.querySelectorAll("#student_table tbody tr").forEach(row => {
     row.addEventListener("click", function (){
-        window.location.replace("/student/" + this.cells[0].innerHTML)
+        window.location.href = "/student/" + this.cells[0].innerHTML
     }, false)
 })
 
