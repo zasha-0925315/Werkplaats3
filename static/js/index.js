@@ -58,7 +58,10 @@ let myfunc = setInterval(function () {
 }, 1000);
 
 // This makes the elements #timer-border and Checkin-Sluit invisible/ nonexistant.
-qrcode = document.querySelector("#qr-gen")
+qrgen = document.querySelector("#qr-gen")
+qrcode = document.querySelector("#qr")
+qrtext = document.querySelector("#QR-Text").innerHTML;
+
 let timer = document.querySelector('#timer-border');
 timer.style.display = 'None'
 
@@ -73,11 +76,22 @@ generatebutton.addEventListener("click", function () {
     if (input.value !== '') {
         timer.style.display = '';
         checkin.style.display = '';
-        qrcode.style.display = 'None';
+        input.style.display = 'None';
+        qrgen.style.display = 'None';
+        document.querySelector("#QR-Text").innerHTML = qrtext.replace("QR Code", "Welkom Bij HR!")
     }
 });
 
-
+// For check-in Button //
+checkin.addEventListener("click", function () {
+    checkin.style.display = 'None';
+    qrcode.style.display = 'None';
+    timer.style.width = "500px";
+    timer.style.height = "100px";
+    timer.style.font = "30px";
+    timer.innerHTML = 'Check-in is gesloten!';
+    timer.style.fontSize = "42px";
+});
 get_meeting()
 
 let interval_id = setInterval(get_meeting, 5000)
