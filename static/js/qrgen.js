@@ -20,4 +20,6 @@ function generateCode() {
     }
 }
 
+
+
 btn.addEventListener('click', generateCode);
