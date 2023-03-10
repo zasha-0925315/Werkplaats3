@@ -6,10 +6,19 @@
 {% block content %}
     <main>
         <h1>Meetings</h1>
+        <div class="meeting-link">
+
+        </div>
         <div id="search_container">
             <label>
                 <input type="search" id="search_input" placeholder="Zoek">
             </label>
+             <button  id="Select-Planning-button" type="button">
+                 <a href="/meeting/new">
+                    <svg  class="plus-knop" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFE" viewBox="0 0 18 18"><path d="M18 10h-8v8H8v-8H0V8h8V0h2v8h8v2z"></path></svg>
+                 </a>
+
+            </button>
         </div>
         <div id="meeting_list_table">
             <table>

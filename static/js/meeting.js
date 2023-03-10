@@ -2,13 +2,10 @@ const get_meeting = async () => {
     try {
         const url = window.location.pathname.split('/')
         const urlId = url[2]
-        const  response = await fetch('../api/'+ urlId, {
-            method: 'GET',
-            headers: {
-                'Content-type': 'application/json'
-            }
-        });
+        const  response = await fetch('../api/'+ urlId);
         const data = await response.json();
+
+        console.log(data)
         if (response.error) {
             console.log("oopsie")
         } else if (!response.ok) {
@@ -34,6 +31,7 @@ const get_meeting = async () => {
                     }
 
                     let student_name = "<td>" + data["presence_list"][student_count]["first name"] + " " + data["presence_list"][student_count]["last name"] + "</td>"
+                    let student_class = "<td>" + data["presence_list"][student_count]["class"] + "</td>"
                     let student_afwezig = "<td class='no_presence'>Afwezig</td>"
                     let student_aanwezig = "<td class='yes_presence'>Aanwezig</td>"
                     let student_afgemeld = "<td class='maybe_presence'>Afgemeld</td>"
@@ -46,20 +44,21 @@ const get_meeting = async () => {
                         "<div id='button_presence_no' class='button_presence' data-value='0' data-count=" + student_count + ">:(</div>" +
                         "</td>"
 
+
                     switch (data["presence_list"][student_count]["presence"]) {
                         case 0:
-                            meetingInfo.innerHTML += student_name + student_afwezig + student_check_in_time + presence_options
+                            meetingInfo.innerHTML += student_name + student_class + student_afwezig + student_check_in_time + presence_options
                             break
                         case 1:
-                            meetingInfo.innerHTML += student_name + student_aanwezig + student_check_in_time + presence_options
+                            meetingInfo.innerHTML += student_name + student_class + student_aanwezig + student_check_in_time + presence_options
                             student_presence++
                             break
                         case 2:
-                            meetingInfo.innerHTML += "<tr class='afgemeld_row'>" + student_name + student_afgemeld + student_check_in_time + presence_options +
+                            meetingInfo.innerHTML += "<tr class='afgemeld_row'>" + student_name + student_class + student_afgemeld + student_check_in_time + presence_options +
                                "<td class='afgemeld_reason'>" + afgemeld_reason + "</td>" + "</tr>"
                             break
                         default:
-                            meetingInfo.innerHTML += student_name + student_error + presence_options
+                            meetingInfo.innerHTML += student_name + student_class + student_error + presence_options
                     }
                     student_count++
                 }

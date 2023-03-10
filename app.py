@@ -146,7 +146,6 @@ def meetingid(meetingId):
 def api_get_meeting(meetingId):
 
     presence_list = presencedb.get_presence(meetingId)
-    print(presence_list)
 
     return json.jsonify({
         'presence_list': presence_list

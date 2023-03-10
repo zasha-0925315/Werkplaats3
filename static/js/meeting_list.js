@@ -3,7 +3,6 @@ async function get_meetings(){
         const response = await fetch('../api/meeting');
         const meetings = await response.json();
 
-
         fill_table(meetings["meetings"])
         search_table(meetings);
 
