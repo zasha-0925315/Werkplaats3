@@ -71,14 +71,30 @@ def base():
 def qr():
     return render_template("QRscan.html")
 
+
 @app.route('/meeting')
 def meeting():
+    return render_template('meeting_list.html')
+
+
+@app.route('/api/meeting')
+def api_meeting():
+    meeting_list = meetingdb.get_all_meetings()
+    print(meeting_list)
+
+    return json.jsonify({
+        'meetings': meeting_list
+    })
+
+
+@app.route('/meeting/new')
+def creat_meeting():
     teacher_list = teacherdb.get_teacher()
     class_list = classdb.get_class()
     
     return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
 
-@app.post('/meeting') # shortcut voor methods = ["POST"]
+@app.post('/meeting/new') # shortcut voor methods = ["POST"]
 def meeting_post():
     meeting_name = str(request.form.get('meeting_name'))
     meeting_date = request.form.get('meeting_date')
@@ -151,6 +167,7 @@ def api_get_docentmeeting():
 def checkin():
     return render_template('checkin.html')
 
+
 @app.route('/checkin/<meetingId>', methods=["GET", "POST"])
 def checkin_id(meetingId):
     match request.method:
@@ -160,6 +177,7 @@ def checkin_id(meetingId):
         case 'POST':
          # placeholder #
          return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
+
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
@@ -201,7 +219,7 @@ def api_get_student_presence(studentId):
     p_s_list = presencedb.get_presence_student(studentId)
 
     return jsonify({
-        'studenten' : p_s_list
+        'presence' : p_s_list
     })
 
 @app.route('/api/teacher')

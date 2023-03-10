@@ -103,6 +103,10 @@
     height: fit-content;
 }
 
+#meeting_list_table tbody tr:hover {
+    background-color: var(--hr-light-gray);
+}
+
 @media (pointer:coarse) {
     #meeting_info_content {
         flex-direction: column;
