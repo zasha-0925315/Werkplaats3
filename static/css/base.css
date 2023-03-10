@@ -8,7 +8,7 @@
 @import "button.css";
 @import "form.css";
 @import "links.css";
-/*@import "student.css";*/
+@import "student_list.css";
 @import "qr.css";
 
 :root {

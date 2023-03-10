@@ -47,9 +47,16 @@ def check_login():
             return redirect(url_for('show_login'))
 
 # Main route
-@app.route("/")
-def index():
-    return render_template("index.html", title=index)
+# @app.route("/")
+# def index():
+#     return render_template("index.html", title=index)
+
+@app.route("/", methods=["GET","POST"])
+def link():
+    match request.method:
+        case 'GET':
+            teacher_list = teacherdb.get_teacher()
+    return render_template('link.html', teachers=teacher_list)
 
 @app.route("/test-ajax.html", methods = ['GET'])
 def testajax():
@@ -62,16 +69,32 @@ def base():
 # Url for QR Code scanning
 @app.route('/QR')
 def qr():
-    return render_template("QR.html", title=qr)
+    return render_template("QRscan.html")
+
 
 @app.route('/meeting')
 def meeting():
+    return render_template('meeting_list.html')
+
+
+@app.route('/api/meeting')
+def api_meeting():
+    meeting_list = meetingdb.get_all_meetings()
+    print(meeting_list)
+
+    return json.jsonify({
+        'meetings': meeting_list
+    })
+
+
+@app.route('/meeting/new')
+def creat_meeting():
     teacher_list = teacherdb.get_teacher()
     class_list = classdb.get_class()
     
     return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
 
-@app.post('/meeting') # shortcut voor methods = ["POST"]
+@app.post('/meeting/new') # shortcut voor methods = ["POST"]
 def meeting_post():
     meeting_name = str(request.form.get('meeting_name'))
     meeting_date = request.form.get('meeting_date')
@@ -108,7 +131,9 @@ def meetingid(meetingId):
             student_list = ast.literal_eval(meeting_info[0]["student"])
 
             return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
-
+        case 'POST':
+             meeting_info = meetingdb.get_meeting(meetingId)
+             return redirect('QRgen', meetingId=meetingId)
         case 'PUT':
             print("PUT")
         case 'PATCH':
@@ -121,7 +146,6 @@ def meetingid(meetingId):
 def api_get_meeting(meetingId):
 
     presence_list = presencedb.get_presence(meetingId)
-    print(presence_list)
 
     return json.jsonify({
         'presence_list': presence_list
@@ -137,32 +161,46 @@ def api_get_docentmeeting():
         'meeting_info' : docent_meeting, 
     })
 
-@app.route('/oneonone', methods=["GET", "POST"])
-def oneonone():
-    match request.method:
-        case 'GET':
-            class_list = classdb.get_class()
-            # selected_class =
-            # student_list = meetingdb.get_students_by_class(selected_class)
-
-            return render_template('oneOnOne.html', classes=class_list)
-        case 'POST':
-            print("POST")
-
-        case _:
-            print("nope")
-
 
 @app.route('/checkin')
 def checkin():
+    return render_template('checkin.html')
 
-    return render_template('checkin.html', question = 'hallo')
+
+@app.route('/checkin/<meetingId>', methods=["GET", "POST"])
+def checkin_id(meetingId):
+    match request.method:
+        case 'GET':
+         meeting_list = meetingdb.get_meeting(meetingId)
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
+        case 'POST':
+         # placeholder #
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
+
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
     match request.method:
         case 'GET':
             return render_template('meetingid.html')
+
+
+@app.route('/student')
+def student():
+    return render_template('student.html')
+
+
+@app.post('/student') # shortcut voor methods = ["POST"]
+def student_post():
+    return render_template('student.html')
+
+
+@app.route('/student/<studentId>', methods=["GET", "DELETE"])
+def studentid(studentId):
+
+
+    return render_template('studentid.html')
+
 
 
 @app.route('/api/student')
@@ -175,30 +213,13 @@ def api_get_students():
         'studenten' : s_list
     })
 
-@app.route('/student')
-def student():
-    return render_template('student.html')
+@app.route('/api/student/<studentId>')
+def api_get_student_presence(studentId):
+    p_s_list = presencedb.get_presence_student(studentId)
 
-@app.route('/student2')
-def student2():
-    match request.method:
-        case 'GET':
-            return render_template('student2.html')
-        case 'POST':
-            print("POST")
-
-@app.post('/student') # shortcut voor methods = ["POST"]
-def student_post():
-    return render_template('student.html')
-   
-@app.route('/student/<studentId>', methods=["GET", "DELETE"])
-def studentid():
-    match request.method:
-        case 'GET':
-            return render_template('studentid.html')
-        case 'DELETE':
-            print("DELETE")
-
+    return jsonify({
+        'presence' : p_s_list
+    })
 
 @app.route('/api/teacher')
 def api_get_teachers():
@@ -281,20 +302,16 @@ def handle_login():
 def register():
     return render_template('register.html', title=register)    
 
-@app.route("/testqr")
-def testqr():
-    return render_template("qrgen.html")
+@app.route("/QRgen/<meetingId>", methods = ["GET"])
+def qrgen(meetingId):
+    match request.method:
+      case 'GET':
+       meeting_list = meetingdb.get_meeting(meetingId)
+    return render_template("qrgen.html", meetings=meeting_list, meetingId=meetingId, message='dog')
 
 @app.route("/teapot")
 def teapot():
     return render_template("teapot.html"), 418
-
-@app.route("/link", methods=["GET","POST"])
-def link():
-    match request.method:
-        case 'GET':
-            teacher_list = teacherdb.get_teacher() 
-    return render_template('link.html', teachers=teacher_list)    
 
 @app.route("/logout")
 def logout():

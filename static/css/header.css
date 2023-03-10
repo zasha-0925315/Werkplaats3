@@ -52,6 +52,11 @@ header button a:hover {
     color: var(--hr-red);
 }
 
+#logo a {
+    display: flex;
+    align-items: center;
+}
+
 #logo path {
     transition: 300ms;
 }
