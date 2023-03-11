@@ -74,16 +74,18 @@ class MeetingManagement:
             cursor = conn.cursor()
 
             cursor.execute(f"SELECT * FROM meeting")
-            meeting_db_info = cursor.fetchall()
+            meeting_all_info = cursor.fetchall()
             meeting_info = []
-            for info in meeting_db_info:
+            for info in meeting_all_info:
                 meeting_info.append({
                     "id": info[0],
                     "name": info[1],
                     "date": info[2],
                     "location": info[3],
                     "teacher": info[4],
-                    "student": info[5]
+                    "student": info[5],
+                    "start_time": info[6],
+                    "end_time": info[7]
                 })
             conn.close()
 
