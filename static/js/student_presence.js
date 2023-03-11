@@ -5,8 +5,8 @@ async function get_student_presence(){
         const response = await fetch('../api/student/' + urlId);
         const presence = await response.json();
 
-        fill_name(presence["studenten"][0])
-        fill_table(presence["studenten"])
+        fill_name(presence["presence"][0])
+        fill_table(presence["presence"])
 
     } catch(error) {
         const err = document.querySelector("#student_table")

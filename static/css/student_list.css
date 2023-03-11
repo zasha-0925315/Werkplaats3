@@ -1,3 +1,7 @@
 #student_table tbody tr:hover {
     background-color: var(--hr-light-gray);
-}+
+}
+
+#table_student_presence tbody tr:hover {
+    background-color: var(--hr-light-gray);
+}
