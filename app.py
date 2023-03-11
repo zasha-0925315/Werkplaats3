@@ -184,24 +184,24 @@ def meetingforteacher():
         case 'GET':
             return render_template('meetingid.html')
 
+@app.route('/api/student/<studentId>')
+def api_get_student_presence(studentId):
+    p_s_list = presencedb.get_presence_student(studentId)
+    return jsonify({
+        'studenten' : p_s_list
+    })
 
 @app.route('/student')
 def student():
     return render_template('student.html')
 
-
 @app.post('/student') # shortcut voor methods = ["POST"]
 def student_post():
     return render_template('student.html')
-
-
+   
 @app.route('/student/<studentId>', methods=["GET", "DELETE"])
 def studentid(studentId):
-
-
     return render_template('studentid.html')
-
-
 
 @app.route('/api/student')
 def api_get_students():
@@ -220,6 +220,14 @@ def api_get_student_presence(studentId):
     return jsonify({
         'presence' : p_s_list
     })
+
+def studentid():
+    match request.method:
+        case 'GET':
+            return render_template('studentid.html')
+        case 'DELETE':
+            print("DELETE")
+
 
 @app.route('/api/teacher')
 def api_get_teachers():
