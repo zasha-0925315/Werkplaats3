@@ -46,13 +46,15 @@ def check_login():
         if not session.get("logged_in"):
             return redirect(url_for('show_login'))
 
-# Main route
-# @app.route("/")
-# def index():
-#     return render_template("index.html", title=index)
+ # Main route
+@app.route("/index")
+def index():
+     return render_template("index.html", title=index)
 
 @app.route("/", methods=["GET","POST"])
 def link():
+    flash("a", 'info')
+    flash("b", 'warning')
     match request.method:
         case 'GET':
             teacher_list = teacherdb.get_teacher()
@@ -71,11 +73,9 @@ def base():
 def qr():
     return render_template("QRscan.html")
 
-
 @app.route('/meeting')
 def meeting():
     return render_template('meeting_list.html')
-
 
 @app.route('/api/meeting')
 def api_meeting():
@@ -85,7 +85,6 @@ def api_meeting():
     return json.jsonify({
         'meetings': meeting_list
     })
-
 
 @app.route('/meeting/new')
 def creat_meeting():
@@ -122,7 +121,6 @@ def meeting_post():
     flash("Meeting toegevoegd!", "info")
     return redirect(url_for('meeting'))
 
-
 @app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH", "DELETE"])
 def meetingid(meetingId):
     match request.method:
@@ -140,7 +138,6 @@ def meetingid(meetingId):
             json_data = request.get_json()
             presencedb.update_presence(json_data)
             return json.jsonify()
-
 
 @app.route('/api/<meetingId>')
 def api_get_meeting(meetingId):
@@ -161,11 +158,9 @@ def api_get_docentmeeting():
         'meeting_info' : docent_meeting, 
     })
 
-
 @app.route('/checkin')
 def checkin():
     return render_template('checkin.html')
-
 
 @app.route('/checkin/<meetingId>', methods=["GET", "POST"])
 def checkin_id(meetingId):
@@ -176,7 +171,6 @@ def checkin_id(meetingId):
         case 'POST':
          # placeholder #
          return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
-
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
@@ -221,7 +215,6 @@ def studentid():
         case 'DELETE':
             print("DELETE")
 
-
 @app.route('/api/teacher')
 def api_get_teachers():
     t_list = teacherdb.get_teacher_json()
@@ -239,7 +232,6 @@ def teacher():
 @app.post('/teacher') # shortcut voor methods = ["POST"]
 def teacher_post():
     return render_template('teacher.html')
-
 
 @app.route('/teacher/<teacherId>', methods=["GET", "PUT", "DELETE"])
 def teacherid():
@@ -283,7 +275,7 @@ def studentclassid():
 def screen():
     return render_template('screen.html', title=screen)
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login')
 def show_login():
     session["username"] = request.form.get("username")
     if session.get('logged_in'):
@@ -291,13 +283,19 @@ def show_login():
     else:
         return render_template('login.html')
       
-@app.route("/handle_login", methods=["GET", "POST"])
+@app.post("/handle_login")
 def handle_login():
     if request.form["password"] == "password" and request.form["username"] == "admin":
         session["logged_in"] = True
     else:
-        return render_template("login.html", message="Invalid Password or Username.")
+        flash("Invalid Password or Username.", "warning")
+        return render_template("login.html")
     return redirect(url_for('link'))
+
+@app.route("/logout")
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for("index"))
 
 @app.route("/register")
 def register():
@@ -313,11 +311,6 @@ def qrgen(meetingId):
 @app.route("/teapot")
 def teapot():
     return render_template("teapot.html"), 418
-
-@app.route("/logout")
-def logout():
-    session.pop('logged_in', None)
-    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')
