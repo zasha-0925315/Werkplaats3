@@ -187,8 +187,9 @@ def meetingforteacher():
 @app.route('/api/student/<studentId>')
 def api_get_student_presence(studentId):
     p_s_list = presencedb.get_presence_student(studentId)
+
     return jsonify({
-        'studenten' : p_s_list
+        'presence' : p_s_list
     })
 
 @app.route('/student')
@@ -211,14 +212,6 @@ def api_get_students():
     #return json.dumps(s_list)
     return jsonify({ # oke, mooi. wat doe ik nu hier mee?
         'studenten' : s_list
-    })
-
-@app.route('/api/student/<studentId>')
-def api_get_student_presence(studentId):
-    p_s_list = presencedb.get_presence_student(studentId)
-
-    return jsonify({
-        'presence' : p_s_list
     })
 
 def studentid():
