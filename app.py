@@ -5,8 +5,6 @@ from os import environ, path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 
-
-from lib.forms import LoginForm
 from lib.login import Login
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
