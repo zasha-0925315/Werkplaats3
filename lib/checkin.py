@@ -20,7 +20,8 @@ class CheckinManagement:
             cursor.execute(f"INSERT INTO Vragen (vraag1, vraag2, vraag3)"
                            f"VALUES(?, ?, ?)", params_checkin)
             conn.commit()
-
+            cursor.execute(f"SELECT last_insert_rowid()")
+            
             conn.close()
 
         except OperationalError as e:
