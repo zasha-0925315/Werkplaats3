@@ -1,28 +1,21 @@
-import sqlite3
-from sqlite3 import OperationalError
+#import sqlite3
+#from sqlite3 import OperationalError
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import SQLAlchemyUserDatastore
+from flask_security.models import fsqla_v2 as fsqla
 
-from lib.db import Database
+#from lib.db import Database
 
-class Login(Database):
-    """regelt login enzo"""
+DB = SQLAlchemy()
+fsqla.FsModels.set_db_info(DB, user_table_name="gebruikers")
 
-    def __init__(self, db_file):
-        super().__init__(db_file)
+class User(DB.Model, fsqla.FsUserMixin):
+     __tablename__ = "gebruikers"
 
-    def login_user(self, usn, pwd):
-        try:
-            conn = sqlite3.connect(self.db_file)
-            cursor = conn.cursor()
+class Role(DB.Model, fsqla.FsRoleMixin):
+     pass
 
-            cursor.execute("SELECT * FROM login WHERE gebruikersnaam = ? AND wachtwoord = ?", usn, pwd)
-            user = cursor.fetchone()
-            conn.commit() 
+#class WebAuth(DB.Model, fsqla.FsWebAuthnMixin):
+#     pass
 
-            conn.close()
-
-        except OperationalError as e:
-            print("yeet")
-            raise e
-        return user
+datastore = SQLAlchemyUserDatastore(DB, User, Role)

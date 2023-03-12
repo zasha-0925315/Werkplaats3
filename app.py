@@ -4,8 +4,9 @@ import os
 from os import environ, path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
+from flask_security import Security, auth_required, login_user, logout_user, login_required, roles_required, roles_accepted
 
-from lib.login import Login
+from lib.login import DB, datastore
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
@@ -27,11 +28,17 @@ FLASK_DEBUG = True
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['JSON_SORT_KEYS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/demo_data.db'
+app.config['SECURITY_LOGIN_USER_TEMPLATE'] = 'login.html'
 
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
-login = Login(DB_FILE)
+# flask_security
+DB.init_app(app)
+Security(app, datastore)
+
+# Database cnx
+#login = Login(DB_FILE)
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
