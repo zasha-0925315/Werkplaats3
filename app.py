@@ -3,8 +3,34 @@ import os
 
 from os import environ, path
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
-from flask_security import Security, auth_required, login_user, logout_user, login_required, roles_required, roles_accepted
+
+from flask import (Flask, 
+                  render_template, 
+                  request, 
+                  session, 
+                  redirect, 
+                  url_for, 
+                  json, 
+                  jsonify, 
+                  flash
+                  ) 
+
+# from flask_login import (login_manager, 
+#                         login_url, 
+#                         login_user, 
+#                         login_required, 
+#                         set_login_view
+#                         ) 
+
+from flask_security import (Security, 
+                           auth_required, 
+                           login_user, 
+                           logout_user, 
+                           login_required, 
+                           roles_required, 
+                           roles_accepted
+                           )
+
 
 from lib.login import DB, datastore
 from lib.student import StudentManagement
@@ -24,21 +50,21 @@ FLASK_PORT = 81
 FLASK_DEBUG = True
 #FLASK_RUN_CERT = "adhoc"
 
-# other important stuffs
+# Flask config
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['JSON_SORT_KEYS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/demo_data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
 app.config['SECURITY_LOGIN_USER_TEMPLATE'] = 'login.html'
+app.config["SECURITY_PASSWORD_SALT"] = environ.get('PW_SALT')
 
-DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
-
-# flask_security
+# Flask_security
 DB.init_app(app)
 Security(app, datastore)
 
 # Database cnx
-#login = Login(DB_FILE)
+DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
+
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
@@ -46,18 +72,19 @@ meetingdb = MeetingManagement(DB_FILE)
 presencedb = PresenceManagement(DB_FILE)
 
 # routes
-@app.before_request
-def check_login():
-    if request.endpoint not in ["index","show_login", "handle_login"]:
-        if not session.get("logged_in"):
-            return redirect(url_for('show_login'))
+# @app.before_request
+# def check_login():
+#     if request.endpoint not in ["index","show_login", "handle_login"]:
+#         if not session.get("logged_in"):
+#             return redirect(url_for('show_login'))
 
- # Main route
+# Main route
 @app.route("/index")
 def index():
      return render_template("index.html", title=index)
 
 @app.route("/", methods=["GET","POST"])
+@auth_required()
 def link():
     match request.method:
         case 'GET':
@@ -69,6 +96,7 @@ def testajax():
     return render_template("test-ajax.html")
 
 @app.route("/base")
+
 def base():
     return render_template("base.html")
 
@@ -78,6 +106,7 @@ def qr():
     return render_template("QRscan.html")
 
 @app.route('/meeting')
+@auth_required()
 def meeting():
     return render_template('meeting_list.html')
 
@@ -91,6 +120,7 @@ def api_meeting():
     })
 
 @app.route('/meeting/new')
+@auth_required()
 def creat_meeting():
     teacher_list = teacherdb.get_teacher()
     class_list = classdb.get_class()
@@ -98,6 +128,7 @@ def creat_meeting():
     return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
 
 @app.post('/meeting/new') # shortcut voor methods = ["POST"]
+@auth_required()
 def meeting_post():
     meeting_name = str(request.form.get('meeting_name'))
     meeting_date = request.form.get('meeting_date')
@@ -126,6 +157,7 @@ def meeting_post():
     return redirect(url_for('meeting'))
 
 @app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH", "DELETE"])
+@auth_required()
 def meetingid(meetingId):
     match request.method:
         case 'GET':
@@ -177,6 +209,8 @@ def checkin_id(meetingId):
          return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
+@auth_required()
+
 def meetingforteacher():
     match request.method:
         case 'GET':
@@ -191,6 +225,7 @@ def api_get_student_presence(studentId):
     })
 
 @app.route('/student')
+@auth_required()
 def student():
     return render_template('student.html')
 
@@ -229,6 +264,7 @@ def api_get_teachers():
     })
 
 @app.route('/teacher')
+@auth_required()
 def teacher():
     t_list = teacherdb.get_teacher()
     return render_template('teacher.html', teachers=t_list)
@@ -280,6 +316,7 @@ def screen():
     return render_template('screen.html', title=screen)
 
 @app.route('/admin')
+@auth_required()
 def admin():
     return render_template('admin.html')
 
@@ -310,6 +347,7 @@ def register():
     return render_template('register.html', title=register)    
 
 @app.route("/QRgen/<meetingId>", methods = ["GET"])
+@auth_required()
 def qrgen(meetingId):
     match request.method:
       case 'GET':
