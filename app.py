@@ -186,7 +186,17 @@ def checkin_id(meetingId):
              vraag3)
          
          return redirect (url_for('meeting'))
+        
+@app.route('/overzicht', methods =["GET"])
+def overzicht():
+ return render_template('overzicht.html')
 
+@app.route('/overzicht/<meetingId>', methods =["GET"])
+def get_overzicht(meetingId):
+  match request.method:
+      case 'GET':
+          meeting_list = meetingdb.get_meeting(meetingId)
+          return render_template('overzicht.html', meetings=meeting_list, meetingId=meetingId)
 
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
@@ -289,9 +299,6 @@ def studentclassid():
         case 'DELETE':
             print("DELETE")
 
-@app.route("/screen")
-def screen():
-    return render_template('screen.html', title=screen)
 
 @app.route('/login', methods=["GET", "POST"])
 def show_login():
