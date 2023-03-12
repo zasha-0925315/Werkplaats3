@@ -48,3 +48,12 @@ class TeacherManagement(Database):
             raise e
 
         return t_list
+    
+    def add_teacher(self):
+            pass
+
+    def edit_teacher(self):
+            pass
+    
+    def delete_teacher(self):
+        pass

@@ -93,3 +93,9 @@ class MeetingManagement:
             print("yeet")
             raise e
         return meeting_info
+    
+    def edit_meeting(self):
+        pass
+
+    def delete_meeting(self):
+        pass

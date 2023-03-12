@@ -15,16 +15,10 @@ from flask import (Flask,
                   flash
                   ) 
 
-# from flask_login import (login_manager, 
-#                         login_url, 
-#                         login_user, 
-#                         login_required, 
-#                         set_login_view
-#                         ) 
+from flask_login import login_user  
 
 from flask_security import (Security, 
-                           auth_required, 
-                           login_user, 
+                           auth_required,  
                            logout_user, 
                            login_required, 
                            roles_required, 
