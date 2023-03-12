@@ -53,8 +53,6 @@ def index():
 
 @app.route("/", methods=["GET","POST"])
 def link():
-    flash("a", 'info')
-    flash("b", 'warning')
     match request.method:
         case 'GET':
             teacher_list = teacherdb.get_teacher()
