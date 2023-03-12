@@ -189,7 +189,8 @@ def checkin_id(meetingId):
         
 @app.route('/overzicht', methods =["GET"])
 def overzicht():
- return render_template('overzicht.html')
+   results = checkindb.get_results()
+   return render_template('overzicht.html', results=results)
 
 @app.route('/overzicht/<meetingId>', methods =["GET"])
 def get_overzicht(meetingId):

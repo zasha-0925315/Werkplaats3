@@ -20,10 +20,26 @@ class CheckinManagement:
             cursor.execute(f"INSERT INTO Vragen (vraag1, vraag2, vraag3)"
                            f"VALUES(?, ?, ?)", params_checkin)
             conn.commit()
-            cursor.execute(f"SELECT last_insert_rowid()")
-            
+
             conn.close()
 
         except OperationalError as e:
             print("yeet")
             raise e
+        
+    def get_results(self):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute("SELECT * FROM vragen")
+            results = cursor.fetchall()
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+
+        return results
