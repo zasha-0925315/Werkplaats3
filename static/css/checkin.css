@@ -27,9 +27,14 @@
     margin-top: 5px;
 }
 
-#Overzicht-text {
+#overzicht-text {
     display: flex;
     text-align: center;
     margin-top: 20px;
-    font-size: 30px;
+    justify-content: space-around;
+}
+
+#th-spacing {
+    border-collapse: separate;
+    border-spacing: 10px;
 }
