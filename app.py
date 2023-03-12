@@ -5,8 +5,6 @@ from os import environ, path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 
-
-from lib.forms import LoginForm
 from lib.login import Login
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
@@ -29,7 +27,7 @@ FLASK_DEBUG = True
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['JSON_SORT_KEYS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
@@ -273,10 +271,6 @@ def studentclassid():
 @app.route("/screen")
 def screen():
     return render_template('screen.html', title=screen)
-
-@app.route('/admin')
-def admin():
-    return render_template('admin.html')
 
 @app.route('/login')
 def show_login():
