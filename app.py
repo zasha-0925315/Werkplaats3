@@ -279,6 +279,10 @@ def studentclassid():
 def screen():
     return render_template('screen.html', title=screen)
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
 @app.route('/login')
 def show_login():
     session["username"] = request.form.get("username")
