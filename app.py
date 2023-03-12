@@ -12,6 +12,7 @@ from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
 from lib.meeting import MeetingManagement
 from lib.presence import PresenceManagement
+from lib.checkin import CheckinManagement
 
 # no touchy
 projpath = path.join(path.dirname(__file__), '.env')
@@ -38,6 +39,7 @@ teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
 meetingdb = MeetingManagement(DB_FILE)
 presencedb = PresenceManagement(DB_FILE)
+checkindb = CheckinManagement(DB_FILE)
 
 # routes
 @app.before_request
@@ -177,7 +179,12 @@ def checkin_id(meetingId):
          vraag1 = str(request.form.get('vraag1'))
          vraag2 = str(request.form.get('vraag2'))
          vraag3 = str(request.form.get('vraag3'))
-         print(vraag1)
+
+         checkindb.add_checkin(
+             vraag1,
+             vraag2,
+             vraag3)
+         
          return redirect (url_for('meeting'))
 
 
