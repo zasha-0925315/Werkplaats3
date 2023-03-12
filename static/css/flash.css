@@ -1,0 +1,15 @@
+.flash {
+    font-size: medium;
+}
+
+.flash-info {
+    background-color: #0fd3a6;
+    color: #252525;
+    border-left: 6px solid #0db18b;
+}
+
+.flash-warning {
+    background-color: #a30c2e;
+    color: #ffffff;
+    border-left: 6px solid #7e0924;
+}
