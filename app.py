@@ -174,8 +174,12 @@ def checkin_id(meetingId):
          meeting_list = meetingdb.get_meeting(meetingId)
          return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
         case 'POST':
-         # placeholder #
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
+         vraag1 = str(request.form.get('vraag1'))
+         vraag2 = str(request.form.get('vraag2'))
+         vraag3 = str(request.form.get('vraag3'))
+         print(vraag1)
+         return redirect (url_for('meeting'))
+
 
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
