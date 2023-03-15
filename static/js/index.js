@@ -1,7 +1,7 @@
 const urlyx = window.location.pathname.split("/")
 urlId = urlyx[2]
 const url = '/api/checkin/' + urlId
-console.log(url)
+console.log(urlId)
 
 const get_meeting = async () => {
     try {
@@ -92,5 +92,14 @@ checkin.addEventListener("click", function () {
     timer.style.fontSize = "42px";
 });
 get_meeting()
+
+mid = document.querySelector('meetingid')
+
+function insertmid() {
+    document.querySelector('meetingid').innerHTML = urlId;
+    console.log(urlId)
+}
+
+mid.addEventListener('DOMContentLoaded', insertmid)
 
 let interval_id = setInterval(get_meeting, 5000)

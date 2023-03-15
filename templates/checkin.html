@@ -2,6 +2,7 @@
 {% block title %}Check In{% endblock %}
 {% block head %}
     {{ super() }}
+    <script src="../static/js/index.js"></script>
 {% endblock head %}
 {% block content %}
     <div id="checkin_content">
@@ -9,9 +10,13 @@
             <h3>Hoe zit het met jullie?<h3>
         <form method="post">
             {% if question is not none %}
-              </div>
+              </div> {{ meetingId[0] }}
                 <div id="answer_box">
                    <div id="questions_input">
+                    <label>Studenten id</br>
+                        <input name="studentenid"></label>
+                        <!-- <label>meetingid<br> 
+                        <input name="meetingid"></label> -->
                     <label>Vraag 1<br>
                         <input name="vraag1"></label>
                      <label>Vraag 2<br>
@@ -20,6 +25,7 @@
                          <input name="vraag3"></label>
                    </div>
                 </div>
+            
             {% endif %}
             <button class="button1">Ik ben aanwezig</button>
         </form>
