@@ -15,9 +15,17 @@ table {
 th {
     text-align: center;
     color: var(--white);
-    height: 50px;
+    height: fit-content;
     background-color: var(--hr-red);
-    border: 1px solid var(--hr-darker-red);
+    /*border: 1px solid var(--hr-darker-red);*/
+}
+
+tr th:first-child {
+    border-radius: 6px 0 0 0;
+}
+
+tr th:last-child {
+    border-radius: 0 6px 0 0;
 }
 
 td {
@@ -28,15 +36,17 @@ tr {
     background-color: var(--white);
 }
 
-tr td{
+tr td th{
     background-color: transparent;
     padding: 5px;
 }
 
-tbody tr :hover {
-    background-color: var(--gray);
-    color: var(--white);
-}
+/*geef de tabellen waar je dit voor wil gebruiken een class en koppel deze code vast daaraan, zodat het geen effect heeft op de meeting tabel*/
+/*CLASS_NAME_HERE tbody tr :hover {*/
+/*    background-color: var(--gray);*/
+/*    color: var(--white);*/
+/*}*/
+
 tr td:first-child {
     border-radius: 6px 0 0 0;
 }

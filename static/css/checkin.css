@@ -1,0 +1,28 @@
+#checkin-text {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+#answer_box {
+    margin-top: 20px;
+}
+
+#answer_box #questions_input {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#checkin_content {
+    height: 1000px;
+}
+
+#checkin_content .button1 {
+    margin-top: 10px;
+}
+
+#checkin_content input {
+    margin-top: 5px;
+}
