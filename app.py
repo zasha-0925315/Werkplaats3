@@ -164,6 +164,21 @@ def checkin_id(meetingId):
          return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
 
 
+@app.route('/sign_out/<meetingId>')
+def sign_out(meetingId):
+
+    return render_template('sign_out.html')
+
+@app.patch('/sign_out/<meetingId>')
+def sign_out_post(meetingId):
+    json_data = request.get_json()
+    presencedb.update_presence(json_data)
+    print(json_data)
+    return json.jsonify()
+
+
+
+
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
     match request.method:
