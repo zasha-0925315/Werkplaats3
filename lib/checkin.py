@@ -18,7 +18,7 @@ class CheckinManagement:
             cursor = conn.cursor()
 
             cursor.execute(f"INSERT INTO Vragen (vraag1, vraag2, vraag3)"
-                           f"VALUES(?, ?, ?)", params_checkin)
+                           f'VALUES(?, ?, ?)', params_checkin)
             conn.commit()
 
             conn.close()

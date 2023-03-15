@@ -305,7 +305,7 @@ def studentclassid():
 def show_login():
     session["username"] = request.form.get("username")
     if session.get('logged_in'):
-        return redirect(url_for("link"))
+        return redirect(url_for("login"))
     else:
         return render_template('login.html')
       
