@@ -63,7 +63,7 @@ const get_meeting = async () => {
                     student_count++
                 }
                 meetingFooter.replaceChildren()
-                meetingFooter.innerHTML = "<td>" + "</td>" + "<td>" + student_presence + "/" + student_count + " " + "aanwezig" + "</td>" + "<td>" + "</td>"
+                meetingFooter.innerHTML = "<td></td><td></td><td>" + student_presence + "/" + student_count + " " + "aanwezig" + "</td><td></td>"
             } else {
                 console.log(data.length)
                 const meetingInfo = document.querySelector("#presence_table")
@@ -74,9 +74,7 @@ const get_meeting = async () => {
 
 
         document.querySelectorAll(".button_presence").forEach(presence_option => {
-            presence_option.addEventListener(
-                "click",
-                function (){
+            presence_option.addEventListener("click", function (){
                     let student = this.dataset.count
                     let presence = parseInt(this.dataset.value)
                     if (data["presence_list"][student]["presence"] !== presence) {

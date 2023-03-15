@@ -11,13 +11,12 @@ class MeetingManagement:
         if not os.path.exists(self.db_file):
             raise FileNotFoundError(f"F in the chat for {db_file}")
 
-    def add_meeting(self, meeting_name, meeting_date, meeting_start_time, meeting_end_time, meeting_location,
-                    meeting_teacher, meeting_students, meeting_students2):
+    def add_meeting(self, json_meeting, meeting_students, meeting_students2):
         try:
 
             params_meeting = (
-            meeting_name, meeting_date, meeting_start_time, meeting_end_time, meeting_location, meeting_teacher,
-            meeting_students)
+                json_meeting["name"], json_meeting["date"], json_meeting["start time"], json_meeting["end time"],
+                json_meeting["location"], str(json_meeting["teacher"]), meeting_students)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 

@@ -1,90 +1,87 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
-<body>
     <!-- <div id="meeting-div">Meetings
     </div> -->
-  <div id="maih">
-    <div id="meeting-border">
-      <div id="meeting-header">
-        Meetings
-        <div class="meeting-link">
-        <button onclick ="dropMenu()" id="Select-Planning-button" type="button">
-          <svg  class="plus-knop" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFE" viewBox="0 0 18 18"><path d="M18 10h-8v8H8v-8H0V8h8V0h2v8h8v2z"></path></svg>
-        
-        <div id="menu" class="menu-content">
-          <a href="/meeting">Meeting maken</a>
-        </div>
-      </button>
-      </div>
+    <div id="maih">
+        <div id="meeting-border">
+            <div id="meeting-header">Meetings
+                <div class="meeting-link">
+                    <button  id="Select-Planning-button" type="button">
+                        <a href="/meeting/new">
+                            <svg  class="plus-knop" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFE" viewBox="0 0 18 18"><path d="M18 10h-8v8H8v-8H0V8h8V0h2v8h8v2z"></path></svg>
+                        </a>
+                    </button>
+                </div>
+            </div>
 
-      </div>
-      <!-- De dropdown lijst voor andere docenten -->
-      <select name="Select-Teacher" id="Select-Teacher">
-        {% for teacher in teachers %}
-       <option value="{{ teacher[0] }}">{{ teacher[0] }}</option>
-       {% endfor %}
-      </select>
+            <div id= "meeting-and-plan">
+                <div id="meeting-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> Eigen Agenda </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>hond</td>
+                            </tr>
+                            <tr>
+                                <td>kat</td>
+                            </tr>
+                            <tr>
+                                <td>doggo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-        <div id= "meeting-and-plan">
-          <div id="meeting-table">
-            <table width ="400px">
-              <thead> 
-              <th> Eigen Agenda </th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>hond</td>
-                </tr>
-                <tr>
-                  <td>kat</td>
-                </tr>
-                <tr>
-                  <td>doggo</td>
-                </tr>
-              </tbody>
-            </table>
-            
-         </div>
-          <div id="Docent-Planning">
-            <table width ="400px" id="Docent-Table">
-              <thead>
-               <th>Docent</th>
-              </thead>
-              <tbody id="docent-body">
-                <tr>
-                  <td>Mark</td>
-                </tr>
-                <tr>
-                  <td>Veysel</td>
-                </tr>
-                <tr>
-                  <td>Diederik</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-         <!-- <div id="check-meeting-button">
-          <a href="{{ url_for('show_login')}}"class="Planning-text">Check Planning</a>
-        </div> -->
+                <div id="Docent-Planning">
+                <!-- De dropdown lijst voor andere docenten -->
+                    <label>Selecteer leraar:
+                        <select name="Select-Teacher" id="Select-Teacher">
+                            {% for teacher in teachers %}
+                                <option value="{{ teacher[0] }}">{{ teacher[0] }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <table id="Docent-Table">
+                        <thead>
+                            <tr>
+                                <th>Docent</th>
+                            </tr>
+                        </thead>
+                        <tbody id="docent-body">
+                            <tr>
+                                <td>Mark</td>
+                            </tr>
+                            <tr>
+                                <td>Veysel</td>
+                            </tr>
+                            <tr>
+                                <td>Diederik</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+{#          <div id="check-meeting-button">#}
+{#              <a href="{{ url_for('show_login')}}"class="Planning-text">Check Planning</a>#}
+{#          </div>#}
+            </div>
         </div>
-      </div>  
-      <div>
+        <div class= "Greet-Balk" id="Greet-Balk"> <br>
+            {% if session.logged_in %}
+                <p class="Greet-Text">
+                    Hoi, {{ session.username }}
+                </p>
+            {% endif %}
+        </div>
     </div>
-    <div class= "Greet-Balk" id="Greet-Balk"> <br>
-        {% if session.logged_in %}
-        <p class="Greet-Text">
-          Hoi, {{ session.username }}
-        </p>
-        {% endif %}
-    </div>
-  </div>
-  <button onclick="">clickkk</button>
-</body>
 {% endblock content %}
 
 {% block script %}
 {{ super() }}
-<script src="static/js/link.js">
+<script src="../static/js/link.js">
 </script>
 {% endblock script %}
