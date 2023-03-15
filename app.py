@@ -326,7 +326,17 @@ def qrgen(meetingId):
     match request.method:
       case 'GET':
        meeting_info = meetingdb.get_meeting(meetingId)
-    return render_template("qrgen.html", meetings=meeting_info, meetingId=meetingId, message='dog')
+       return render_template("qrgen.html", meetings=meeting_info, meetingId=meetingId, message='dog')
+
+
+@app.route("/api/checkin/<meetingId>")
+def QR_checkin(meetingId):
+    meeting_info = meetingdb.get_meeting(meetingId)
+    
+    return jsonify({
+        'meeting_info' : meeting_info
+    })
+
 
 @app.route("/teapot")
 def teapot():
