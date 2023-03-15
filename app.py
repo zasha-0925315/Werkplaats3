@@ -325,8 +325,8 @@ def register():
 def qrgen(meetingId):
     match request.method:
       case 'GET':
-       meeting_list = meetingdb.get_meeting(meetingId)
-    return render_template("qrgen.html", meetings=meeting_list, meetingId=meetingId, message='dog')
+       meeting_info = meetingdb.get_meeting(meetingId)
+    return render_template("qrgen.html", meetings=meeting_info, meetingId=meetingId, message='dog')
 
 @app.route("/teapot")
 def teapot():

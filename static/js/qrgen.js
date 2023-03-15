@@ -1,7 +1,10 @@
 const btn = document.querySelector("#qr-gen");
 
+const urly = window.location.pathname.split('/')
+
+
 function generateCode() {
-    let getText = document.getElementById("text1").value;
+    let getText = document.getElementById("")
     let getValue = document.querySelector("valuecheck")
 
     if (getText) { //laat pas de QR code zien als er daadwerkelijk text is ingevoerd

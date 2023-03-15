@@ -13,7 +13,7 @@ class CheckinManagement:
     def add_checkin(self, vraag1,vraag2,vraag3):
         try:
 
-            params_checkin = (vraag1, vraag2, vraag3 )
+            params_checkin = (vraag1, vraag2, vraag3)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
@@ -27,6 +27,25 @@ class CheckinManagement:
             print("yeet")
             raise e
         
+    # def get_checkins(self, vraag1,vraag2,vraag3):
+    #     try:
+
+    #         params_checkin = (vraag1, vraag2, vraag3 )
+    #         conn = sqlite3.connect(self.db_file)
+    #         cursor = conn.cursor()
+
+    #         cursor.execute(f"meeting.student "
+    #                        f"from aanwezigheid"
+    #                        f""
+    #         conn.commit()
+
+    #         conn.close()
+
+    #     except OperationalError as e:
+    #         print("yeet")
+    #         raise e
+        
+
     def get_results(self):
         try:
             conn = sqlite3.connect(self.db_file)
