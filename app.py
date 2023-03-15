@@ -44,7 +44,7 @@ checkindb = CheckinManagement(DB_FILE)
 # routes
 @app.before_request
 def check_login():
-    if request.endpoint not in ["index","show_login", "handle_login"]:
+    if request.endpoint not in ["base","show_login", "handle_login"]:
         if not session.get("logged_in"):
             return redirect(url_for('show_login'))
 
@@ -335,7 +335,7 @@ def teapot():
 @app.route("/logout")
 def logout():
     session.pop('logged_in', None)
-    return redirect(url_for("index"))
+    return redirect(url_for("base"))
 
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')
