@@ -125,7 +125,7 @@ def meeting_post():
     return redirect(url_for('meeting'))
 
 
-@app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH", "DELETE"])
+@app.route('/meeting/<meetingId>', methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
 def meetingid(meetingId):
     match request.method:
         case 'GET':
@@ -135,8 +135,10 @@ def meetingid(meetingId):
             return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
         case 'POST':
              meeting_info = meetingdb.get_meeting(meetingId)
-             question = request.form['question']
-             return redirect('checkin', meetingId=meetingId, question=question)
+             question = str(request.form.get('question'))
+             checkindb.add_question(question)
+
+             return redirect('meeting.html', meetingId=meetingId, question=question)
         case 'PUT':
             print("PUT")
         case 'PATCH':
@@ -175,8 +177,7 @@ def checkin_id(meetingId):
     match request.method:
         case 'GET':
          meeting_list = meetingdb.get_meeting(meetingId)
-         question = request.args.get('question')
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list, question=question)
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
         case 'POST':
          studentenid = request.form.get('studentenid')
          classid = request.form.get('meetingid')

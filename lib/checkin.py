@@ -62,3 +62,20 @@ class CheckinManagement:
             raise e
 
         return results
+    
+    def add_question(self, question):
+        try:
+
+            params_checkin = (question)
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"INSERT INTO Vragen (vraag1)"
+                           f'VALUES(?)', params_checkin)
+            conn.commit()
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
