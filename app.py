@@ -175,7 +175,8 @@ def checkin_id(meetingId):
     match request.method:
         case 'GET':
          meeting_list = meetingdb.get_meeting(meetingId)
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
+         question = request.args.get('question')
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list, question=question)
         case 'POST':
          studentenid = request.form.get('studentenid')
          classid = request.form.get('meetingid')
@@ -190,8 +191,8 @@ def checkin_id(meetingId):
              vraag2,
              vraag3,
              )
-         question = request.args.get('question')
-         return redirect (url_for('meeting'), question=question)
+   
+         return redirect (url_for('meeting'))
         
 @app.route('/overzicht', methods =["GET"])
 def overzicht():

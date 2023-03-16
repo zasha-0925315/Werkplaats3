@@ -9,20 +9,21 @@
         <div id="checkin-text">
             <h3>Hoe zit het met jullie?<h3>
         <form method="post">
-            {% if question is not none %}
               </div>
                 <div id="answer_box">
                    <div id="questions_input">
                     <label>Studenten id</br>
                         <input name="studentenid"></label>
+                        {% if question is not none %}
                         <!-- <label>meetingid<br> 
                         <input name="meetingid"></label> -->
                     <label>{{ question }}<br>
-                        <input name="vraag1"></label>
-                     <label>Vraag 2<br>
+                        <input name="vraag1">
+                    </label>
+                     <!-- <label>Vraag 2<br>
                          <input name="vraag2"></label>
                      <label>Vraag 3<br>
-                         <input name="vraag3"></label>
+                         <input name="vraag3"></label> -->
                    </div>
                 </div>
             
