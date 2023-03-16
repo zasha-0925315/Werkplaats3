@@ -32,7 +32,15 @@
                 <tfoot id="presence_table_footer"></tfoot>
             </table>
         </div>
+    <form action="/checkin/{{ meetingId[0] }}">
     </div>
+    <div id="question-box">
+        <label>
+            <input name="question">
+        </label>
+        <button></button>
+    </div>
+</form>
 {% endblock %}
 {% block script %}
     {{ super() }}

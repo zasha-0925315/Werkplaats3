@@ -135,7 +135,8 @@ def meetingid(meetingId):
             return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
         case 'POST':
              meeting_info = meetingdb.get_meeting(meetingId)
-             return redirect('QRgen', meetingId=meetingId)
+             question = request.form['question']
+             return redirect('checkin', meetingId=meetingId, question=question)
         case 'PUT':
             print("PUT")
         case 'PATCH':
@@ -189,8 +190,8 @@ def checkin_id(meetingId):
              vraag2,
              vraag3,
              )
-         
-         return redirect (url_for('meeting'))
+         question = request.args.get('question')
+         return redirect (url_for('meeting'), question=question)
         
 @app.route('/overzicht', methods =["GET"])
 def overzicht():
@@ -346,6 +347,8 @@ def QR_checkin(meetingId):
 @app.route("/teapot")
 def teapot():
     return render_template("teapot.html"), 418
+
+
 
 @app.route("/logout")
 def logout():
