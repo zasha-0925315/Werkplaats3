@@ -137,8 +137,7 @@ def meetingid(meetingId):
              meeting_info = meetingdb.get_meeting(meetingId)
              question = str(request.form.get('question'))
              checkindb.add_question(question)
-
-             return redirect('meeting.html', meetingId=meetingId, question=question)
+             return render_template('meetingid.html', meetingId=meetingId, question=question, meeting_info=meeting_info)
         case 'PUT':
             print("PUT")
         case 'PATCH':
@@ -146,6 +145,11 @@ def meetingid(meetingId):
             presencedb.update_presence(json_data)
             return json.jsonify()
 
+@app.route('/api/question')
+def question_api():
+    json_data = request.get_json()
+    checkindb.update_question(json_data)
+    return json.jsonify()
 
 @app.route('/api/<meetingId>')
 def api_get_meeting(meetingId):
@@ -174,23 +178,20 @@ def checkin():
 
 @app.route('/checkin/<meetingId>', methods=["GET", "POST"])
 def checkin_id(meetingId):
-    match request.method:
-        case 'GET':
          meeting_list = meetingdb.get_meeting(meetingId)
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
-        case 'POST':
+         question = request.args.get('q')
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list, question=question)
+
+@app.patch('/checkin/<meetingId>')
+def patch_checkin(meetingId):
          studentenid = request.form.get('studentenid')
          classid = request.form.get('meetingid')
          vraag1 = str(request.form.get('vraag1'))
-         vraag2 = str(request.form.get('vraag2'))
-         vraag3 = str(request.form.get('vraag3'))
-         
+           
          checkindb.add_checkin(
              studentenid,
              classid,
              vraag1,
-             vraag2,
-             vraag3,
              )
    
          return redirect (url_for('meeting'))
