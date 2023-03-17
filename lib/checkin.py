@@ -84,12 +84,12 @@ class CheckinManagement:
             try:
 
              json_question = json_data["question"]
-             json_meeting = json_data["meeting"]
+             json_meeting = int(json_data["meeting id"])
              conn = sqlite3.connect(self.db_file)
              cursor = conn.cursor()
 
              cursor.execute(f"UPDATE meeting SET vragen = ?"
-                            f"meeting = ?", (json_question, json_meeting))
+                            f"WHERE id = ?", (json_question, json_meeting))
              conn.commit()
              conn.close()
 

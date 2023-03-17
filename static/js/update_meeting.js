@@ -6,13 +6,16 @@ const urlId = url[2]
 console.log(urlId)
 
 async function get_question() {
-    fetch('../api/question'), {
+    fetch('../api/question', {
         method: 'PATCH',
         body: JSON.stringify({
             'meeting id': urlId,
-            'question': question
-        })
-    }
+            'question': question.value
+        }),
+        headers: {
+            'Content-type': 'application/JSON'
+        }
+    })
 }
 
 button.addEventListener('click', function () {

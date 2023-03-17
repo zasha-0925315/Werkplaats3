@@ -147,10 +147,10 @@ def meetingid(meetingId):
 
 @app.patch('/api/question')
 def question_api():
-    json_data = request.get_json()
-    checkindb.update_question(json_data)
-    print(json_data)
-    return json.jsonify()
+        json_data = request.get_json()
+        checkindb.update_question(json_data)
+        print (json_data)
+        return json.jsonify()
 
 @app.route('/api/<meetingId>')
 def api_get_meeting(meetingId):
@@ -179,9 +179,9 @@ def checkin():
 
 @app.route('/checkin/<meetingId>', methods=["GET", "POST"])
 def checkin_id(meetingId):
-         meeting_list = meetingdb.get_meeting(meetingId)
-         question = request.args.get('q')
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list, question=question)
+         meeting_info = meetingdb.get_meeting(meetingId)
+         question = meeting_info[0]["question"]
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_info, question=question)
 
 @app.patch('/checkin/<meetingId>')
 def patch_checkin(meetingId):

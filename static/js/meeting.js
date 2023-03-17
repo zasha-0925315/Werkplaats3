@@ -72,31 +72,26 @@ const get_meeting = async () => {
             }
         }
 
-        async function presence() {
-            let student = this.dataset.count
-            let presence = parseInt(this.dataset.value)
-            if (data["presence_list"][student]["presence"] !== presence) {
-                fetch('/meeting/' + urlId, {
-                    method: 'PATCH',
-                    body: JSON.stringify({
-                        'presence': presence,
-                        'meeting': data["presence_list"][student]["meeting"],
-                        'student': data["presence_list"][student]["student"],
-                        'reason': "Verandert door leraar"
-                    }),
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                })
-            }
-
-        }
-
         document.querySelectorAll(".button_presence").forEach(presence_option => {
             presence_option.addEventListener(
                 "click",
                 function () {
-                    presence()
+                    let student = this.dataset.count
+                    let presence = parseInt(this.dataset.value)
+                    if (data["presence_list"][student]["presence"] !== presence) {
+                        fetch('/meeting/' + urlId, {
+                            method: 'PATCH',
+                            body: JSON.stringify({
+                                'presence': presence,
+                                'meeting': data["presence_list"][student]["meeting"],
+                                'student': data["presence_list"][student]["student"],
+                                'reason': "Verandert door leraar"
+                            }),
+                            headers: {
+                                'Content-type': 'application/json'
+                            }
+                        })
+                    }
                 },
                 false)
         })
