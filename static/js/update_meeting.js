@@ -6,9 +6,10 @@ const tb = document.querySelector('#tbody_answers')
 const url = window.location.pathname.split('/')
 const urlId = url[2]
 
+
 table.style.display = 'None'
 tb.style.display = 'None'
-
+const messageQuestion = document.querySelector('#message_question')
 
 async function get_question() {
     fetch('../api/question', {
@@ -23,6 +24,12 @@ async function get_question() {
     })
 }
 
+function checkVraag() {
+    message = 'Vul een vraag in ..' + '<br>'
+    document.querySelector('#message_question').innerHTML = message;
+};
+
+
 function appearTable() {
     table.style.display = '';
     tb.style.display = '';
@@ -35,7 +42,13 @@ function disappearTable() {
 
 questionButton.addEventListener('click', function () {
     if (question.value !== '') {
-        get_question()
+        get_question();
+        if (messageQuestion) {
+            messageQuestion.remove();
+            console.log(message)
+        }
+    } else {
+        checkVraag();
     }
 });
 
@@ -76,6 +89,8 @@ function fillAnswers(answers) {
         tb.appendChild(tr);
     }
 };
+
+
 
 document.addEventListener('DOMContentLoaded', get_answers());
 
