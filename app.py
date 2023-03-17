@@ -145,10 +145,11 @@ def meetingid(meetingId):
             presencedb.update_presence(json_data)
             return json.jsonify()
 
-@app.route('/api/question')
+@app.patch('/api/question')
 def question_api():
     json_data = request.get_json()
     checkindb.update_question(json_data)
+    print(json_data)
     return json.jsonify()
 
 @app.route('/api/<meetingId>')

@@ -5,14 +5,18 @@ const urlId = url[2]
 
 console.log(urlId)
 
+async function get_question() {
+    fetch('../api/question'), {
+        method: 'PATCH',
+        body: JSON.stringify({
+            'meeting id': urlId,
+            'question': question
+        })
+    }
+}
+
 button.addEventListener('click', function () {
     if (question.value !== '') {
-        fetch('api/question'), {
-            method: 'PATCH',
-            body: JSON.stringify({
-                'meeting id': urlId,
-                'question': question
-            })
-        }
+        get_question()
     }
 });
