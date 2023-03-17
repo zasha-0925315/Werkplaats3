@@ -95,7 +95,7 @@ class CheckinManagement:
 
             except OperationalError as e:
                 print("yeet")
-            raise e
+                raise e
     
     def post_answers(self, json_data):
             try:
@@ -112,7 +112,7 @@ class CheckinManagement:
 
             except OperationalError as e:
                 print("yeet")
-            raise e
+                raise e
     
     def patch_checkin(self, json_data):
             try:
@@ -130,4 +130,4 @@ class CheckinManagement:
 
             except OperationalError as e:
                 print("yeet")
-            raise e
+                raise e
