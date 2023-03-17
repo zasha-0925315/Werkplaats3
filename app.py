@@ -61,13 +61,7 @@ def link():
             teacher_list = teacherdb.get_teacher()
     return render_template('link.html', teachers=teacher_list)
 
-@app.route("/test-ajax.html", methods = ['GET'])
-def testajax():
-    return render_template("test-ajax.html")
 
-@app.route("/base")
-def base():
-    return render_template("base.html")
 
 # Url for QR Code scanning
 @app.route('/QR')
@@ -290,7 +284,7 @@ def teacherid():
         case 'PUT':
             print("PUT")
         case 'DELETE':
-            print("DELTE")
+            print("DELETE")
 
 @app.route('/api/klas')
 def api_get_class():
