@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
-    <!-- <div id="meeting-div">Meetings
-    </div> -->
     <div id="maih">
         <div id="meeting-border">
             <div id="meeting-header">Meetings
@@ -25,13 +23,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>hond</td>
+                                <td>SLC</td>
                             </tr>
                             <tr>
-                                <td>kat</td>
+                                <td>Wiskunde</td>
                             </tr>
                             <tr>
-                                <td>doggo</td>
+                                <td>UX</td>
                             </tr>
                         </tbody>
                     </table>
@@ -39,8 +37,9 @@
 
                 <div id="Docent-Planning">
                 <!-- De dropdown lijst voor andere docenten -->
-                    <label>Selecteer leraar:
+                    <label>Selecteer docent:
                         <select name="Select-Teacher" id="Select-Teacher">
+                        <option disabled selected>Selecteer docent</option>
                             {% for teacher in teachers %}
                                 <option value="{{ teacher[0] }}">{{ teacher[0] }}</option>
                             {% endfor %}
@@ -58,9 +57,6 @@
                         </tbody>
                     </table>
                 </div>
-{#          <div id="check-meeting-button">#}
-{#              <a href="{{ url_for('show_login')}}"class="Planning-text">Check Planning</a>#}
-{#          </div>#}
             </div>
         </div>
         <div class= "Greet-Balk" id="Greet-Balk"> <br>
