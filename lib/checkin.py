@@ -10,14 +10,14 @@ class CheckinManagement:
         if not os.path.exists(self.db_file):
             raise FileNotFoundError(f"F in the chat for {db_file}")
 
-    def add_checkin(self, studentenid, classid, result):
+    def add_checkin(self, studentenid,result):
         try:
 
-            params_checkin = (studentenid, classid, result)
+            params_checkin = (studentenid, result)
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"INSERT INTO Vragen (studentenid, meeting, resultaat)"
+            cursor.execute(f"INSERT INTO Vraagresultaten (studentenid, resultaat)"
                            f'VALUES(?, ?, ?)', params_checkin)
             conn.commit()
 
