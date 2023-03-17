@@ -106,7 +106,7 @@ class CheckinManagement:
              cursor = conn.cursor()
 
              cursor.execute(f"INSERT INTO vraagresultaten(studentid, resultaat, meeting)"
-                            f"VALUES(?, ?, ?)", (json_result,json_student, json_meeting))
+                            f"VALUES(?, ?, ?)", (json_student, json_result, json_meeting))
              conn.commit()
              conn.close()
 

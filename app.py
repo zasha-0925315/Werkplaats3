@@ -185,7 +185,7 @@ def checkin_id(meetingId):
          return render_template('checkin.html', meetingId=meetingId, meetings=meeting_info, question=question)
 
 @app.post('/checkin/<meetingId>')
-def post_checkin():
+def post_checkin(meetingId):
     json_data = request.get_json()
     checkindb.post_answers(json_data)
     return json.jsonify()
