@@ -1,9 +1,13 @@
 const question = document.querySelector('#question')
 const button = document.querySelector('#button10')
+const table = document.querySelector('#question_header')
+const tb = document.querySelector('#tbody_answers')
 const url = window.location.pathname.split('/')
 const urlId = url[2]
 
-console.log(urlId)
+table.style.display = 'None'
+tb.style.display = 'None'
+
 
 async function get_question() {
     fetch('../api/question', {
@@ -18,18 +22,48 @@ async function get_question() {
     })
 }
 
-button.addEventListener('click', function () {
-    if (question.value !== '') {
-        get_question()
-    }
-});
-
-function fillquestions() {
-    const table = document.querySelector('#question_table');
-    const questions = questions;
-    const tb = document.createElement('tbody');
+function appearTable() {
+    table.style.display = '';
+    tb.style.display = '';
 }
 
-table.appendChild(tb);
+button.addEventListener('click', function () {
+    if (question.value !== '') {
+        get_question(),
+            appearTable()
+    }
 
-for (const )
+});
+
+async function get_answers() {
+    try {
+        const response = await fetch('../api/answers/' + urlId,);
+        const answers = await response.json();
+        console.log(answers)
+        fillAnswers(answers['answer_info'])
+
+    } catch (error) {
+        console.log(error)
+
+    } finally {
+        setTimeout(get_answers, 5000)
+    }
+}
+
+function fillAnswers(answers) {
+    const table = document.querySelector('#question_table');
+    const tb = document.querySelector('#tbody_answers');
+
+    tb.replaceChildren()
+    table.appendChild(tb);
+
+    for (const answer of answers) {
+        let tr = document.createElement('tr');
+        tr.innerHTML = '<td>' + answer[1] + "</td>"
+        console.log(answer)
+        tb.appendChild(tr);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', get_answers());
+

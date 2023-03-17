@@ -104,10 +104,10 @@ const get_meeting = async () => {
 }
 document.addEventListener('DOMContentLoaded', get_meeting)
 
-function hide() {
-    question = document.querySelector('#question-box')
-    question.style.display = 'None'
-}
+// function hide() {
+//     question = document.querySelector('#question-box')
+//     question.style.display = 'None'
+// }
 
-button = document.querySelector('button10')
-button.addEventListener('click', hide)
+// button = document.querySelector('button10')
+// button.addEventListener('click', hide)
