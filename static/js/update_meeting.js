@@ -1,5 +1,6 @@
 const question = document.querySelector('#question')
-const button = document.querySelector('#button10')
+const questionButton = document.querySelector('#button10')
+const AnswersButton = document.querySelector('#show_answers')
 const table = document.querySelector('#question_header')
 const tb = document.querySelector('#tbody_answers')
 const url = window.location.pathname.split('/')
@@ -27,12 +28,23 @@ function appearTable() {
     tb.style.display = '';
 }
 
-button.addEventListener('click', function () {
-    if (question.value !== '') {
-        get_question(),
-            appearTable()
-    }
+function disappearTable() {
+    table.style.display = 'None';
+    tb.style.display = 'None';
+}
 
+questionButton.addEventListener('click', function () {
+    if (question.value !== '') {
+        get_question()
+    }
+});
+
+AnswersButton.addEventListener('click', function () {
+    if (table.style.display === 'none') {
+        appearTable();
+    } else {
+        disappearTable();
+    }
 });
 
 async function get_answers() {

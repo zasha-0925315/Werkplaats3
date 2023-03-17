@@ -23,3 +23,7 @@
     background-color: var(--hr-darker-red);
     transition: all 200ms;
 }
+
+#button10 {
+    cursor: pointer;
+}
