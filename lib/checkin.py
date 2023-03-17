@@ -96,3 +96,38 @@ class CheckinManagement:
             except OperationalError as e:
                 print("yeet")
             raise e
+    
+    def post_answers(self, json_data):
+            try:
+             json_result = json_data["result"]
+             json_student= json_data["student id"]
+             json_meeting = int(json_data["meeting"])
+             conn = sqlite3.connect(self.db_file)
+             cursor = conn.cursor()
+
+             cursor.execute(f"INSERT INTO vraagresultaten(studentid, resultaat, meeting)"
+                            f"VALUES(?, ?, ?)", (json_result,json_student, json_meeting))
+             conn.commit()
+             conn.close()
+
+            except OperationalError as e:
+                print("yeet")
+            raise e
+    
+    def patch_checkin(self, json_data):
+            try:
+             json_presence = json_data["presence"]
+             json_student= json_data["student"]
+             json_meeting = int(json_data["meeting"])
+             json_checkintime = json_data["checkin time"]
+             conn = sqlite3.connect(self.db_file)
+             cursor = conn.cursor()
+
+             cursor.execute(f"UPDATE aanwezigheid SET aanwezigheid = ?, check_in_tijd = ?"
+                            f"WHERE student = ? AND meeting = ? ", (json_presence, json_checkintime, json_student, json_meeting))
+             conn.commit()
+             conn.close()
+
+            except OperationalError as e:
+                print("yeet")
+            raise e

@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, j
 from os import environ, path
 from dotenv import load_dotenv
 
+import datetime
 from lib.forms import LoginForm
 from lib.login import Login
 from lib.student import StudentManagement
@@ -177,25 +178,27 @@ def checkin():
     return render_template('checkin.html')
 
 
-@app.route('/checkin/<meetingId>', methods=["GET", "POST"])
+@app.route('/checkin/<meetingId>')
 def checkin_id(meetingId):
          meeting_info = meetingdb.get_meeting(meetingId)
          question = meeting_info[0]["question"]
          return render_template('checkin.html', meetingId=meetingId, meetings=meeting_info, question=question)
 
+@app.post('/checkin/<meetingId>')
+def post_checkin():
+    json_data = request.get_json()
+    checkindb.post_answers(json_data)
+    return json.jsonify()
+
+
 @app.patch('/checkin/<meetingId>')
 def patch_checkin(meetingId):
-         studentenid = request.form.get('studentenid')
-         classid = request.form.get('meetingid')
-         vraag1 = str(request.form.get('vraag1'))
-           
-         checkindb.add_checkin(
-             studentenid,
-             classid,
-             vraag1,
-             )
-   
-         return redirect (url_for('meeting'))
+     json_data = request.get_json()
+     checkindb.patch_checkin(json_data)
+     print (json_data)
+     return json.jsonify()
+
+
         
 @app.route('/overzicht', methods =["GET"])
 def overzicht():
