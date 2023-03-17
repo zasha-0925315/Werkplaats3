@@ -74,7 +74,6 @@ def base():
 def qr():
     return render_template("QRscan.html")
 
-
 @app.route('/meeting')
 def meeting():
     return render_template('meeting_list.html')
@@ -132,8 +131,9 @@ def meetingid(meetingId):
         case 'GET':
             meeting_info = meetingdb.get_meeting(meetingId)
             student_list = ast.literal_eval(meeting_info[0]["student"])
+            answer_info = checkindb.show_answers(meetingId)
 
-            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
+            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list, answer_info=answer_info)
         case 'POST':
              meeting_info = meetingdb.get_meeting(meetingId)
              question = str(request.form.get('question'))
@@ -235,7 +235,6 @@ def studentid(studentId):
 
 
     return render_template('studentid.html')
-
 
 
 @app.route('/api/student')

@@ -133,7 +133,11 @@
     }
 }
 
-#question-box {
+#question_box {
     margin-left: 20px;
     margin-top: 30px;
+}
+
+#question_table {
+    display: flex;
 }

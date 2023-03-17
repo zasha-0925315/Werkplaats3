@@ -34,16 +34,25 @@
         </div>
         <!-- Sends data over to checkin/..  -->
     </div>
-    <div id="question-box">
+    <div id="question_box">
         <label>
-           <h3>Vraag</h3>
+           <h1>Vraag</h1>
         </label>
         <label>
             <input id='question'name="question" placeholder="vraag.."><br>
         </label>
         <button class='button1'id="button10">Maak vraag</button>
+        <div id="questions_here">
+        <table id="question_table">
+         <thead>
+                <tr>
+                    <th>Antwoord</th>
+                </tr>
+         </thead>
+        </table>
     </div>
 </div>
+
 {% endblock %}
 {% block script %}
     {{ super() }}

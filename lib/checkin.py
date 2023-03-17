@@ -131,3 +131,18 @@ class CheckinManagement:
             except OperationalError as e:
                 print("yeet")
                 raise e
+            
+    def show_answers(self, meetingid):
+            try:
+             conn = sqlite3.connect(self.db_file)
+             cursor = conn.cursor()
+
+             cursor.execute(f"SELECT * FROM Vraagresultaten WHERE meeting = {meetingid}")
+             results = cursor.fetchall()
+             conn.commit()
+             conn.close()
+
+            except OperationalError as e:
+                print("yeet")
+                raise e       
+            return results

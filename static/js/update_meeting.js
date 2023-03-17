@@ -23,3 +23,13 @@ button.addEventListener('click', function () {
         get_question()
     }
 });
+
+function fillquestions() {
+    const table = document.querySelector('#question_table');
+    const questions = questions;
+    const tb = document.createElement('tbody');
+}
+
+table.appendChild(tb);
+
+for (const )
