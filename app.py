@@ -162,6 +162,14 @@ def api_get_meeting(meetingId):
         'presence_list': presence_list
     })
 
+@app.route('/api/answers/<meetingId>')
+def api_get_answers(meetingId):
+    answer_info = checkindb.show_answers(meetingId)
+
+    return json.jsonify({
+        'answer_info': answer_info
+    })
+
 @app.route('/api/class/json', methods=["GET"])
 def api_get_docentmeeting():
 
