@@ -175,9 +175,9 @@ def api_get_docentmeeting():
     })
 
 
-@app.route('/checkin')
-def checkin():
-    return render_template('checkin.html')
+@app.route('/checkedin')
+def checked_in():
+    return render_template('checkedin.html')
 
 
 @app.route('/checkin/<meetingId>')

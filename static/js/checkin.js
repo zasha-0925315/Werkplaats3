@@ -37,7 +37,7 @@ button.addEventListener('click', function () {
                 'presence': 1,
                 'meeting': urlId,
                 'student': studentId.value,
-                'checkin time': newTime,
+                'checkin time': newTime
             }),
             headers: {
                 'Content-type': 'application/json'
@@ -45,7 +45,7 @@ button.addEventListener('click', function () {
         }) // if json information is processed then this redirects user to the href link //
             .then(response => {
                 if (response.ok) {
-                    window.location.href = '/meeting';
+                    window.location.href = '/checkedin';
                 }
             })
             .catch(error => {
