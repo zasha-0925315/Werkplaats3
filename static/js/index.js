@@ -94,7 +94,7 @@ generatebutton.addEventListener("click", function () {
 // For check-in Button //
 checkin.addEventListener("click", function () {
     checkin.style.display = 'None';
-    qrcode.style.display = 'None';
+    qrCode.style.display = 'None';
     timer.style.width = "500px";
     timer.style.height = "100px";
     timer.style.font = "30px";
