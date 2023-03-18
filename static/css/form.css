@@ -15,8 +15,7 @@ form div label {
 
 }
 
-form input,
-form select,input {
+select, input {
     margin-bottom: 10px;
     border-radius: 50px;
     background-color: var(--white);

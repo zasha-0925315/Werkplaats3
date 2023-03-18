@@ -56,9 +56,7 @@ def check_login():
 
 @app.route("/", methods=["GET","POST"])
 def link():
-    match request.method:
-        case 'GET':
-            teacher_list = teacherdb.get_teacher()
+    teacher_list = teacherdb.get_teacher()
     return render_template('link.html', teachers=teacher_list)
 
 
@@ -92,31 +90,19 @@ def creat_meeting():
 
 @app.post('/meeting/new') # shortcut voor methods = ["POST"]
 def meeting_post():
-    meeting_name = str(request.form.get('meeting_name'))
-    meeting_date = request.form.get('meeting_date')
-    meeting_start_time = request.form.get('meeting_start_time')
-    meeting_end_time = request.form.get('meeting_end_time')
-    meeting_location = str(request.form.get('meeting_location'))
-    meeting_teacher = str(request.form.getlist('meeting_teacher'))
-    meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
+    json_meeting = request.get_json()
+
+    meeting_classes = str(json_meeting["class"]).replace("[", "").replace("]", "")
     meeting_students = str(studentdb.get_students_by_class(meeting_classes))
     meeting_students2 = studentdb.get_students_by_class(meeting_classes)
-    print(meeting_date)
-    print(meeting_start_time)
-    print(meeting_end_time)
 
     meetingdb.add_meeting(
-        meeting_name,
-        meeting_date,
-        meeting_start_time,
-        meeting_end_time,
-        meeting_location,
-        meeting_teacher,
+        json_meeting,
         meeting_students,
         meeting_students2)
 
     flash("Meeting toegevoegd!", "info")
-    return redirect(url_for('meeting'))
+    return redirect('meeting')
 
 
 @app.route('/meeting/<meetingId>', methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
@@ -213,6 +199,21 @@ def get_overzicht(meetingId):
       case 'GET':
           meeting_list = meetingdb.get_meeting(meetingId)
           return render_template('overzicht.html', meetings=meeting_list, meetingId=meetingId)
+
+
+@app.route('/sign_out/<meetingId>')
+def sign_out(meetingId):
+
+    return render_template('sign_out.html')
+
+@app.patch('/sign_out/<meetingId>')
+def sign_out_post(meetingId):
+    json_data = request.get_json()
+    presencedb.update_presence(json_data)
+    print(json_data)
+    return json.jsonify()
+
+
 
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])

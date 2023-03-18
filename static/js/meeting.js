@@ -63,7 +63,7 @@ const get_meeting = async () => {
                     student_count++
                 }
                 meetingFooter.replaceChildren()
-                meetingFooter.innerHTML = "<td>" + "</td>" + "<td>" + student_presence + "/" + student_count + " " + "aanwezig" + "</td>" + "<td>" + "</td>"
+                meetingFooter.innerHTML = "<td></td><td></td><td>" + student_presence + "/" + student_count + " " + "aanwezig" + "</td><td></td>"
             } else {
                 console.log(data.length)
                 const meetingInfo = document.querySelector("#presence_table")
@@ -73,26 +73,24 @@ const get_meeting = async () => {
         }
 
         document.querySelectorAll(".button_presence").forEach(presence_option => {
-            presence_option.addEventListener(
-                "click",
-                function () {
-                    let student = this.dataset.count
-                    let presence = parseInt(this.dataset.value)
-                    if (data["presence_list"][student]["presence"] !== presence) {
-                        fetch('/meeting/' + urlId, {
-                            method: 'PATCH',
-                            body: JSON.stringify({
-                                'presence': presence,
-                                'meeting': data["presence_list"][student]["meeting"],
-                                'student': data["presence_list"][student]["student"],
-                                'reason': "Verandert door leraar"
-                            }),
-                            headers: {
-                                'Content-type': 'application/json'
-                            }
-                        })
-                    }
-                },
+            presence_option.addEventListener("click", function () {
+                let student = this.dataset.count
+                let presence = parseInt(this.dataset.value)
+                if (data["presence_list"][student]["presence"] !== presence) {
+                    fetch('/meeting/' + urlId, {
+                        method: 'PATCH',
+                        body: JSON.stringify({
+                            'presence': presence,
+                            'meeting': data["presence_list"][student]["meeting"],
+                            'student': data["presence_list"][student]["student"],
+                            'reason': "Verandert door leraar"
+                        }),
+                        headers: {
+                            'Content-type': 'application/json'
+                        }
+                    })
+                }
+            },
                 false)
         })
 
@@ -103,11 +101,3 @@ const get_meeting = async () => {
     }
 }
 document.addEventListener('DOMContentLoaded', get_meeting)
-
-// function hide() {
-//     question = document.querySelector('#question-box')
-//     question.style.display = 'None'
-// }
-
-// button = document.querySelector('button10')
-// button.addEventListener('click', hide)
