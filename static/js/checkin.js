@@ -6,8 +6,9 @@ const urlId = url[2]
 
 // error message if student does not input the right info //
 function displayMessage() {
-    message = 'Ongeldige studentenid'
+    message = 'Ongeldige Studentenid'
     document.querySelector('#message').innerHTML = message;
+    document.querySelector('#message').style.color = 'red';
 }
 
 // fetch question from meeting // 
