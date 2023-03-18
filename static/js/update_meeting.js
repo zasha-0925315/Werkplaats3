@@ -3,14 +3,18 @@ const questionButton = document.querySelector('#button10')
 const AnswersButton = document.querySelector('#show_answers')
 const table = document.querySelector('#question_header')
 const tb = document.querySelector('#tbody_answers')
+const messageQuestion = document.querySelector('#message_question')
 const url = window.location.pathname.split('/')
 const urlId = url[2]
+const meetingId = url[2]
 
 
+// hide the antwoord table first.. //
 table.style.display = 'None'
 tb.style.display = 'None'
-const messageQuestion = document.querySelector('#message_question')
 
+
+// Sends the question in JSON format to the database //
 async function get_question() {
     fetch('../api/question', {
         method: 'PATCH',
@@ -24,30 +28,38 @@ async function get_question() {
     })
 }
 
+// changes Vraag Header Text to the value inputted in the input field //
 function changeTitle() {
     question_title = question.value
+    localStorage.setItem('QuestionTitle', question_title)
     document.querySelector('#question_title').innerHTML = question_title
 }
 
-question_title_text = document.querySelector('#question_title').textContent
-localStorage.setItem("#question_title", question_title_text);
-
+function loadTitle() {
+    const questionTitle = localStorage.getItem('QuestionTitle')
+    if (questionTitle) {
+        document.querySelector('#question_title').innerHTML = questionTitle;
+        question.value = questionTitle;
+    }
+}
+// error message //
 function checkVraag() {
     message = 'Vul een vraag in ..' + '<br>'
     document.querySelector('#message_question').innerHTML = message;
 };
 
-
+// makes the Antwoord , result table appear //
 function appearTable() {
     table.style.display = '';
     tb.style.display = '';
 }
-
+// makes the Antwoord, result table disappear //
 function disappearTable() {
     table.style.display = 'None';
     tb.style.display = 'None';
 }
-
+// if 'maak vraag' question has value then it will trigger the JSON function and change the title. if there is no value it will trigger a message that warns the user
+//
 questionButton.addEventListener('click', function () {
     if (question.value !== '') {
         get_question(), changeTitle();
@@ -60,7 +72,7 @@ questionButton.addEventListener('click', function () {
         checkVraag();
     }
 });
-
+// toggles ON/OFF the answer table in meetingid.html //
 AnswersButton.addEventListener('click', function () {
     if (table.style.display === 'none') {
         appearTable();
@@ -69,6 +81,7 @@ AnswersButton.addEventListener('click', function () {
     }
 });
 
+// Pulls the answers from the database every 5 seconds in AJAX //
 async function get_answers() {
     try {
         const response = await fetch('../api/answers/' + urlId,);
@@ -84,6 +97,7 @@ async function get_answers() {
     }
 }
 
+// Adds the answers if they are present in the database //
 function fillAnswers(answers) {
     const table = document.querySelector('#question_table');
     const tb = document.querySelector('#tbody_answers');
@@ -99,14 +113,8 @@ function fillAnswers(answers) {
     }
 };
 
-window.onload = function () {
-    let saved_question_title = localStorage.getItem("#question_title");
-    console.log('Retrieved question_title:', saved_question_title);
-    if (saved_question_title) {
-        document.querySelector('#question_title').innerHTML - saved_question_title;
-    }
-}
-
+// loads the answers only if the DOM is loaded //
+loadTitle();
 
 document.addEventListener('DOMContentLoaded', get_answers());
 
