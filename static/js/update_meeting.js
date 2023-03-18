@@ -35,11 +35,12 @@ function changeTitle() {
     document.querySelector('#question_title').innerHTML = question_title
 }
 
+// loads the title from localStorage, at the bottom of the js file we load it again //
 function loadTitle() {
     const questionTitle = localStorage.getItem('QuestionTitle')
     if (questionTitle) {
         document.querySelector('#question_title').innerHTML = questionTitle;
-        question.value = questionTitle;
+
     }
 }
 // error message //
