@@ -58,7 +58,8 @@ class MeetingManagement:
                     "teacher": info[4],
                     "student": info[5],
                     "start_time": info[6],
-                    "end_time": info[7]
+                    "end_time": info[7],
+                    "question": info[8]
                 })
             conn.close()
 
@@ -84,7 +85,8 @@ class MeetingManagement:
                     "teacher": info[4],
                     "student": info[5],
                     "start_time": info[6],
-                    "end_time": info[7]
+                    "end_time": info[7],
+                    "question": info[8]
                 })
             conn.close()
 

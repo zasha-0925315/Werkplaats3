@@ -15,7 +15,8 @@
             <p>{{ meeting_info[0]["location"] }}</p>
             <h4>leraar(en):</h4>
             <p>{{ meeting_info[0]["teacher"] }}</p>
-            <button class="button1"><a href="/QRgen/{{ meetingId[0] }}" target="_blank">Laat QR code zien</a></button>
+            <button class="button1"><a href="/QRgen/{{ meetingId[0] }}" target="_blank">Laat QR code zien</a></button><br>
+            <button class="button1" id="show_answers">Antwoorden zien</button>
         </div>
         <div id="meeting_table">
             <table>
@@ -32,9 +33,33 @@
                 <tfoot id="presence_table_footer"></tfoot>
             </table>
         </div>
+        <!-- Sends data over to checkin/..  -->
     </div>
+    <div id="question_box">
+        <label>
+           <h1 id='question_title'>Vraag</h1>
+        </label>
+        <span id="message_question"></span>
+        <label>
+            <input id='question'name="question" placeholder="vraag.."><br>
+        </label>
+        <button class='button1'id="button10">Maak vraag</button>
+        <div id="questions_here">
+        <table id="question_table">
+         <thead>
+                <tr>
+                    <th id="question_header">Antwoord</th>
+                </tr>
+         </thead>
+         <tbody id="tbody_answers"> 
+         </tbody>
+        </table>
+    </div>
+</div>
+
 {% endblock %}
 {% block script %}
     {{ super() }}
     <script src="../static/js/meeting.js"></script>
+    <script src="../static/js/update_meeting.js"></script>
 {% endblock script %}

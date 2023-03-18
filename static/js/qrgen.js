@@ -1,10 +1,11 @@
 const btn = document.querySelector("#qr-gen");
 
-function generateCode() {
-    let getText = document.getElementById("text1").value;
-    let getValue = document.querySelector("valuecheck")
+const urly = window.location.pathname.split('/')
+const meetingId = urly[2]
+const meetingvalue = 'checkin/' + meetingId
 
-    if (getText) { //laat pas de QR code zien als er daadwerkelijk text is ingevoerd
+function generateCode() {
+    if (meetingId) { // laat pas de QR code zien als er daadwerkelijk text is ingevoerd
         let qr = new QRious({
             foreground: "#D30F4C",
             background: "#FFFFFF",
@@ -13,13 +14,11 @@ function generateCode() {
             level: "H",
             padding: 25,
             element: document.getElementById("qr"),
-            value: getText
+            value: meetingvalue
         })
     } else {
         alert("Geen text ingevoerd!");
     }
 }
-
-
 
 btn.addEventListener('click', generateCode);

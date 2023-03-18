@@ -36,7 +36,7 @@ tr {
     background-color: var(--white);
 }
 
-tr td th{
+tr td th {
     background-color: transparent;
     padding: 5px;
 }
