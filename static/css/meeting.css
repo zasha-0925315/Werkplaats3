@@ -135,10 +135,19 @@
 
 #question_box {
     margin-left: 20px;
-    margin-top: 30px;
+    margin-top: 45px;
 }
 
 #show_answers {
     margin-top: 10px;
     cursor: pointer;
+}
+
+#question_box #message_question {
+    margin-bottom: 20px;
+    color: red;
+}
+
+#question_box #question {
+    margin-top: 10px;
 }

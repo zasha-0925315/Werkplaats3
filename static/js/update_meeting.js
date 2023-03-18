@@ -24,6 +24,10 @@ async function get_question() {
     })
 }
 
+function changeTitle() {
+    question_title = question.value
+    document.querySelector('#question_title').innerHTML = question_title
+}
 function checkVraag() {
     message = 'Vul een vraag in ..' + '<br>'
     document.querySelector('#message_question').innerHTML = message;
@@ -42,10 +46,11 @@ function disappearTable() {
 
 questionButton.addEventListener('click', function () {
     if (question.value !== '') {
-        get_question();
+        get_question(), changeTitle();
         if (messageQuestion) {
             messageQuestion.remove();
             console.log(message)
+
         }
     } else {
         checkVraag();
