@@ -28,6 +28,10 @@ function changeTitle() {
     question_title = question.value
     document.querySelector('#question_title').innerHTML = question_title
 }
+
+question_title_text = document.querySelector('#question_title').textContent
+localStorage.setItem("#question_title", question_title_text);
+
 function checkVraag() {
     message = 'Vul een vraag in ..' + '<br>'
     document.querySelector('#message_question').innerHTML = message;
@@ -95,6 +99,13 @@ function fillAnswers(answers) {
     }
 };
 
+window.onload = function () {
+    let saved_question_title = localStorage.getItem("#question_title");
+    console.log('Retrieved question_title:', saved_question_title);
+    if (saved_question_title) {
+        document.querySelector('#question_title').innerHTML - saved_question_title;
+    }
+}
 
 
 document.addEventListener('DOMContentLoaded', get_answers());
