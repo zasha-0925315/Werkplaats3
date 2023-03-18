@@ -36,8 +36,11 @@
         <!-- Sends data over to checkin/..  -->
     </div>
     <div id="question_box">
-        <label>
-           <h1 id='question_title'>Vraag</h1>
+        <label> {% if question is not none %}
+           <h1 id='question_title'>{{question}}</h1>
+               {% else %}
+               <h1 id='question_title'>Vraag</h1>
+               {% endif %}
         </label>
         <span id="message_question"></span>
         <label>

@@ -36,13 +36,13 @@ function changeTitle() {
 }
 
 // loads the title from localStorage, at the bottom of the js file we load it again //
-function loadTitle() {
-    const questionTitle = localStorage.getItem('QuestionTitle')
-    if (questionTitle) {
-        document.querySelector('#question_title').innerHTML = questionTitle;
+// function loadTitle() {
+//     const questionTitle = localStorage.getItem('QuestionTitle')
+//     if (questionTitle) {
+//         document.querySelector('#question_title').innerHTML = questionTitle;
 
-    }
-}
+//     }
+// }
 // error message //
 function checkVraag() {
     message = 'Vul een vraag in ..' + '<br>'
@@ -115,7 +115,7 @@ function fillAnswers(answers) {
 };
 
 // loads the answers only if the DOM is loaded //
-loadTitle();
+// loadTitle();
 
 document.addEventListener('DOMContentLoaded', get_answers());
 

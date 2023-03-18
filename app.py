@@ -112,8 +112,9 @@ def meetingid(meetingId):
             meeting_info = meetingdb.get_meeting(meetingId)
             student_list = ast.literal_eval(meeting_info[0]["student"])
             answer_info = checkindb.show_answers(meetingId)
+            question = meeting_info[0]["question"]
 
-            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list, answer_info=answer_info)
+            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list, answer_info=answer_info, question=question)
         case 'POST':
              meeting_info = meetingdb.get_meeting(meetingId)
              question = str(request.form.get('question'))
