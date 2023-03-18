@@ -38,3 +38,7 @@
     border-collapse: separate;
     border-spacing: 10px;
 }
+
+#button_checkin {
+    cursor: pointer;
+}
