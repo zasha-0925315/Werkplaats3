@@ -3,6 +3,9 @@ urlId = urlyx[2]
 const url = '/api/checkin/' + urlId
 console.log(urlId)
 
+qrCode = document.querySelector('#qr')
+Checkin_close = document.querySelector('#Close_Checkin')
+
 const get_meeting = async () => {
     try {
         const response = await fetch(url, {
@@ -53,17 +56,20 @@ function DateGetter(meetinginfo) {
             document.getElementById("mins").innerHTML = ""
             document.getElementById("secs").innerHTML = ""
             document.getElementById("end").innerHTML = "Check-in is gesloten";
+            qrCode.style.display = 'None'
+            Checkin_close.style.display = 'None'
+
         }
     }, 1000);
 }
 // Run myfunc every second
 
 
-// This makes the elements #timer-border and Checkin-Sluit invisible/ nonexistant.
+// This makes the elements #timer_border and Checkin-Sluit invisible/ nonexistant.
 qrcode = document.querySelector("#qr")
 qrtext = document.querySelector("#QR-Text").innerHTML;
 
-let timer = document.querySelector('#timer-border');
+let timer = document.querySelector('#timer_border');
 timer.style.display = 'None'
 
 let checkin = document.querySelector("#Checkin-sluit")

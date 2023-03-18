@@ -3,6 +3,8 @@ const btn = document.querySelector("#qr-gen");
 const urly = window.location.pathname.split('/')
 const meetingId = urly[2]
 const meetingvalue = 'checkin/' + meetingId
+const timerx = document.querySelector('#timer')
+console.log(timerx)
 
 function generateCode() {
     if (meetingId) { // laat pas de QR code zien als er daadwerkelijk text is ingevoerd

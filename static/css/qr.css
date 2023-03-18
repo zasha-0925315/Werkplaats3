@@ -47,7 +47,7 @@
     transition: all 200ms;
 }
 
-#timer-border {
+#timer_border {
     display: flex;
     justify-content: center;
     font-size: 20px;
