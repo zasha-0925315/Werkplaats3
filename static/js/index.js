@@ -3,8 +3,9 @@ urlId = urlyx[2]
 const url = '/api/checkin/' + urlId
 console.log(urlId)
 
-qrCode = document.querySelector('#qr')
-Checkin_close = document.querySelector('#Close_Checkin')
+const qrCode = document.querySelector('#qr')
+const Checkin_close = document.querySelector('#Close_Checkin')
+const qrText = document.querySelector("#QR_Text")
 
 const get_meeting = async () => {
     try {
@@ -51,14 +52,15 @@ function DateGetter(meetinginfo) {
         // Display the message when countdown is over
         if (timeleft < 0) {
             clearInterval(myfunc);
+
             document.getElementById("days").innerHTML = ""
             document.getElementById("hours").innerHTML = ""
             document.getElementById("mins").innerHTML = ""
             document.getElementById("secs").innerHTML = ""
-            document.getElementById("end").innerHTML = "Check-in is gesloten";
+            document.getElementById("end").innerHTML = '<h1>' + "Check-in is gesloten"; + '</h1>'
+            timer.style.width = '500px'
             qrCode.style.display = 'None'
             Checkin_close.style.display = 'None'
-
         }
     }, 1000);
 }
@@ -66,8 +68,8 @@ function DateGetter(meetinginfo) {
 
 
 // This makes the elements #timer_border and Checkin-Sluit invisible/ nonexistant.
-qrcode = document.querySelector("#qr")
-qrtext = document.querySelector("#QR-Text").innerHTML;
+
+
 
 let timer = document.querySelector('#timer_border');
 timer.style.display = 'None'
@@ -80,10 +82,12 @@ We put an if condition as we want the timer to only appear if the text field has
 let generatebutton = document.querySelector('#qr-gen')
 
 generatebutton.addEventListener("click", function () {
+    qrText.style.display = 'none';
     timer.style.display = '';
     checkin.style.display = '';
     generatebutton.style.display = 'None';
-    document.querySelector("#QR-Text").innerHTML = qrtext.replace("QR Code", "Welkom Bij HR!")
+
+    // document.querySelector("#QR-Text").innerHTML = qrtext.replace("QR Code", "Welkom Bij HR!")
 }
 );
 
