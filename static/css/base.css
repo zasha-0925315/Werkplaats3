@@ -12,6 +12,7 @@
 @import "student_list.css";
 @import "qr.css";
 @import "checkin.css";
+@import "admin.css";
 
 :root {
     --main-font: 'Poppins', sans-serif;

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Gebruiker{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <h1>{{userid}}</h1>
+        <div id="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Gebruikersnaam</th>
+                        <th>Type</th>
+                        <th>eh</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <!-- <script src=""></script> -->
+{% endblock script %}

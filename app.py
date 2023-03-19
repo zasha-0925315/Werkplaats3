@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 #from lib.forms import LoginForm
 from lib.login import Login
+from lib.user import UserManagement
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
@@ -35,6 +36,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
 login = Login(DB_FILE)
+userdb = UserManagement(DB_FILE)
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
@@ -310,7 +312,6 @@ def studentclassid():
         case 'DELETE':
             print("DELETE")
 
-
 @app.route('/admin')
 def admin():
     if not session.get('logged_in'):
@@ -330,6 +331,27 @@ def admin_student():
 @app.route('/admin/teacher')
 def admin_teacher():
     return render_template('admin.html')
+
+@app.route('/api/user')
+def api_get_users():
+    user_list = userdb.get_user_json()
+    #print(user_list)
+    return jsonify({ 
+        'users' : user_list
+    })
+
+@app.route('/users')
+def user():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('users.html')
+
+@app.route('/user/<userId>')
+def userid(userId):
+
+    return render_template('userid.html')
 
 @app.route('/login')
 def show_login():
