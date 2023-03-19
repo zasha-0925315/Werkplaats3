@@ -1,16 +1,9 @@
-async function delete_user(id){
-    try {
-        fetch('{{url_for("delete_user")}}' + id, {
-            method: 'DELETE'
-        })
+//do we even need async here?
 
-        console.log("delet")
 
-    } catch(error) {
 
-        console.log(error);
-    }
-}
+
+
 
 async function update_user(id){
     try {
@@ -23,6 +16,20 @@ async function update_user(id){
         })
 
         console.log("I need scissors! 61!")
+
+    } catch(error) {
+
+        console.log(error);
+    }
+}
+
+async function delete_user(id){
+    try {
+        fetch('{{url_for("delete_user")}}' + id, {
+            method: 'DELETE'
+        })
+
+        console.log("delet")
 
     } catch(error) {
 

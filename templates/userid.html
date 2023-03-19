@@ -16,13 +16,15 @@
                         <th>Type</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <td><input name="id" value="{{id}}" readonly></td>
-                    <td><input type="text" name="gebruikersnaam" value="{{gb}}"></td>
-                    <td><input type="text" name="wachtwoord" value="{{ww}}"></td>
-                    <td><input type="checkbox" name="type" value="{{tp}}" {{ "checked" if tp == 1 }}></td>
-                </tbody>
             </table>
+        </div>
+        <div>
+            <form action="">
+                <input name="id" value="{{id}}" readonly>
+                <input type="text" name="gebruikersnaam" value="{{gb}}">
+                <input type="text" name="wachtwoord" value="{{ww}}">
+                <input type="checkbox" name="type" value="{{tp}}" {{ "checked" if tp == 1 }}>
+            </form>
         </div>
         <div id="admin_stuff">
             <button><span><a href="" onclick="update_user('{{id}}')">Bewerk gebruiker</a></span></button>
