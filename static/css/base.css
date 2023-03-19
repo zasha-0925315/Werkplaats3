@@ -2,6 +2,7 @@
 @import "header.css";
 @import "table.css";
 @import "table2.css";
+@import "flash.css";
 @import "creat_meeting.css";
 @import "meeting.css";
 @import "login.css";
@@ -11,6 +12,7 @@
 @import "student_list.css";
 @import "qr.css";
 @import "checkin.css";
+@import "admin.css";
 
 :root {
     --main-font: 'Poppins', sans-serif;
@@ -18,6 +20,7 @@
     --hr-red: #d30f4c;
     --hr-darker-red: #c50e47;
     --white: #fff;
+    --beige: #f5e3bb;
     --hr-dark-blue: #001e48;
     --hr-light-gray: #f5f5f5;
     --gray: #696969;
@@ -27,6 +30,7 @@
 
 * {
     font-family: var(--main-font);
+    color: var(--hr-dark-blue);
 }
 
 body {

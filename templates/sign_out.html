@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Studenten{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <div>
+            <label>Studenten Id:<br>
+                <input id="student_id" name="student_id" minlength="7" maxlength="7">
+            </label>
+        </div>
+        <div>
+            <label>Reden van afwezigheid:<br>
+                <input id="reason" name="reason">
+            </label>
+        </div>
+            <button id="sign_out_button" class="button1">Meld af</button>
+            <div id="message"></div>
+        </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/sign_out.js"></script>
+{% endblock script %}

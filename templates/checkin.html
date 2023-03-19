@@ -6,28 +6,25 @@
 {% block content %}
     <div id="checkin_content">
         <div id="checkin-text">
-            <h3>Hoe zit het met jullie?<h3>
-        <form method="post">
-            {% if question is not none %}
+            <h3>Check-In</h3>
               </div>
+               <span id="message"></span>
                 <div id="answer_box">
                    <div id="questions_input">
-                    <label for ="vraag1">Vraag 1<br>
-                     <input type="text">
-                    </label>
-                    <label for="vraag2">Vraag 2<br>
-                     <input type="text">
-                    </label>
-                    <label for="vraag3">Vraag 3<br>
-                     <input type="text">
+                    <label>Studenten id</br>
+                        <input id ='studentid' name="studentid"></label>
+                        {% if question is not none %}
+                    <label>{{ question }}<br>
+                        <input id ="vraag1" name="vraag1">
                     </label>
                    </div>
                 </div>
             {% endif %}
-            <button class="button1">Ik ben aan wezig</button>
-        </form>
+            <button id ="button_checkin" class="button1">Ik ben aanwezig</button>
     </div>
 {% endblock %}
 {% block script %}
     {{ super() }}
+    <script src="../static/js/checkin.js"></script>
+    <script src="../static/js/index.js"></script>
 {% endblock script %}
