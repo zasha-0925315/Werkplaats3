@@ -1,36 +1,25 @@
-#import sqlite3
-#from sqlite3 import OperationalError
-#from lib.db import Database
-from flask_sqlalchemy import SQLAlchemy
-from flask_security import SQLAlchemyUserDatastore
-from flask_security.models import fsqla_v2 as fsqla
-from sqlalchemy.orm import relationship, backref
-from sqlalchemy import Column, Integer, String, ForeignKey
+import sqlite3
+from sqlite3 import OperationalError
+from lib.db import Database
 
+class Login(Database):
+    """regelt login enzo"""
 
-DB = SQLAlchemy()
-fsqla.FsModels.set_db_info(DB, user_table_name="gebruikers", role_table_name="rol")
+    def __init__(self, db_file):
+        super().__init__(db_file)
 
-class User(DB.Model, fsqla.FsUserMixin):
-     __tablename__ = "gebruikers"
-     id = Column(Integer(), primary_key=True)
-     gebruikersnaam = Column(String(50), nullable=False)
-     wachtwoord = Column(String(255), nullable=False)
-     rollen = relationship('Role', secondary="gebruikerrol", backref=backref('gebruiker', lazy='dynamic'))
+    def login_user(self, usn, pwd):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
 
-class Role(DB.Model, fsqla.FsRoleMixin):
-     __tablename__ = "rol"
-     id = Column(Integer(), primary_key=True)
-     rol_type = Column(String(10))
+            cursor.execute("SELECT * FROM login WHERE gebruikersnaam = ? AND wachtwoord = ?", usn, pwd)
+            user = cursor.fetchone()
+            conn.commit() 
 
-class UserRole(DB.Model):
-     __tablename__ = "gebruikerrol"
-     id = Column(Integer(), primary_key=True)
-     user_id = Column('gebruikers_id', Integer(), ForeignKey('gebruikers.id'))
-     role_id = Column('rol_id', Integer(), ForeignKey('rol.id'))
-     
+            conn.close()
 
-#class WebAuth(DB.Model, fsqla.FsWebAuthnMixin):
-#     pass
-
-datastore = SQLAlchemyUserDatastore(DB, User, Role)
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return user

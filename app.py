@@ -7,7 +7,7 @@ from os import environ, path
 from dotenv import load_dotenv
 
 #from lib.forms import LoginForm
-#from lib.login import Login
+from lib.login import Login
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
@@ -34,7 +34,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
-#login = Login(DB_FILE)
+login = Login(DB_FILE)
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
@@ -350,7 +350,7 @@ def handle_login():
 
 @app.route("/logout")
 def logout():
-    session.pop('logged_in', None)
+    session.pop('logged_in', 'username')
     return redirect(url_for("link"))
 
 @app.route("/register")
