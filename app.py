@@ -361,6 +361,14 @@ def userid(userId):
 
     return render_template('userid.html', userid = userId, id=id, gb=gb, ww=ww, tp=tp )
 
+@app.delete('/user/<userId>')
+def delete_user(userId):
+
+    userdb.delete_user(userId)
+    flash("Gebruiker verwijderd!", "info")
+    
+    return redirect(url_for('user'))
+
 @app.route('/login')
 def show_login():
     session["username"] = request.form.get("username")

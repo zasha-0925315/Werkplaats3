@@ -26,10 +26,11 @@
         </div>
         <div id="admin_stuff">
             <button><span><a href="/admin">Bewerk gebruiker</a></span></button>
-            <button><span><a href="/admin">Verwijder gebruiker</a></span></button>
+            <button><span><a href="" onclick="delete_user()">Verwijder gebruiker</a></span></button>
         </div>
     </div>
 {% endblock %}
 {% block script %}
     {{ super() }}
+    <script src="/static/js/user_detail.js"></script>
 {% endblock script %}

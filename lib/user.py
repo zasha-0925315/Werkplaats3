@@ -73,12 +73,17 @@ class UserManagement(Database):
             print("yeet")
             raise e
 
-    def delete_user(self):
+    def delete_user(self, id):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("")
+            cursor.execute(f"DELETE * FROM gebruikers WHERE gebruikersnaam = ?", [id])
+            conn.commit()
+
+            #need to reset sqlite_sequence table bc user_id = autoincrement
+            reset_seq_qry = "UPDATE 'sqlite_sequence' SET 'seq' = (SELECT MAX('user_id') FROM 'gebruikers') WHERE 'name' = 'gebruikers'"
+            cursor.execute(reset_seq_qry)
             conn.commit() 
 
             conn.close()
