@@ -315,6 +315,8 @@ def studentclassid():
 def admin():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
     return render_template('admin.html')
 
 @app.route('/admin/class')

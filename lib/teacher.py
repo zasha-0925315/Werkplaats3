@@ -50,10 +50,10 @@ class TeacherManagement(Database):
         return t_list
     
     def add_teacher(self):
-            pass
+        pass
 
     def edit_teacher(self):
-            pass
+        pass
     
     def delete_teacher(self):
         pass
