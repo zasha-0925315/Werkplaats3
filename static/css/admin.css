@@ -2,3 +2,8 @@
 #ding a {
     text-decoration: none;
 }
+
+#ding, #admin_stuff {
+    text-align: center;
+    margin: auto;
+}
