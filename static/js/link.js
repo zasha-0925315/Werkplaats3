@@ -1,80 +1,68 @@
-const url = '../api/class/json'
-
-function get_meeting_info(meetingdata) { }
-
-const get_meeting = async () => {
+// Get the list of meetings
+async function getMeeting () {
     try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
+        const response = await fetch('../api/class/json');
         const data = await response.json();
-        console.log(data)
-        if (response.error) {
-            console.log("ouwh error")
-        } else if (!response.ok) {
-            console.log("Some non-200 HTTP response code or something")
-        } else {
-            id = 0
-            let futureDate = new Date(data["meeting_info"][2]["date"])
-            let currentDate = new Date();
-            console.log(futureDate)
-            if (data["meeting_info"].length > 0) {
-                const tbody = document.querySelector("#docent-body")
-                let planning_length = 0
-                let max_length = 3
-                tbody.replaceChildren()
-                while (planning_length < max_length) {
-                    tbody.innerHTML += " <td><strong> " + data["meeting_info"][planning_length]["name"] + "</strong> <small>" + data["meeting_info"][planning_length]["date"] + "</small> </td>";
-                    planning_length++
-                }
+        const meetingArray = data["meeting_info"]
+
+        meetingArray.sort((a, b) => {
+            if (a.date < b.date) {
+                return -1
             }
-        }
+        })
+
+        selectTeacher(meetingArray)
+
     }
-
-
     catch (e) {
         console.log("Some error with fetching JSON from Meetings server: " + e)
     }
 }
+// select the <select>
+const teacherSelectBox = document.querySelector("#Select-Teacher")
 
-
-document.querySelector("#Select-Teacher").addEventListener("change", function () {
-    if (this.value == "MEYEF") {
-        console.log("MEYEF");
-    } else if (this.value == "KNUFI") {
-        console.log("KNUFI");
-    } else {
-        console.log('dog')
-    }
-});
-
-function dropMenu() {
-    document.getElementById('menu').style.display = 'initial'
+// add an eventlistenter to the change of the <select>
+function selectTeacher(meetingArray){
+    teacherSelectBox.addEventListener("change", function () {
+        createTable(meetingArray)
+    });
 }
 
-// window.onclick = function (event) {
-//     if (!event.target.matches('.Select-Planning-button')) {
-//         let dropdowns = document.getElementsByClassName("menu");
-//         let i;
-//         for (i = 0; i < dropdowns.length; i++) {
-//             var openDropdown = dropdowns[i];
-//             if (openDropdown.style.display = 'initial') {
-//                 (openDropdown.style.display = 'none')
-//             }
-//         }
-//     }
-// }
+// create the table
+function createTable(meetingArray){
+    if (meetingArray.length > 0) {
+        const tbody = document.querySelector("#docent-body")
+        let currentDate = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf("T"));
+        let dateFiltered = meetingArray.filter(filterDate)
+        let planningLength = 0
+        let maxLength = 3
+        let arrayLength = dateFiltered.length
 
-// lijst = document.querySelector('#Select-Teacher')
-// lijst.addEventListener("change", docentLijst()); {
+        console.log(teacherSelectBox.value)
+        tbody.replaceChildren()
 
-// };
+        while (planningLength < arrayLength && planningLength < maxLength) {
+            if (dateFiltered[planningLength]["teacher"].includes(teacherSelectBox.value)){
+                console.log(dateFiltered[planningLength]["teacher"])
+                    tbody.innerHTML +=
+                    "<td><strong> " + dateFiltered[planningLength]["name"] + "</strong></td>" + " " +
+                    "<td><small>" + dateFiltered[planningLength]["date"] + "</small></td>" + " " +
+                    "<td><small>" + dateFiltered[planningLength]["start_time"] + "</small></td>" + " " +
+                    "<td><small>" + dateFiltered[planningLength]["end_time"] + "</small></td>"
+            }
+            planningLength++
+        }
+        if (tbody.innerHTML === ""){
+            tbody.innerHTML = "<td>Geen aankonde bijeenkomsten</td>"
+        }
+        function filterDate(meetingArray) {
+            return meetingArray["date"] >= currentDate
+        }
+    }else{
+        console.log("kio")
+    }
+}
 
+// activate the getMeeting function when the DOM is loaded
+document.addEventListener('DOMContentLoaded', getMeeting())
 
-get_meeting()
-
-let interval_id = setInterval(get_meeting, 5000)

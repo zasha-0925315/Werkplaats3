@@ -1,5 +1,7 @@
-.flash {
+.flash, .flash-info, .flash-warning {
     font-size: medium;
+    height: 55px;
+    margin: 0px;
 }
 
 .flash-info {

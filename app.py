@@ -1,16 +1,20 @@
 import ast
 import os
 
+import datetime
 from os import environ, path
 from dotenv import load_dotenv
+
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 
+from lib.forms import LoginForm
 from lib.login import Login
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
 from lib.meeting import MeetingManagement
 from lib.presence import PresenceManagement
+from lib.checkin import CheckinManagement
 
 # no touchy
 projpath = path.join(path.dirname(__file__), '.env')
@@ -37,11 +41,12 @@ teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
 meetingdb = MeetingManagement(DB_FILE)
 presencedb = PresenceManagement(DB_FILE)
+checkindb = CheckinManagement(DB_FILE)
 
 # routes
 @app.before_request
 def check_login():
-    if request.endpoint not in ["index","show_login", "handle_login"]:
+    if request.endpoint not in ["base","show_login", "handle_login"]:
         if not session.get("logged_in"):
             return redirect(url_for('show_login'))
 
@@ -52,18 +57,10 @@ def index():
 
 @app.route("/", methods=["GET","POST"])
 def link():
-    match request.method:
-        case 'GET':
-            teacher_list = teacherdb.get_teacher()
+    teacher_list = teacherdb.get_teacher()
     return render_template('link.html', teachers=teacher_list)
 
-@app.route("/test-ajax.html", methods = ['GET'])
-def testajax():
-    return render_template("test-ajax.html")
 
-@app.route("/base")
-def base():
-    return render_template("base.html")
 
 # Url for QR Code scanning
 @app.route('/QR')
@@ -92,49 +89,48 @@ def creat_meeting():
 
 @app.post('/meeting/new') # shortcut voor methods = ["POST"]
 def meeting_post():
-    meeting_name = str(request.form.get('meeting_name'))
-    meeting_date = request.form.get('meeting_date')
-    meeting_start_time = request.form.get('meeting_start_time')
-    meeting_end_time = request.form.get('meeting_end_time')
-    meeting_location = str(request.form.get('meeting_location'))
-    meeting_teacher = str(request.form.getlist('meeting_teacher'))
-    meeting_classes = str(request.form.getlist('meeting_class')).replace("[", "").replace("]", "")
+    json_meeting = request.get_json()
+
+    meeting_classes = str(json_meeting["class"]).replace("[", "").replace("]", "")
     meeting_students = str(studentdb.get_students_by_class(meeting_classes))
     meeting_students2 = studentdb.get_students_by_class(meeting_classes)
-    print(meeting_date)
-    print(meeting_start_time)
-    print(meeting_end_time)
 
     meetingdb.add_meeting(
-        meeting_name,
-        meeting_date,
-        meeting_start_time,
-        meeting_end_time,
-        meeting_location,
-        meeting_teacher,
+        json_meeting,
         meeting_students,
         meeting_students2)
 
     flash("Meeting toegevoegd!", "info")
-    return redirect(url_for('meeting'))
+    return redirect('meeting')
 
-@app.route('/meeting/<meetingId>', methods=["GET", "PUT", "PATCH", "DELETE"])
+@app.route('/meeting/<meetingId>', methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
 def meetingid(meetingId):
     match request.method:
         case 'GET':
             meeting_info = meetingdb.get_meeting(meetingId)
             student_list = ast.literal_eval(meeting_info[0]["student"])
+            answer_info = checkindb.show_answers(meetingId)
+            question = meeting_info[0]["question"]
 
-            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list)
+            return render_template('meetingid.html', meetingId=meetingId, meeting_info=meeting_info, student_list=student_list, answer_info=answer_info, question=question)
         case 'POST':
              meeting_info = meetingdb.get_meeting(meetingId)
-             return redirect('QRgen', meetingId=meetingId)
+             question = str(request.form.get('question'))
+             checkindb.add_question(question)
+             return render_template('meetingid.html', meetingId=meetingId, question=question, meeting_info=meeting_info)
         case 'PUT':
             print("PUT")
         case 'PATCH':
             json_data = request.get_json()
             presencedb.update_presence(json_data)
             return json.jsonify()
+
+@app.patch('/api/question')
+def question_api():
+        json_data = request.get_json()
+        checkindb.update_question(json_data)
+        print (json_data)
+        return json.jsonify()
 
 @app.route('/api/<meetingId>')
 def api_get_meeting(meetingId):
@@ -143,6 +139,14 @@ def api_get_meeting(meetingId):
 
     return json.jsonify({
         'presence_list': presence_list
+    })
+
+@app.route('/api/answers/<meetingId>')
+def api_get_answers(meetingId):
+    answer_info = checkindb.show_answers(meetingId)
+
+    return json.jsonify({
+        'answer_info': answer_info
     })
 
 @app.route('/api/class/json', methods=["GET"])
@@ -155,19 +159,59 @@ def api_get_docentmeeting():
         'meeting_info' : docent_meeting, 
     })
 
+
+@app.route('/checkedin')
+def checked_in():
+    return render_template('checkedin.html')
+
+@app.route('/checkin/<meetingId>')
 @app.route('/checkin')
 def checkin():
     return render_template('checkin.html')
 
 @app.route('/checkin/<meetingId>', methods=["GET", "POST"])
 def checkin_id(meetingId):
-    match request.method:
-        case 'GET':
-         meeting_list = meetingdb.get_meeting(meetingId)
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
-        case 'POST':
-         # placeholder #
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_list)
+         meeting_info = meetingdb.get_meeting(meetingId)
+         question = meeting_info[0]["question"]
+         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_info, question=question)
+
+@app.post('/checkin/<meetingId>')
+def post_checkin(meetingId):
+    json_data = request.get_json()
+    checkindb.post_answers(json_data)
+    return json.jsonify()
+
+
+@app.patch('/checkin/<meetingId>')
+def patch_checkin(meetingId):
+     json_data = request.get_json()
+     checkindb.patch_checkin(json_data)
+     print (json_data)
+     return json.jsonify()
+
+@app.route('/overzicht', methods =["GET"])
+def overzicht():
+   results = checkindb.get_results()
+   return render_template('overzicht.html', results=results)
+
+@app.route('/overzicht/<meetingId>', methods =["GET"])
+def get_overzicht(meetingId):
+  match request.method:
+      case 'GET':
+          meeting_list = meetingdb.get_meeting(meetingId)
+          return render_template('overzicht.html', meetings=meeting_list, meetingId=meetingId)
+
+@app.route('/sign_out/<meetingId>')
+def sign_out(meetingId):
+
+    return render_template('sign_out.html')
+
+@app.patch('/sign_out/<meetingId>')
+def sign_out_post(meetingId):
+    json_data = request.get_json()
+    presencedb.update_presence(json_data)
+    print(json_data)
+    return json.jsonify()
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
@@ -238,7 +282,7 @@ def teacherid():
         case 'PUT':
             print("PUT")
         case 'DELETE':
-            print("DELTE")
+            print("DELETE")
 
 @app.route('/api/klas')
 def api_get_class():
@@ -268,10 +312,6 @@ def studentclassid():
         case 'DELETE':
             print("DELETE")
 
-@app.route("/screen")
-def screen():
-    return render_template('screen.html', title=screen)
-
 @app.route('/admin')
 def admin():
     return render_template('admin.html')
@@ -280,7 +320,7 @@ def admin():
 def show_login():
     session["username"] = request.form.get("username")
     if session.get('logged_in'):
-        return redirect(url_for("link"))
+        return redirect(url_for("login"))
     else:
         return render_template('login.html')
       
@@ -296,7 +336,7 @@ def handle_login():
 @app.route("/logout")
 def logout():
     session.pop('logged_in', None)
-    return redirect(url_for("index"))
+    return redirect(url_for("base"))
 
 @app.route("/register")
 def register():
@@ -306,8 +346,17 @@ def register():
 def qrgen(meetingId):
     match request.method:
       case 'GET':
-       meeting_list = meetingdb.get_meeting(meetingId)
-    return render_template("qrgen.html", meetings=meeting_list, meetingId=meetingId, message='dog')
+       meeting_info = meetingdb.get_meeting(meetingId)
+       return render_template("qrgen.html", meetings=meeting_info, meetingId=meetingId, message='dog')
+
+
+@app.route("/api/checkin/<meetingId>")
+def QR_checkin(meetingId):
+    meeting_info = meetingdb.get_meeting(meetingId)
+    
+    return jsonify({
+        'meeting_info' : meeting_info
+    })
 
 @app.route("/teapot")
 def teapot():

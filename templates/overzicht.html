@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Check In{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+<main>
+    <h1 id="overzicht-text">Overzicht</h1>
+    <div id="overzicht-table">
+        <table id="th-spacing">
+            <thead>
+             <tbody>
+                <tr>
+                    <th>Student</th>
+                    <th>Vraag 1</th>
+                    <th>Vraag 2</th>
+                    <th>Vraag 3</th>
+                </tr>
+             </tbody>  
+            </thead>
+        </table>
+    </div>
+</main>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}
