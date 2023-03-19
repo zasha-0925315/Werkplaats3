@@ -7,7 +7,7 @@ const urlyx = window.location.pathname.split('/')
 const urlId = urlyx[2]
 const url = '/api/checkin/' + urlId
 
-// fetch meeting //
+// fetch meeting from api //
 const get_meeting = async () => {
     try {
         const response = await fetch(url, {
@@ -33,6 +33,7 @@ const get_meeting = async () => {
     }
 }
 
+// checks the meetinginfo from the fetch, if the meeting has yet to happen it will display the normal screen, otherwise it shows the text below //
 function checkDate(meetinginfo) {
     let Vardate = (meetinginfo[0]["date"] + " " + meetinginfo[0]["start_time"]);
     let currentTime = new Date().getTime();
