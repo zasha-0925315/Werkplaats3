@@ -370,6 +370,7 @@ def userid(userId):
 @app.patch('/user/<userId>')
 def update_user(userId):
 
+    print(userId)
     userdb.update_user(userId)
     flash("Gebruiker bewerkt!", "info")
 
@@ -378,6 +379,7 @@ def update_user(userId):
 @app.delete('/user/<userId>')
 def delete_user(userId):
 
+    print(userId)
     userdb.delete_user(userId)
     flash("Gebruiker verwijderd!", "warning")
 
