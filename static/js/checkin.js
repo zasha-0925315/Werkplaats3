@@ -104,6 +104,9 @@ checkinButton.addEventListener('click', function () {
     }
 });
 
+get_meeting()
+
+
 let interval_id = setInterval(get_meeting, 1000)
 
 document.addEventListener('DOMContentLoaded', checkDate)
