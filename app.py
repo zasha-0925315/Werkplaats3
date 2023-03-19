@@ -188,23 +188,8 @@ def patch_checkin(meetingId):
      return json.jsonify()
 
 
-        
-@app.route('/overzicht', methods =["GET"])
-def overzicht():
-   results = checkindb.get_results()
-   return render_template('overzicht.html', results=results)
-
-@app.route('/overzicht/<meetingId>', methods =["GET"])
-def get_overzicht(meetingId):
-  match request.method:
-      case 'GET':
-          meeting_list = meetingdb.get_meeting(meetingId)
-          return render_template('overzicht.html', meetings=meeting_list, meetingId=meetingId)
-
-
 @app.route('/sign_out/<meetingId>')
 def sign_out(meetingId):
-
     return render_template('sign_out.html')
 
 @app.patch('/sign_out/<meetingId>')
@@ -213,9 +198,6 @@ def sign_out_post(meetingId):
     presencedb.update_presence(json_data)
     print(json_data)
     return json.jsonify()
-
-
-
 
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
@@ -236,8 +218,6 @@ def student_post():
 
 @app.route('/student/<studentId>', methods=["GET", "DELETE"])
 def studentid(studentId):
-
-
     return render_template('studentid.html')
 
 
