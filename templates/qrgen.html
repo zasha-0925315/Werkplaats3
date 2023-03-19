@@ -9,40 +9,38 @@
 <main>  
    <body>
     <!-- Everything related to QR code / buttons -->
-       <div id="QR-Text">
+       <div id="QR_Text">
            <h1>QR Code</h1>
        </div>
        <div id="QR-Box">
            <div id="QR-Content">
                <div id="test">
                    <form>
-                       <input type="text" id="text1"/>
                        <button type="button" id="qr-gen">Genereer qr</button>
                    </form>
                    <p>
                     <!-- Eerder sluiten de Check-in functie -->
-                    <div id="Eerder-Sluiten">
+                    <div id="Close_Checkin">
                         <div>
                         <button type="button" id="Checkin-sluit">Check-in Sluiten</button>
                         </div>
                     </div>
                     <!-- The timer function for Check-In -->
-                 <div id="timer-border">
-                <div class="timer" name="timer">
-                 <span id ="days"></span>
-                 <span id ="hours"></span>
-                 <span id ="mins"></span>
-                 <span id ="secs"></span>
-                 <span id ="end" class="p5"></span>
-            </div>
-       </div>
+                <div id="timer_border">
+                 <div id="timer" name="timer">
+                    <span id ="days"></span>
+                    <span id ="hours"></span>
+                    <span id ="mins"></span>
+                    <span id ="secs"></span>
+                    <span id ="end" class="p5"></span>
+                 </div>
+                </div>
                 </div>
                <div id="qrcontainer">
                 <canvas id="qr"></canvas>
                </div>
             </div>
         </div>
- <!-- <span id="Values">/Checkin/{{meetingId[0]}}</span> -->
    </body>
 </main>
 {% endblock %}
