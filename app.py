@@ -351,7 +351,15 @@ def user():
 @app.route('/user/<userId>')
 def userid(userId):
 
-    return render_template('userid.html', userid = userId)
+    user_info = userdb.get_user_detail(userId)
+    print(user_info)
+
+    id = user_info[0]
+    gb = user_info[1]
+    ww = user_info[2]
+    tp = user_info[3]
+
+    return render_template('userid.html', userid = userId, id=id, gb=gb, ww=ww, tp=tp )
 
 @app.route('/login')
 def show_login():

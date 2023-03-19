@@ -22,6 +22,22 @@ class UserManagement(Database):
             print("yeet")
             raise e
 
+    def get_user_detail(self, id):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"SELECT * FROM gebruikers WHERE gebruikersnaam = ?", [id])
+            user = cursor.fetchone()
+            
+            conn.commit()
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return user
+
     def get_user_json(self):
         try:
             conn = sqlite3.connect(self.db_file)

@@ -10,17 +10,26 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Gebruikersid</th>
                         <th>Gebruikersnaam</th>
+                        <th>Wachtwoord</th>
                         <th>Type</th>
-                        <th>eh</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <td>{{id}}</td>
+                    <td>{{gb}}</td>
+                    <td>{{ww}}</td>
+                    <td>{{tp}}</td>
+                </tbody>
             </table>
+        </div>
+        <div id="admin_stuff">
+            <button><span><a href="/admin">Bewerk gebruiker</a></span></button>
+            <button><span><a href="/admin">Verwijder gebruiker</a></span></button>
         </div>
     </div>
 {% endblock %}
 {% block script %}
     {{ super() }}
-    <!-- <script src=""></script> -->
 {% endblock script %}
