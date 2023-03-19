@@ -16,9 +16,9 @@ async function update_user(id){
     try {
         fetch('/user/' + id, {
             method: 'PATCH',
-            /*headers: {
+            headers: {
                 'Content-Type' : 'application/json'
-            },
+            }/*,
             body: JSON.stringify(table)*/
         })
 
@@ -29,5 +29,3 @@ async function update_user(id){
         console.log(error);
     }
 }
-
-//document.addEventListener('DOMContentLoaded', get_users());
