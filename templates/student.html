@@ -6,6 +6,11 @@
 {% block content %}
     <main>
         <h1>Studenten</h1>
+        {% if session.username == 'admin' %}
+            <div id="admin_stuff">
+                <button><span><a href="/admin">Voeg student toe</a></span></button>
+            </div>
+        {% endif %}
         <div id="search_container">
             <label>
                 <input type="search" id="search_input" placeholder="Zoek">

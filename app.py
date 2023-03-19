@@ -322,15 +322,15 @@ def admin():
 
 @app.route('/admin/class')
 def admin_class():
-    return render_template('admin.html')
+    return render_template('class.html')
 
 @app.route('/admin/student')
 def admin_student():
-    return render_template('admin.html')
+    return render_template('student.html')
 
 @app.route('/admin/teacher')
 def admin_teacher():
-    return render_template('admin.html')
+    return render_template('teacher.html')
 
 @app.route('/api/user')
 def api_get_users():
@@ -340,7 +340,7 @@ def api_get_users():
         'users' : user_list
     })
 
-@app.route('/users')
+@app.route('/admin/user')
 def user():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
