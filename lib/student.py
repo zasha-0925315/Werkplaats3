@@ -64,3 +64,12 @@ class StudentManagement(Database):
             print("yeet")
             raise e
         return students
+    
+    def add_student(self):
+        pass
+
+    def edit_student(self):
+        pass
+
+    def delete_student(self):
+        pass

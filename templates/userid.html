@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Gebruiker{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <h1>Gebruiker {{gb}}</h1>
+        <div id="table">
+            <table id="user">
+                <thead>
+                    <tr>
+                        <th>Gebruikersid</th>
+                        <th>Gebruikersnaam</th>
+                        <th>Wachtwoord</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td name="id">{{id}}</td>
+                    <td contenteditable="true">{{gb}}</td>
+                    <td contenteditable="true">{{ww}}</td>
+                    <td contenteditable="true">{{tp}}</td>
+                </tbody>
+            </table>
+        </div>
+        <div id="admin_stuff">
+            <button><span><a href="" onclick="update_user('{{id}}')">Bewerk gebruiker</a></span></button>
+            <button><span><a href="" onclick="delete_user('{{id}}')">Verwijder gebruiker</a></span></button>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="/static/js/user_detail.js"></script>
+{% endblock script %}

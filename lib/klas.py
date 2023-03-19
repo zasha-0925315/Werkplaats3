@@ -40,3 +40,12 @@ class ClassManagement(Database):
             print("yeet")
             raise e
         return enrollment
+    
+    def add_class(self):
+        pass
+
+    def edit_class(self):
+        pass
+
+    def delete_class(self):
+        pass
