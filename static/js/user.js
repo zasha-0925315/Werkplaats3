@@ -1,6 +1,6 @@
 async function get_users(){
     try {
-        const response = await fetch('../api/user');
+        const response = await fetch('../api/users');
         const users = await response.json();
 
         console.log(`${JSON.stringify(users)}`);

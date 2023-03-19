@@ -332,7 +332,7 @@ def admin_student():
 def admin_teacher():
     return render_template('teacher.html')
 
-@app.route('/api/user')
+@app.route('/api/users')
 def api_get_users():
     user_list = userdb.get_user_json()
     #print(user_list)
@@ -366,7 +366,7 @@ def delete_user(userId):
 
     userdb.delete_user(userId)
     flash("Gebruiker verwijderd!", "info")
-    
+
     return redirect(url_for('user'))
 
 @app.route('/login')
