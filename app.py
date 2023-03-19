@@ -1,13 +1,13 @@
 import ast
 import os
+import datetime
 
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 from os import environ, path
 from dotenv import load_dotenv
 
-import datetime
-from lib.forms import LoginForm
-from lib.login import Login
+#from lib.forms import LoginForm
+#from lib.login import Login
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
@@ -34,7 +34,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
-login = Login(DB_FILE)
+#login = Login(DB_FILE)
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
@@ -46,7 +46,7 @@ checkindb = CheckinManagement(DB_FILE)
 @app.before_request
 def check_login():
     if request.endpoint not in ["base","show_login", "handle_login"]:
-        if not session.get("logged_in"):
+        if not session.get("logged_in", "username"):
             return redirect(url_for('show_login'))
 
 # Main route
@@ -59,8 +59,6 @@ def link():
     teacher_list = teacherdb.get_teacher()
     return render_template('link.html', teachers=teacher_list)
 
-
-
 # Url for QR Code scanning
 @app.route('/QR')
 def qr():
@@ -68,8 +66,10 @@ def qr():
 
 @app.route('/meeting')
 def meeting():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    
     return render_template('meeting_list.html')
-
 
 @app.route('/api/meeting')
 def api_meeting():
@@ -80,9 +80,11 @@ def api_meeting():
         'meetings': meeting_list
     })
 
-
 @app.route('/meeting/new')
 def creat_meeting():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    
     teacher_list = teacherdb.get_teacher()
     class_list = classdb.get_class()
     
@@ -103,7 +105,6 @@ def meeting_post():
 
     flash("Meeting toegevoegd!", "info")
     return redirect('meeting')
-
 
 @app.route('/meeting/<meetingId>', methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
 def meetingid(meetingId):
@@ -161,11 +162,9 @@ def api_get_docentmeeting():
         'meeting_info' : docent_meeting, 
     })
 
-
 @app.route('/checkedin')
 def checked_in():
     return render_template('checkedin.html')
-
 
 @app.route('/checkin/<meetingId>')
 def checkin_id(meetingId):
@@ -179,7 +178,6 @@ def post_checkin(meetingId):
     checkindb.post_answers(json_data)
     return json.jsonify()
 
-
 @app.patch('/checkin/<meetingId>')
 def patch_checkin(meetingId):
      json_data = request.get_json()
@@ -187,8 +185,6 @@ def patch_checkin(meetingId):
      print (json_data)
      return json.jsonify()
 
-
-        
 @app.route('/overzicht', methods =["GET"])
 def overzicht():
    results = checkindb.get_results()
@@ -214,32 +210,27 @@ def sign_out_post(meetingId):
     print(json_data)
     return json.jsonify()
 
-
-
-
 @app.route('/meeting/showForTeacher/<teacherId>', methods=["GET"])
 def meetingforteacher():
     match request.method:
         case 'GET':
             return render_template('meetingid.html')
 
-
 @app.route('/student')
 def student():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    
     return render_template('student.html')
-
 
 @app.post('/student') # shortcut voor methods = ["POST"]
 def student_post():
     return render_template('student.html')
 
-
 @app.route('/student/<studentId>', methods=["GET", "DELETE"])
 def studentid(studentId):
 
-
     return render_template('studentid.html')
-
 
 @app.route('/api/student')
 def api_get_students():
@@ -270,13 +261,14 @@ def api_get_teachers():
 
 @app.route('/teacher')
 def teacher():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
     t_list = teacherdb.get_teacher()
     return render_template('teacher.html', teachers=t_list)
 
 @app.post('/teacher') # shortcut voor methods = ["POST"]
 def teacher_post():
     return render_template('teacher.html')
-
 
 @app.route('/teacher/<teacherId>', methods=["GET", "PUT", "DELETE"])
 def teacherid():
@@ -299,6 +291,8 @@ def api_get_class():
 
 @app.route('/class')
 def studentclass():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
     class_list = classdb.get_class()
     return render_template('class.html', classes=class_list)
 
@@ -317,21 +311,47 @@ def studentclassid():
             print("DELETE")
 
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/admin')
+def admin():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    return render_template('admin.html')
+
+@app.route('/admin/class')
+def admin_class():
+    return render_template('admin.html')
+
+@app.route('/admin/student')
+def admin_student():
+    return render_template('admin.html')
+
+@app.route('/admin/teacher')
+def admin_teacher():
+    return render_template('admin.html')
+
+@app.route('/login')
 def show_login():
     session["username"] = request.form.get("username")
     if session.get('logged_in'):
-        return redirect(url_for("login"))
+        return redirect(url_for("link"))
     else:
         return render_template('login.html')
       
-@app.route("/handle_login", methods=["GET", "POST"])
+@app.post("/handle_login")
 def handle_login():
-    if request.form["password"] == "password" and request.form["username"] == "admin":
+    if request.form["password"] == "password" and request.form["username"] == "admin" or request.form["password"] == "password" and request.form["username"] == "docent":
         session["logged_in"] = True
+        session['username'] = request.form["username"]
+        print(session['username'])
     else:
-        return render_template("login.html", message="Invalid Password or Username.")
+        flash("Invalid Password or Username.", "warning")
+        return render_template("login.html")
     return redirect(url_for('link'))
+
+@app.route("/logout")
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for("link"))
 
 @app.route("/register")
 def register():
@@ -344,7 +364,6 @@ def qrgen(meetingId):
        meeting_info = meetingdb.get_meeting(meetingId)
        return render_template("qrgen.html", meetings=meeting_info, meetingId=meetingId, message='dog')
 
-
 @app.route("/api/checkin/<meetingId>")
 def QR_checkin(meetingId):
     meeting_info = meetingdb.get_meeting(meetingId)
@@ -353,17 +372,9 @@ def QR_checkin(meetingId):
         'meeting_info' : meeting_info
     })
 
-
 @app.route("/teapot")
 def teapot():
     return render_template("teapot.html"), 418
-
-
-
-@app.route("/logout")
-def logout():
-    session.pop('logged_in', None)
-    return redirect(url_for("base"))
 
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')
