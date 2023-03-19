@@ -379,7 +379,7 @@ def update_user(userId):
     userdb.update_user(userId)
     flash("Gebruiker bewerkt!", "info")
 
-    return render_template('userid.html')
+    return redirect(url_for('users'))
 
 @app.delete('/user/<userId>')
 def delete_user(userId):
