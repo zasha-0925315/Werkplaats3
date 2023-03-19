@@ -6,6 +6,8 @@ console.log(urlId)
 const qrCode = document.querySelector('#qr')
 const Checkin_close = document.querySelector('#Close_Checkin')
 const qrText = document.querySelector("#QR_Text")
+const generateButton = document.querySelector('#qr-gen')
+const timer = document.querySelector('#timer_border')
 
 const get_meeting = async () => {
     try {
@@ -51,18 +53,23 @@ function DateGetter(meetinginfo) {
 
         // Display the message when countdown is over
         if (timeleft < 0) {
+
             clearInterval(myfunc);
             document.getElementById("days").innerHTML = ""
             document.getElementById("hours").innerHTML = ""
             document.getElementById("mins").innerHTML = ""
             document.getElementById("secs").innerHTML = ""
-            document.getElementById("end").innerHTML = '<h1>' + "Check-in is gesloten"; + '</h1>'
+            document.getElementById("end").innerHTML = ""
             timer.style.width = '500px'
+            generateButton.style.display = 'None'
+            qrText.style.display = ''
+            qrText.innerHTML = '<h1>' + 'Check-in is gesloten' + '</h1>'
             qrCode.style.display = 'None'
             Checkin_close.style.display = 'None'
         }
-    }, 1000);
+    },);
 }
+
 // Run myfunc every second
 
 
@@ -70,7 +77,7 @@ function DateGetter(meetinginfo) {
 
 
 
-let timer = document.querySelector('#timer_border');
+
 timer.style.display = 'None'
 
 let checkin = document.querySelector("#Checkin-sluit")
@@ -78,13 +85,12 @@ checkin.style.display = 'None'
 
 /* Clicking on the QR button will return the style.display back to before.
 We put an if condition as we want the timer to only appear if the text field has any value */
-let generatebutton = document.querySelector('#qr-gen')
 
-generatebutton.addEventListener("click", function () {
+generateButton.addEventListener("click", function () {
     qrText.style.display = 'none';
     timer.style.display = '';
     checkin.style.display = '';
-    generatebutton.style.display = 'None';
+    generateButton.style.display = 'None';
 
     // document.querySelector("#QR-Text").innerHTML = qrtext.replace("QR Code", "Welkom Bij HR!")
 }

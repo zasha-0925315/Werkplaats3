@@ -2,9 +2,9 @@ import ast
 import os
 import datetime
 
+import datetime
 from os import environ, path
 from dotenv import load_dotenv
-
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 #from flask_wtf import CSRFProtect
 
@@ -170,11 +170,17 @@ def api_get_docentmeeting():
         'meeting_info' : docent_meeting, 
     })
 
+
 @app.route('/checkedin')
 def checked_in():
     return render_template('checkedin.html')
 
 @app.route('/checkin/<meetingId>')
+@app.route('/checkin')
+def checkin():
+    return render_template('checkin.html')
+
+@app.route('/checkin/<meetingId>', methods=["GET", "POST"])
 def checkin_id(meetingId):
          meeting_info = meetingdb.get_meeting(meetingId)
          question = meeting_info[0]["question"]
@@ -204,7 +210,6 @@ def get_overzicht(meetingId):
       case 'GET':
           meeting_list = meetingdb.get_meeting(meetingId)
           return render_template('overzicht.html', meetings=meeting_list, meetingId=meetingId)
-
 
 @app.route('/sign_out/<meetingId>')
 def sign_out(meetingId):
