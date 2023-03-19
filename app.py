@@ -2,7 +2,6 @@ import ast
 import os
 import datetime
 
-import datetime
 from os import environ, path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
@@ -170,13 +169,11 @@ def api_get_docentmeeting():
         'meeting_info' : docent_meeting, 
     })
 
-
 @app.route('/checkedin')
 def checked_in():
     return render_template('checkedin.html')
 
 @app.route('/checkin/<meetingId>')
-@app.route('/checkin')
 def checkin():
     return render_template('checkin.html')
 
@@ -213,7 +210,6 @@ def get_overzicht(meetingId):
 
 @app.route('/sign_out/<meetingId>')
 def sign_out(meetingId):
-
     return render_template('sign_out.html')
 
 @app.patch('/sign_out/<meetingId>')
@@ -242,7 +238,6 @@ def student_post():
 
 @app.route('/student/<studentId>', methods=["GET", "DELETE"])
 def studentid(studentId):
-
     return render_template('studentid.html')
 
 @app.route('/api/student')
