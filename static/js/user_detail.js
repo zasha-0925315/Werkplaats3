@@ -18,7 +18,7 @@ async function update_user(id){
             method: 'PATCH'
         })
 
-        console.log("oopdate")
+        console.log("I need scissors! 61!")
 
     } catch(error) {
 
