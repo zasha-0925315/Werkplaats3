@@ -1,25 +1,25 @@
 //this is a mess hahahahahahahaidhiehfshfsiefjeifjsie 
 
-let array = [];
-let array2 = [];
+let th = ["user_id", "gebruikersnaam", "wachtwoord", "is_admin"];
+let td = [];
 
 const table = document.getElementById("user").rows;
 
-for(let i = 0; th = table[0].cells.item(i); i++){
-    //console.log(th.innerHTML);
-    array.push(th.innerHTML);
+for(let i = 0; tbody = table[1].cells.item(i); i++){ //gooit de txt van tabel in array
+    //console.log(tbody.innerHTML);
+    td.push(tbody.innerHTML);
 }
 
-for(let j = 0; tb = table[1].cells.item(j); j++){
-    //console.log(tb.innerHTML);
-    array2.push(tb.innerHTML);
+let shit = {}; //bovenste twee arrays dumpen in een object zodat ik t naar json kan dingesen
+for(let j = 0; j < th.length; j++){
+    shit[th[j]] = td[j];
 }
 
-array.forEach(function(val, index){
-    array[i]
-});
+let shitJSON = JSON.stringify(shit);
 
-console.log(array, array2);
+console.log(th, td);
+console.log(shit);
+console.log(shitJSON);
 
 /*
 //ar
