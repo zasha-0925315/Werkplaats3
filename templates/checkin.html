@@ -5,14 +5,14 @@
 {% endblock head %}
 {% block content %}
     <div id="checkin_content">
-        <div id="checkin-text">
-            <h3>Check-In</h3>
+        <div id="checkin_box">
+            <h3 id="checkin_text" ->Check-In</h3>
               </div>
                <span id="message"></span>
                 <div id="answer_box">
                    <div id="questions_input">
                     <label>Studenten id</br>
-                        <input id ='studentid' name="studentid"></label>
+                        <input id ='studentid' name="studentid" minlength="7" maxlength="7"></label>
                         {% if question is not none %}
                     <label>{{ question }}<br>
                         <input id ="vraag1" name="vraag1">
@@ -26,5 +26,4 @@
 {% block script %}
     {{ super() }}
     <script src="../static/js/checkin.js"></script>
-    <script src="../static/js/index.js"></script>
 {% endblock script %}

@@ -1,5 +1,5 @@
 const urlyx = window.location.pathname.split("/")
-urlId = urlyx[2]
+const urlId = urlyx[2]
 const url = '/api/checkin/' + urlId
 console.log(urlId)
 
@@ -8,6 +8,8 @@ const Checkin_close = document.querySelector('#Close_Checkin')
 const qrText = document.querySelector("#QR_Text")
 const generateButton = document.querySelector('#qr-gen')
 const timer = document.querySelector('#timer_border')
+
+
 
 const get_meeting = async () => {
     try {

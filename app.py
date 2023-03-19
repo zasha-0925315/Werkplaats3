@@ -171,7 +171,7 @@ def checked_in():
 def checkin_id(meetingId):
          meeting_info = meetingdb.get_meeting(meetingId)
          question = meeting_info[0]["question"]
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_info, question=question)
+         return render_template('checkin.html', meetingId=meetingId, meeting_info=meeting_info, question=question)
 
 @app.post('/checkin/<meetingId>')
 def post_checkin(meetingId):
