@@ -5,9 +5,9 @@
 {% endblock head %}
 {% block content %}
     <div>
-        <h1>Gebruiker {{userid}}</h1>
+        <h1>Gebruiker {{gb}}</h1>
         <div id="table">
-            <table>
+            <table id="user">
                 <thead>
                     <tr>
                         <th>Gebruikersid</th>
@@ -17,15 +17,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <td>{{id}}</td>
-                    <td>{{gb}}</td>
-                    <td>{{ww}}</td>
-                    <td>{{tp}}</td>
+                    <td >{{id}}</td>
+                    <td contenteditable="true">{{gb}}</td>
+                    <td contenteditable="true">{{ww}}</td>
+                    <td contenteditable="true">{{tp}}</td>
                 </tbody>
             </table>
         </div>
         <div id="admin_stuff">
-            <button><span><a href="{{url_for("user")}}" onclick="update_user('{{id}}')">Bewerk gebruiker</a></span></button>
+            <button><span><a href="" onclick="update_user('{{id}}')">Bewerk gebruiker</a></span></button>
             <button><span><a href="" onclick="delete_user('{{id}}')">Verwijder gebruiker</a></span></button>
         </div>
     </div>

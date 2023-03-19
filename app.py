@@ -346,8 +346,8 @@ def api_get_users():
         'users' : user_list
     })
 
-@app.route('/admin/user')
-def user():
+@app.route('/admin/users')
+def users():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
@@ -371,10 +371,15 @@ def userid(userId):
 def update_user(userId):
 
     print(userId)
+
+    #user = request.form.getlist()
+
+    #print(user)
+
     userdb.update_user(userId)
     flash("Gebruiker bewerkt!", "info")
 
-    return redirect(url_for('user'))
+    return render_template('userid.html')
 
 @app.delete('/user/<userId>')
 def delete_user(userId):
@@ -383,7 +388,7 @@ def delete_user(userId):
     userdb.delete_user(userId)
     flash("Gebruiker verwijderd!", "warning")
 
-    return redirect(url_for('user'))
+    return redirect(url_for('users'))
 
 @app.route('/login')
 def show_login():

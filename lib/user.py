@@ -27,7 +27,7 @@ class UserManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"SELECT * FROM gebruikers WHERE gebruikersnaam = ?", [id])
+            cursor.execute(f"SELECT * FROM gebruikers WHERE user_id = ?", [id])
             user = cursor.fetchone()
             
             conn.commit()

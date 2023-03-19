@@ -38,7 +38,7 @@ function fill_table(obj){
 // copypasta click function
 document.querySelectorAll("#user_table tbody tr").forEach(row => {
     row.addEventListener("click", function (){
-        window.location.href = "/user/" + this.cells[1].innerHTML
+        window.location.href = "/user/" + this.cells[0].innerHTML
     }, false)
 })
 

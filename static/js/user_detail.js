@@ -14,8 +14,12 @@ async function delete_user(id){
 
 async function update_user(id){
     try {
-        fetch('{{url_for("update_user")}}' + id, {
-            method: 'PATCH'
+        fetch('/user/' + id, {
+            method: 'PATCH',
+            /*headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(table)*/
         })
 
         console.log("I need scissors! 61!")
