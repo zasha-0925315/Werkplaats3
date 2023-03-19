@@ -59,12 +59,12 @@ class UserManagement(Database):
             raise e
         return user_list
 
-    def update_user(self):
+    def update_user(self, id):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("")
+            cursor.execute(f"SELECT * FROM gebruikers WHERE gebruikersnaam = ?", [id])
             conn.commit() 
 
             conn.close()
@@ -78,7 +78,7 @@ class UserManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"DELETE * FROM gebruikers WHERE gebruikersnaam = ?", [id])
+            cursor.execute(f"DELETE FROM gebruikers WHERE gebruikersnaam = ?", [id])
             conn.commit()
 
             #need to reset sqlite_sequence table bc user_id = autoincrement
