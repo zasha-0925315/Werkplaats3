@@ -451,7 +451,7 @@ def admin_teacher():
         return redirect(url_for('link'))
     return render_template('adminteacher.html')
 
-@app.route('/admin/teacher<teacherId>')
+@app.route('/admin/teacher/<teacherId>')
 def admin_teacherid(teacherId):
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
@@ -468,10 +468,8 @@ def admin_teacherid(teacherId):
     voornaam = docent_info[1]
     achternaam = docent_info[2]
     email = docent_info[3]
-    wachtwoord = docent_info[4]
-    admin = docent_info[5]
 
-    return render_template('adminteacherid.html', id=id, voornaam=voornaam, achternaam=achternaam, email=email, wachtwoord=wachtwoord, admin=admin)
+    return render_template('adminteacherid.html', id=id, voornaam=voornaam, achternaam=achternaam, email=email)
 
 @app.put('/admin/teacher/<teacherId>')
 def update_teacher(teacherId):
@@ -483,12 +481,10 @@ def update_teacher(teacherId):
     voornaam = docent_json.get('voornaam')
     achternaam = docent_json.get('achternaam')
     email = docent_json.get('email')
-    wachtwoord = docent_json.get('wachtwoord')
-    admin = docent_json.get('is_admin')
 
-    print(id, voornaam, achternaam, email, wachtwoord, admin)
+    print(id, voornaam, achternaam, email)
 
-    teacherdb.edit_teacher(voornaam, achternaam, id, email, wachtwoord, admin)
+    teacherdb.edit_teacher(voornaam, achternaam, email, id)
     flash("Docent is bewerkt!", "info")
 
     return redirect(url_for('admin_teacher'))
@@ -519,10 +515,8 @@ def add_teacher_post():
     voornaam = request.form.get('voornaam').strip()
     achternaam = request.form.get('achternaam').strip()
     email = request.form.get('email').strip()
-    wachtwoord = request.form.get('wachtwoord')
-    admin = request.form.get('admin').strip()
 
-    teacherdb.add_teacher(docentencode, voornaam, achternaam, email, wachtwoord, admin)
+    teacherdb.add_teacher(docentencode, voornaam, achternaam, email)
 
     flash("Docent aangemaakt!", "info")
     return redirect(url_for('admin_teacher'))

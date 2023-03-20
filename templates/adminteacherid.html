@@ -7,28 +7,30 @@
     <div>
         <h1>{{voornaam +" "+achternaam}}</h1>
             <div>
-                <table id="student_table">
+                <table id="docent_table">
                     <thead>
                         <tr>
-                            <th>Studentennummer</th>
+                            <th>Docentencode</th>
                             <th>Voornaam</th>
                             <th>Achternaam</th>
+                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
                         <td name="id">{{id}}</td>
                         <td contenteditable="true">{{voornaam}}</td>
                         <td contenteditable="true">{{achternaam}}</td>
+                        <td contenteditable="true">{{email}}</td>
                     </tbody>
                 </table>
             </div>
             <div id="admin_stuff">
-                <button><span><a href="" onclick="update_student('{{id}}')">Bewerk student</a></span></button>
-                <button><span><a href="" onclick="delete_student('{{id}}')">Verwijder student</a></span></button>
+                <button><span><a href="" onclick="update_docent('{{id}}')">Bewerk docent</a></span></button>
+                <button><span><a href="" onclick="delete_docent('{{id}}')">Verwijder docent</a></span></button>
             </div>
     </div>
 {% endblock %}
 {% block script %}
     {{ super() }}
-        <script src="/static/js/student_detail.js"></script>
+        <script src="/static/js/docent_detail.js"></script>
 {% endblock script %}
