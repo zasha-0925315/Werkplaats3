@@ -381,6 +381,10 @@ def userid(userId):
     ww = user_info[2]
     tp = user_info[3]
 
+    if user_info[0] == None:
+        flash("Gebruiker verwijderd!", "warning")
+        return redirect(url_for(users))
+
     return render_template('userid.html', userid = userId, id=id, gb=gb, ww=ww, tp=tp )
 
 @app.patch('/user/<userId>')
@@ -398,16 +402,15 @@ def update_user(userId):
     userdb.update_user(gebruikersnaam, wachtwoord, is_admin, user_id)
     flash("Gebruiker bewerkt!", "info")
 
-    return redirect(url_for('users'))
+    return redirect('users.html')
 
 @app.delete('/user/<userId>')
 def delete_user(userId):
 
-    print(userId)
     userdb.delete_user(userId)
     flash("Gebruiker verwijderd!", "warning")
 
-    return redirect(url_for('users'))
+    return render_template('users.html')
 
 @app.route('/login')
 def show_login():

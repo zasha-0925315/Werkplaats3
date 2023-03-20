@@ -43,7 +43,10 @@ async function update_user(id){
 async function delete_user(id){
     try {
         fetch('/user/' + id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Content-Type' : 'application/json'
+            }
         })
 
         console.log("delet")
