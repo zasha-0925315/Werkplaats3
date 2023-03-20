@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Nieuwe klas{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <h1>Voeg een nieuwe klas toe</h1>            
+        <div>
+            <form id="user" method="POST" action="/admin/klas/add">
+                <label for="klas">Klas</label>
+                <input type="text" name="klas" value="{{klas}}">
+                <button><span><type="submit" id="admin_stuff">Voeg klas toe</a></span></button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}

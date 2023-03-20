@@ -65,8 +65,19 @@ class StudentManagement(Database):
             raise e
         return students
     
-    def add_student(self):
-        pass
+    def add_student(self, studentennummer, voornaam, achternaam):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute("INSERT INTO student (id, voornaam, achternaam) VALUES (?, ?, ?)", [studentennummer, voornaam, achternaam])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
 
     def edit_student(self):
         pass

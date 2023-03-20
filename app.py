@@ -326,13 +326,35 @@ def admin():
         return redirect(url_for('link'))
     return render_template('admin.html')
 
-@app.route('/admin/class')
-def admin_class():
+@app.route('/admin/klas')
+def admin_klas():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     return render_template('class.html')
+
+@app.route('/admin/klas/add')
+def add_klas():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('addklas.html')
+
+@app.post('/admin/klas/add')
+def add_klas_post():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    klas = request.form.get('klas').strip()
+
+    classdb.add_class(klas)
+
+    flash("klas aangemaakt!", "info")
+    return redirect(url_for('admin_klas'))
 
 @app.route('/admin/student')
 def admin_student():
@@ -341,6 +363,30 @@ def admin_student():
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     return render_template('student.html')
+
+@app.route('/admin/student/add')
+def add_student():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('addstudent.html')
+
+@app.post('/admin/student/add')
+def add_student_post():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    studentennummer = request.form.get('studentennummer').strip()
+    voornaam = request.form.get('voornaam').strip()
+    achternaam = request.form.get('achternaam').strip()
+
+    studentdb.add_student(studentennummer, voornaam, achternaam)
+
+    flash("student aangemaakt!", "info")
+    return redirect(url_for('admin_student'))
 
 @app.route('/admin/teacher')
 def admin_teacher():
