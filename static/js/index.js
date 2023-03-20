@@ -1,5 +1,5 @@
 const urlyx = window.location.pathname.split("/")
-urlId = urlyx[2]
+const urlId = urlyx[2]
 const url = '/api/checkin/' + urlId
 console.log(urlId)
 
@@ -9,6 +9,8 @@ const qrText = document.querySelector("#QR_Text")
 const generateButton = document.querySelector('#qr-gen')
 const timer = document.querySelector('#timer_border')
 
+
+// fetch meeting from api //
 const get_meeting = async () => {
     try {
         const response = await fetch(url, {
@@ -51,7 +53,7 @@ function DateGetter(meetinginfo) {
         document.getElementById("mins").innerHTML = ":" + minutes
         document.getElementById("secs").innerHTML = ":" + seconds
 
-        // Display the message when countdown is over
+        // Displays the message when countdown is over //
         if (timeleft < 0) {
 
             clearInterval(myfunc);
@@ -70,16 +72,10 @@ function DateGetter(meetinginfo) {
     },);
 }
 
-// Run myfunc every second
-
 
 // This makes the elements #timer_border and Checkin-Sluit invisible/ nonexistant.
 
-
-
-
 timer.style.display = 'None'
-
 let checkin = document.querySelector("#Checkin-sluit")
 checkin.style.display = 'None'
 

@@ -24,7 +24,8 @@
     transition: all 200ms;
 }
 
-#button10 {
+#button10,
+.button1 {
     cursor: pointer;
     margin-bottom: 5px;
 }

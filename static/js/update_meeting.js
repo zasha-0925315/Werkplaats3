@@ -4,14 +4,71 @@ const AnswersButton = document.querySelector('#show_answers')
 const table = document.querySelector('#question_header')
 const tb = document.querySelector('#tbody_answers')
 const messageQuestion = document.querySelector('#message_question')
-const url = window.location.pathname.split('/')
-const urlId = url[2]
-const meetingId = url[2]
+const urlyx = window.location.pathname.split('/')
+const urlId = urlyx[2]
+const url = '/api/checkin/' + urlId
+
 
 
 // hide the antwoord table first.. //
 table.style.display = 'None'
 tb.style.display = 'None'
+
+// fetch meeting from api //
+const get_meetingq = async () => {
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        const meetinginfo = data["meeting_info"]
+        console.log(meetinginfo)
+        if (response.error) {
+            console.log("ouwh error")
+        } else if (!response.ok) {
+            console.log("Some non-200 HTTP response code or something")
+        } else {
+            makeQuestion(meetinginfo)
+        }
+    }
+
+    catch (e) {
+        console.log("Some error with fetching JSON from Meetings server: " + e)
+    }
+}
+
+// checks the meetinginfo from the fetch, if the meeting has yet to happen it will display the normal screen, otherwise it shows the text below //
+function makeQuestion(meetinginfo) {
+    let Vardate = (meetinginfo[0]["date"] + " " + meetinginfo[0]["start_time"]);
+    let currentTime = new Date().getTime();
+    let timeleft = new Date(Vardate) - currentTime;
+    if (timeleft > 0) {
+        questionButton.addEventListener('click', function () {
+            if (question.value !== '') {
+                get_question(), changeTitle();
+                if (messageQuestion) {
+                    messageQuestion.remove();
+                    console.log(message)
+                }
+            } else {
+                checkVraag();
+            }
+        });
+    } else {
+        questionButton.addEventListener('click', function () {
+            noVraag();
+            console.log(noVraag)
+        }
+        )
+    }
+};
+
+
+
+
 
 
 // Sends the question in JSON format to the database //
@@ -49,6 +106,11 @@ function checkVraag() {
     document.querySelector('#message_question').innerHTML = message;
 };
 
+function noVraag() {
+    message = 'Meeting is voorbij' + '<br>'
+    document.querySelector('#message_question').innerHTML = message;
+}
+
 // makes the Antwoord , result table appear //
 function appearTable() {
     table.style.display = '';
@@ -61,7 +123,7 @@ function disappearTable() {
 }
 // if 'maak vraag' question has value then it will trigger the JSON function and change the title. if there is no value it will trigger a message that warns the user
 //
-questionButton.addEventListener('click', function () {
+function yesQuestion() {
     if (question.value !== '') {
         get_question(), changeTitle();
         if (messageQuestion) {
@@ -72,7 +134,12 @@ questionButton.addEventListener('click', function () {
     } else {
         checkVraag();
     }
-});
+};
+
+function nopeQuestion() {
+    console.log("hhhh?")
+
+}
 // toggles ON/OFF the answer table in meetingid.html //
 AnswersButton.addEventListener('click', function () {
     if (table.style.display === 'none') {
@@ -116,6 +183,6 @@ function fillAnswers(answers) {
 
 // loads the answers only if the DOM is loaded //
 // loadTitle();
+get_meetingq()
 
 document.addEventListener('DOMContentLoaded', get_answers());
-
