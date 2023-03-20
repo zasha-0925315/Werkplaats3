@@ -386,7 +386,8 @@ def userid(userId):
 @app.patch('/user/<userId>')
 def update_user(userId):
 
-    print(userId)
+    json = request.get_json()
+    print(json)
 
     userdb.update_user(userId)
     flash("Gebruiker bewerkt!", "info")
