@@ -1,32 +1,26 @@
 //do we even need async here?
 
-const admin = document.querySelector('input[name=is_admin]:checked') !== null;
-let adminInt;
-
-console.log(admin);
-
-if(!admin){
-    adminInt = 0;
-} else {
-    adminInt = 1;
-}
-
-console.log(adminInt);
-
-/*function toJson(){
+function toJson(){
     let userid = parseInt(document.querySelector('input[name=user_id').value);
-    let admin = parseInt(document.querySelector('input[name=is_admin').value);
+    const admin = document.querySelector('input[name=is_admin]:checked') !== null;
+    let adminInt;
 
+    if(!admin){
+        adminInt = 0;
+    } else {
+        adminInt = 1;
+    }
+    
     let json = JSON.stringify({
         user_id : userid,
         gebruikersnaam : document.querySelector('input[name=gebruikersnaam').value,
         wachtwoord : document.querySelector('input[name=wachtwoord').value,
-        is_admin : admin
+        is_admin : adminInt
     });
     console.log(json);
 
     return json
-}*/
+}
 
 async function update_user(id){
     try {
