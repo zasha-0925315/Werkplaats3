@@ -1,21 +1,16 @@
 //do we even need async here?
 
-let tering = document.querySelector('input[name=user_id').value;
-let tyfus = document.querySelector('input[name=is_admin').value;
+let userid = parseInt(document.querySelector('input[name=user_id').value);
+let admin = parseInt(document.querySelector('input[name=is_admin').value);
 
-let fuck = parseInt(tering);
-let arse = parseInt(tyfus);
-
-//console.log(fuck, arse);
-
-let shit = JSON.stringify({
-    user_id : fuck,
+let json = JSON.stringify({
+    user_id : userid,
     gebruikersnaam : document.querySelector('input[name=gebruikersnaam').value,
     wachtwoord : document.querySelector('input[name=wachtwoord').value,
-    is_admin : arse
+    is_admin : admin
 });
 
-console.log(shit);
+console.log(json);
 
 async function update_user(id){
     try {
@@ -23,8 +18,8 @@ async function update_user(id){
             method: 'PATCH',
             headers: {
                 'Content-Type' : 'application/json'
-            }/*,
-            body: JSON.stringify(table)*/
+            },
+            body: json
         })
 
         console.log("I need scissors! 61!")
