@@ -387,7 +387,7 @@ def userid(userId):
 def update_user(userId):
 
     print(userId)
-    
+
     userdb.update_user(userId)
     flash("Gebruiker bewerkt!", "info")
 

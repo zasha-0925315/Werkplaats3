@@ -6,15 +6,16 @@
 {% block content %}
     <div>
         <h1>Gebruiker {{gb}}</h1>            
-        <div id="user">
-            <form action="">
-                <label for="">Gebruikersid</label>
-                <input name="id" value="{{id}}" readonly>
-                <label for="">Gebruikersnaam</label>
+        <div>
+            <form id="user" method="POST" action="/user/{{id}}">
+                <input type="hidden" name="_method" value="PATCH">
+                <label for="user_id">Gebruikersid</label>
+                <input class="id" name="id" value="{{id}}" readonly>
+                <label for="gebruikersnaam">Gebruikersnaam</label>
                 <input type="text" name="gebruikersnaam" value="{{gb}}">
-                <label for="">Wachtwoord</label>
+                <label for="wachtwoord">Wachtwoord</label>
                 <input type="text" name="wachtwoord" value="{{ww}}">
-                <label for="">Type</label>
+                <label for="is_admin">Type</label>
                 <input type="checkbox" name="type" value="{{tp}}" {{ "checked" if tp == 1 }}>
             </form>
         </div>
