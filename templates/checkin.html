@@ -11,10 +11,10 @@
                <span id="message"></span>
                 <div id="answer_box">
                    <div id="questions_input">
-                    <label>Studenten id</br>
+                    <label id="question_text">Studenten id</br>
                         <input id ='studentid' name="studentid" minlength="7" maxlength="7"></label>
                         {% if question is not none %}
-                    <label>{{ question }}<br>
+                    <label id="question_text">{{ question }}<br>
                         <input id ="vraag1" name="vraag1">
                     </label>
                    </div>

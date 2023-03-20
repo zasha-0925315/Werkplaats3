@@ -71,3 +71,11 @@
 #button_checkin {
     cursor: pointer;
 }
+
+#checkin_content #student_text {
+    margin-bottom: 10px;
+}
+
+#checkin_content #question_text {
+    margin-top: 10px;
+}

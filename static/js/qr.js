@@ -15,6 +15,7 @@ function decode(qrReader, selectedDeviceId) {
             qrText.style.display = 'None'
             qrRes.style.fontWeight = '500'
             qrRes.style.fontSize = '30px'
+            window.location.href = result.text
         })
         .catch((err) => {
             console.error(err)
