@@ -390,12 +390,13 @@ def update_user(userId):
     print(json)
 
     user_id = json.get('user_id')
-    gebruikersnaam = json.get('gebruikersnaam')
+    #gebruikersnaam = json.get('gebruikersnaam')
+    gebruikersnaam = 'test'
     wachtwoord = json.get('wachtwoord')
     is_admin = json.get('is_admin')
     print(user_id, gebruikersnaam, wachtwoord, is_admin)
 
-    userdb.update_user(userId)
+    userdb.update_user(gebruikersnaam, wachtwoord, is_admin, user_id)
     flash("Gebruiker bewerkt!", "info")
 
     return redirect(url_for('users'))
