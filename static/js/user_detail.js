@@ -25,7 +25,7 @@ function toJson(){
 async function update_user(id){
     try {
         fetch('/user/' + id, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
                 'Content-Type' : 'application/json'
             },

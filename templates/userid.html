@@ -7,8 +7,7 @@
     <div>
         <h1>Gebruiker {{gb}}</h1>            
         <div>
-            <form id="user" method="POST" action="/user/{{id}}">
-                <input type="hidden" name="_method" value="PATCH">
+            <form id="user" action="/user/{{id}}">
                 <label for="id">Gebruikersid</label>
                 <input class="id" name="user_id" value="{{id}}" readonly>
                 <label for="gebruikersnaam">Gebruikersnaam</label>

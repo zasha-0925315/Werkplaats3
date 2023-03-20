@@ -374,7 +374,6 @@ def userid(userId):
         return redirect(url_for('link'))
 
     user_info = userdb.get_user_detail(userId)
-    print(user_info)
 
     if user_info is None:
         flash("Gebruiker verwijderd of bestaat niet!", "warning")
@@ -416,7 +415,7 @@ def add_user_post():
     flash("Gebruiker aangemaakt!", "info")
     return redirect(url_for('users'))
 
-@app.patch('/user/<userId>')
+@app.put('/user/<userId>')
 def update_user(userId):
 
     json = request.get_json()
