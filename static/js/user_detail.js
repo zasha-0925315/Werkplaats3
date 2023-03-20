@@ -34,7 +34,7 @@ async function update_user(id){
 
 async function delete_user(id){
     try {
-        fetch('{{url_for("delete_user")}}' + id, {
+        fetch('/user/' + id, {
             method: 'DELETE'
         })
 
