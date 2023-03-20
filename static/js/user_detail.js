@@ -1,16 +1,19 @@
 //do we even need async here?
 
-let userid = parseInt(document.querySelector('input[name=user_id').value);
-let admin = parseInt(document.querySelector('input[name=is_admin').value);
+function toJson(){
+    let userid = parseInt(document.querySelector('input[name=user_id').value);
+    let admin = parseInt(document.querySelector('input[name=is_admin').value);
 
-let json = JSON.stringify({
-    user_id : userid,
-    gebruikersnaam : document.querySelector('input[name=gebruikersnaam').value,
-    wachtwoord : document.querySelector('input[name=wachtwoord').value,
-    is_admin : admin
-});
+    let json = JSON.stringify({
+        user_id : userid,
+        gebruikersnaam : document.querySelector('input[name=gebruikersnaam').value,
+        wachtwoord : document.querySelector('input[name=wachtwoord').value,
+        is_admin : admin
+    });
+    console.log(json);
 
-console.log(json);
+    return json
+}
 
 async function update_user(id){
     try {
@@ -19,7 +22,7 @@ async function update_user(id){
             headers: {
                 'Content-Type' : 'application/json'
             },
-            body: json
+            body: toJson()
         })
 
         console.log("I need scissors! 61!")
