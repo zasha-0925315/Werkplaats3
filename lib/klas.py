@@ -46,7 +46,7 @@ class ClassManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO klas (id) VALUES (?)", [klas])
+            cursor.execute(f"INSERT INTO klas (id) VALUES (?)", [klas])
             conn.commit() 
 
             conn.close()
@@ -60,7 +60,7 @@ class ClassManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("UPDATE klas SET id = ? WHERE id = ?", [klas])
+            cursor.execute(f"UPDATE klas SET id = ? WHERE id = ?", [klas])
             conn.commit() 
 
             conn.close()
@@ -75,7 +75,7 @@ class ClassManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("DELETE FROM klas WHERE id = ?", [klas])
+            cursor.execute(f"DELETE FROM klas WHERE id = ?", [klas])
             conn.commit() 
 
             conn.close()

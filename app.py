@@ -351,13 +351,64 @@ def add_klas_post():
     flash("klas aangemaakt!", "info")
     return redirect(url_for('admin_klas'))
 
+@app.route('/api/adminstudent')
+def api_get_students_admin():
+    s_list = studentdb.get_student_admin()
+
+    return jsonify({
+        'studenten' : s_list
+    })
+
 @app.route('/admin/student')
 def admin_student():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
-    return render_template('student.html')
+    return render_template('adminstudent.html')
+
+@app.route('/admin/student/<studentId>')
+def admin_studentid(studentId):
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    student_info = studentdb.get_student(studentId)
+
+    if student_info is None:
+        flash("Student verwijderd!", "warning")
+        return redirect(url_for('admin_student'))
+
+    id = student_info[0]
+    voornaam = student_info[1]
+    achternaam = student_info[2]
+
+    return render_template('adminstudentid.html', id=id, voornaam=voornaam, achternaam=achternaam)
+
+@app.put('/admin/student/<studentId>')
+def update_student(studentId):
+
+    student_json = request.get_json()
+    print(student_json)
+
+    id = student_json.get('id')
+    voornaam = student_json.get('voornaam')
+    achternaam = student_json.get('achternaam')
+
+    print(id, voornaam, achternaam)
+
+    studentdb.edit_student(voornaam, achternaam, id)
+    flash("Student bewerkt!", "info")
+
+    return redirect(url_for('admin_student'))
+
+@app.delete('/admin/student/<studentId>')
+def delete_student(studentId):
+
+    studentdb.delete_student(studentId)
+    
+    return flash("Student verwijderd!", "warning")
 
 @app.route('/admin/student/add')
 def add_student():
@@ -380,8 +431,16 @@ def add_student_post():
 
     studentdb.add_student(studentennummer, voornaam, achternaam)
 
-    flash("student aangemaakt!", "info")
+    flash("Student aangemaakt!", "info")
     return redirect(url_for('admin_student'))
+
+@app.route('/api/adminteacher')
+def api_get_teachers_admin():
+    t_list = teacherdb.get_teacher_admin()
+
+    return jsonify({
+        'docenten' : t_list
+    })
 
 @app.route('/admin/teacher')
 def admin_teacher():
@@ -390,6 +449,82 @@ def admin_teacher():
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     return render_template('teacher.html')
+
+@app.route('/admin/teacher<teacherId>')
+def admin_teacherid(teacherId):
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    docent_info = teacherdb.get_teacher(teacherId)
+
+    if docent_info is None:
+        flash("Docent is verwijderd!", "warning")
+        return redirect(url_for('admin_teacher'))
+
+    id = docent_info[0]
+    voornaam = docent_info[1]
+    achternaam = docent_info[2]
+    email = docent_info[3]
+    wachtwoord = docent_info[4]
+    admin = docent_info[5]
+
+    return render_template('adminstudentid.html', id=id, voornaam=voornaam, achternaam=achternaam, email=email, wachtwoord=wachtwoord, admin=admin)
+
+@app.put('/admin/teacher/<teacherId>')
+def update_teacher(teacherId):
+
+    docent_json = request.get_json()
+    print(docent_json)
+
+    id = docent_json.get('id')
+    voornaam = docent_json.get('voornaam')
+    achternaam = docent_json.get('achternaam')
+    email = docent_json.get('email')
+    wachtwoord = docent_json.get('wachtwoord')
+    admin = docent_json.get('is_admin')
+
+    print(id, voornaam, achternaam, email, wachtwoord, admin)
+
+    teacherdb.edit_teacher(voornaam, achternaam, id, email, wachtwoord, admin)
+    flash("Docent is bewerkt!", "info")
+
+    return redirect(url_for('admin_teacher'))
+
+@app.delete('/admin/teacher/<teacherId>')
+def delete_teacher(teacherId):
+
+    teacherdb.delete_teacher(teacherId)
+    
+    return flash("Docent is verwijderd!", "warning")
+
+@app.route('/admin/teacher/add')
+def add_teacher():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('addteacher.html')
+
+@app.post('/admin/teacher/add')
+def add_teacher_post():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    docentencode = request.form.get('docentencode').strip()
+    voornaam = request.form.get('voornaam').strip()
+    achternaam = request.form.get('achternaam').strip()
+    email = request.form.get('email').strip()
+    wachtwoord = request.form.get('wachtwoord')
+    admin = request.form.get('admin').strip()
+
+    teacherdb.add_teacher(docentencode, voornaam, achternaam, email, wachtwoord, admin)
+
+    flash("Docent aangemaakt!", "info")
+    return redirect(url_for('admin_teacher'))
 
 @app.route('/api/users')
 def api_get_users():
