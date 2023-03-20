@@ -5,21 +5,23 @@
 {% endblock head %}
 {% block content %}
     <div>
-        <h1>Gebruiker {{gb}}</h1>
+        <h1>Gebruiker {{email}}</h1>
         <div id="table">
             <table id="user">
                 <thead>
                     <tr>
-                        <th>Gebruikersid</th>
-                        <th>Gebruikersnaam</th>
+                        <th>id</th>
+                        <th>Email</th>
                         <th>Wachtwoord</th>
+                        <th>Docent</th>
                         <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
                     <td name="id">{{id}}</td>
-                    <td contenteditable="true">{{gb}}</td>
+                    <td contenteditable="true">{{em}}</td>
                     <td contenteditable="true">{{ww}}</td>
+                    <td contenteditable="true">{{dc}}</td>
                     <td contenteditable="true">{{tp}}</td>
                 </tbody>
             </table>

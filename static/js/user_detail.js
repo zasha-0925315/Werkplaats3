@@ -1,13 +1,14 @@
 //do we even need async here?
 
 function toJson(){
-    let userid = parseInt(document.getElementById("user").rows[1].cells[0].innerHTML);
-    let admin = parseInt(document.getElementById("user").rows[1].cells[3].innerHTML);
+    let id = parseInt(document.getElementById("user").rows[1].cells[0].innerHTML);
+    let admin = parseInt(document.getElementById("user").rows[1].cells[4].innerHTML);
 
     let json = JSON.stringify({
-        user_id : userid,
-        gebruikersnaam : document.getElementById("user").rows[1].cells[1].innerHTML,
+        id : id,
+        email : document.getElementById("user").rows[1].cells[1].innerHTML,
         wachtwoord : document.getElementById("user").rows[1].cells[2].innerHTML,
+        docent : document.getElementById("user").rows[1].cells[3].innerHTML,
         is_admin : admin
     });
 

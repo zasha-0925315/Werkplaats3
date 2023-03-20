@@ -30,8 +30,9 @@ function fill_table(obj){
 
     for(const user of users){
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + user["user_id"] + '</td>'
-        + '<td>' + user["gebruikersnaam"] + '</td>'
+        tr.innerHTML = '<td>' + user["id"] + '</td>'
+        + '<td>' + user["email"] + '</td>'
+        + '<td>' + user["docent"] + '</td>'
         + '<td>' + user["is_admin"] + '</td>';
         tb.appendChild(tr);
     }

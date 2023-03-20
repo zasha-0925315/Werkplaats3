@@ -7,8 +7,8 @@ from os import environ, path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 
-from lib.login import Login
-from lib.user import UserManagement
+from lib.login import AccountManagement
+#from lib.user import Login
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
@@ -36,8 +36,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 # database shiz
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
-login = Login(DB_FILE)
-userdb = UserManagement(DB_FILE)
+logindb = AccountManagement(DB_FILE)
+#userdb = UserManagement(DB_FILE)
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
@@ -449,7 +449,7 @@ def admin_teacher():
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
-    return render_template('teacher.html')
+    return render_template('adminteacher.html')
 
 @app.route('/admin/teacher<teacherId>')
 def admin_teacherid(teacherId):
@@ -471,7 +471,7 @@ def admin_teacherid(teacherId):
     wachtwoord = docent_info[4]
     admin = docent_info[5]
 
-    return render_template('adminstudentid.html', id=id, voornaam=voornaam, achternaam=achternaam, email=email, wachtwoord=wachtwoord, admin=admin)
+    return render_template('adminteacherid.html', id=id, voornaam=voornaam, achternaam=achternaam, email=email, wachtwoord=wachtwoord, admin=admin)
 
 @app.put('/admin/teacher/<teacherId>')
 def update_teacher(teacherId):
@@ -529,7 +529,7 @@ def add_teacher_post():
 
 @app.route('/api/users')
 def api_get_users():
-    user_list = userdb.get_user_json()
+    user_list = logindb.get_account_json()
     #print(user_list)
     return jsonify({ 
         'users' : user_list
@@ -550,18 +550,19 @@ def userid(userId):
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
 
-    user_info = userdb.get_user_detail(userId)
+    user_info = logindb.get_account_detail(userId)
 
     if user_info is None:
         flash("Gebruiker verwijderd of bestaat niet!", "warning")
         return redirect(url_for('users'))
     
     id = user_info[0]
-    gb = user_info[1]
+    em = user_info[1]
     ww = user_info[2]
-    tp = user_info[3]
+    dc = user_info[3]
+    tp = user_info[4]
 
-    return render_template('userid.html', userid = userId, id=id, gb=gb, ww=ww, tp=tp )
+    return render_template('userid.html', userid = userId, id=id, em=em, ww=ww, dc=dc, tp=tp )
 
 @app.route('/admin/user/add')
 def add_user():
@@ -578,8 +579,9 @@ def add_user_post():
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     
-    gebruikersnaam = request.form.get('gebruikersnaam').strip()
+    email = request.form.get('email').strip()
     wachtwoord = request.form.get('wachtwoord')
+    docent = request.form.get('docent').strip()
     admin =request.form.get('admin')
 
     if admin == "on":
@@ -587,7 +589,7 @@ def add_user_post():
     else:
         admin = 0
 
-    userdb.create_user(gebruikersnaam, wachtwoord, admin)
+    logindb.create_account(email, wachtwoord, docent, admin)
 
     flash("Gebruiker aangemaakt!", "info")
     return redirect(url_for('users'))
@@ -595,16 +597,17 @@ def add_user_post():
 @app.put('/user/<userId>')
 def update_user(userId):
 
-    json = request.get_json()
-    print(json)
+    acc_json = request.get_json()
+    print(acc_json)
 
-    user_id = json.get('user_id')
-    gebruikersnaam = json.get('gebruikersnaam')
-    wachtwoord = json.get('wachtwoord')
-    is_admin = json.get('is_admin')
-    print(user_id, gebruikersnaam, wachtwoord, is_admin)
+    id = acc_json.get('id')
+    email = acc_json.get('email')
+    wachtwoord = acc_json.get('wachtwoord')
+    docent = acc_json.get('docent')
+    is_admin = acc_json.get('is_admin')
+    print(id, email, wachtwoord, docent, is_admin)
 
-    userdb.update_user(gebruikersnaam, wachtwoord, is_admin, user_id)
+    logindb.update_account(email, wachtwoord, docent, is_admin, id)
     flash("Gebruiker bewerkt!", "info")
 
     return redirect('users.html')
@@ -612,7 +615,7 @@ def update_user(userId):
 @app.delete('/user/<userId>')
 def delete_user(userId):
 
-    userdb.delete_user(userId)
+    logindb.delete_account(userId)
     
     return flash("Gebruiker verwijderd!", "warning")
 

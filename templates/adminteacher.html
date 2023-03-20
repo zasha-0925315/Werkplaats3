@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Studenten{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <main>
+        <h1>Studenten</h1>
+        {% if session.username == 'admin' %}
+            <div id="admin_stuff">
+                <button><span><a href="/admin/student/add">Voeg student toe</a></span></button>
+            </div>
+        {% endif %}
+        <div id="search_container">
+            <label>
+                <input type="search" id="search_input" placeholder="Zoek">
+            </label>
+        </div>
+        <div id="student_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Studentennummer</th>
+                        <th>Voornaam</th>
+                        <th>Achternaam</th>
+                    </tr>
+                </thead>
+              <tbody></tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/admin_student.js"></script>
+{% endblock script %}
