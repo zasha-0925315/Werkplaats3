@@ -7,7 +7,7 @@
 {% endblock head %}
 {% block content %}
     <main>
-        <h1>Scan QR Code</h1>
+        <h1 id="QR_Scan_Text">Scan QR Code</h1>
         <div id="test">
         </div>
 
@@ -16,12 +16,13 @@
         </div>
 
         <div id="qrresult">
-            <p id="qrres" onchange="change()"></p>
+            <p id="qrres"></p>
         </div>
-        <button onclick="clickY()"></button>
+       
     </main>
 {% endblock content %}
 {% block script %}
     {{ super() }}
     <script src="../static/js/qr.js"></script>
+    <script src="../static/js/qrgen.js"></script>
 {% endblock script %}

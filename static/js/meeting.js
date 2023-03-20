@@ -83,7 +83,7 @@ const get_meeting = async () => {
                             'presence': presence,
                             'meeting': data["presence_list"][student]["meeting"],
                             'student': data["presence_list"][student]["student"],
-                            'reason': "Verandert door leraar"
+                            'reason': "Veranderd door leraar"
                         }),
                         headers: {
                             'Content-type': 'application/json'

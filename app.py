@@ -1,5 +1,6 @@
 import ast
 import os
+
 import datetime
 
 from os import environ, path
@@ -176,7 +177,7 @@ def checkin():
 def checkin_id(meetingId):
          meeting_info = meetingdb.get_meeting(meetingId)
          question = meeting_info[0]["question"]
-         return render_template('checkin.html', meetingId=meetingId, meetings=meeting_info, question=question)
+         return render_template('checkin.html', meetingId=meetingId, meeting_info=meeting_info, question=question)
 
 @app.post('/checkin/<meetingId>')
 def post_checkin(meetingId):
@@ -665,4 +666,4 @@ def teapot():
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
-    #app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG, ssl_context=FLASK_RUN_CERT)
+    #app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG, ssl_context=ctx)

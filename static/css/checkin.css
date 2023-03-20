@@ -27,7 +27,7 @@
     margin-top: 5px;
 }
 
-#checkin-text {
+#checkin_box {
     display: flex;
     text-align: center;
     margin-top: 20px;
@@ -70,4 +70,12 @@
 
 #button_checkin {
     cursor: pointer;
+}
+
+#checkin_content #student_text {
+    margin-bottom: 10px;
+}
+
+#checkin_content #question_text {
+    margin-top: 10px;
 }
