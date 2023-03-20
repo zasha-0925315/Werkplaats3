@@ -41,8 +41,19 @@ class ClassManagement(Database):
             raise e
         return enrollment
     
-    def add_class(self):
-        pass
+    def add_class(self, klas):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute("INSERT INTO klas (id) VALUES (?)", [klas])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
 
     def edit_class(self):
         pass

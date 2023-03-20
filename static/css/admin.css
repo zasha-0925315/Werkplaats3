@@ -1,10 +1,18 @@
 /* kek */
 
-#ding, #admin_stuff {
+#admin-panel, #admin_stuff {
     text-align: center;
     margin: auto;
 }
 
-#ding, #admin_stuff a {
+#admin-panel, #admin_stuff a, button {
     text-decoration: none;
+}
+
+#user label{
+    font-weight: 800;
+}
+
+.id{
+    cursor: not-allowed;
 }

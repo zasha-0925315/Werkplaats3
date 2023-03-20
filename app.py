@@ -32,9 +32,6 @@ app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['JSON_SORT_KEYS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
-#csrf = CSRFProtect() # dingetje
-#csrf.init_app(app)
-
 # database shiz
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
@@ -324,13 +321,35 @@ def admin():
         return redirect(url_for('link'))
     return render_template('admin.html')
 
-@app.route('/admin/class')
-def admin_class():
+@app.route('/admin/klas')
+def admin_klas():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     return render_template('class.html')
+
+@app.route('/admin/klas/add')
+def add_klas():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('addklas.html')
+
+@app.post('/admin/klas/add')
+def add_klas_post():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    klas = request.form.get('klas').strip()
+
+    classdb.add_class(klas)
+
+    flash("klas aangemaakt!", "info")
+    return redirect(url_for('admin_klas'))
 
 @app.route('/admin/student')
 def admin_student():
@@ -339,6 +358,30 @@ def admin_student():
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     return render_template('student.html')
+
+@app.route('/admin/student/add')
+def add_student():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('addstudent.html')
+
+@app.post('/admin/student/add')
+def add_student_post():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    studentennummer = request.form.get('studentennummer').strip()
+    voornaam = request.form.get('voornaam').strip()
+    achternaam = request.form.get('achternaam').strip()
+
+    studentdb.add_student(studentennummer, voornaam, achternaam)
+
+    flash("student aangemaakt!", "info")
+    return redirect(url_for('admin_student'))
 
 @app.route('/admin/teacher')
 def admin_teacher():
@@ -372,8 +415,11 @@ def userid(userId):
         return redirect(url_for('link'))
 
     user_info = userdb.get_user_detail(userId)
-    print(user_info)
 
+    if user_info is None:
+        flash("Gebruiker verwijderd of bestaat niet!", "warning")
+        return redirect(url_for('users'))
+    
     id = user_info[0]
     gb = user_info[1]
     ww = user_info[2]
@@ -381,34 +427,58 @@ def userid(userId):
 
     return render_template('userid.html', userid = userId, id=id, gb=gb, ww=ww, tp=tp )
 
+@app.route('/admin/user/add')
+def add_user():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('adduser.html')
+
+@app.post('/admin/user/add')
+def add_user_post():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    gebruikersnaam = request.form.get('gebruikersnaam').strip()
+    wachtwoord = request.form.get('wachtwoord')
+    admin =request.form.get('admin')
+
+    if admin == "on":
+        admin = 1
+    else:
+        admin = 0
+
+    userdb.create_user(gebruikersnaam, wachtwoord, admin)
+
+    flash("Gebruiker aangemaakt!", "info")
+    return redirect(url_for('users'))
+
 @app.put('/user/<userId>')
 def update_user(userId):
 
-    print(userId)
+    json = request.get_json()
+    print(json)
 
-    user = request.get_json()
-    print(user)
-
-    user_id = user.get('user_id')
-    gebruikersnaam = user.get('gebruikersnaam')
-    wachtwoord = user.get('wachtwoord')
-    is_admin = user.get('is_admin')
-
-    print(gebruikersnaam, wachtwoord, is_admin, user_id)
+    user_id = json.get('user_id')
+    gebruikersnaam = json.get('gebruikersnaam')
+    wachtwoord = json.get('wachtwoord')
+    is_admin = json.get('is_admin')
+    print(user_id, gebruikersnaam, wachtwoord, is_admin)
 
     userdb.update_user(gebruikersnaam, wachtwoord, is_admin, user_id)
     flash("Gebruiker bewerkt!", "info")
 
-    return redirect(url_for('users'))
+    return redirect('users.html')
 
 @app.delete('/user/<userId>')
 def delete_user(userId):
 
-    print(userId)
     userdb.delete_user(userId)
-    flash("Gebruiker verwijderd!", "warning")
-
-    return redirect(url_for('users'))
+    
+    return flash("Gebruiker verwijderd!", "warning")
 
 @app.route('/login')
 def show_login():
