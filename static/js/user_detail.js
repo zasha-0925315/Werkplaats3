@@ -1,48 +1,30 @@
-//this is a mess hahahahahahahaidhiehfshfsiefjeifjsie 
+//do we even need async here?
 
-let th = ["user_id", "gebruikersnaam", "wachtwoord", "is_admin"];
-let td = [];
+function toJson(){
+    let userid = parseInt(document.getElementById("user").rows[1].cells[0].innerHTML);
+    let admin = parseInt(document.getElementById("user").rows[1].cells[3].innerHTML);
 
-const table = document.getElementById("user").rows;
-
-for(let i = 0; tbody = table[1].cells.item(i); i++){ //gooit de txt van tabel in array
-    //console.log(tbody.innerHTML);
-    td.push(tbody.innerHTML);
-}
-
-let shit = {}; //bovenste twee arrays dumpen in een object zodat ik t naar json kan dingesen
-for(let j = 0; j < th.length; j++){
-    shit[th[j]] = td[j];
-}
-
-let shitJSON = JSON.stringify(shit);
-
-console.log(th, td);
-console.log(shit);
-console.log(shitJSON);
-
-/*
-//ar
-const table = document.getElementById("user").rows;
-
-Array.from(table).forEach(row => {
-    const cell = Array.from(row.cells);
-    cell.forEach(cell => {
-        console.log(cell.innerHTML);
+    let json = JSON.stringify({
+        user_id : userid,
+        gebruikersnaam : document.getElementById("user").rows[1].cells[1].innerHTML,
+        wachtwoord : document.getElementById("user").rows[1].cells[2].innerHTML,
+        is_admin : admin
     });
-}); 
-*/
 
-//todo: shit om tabel shit te laten onthouden want lmao.
+    return json
+}
 
-
-async function delete_user(id){
+async function update_user(id){
     try {
-        fetch('{{url_for("delete_user")}}' + id, {
-            method: 'DELETE'
-        })
+        fetch('/user/' + id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: toJson()
+        });
 
-        console.log("delet")
+        console.log("I hear it's amazing when the famous purple stuffed worm in flap-jaw space with the tuning fork does a raw blink on Hara-Kiri Rock.")
 
     } catch(error) {
 
@@ -50,14 +32,10 @@ async function delete_user(id){
     }
 }
 
-async function update_user(id){
+async function delete_user(id){
     try {
-        fetch('/user/' + id, {
-            method: 'PATCH',
-            /*headers: {
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify(table)*/
+        fetch('{{url_for("delete_user")}}' + id, {
+            method: 'DELETE'
         })
 
         console.log("I need scissors! 61!")
@@ -67,5 +45,3 @@ async function update_user(id){
         console.log(error);
     }
 }
-
-//document.addEventListener('DOMContentLoaded', get_users());

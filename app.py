@@ -383,16 +383,22 @@ def userid(userId):
 
     return render_template('userid.html', userid = userId, id=id, gb=gb, ww=ww, tp=tp )
 
-@app.patch('/user/<userId>')
+@app.put('/user/<userId>')
 def update_user(userId):
 
     print(userId)
 
-    #user = request.form.getlist()
+    user = request.get_json()
+    print(user)
 
-    #print(user)
+    user_id = user.get('user_id')
+    gebruikersnaam = user.get('gebruikersnaam')
+    wachtwoord = user.get('wachtwoord')
+    is_admin = user.get('is_admin')
 
-    userdb.update_user(userId)
+    print(gebruikersnaam, wachtwoord, is_admin, user_id)
+
+    userdb.update_user(gebruikersnaam, wachtwoord, is_admin, user_id)
     flash("Gebruiker bewerkt!", "info")
 
     return redirect(url_for('users'))
