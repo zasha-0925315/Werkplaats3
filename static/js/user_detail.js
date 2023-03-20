@@ -46,7 +46,7 @@ async function delete_user(id){
             method: 'DELETE'
         });
 
-        console.log("delet")
+        console.log("I hear it's amazing when the famous purple stuffed worm in flap-jaw space with the tuning fork does a raw blink on Hara-Kiri Rock.")
 
     } catch(error) {
 

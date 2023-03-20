@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Nieuwe gebruiker{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <h1>Voeg nieuw gebruiker toe</h1>            
+        <div>
+            <form id="user" method="POST" action="/admin/user/add">
+                <label for="gebruikersnaam">Gebruikersnaam</label>
+                <input type="text" name="gebruikersnaam" value="{{gebruikersnaam}}">
+                <label for="wachtwoord">Wachtwoord</label>
+                <input type="password" name="wachtwoord" value="{{wachtwoord}}">
+                <label for="type">Type</label>
+                <input type="checkbox" name="is_admin" value="{{admin}}">
+                <button><span><type="submit" id="admin_stuff">Voeg gebruiker toe</a></span></button>
+            </form>
+            
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}

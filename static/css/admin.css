@@ -5,7 +5,7 @@
     margin: auto;
 }
 
-#admin-panel, #admin_stuff a {
+#admin-panel, #admin_stuff a, button {
     text-decoration: none;
 }
 

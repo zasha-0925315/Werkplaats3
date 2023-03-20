@@ -387,6 +387,35 @@ def userid(userId):
 
     return render_template('userid.html', userid = userId, id=id, gb=gb, ww=ww, tp=tp )
 
+@app.route('/admin/user/add')
+def add_user():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('adduser.html')
+
+@app.post('/admin/user/add')
+def add_user_post():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    gebruikersnaam = request.form.get('gebruikersnaam').strip()
+    wachtwoord = request.form.get('wachtwoord')
+    admin =request.form.get('admin')
+
+    if admin == "on":
+        admin = 1
+    else:
+        admin = 0
+
+    userdb.create_user(gebruikersnaam, wachtwoord, admin)
+
+    flash("Gebruiker aangemaakt!", "info")
+    return redirect(url_for('users'))
+
 @app.patch('/user/<userId>')
 def update_user(userId):
 
@@ -408,9 +437,8 @@ def update_user(userId):
 def delete_user(userId):
 
     userdb.delete_user(userId)
-    flash("Gebruiker verwijderd!", "warning")
-
-    return redirect(url_for('users'))
+    
+    return flash("Gebruiker verwijderd!", "warning")
 
 @app.route('/login')
 def show_login():

@@ -8,12 +8,12 @@ class UserManagement(Database):
     def __init__(self, db_file):
         super().__init__(db_file)
 
-    def create_user(self):
+    def create_user(self, gebruikersnaam, wachtwoord, admin):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("")
+            cursor.execute("INSERT INTO gebruikers (gebruikersnaam, wachtwoord, is_admin) VALUES (?, ?, ?)", [gebruikersnaam, wachtwoord, admin])
             conn.commit() 
 
             conn.close()
