@@ -5,9 +5,7 @@ import datetime
 from os import environ, path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
-#from flask_wtf import CSRFProtect
 
-#from lib.forms import LoginForm
 from lib.login import Login
 from lib.user import UserManagement
 from lib.student import StudentManagement
