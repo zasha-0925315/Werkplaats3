@@ -79,8 +79,31 @@ class StudentManagement(Database):
             print("yeet")
             raise e
 
-    def edit_student(self):
-        pass
+    def edit_student(self, studentennummer, voornaam, achternaam):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
 
-    def delete_student(self):
-        pass
+            cursor.execute("UPDATE student SET voornaam = ?, achternaam = ? WHERE id = ?", [voornaam, achternaam, studentennummer])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+
+    def delete_student(self, studentennummer):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"gebruikers ", [id])
+            cursor.execute("DELETE FROM student WHERE id = ?", [studentennummer])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e

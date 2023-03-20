@@ -55,8 +55,31 @@ class ClassManagement(Database):
             print("yeet")
             raise e
 
-    def edit_class(self):
-        pass
+    def edit_class(self, klas):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
 
-    def delete_class(self):
-        pass
+            cursor.execute("UPDATE klas SET id = ? WHERE id = ?", [klas])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+
+
+    def delete_class(self, klas):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute("DELETE FROM klas WHERE id = ?", [klas])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
