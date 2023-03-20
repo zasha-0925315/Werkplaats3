@@ -376,14 +376,14 @@ def userid(userId):
     user_info = userdb.get_user_detail(userId)
     print(user_info)
 
+    if user_info is None:
+        flash("Gebruiker verwijderd of bestaat niet!", "warning")
+        return redirect(url_for('users'))
+    
     id = user_info[0]
     gb = user_info[1]
     ww = user_info[2]
     tp = user_info[3]
-
-    if user_info[0] == None:
-        flash("Gebruiker verwijderd!", "warning")
-        return redirect(url_for(users))
 
     return render_template('userid.html', userid = userId, id=id, gb=gb, ww=ww, tp=tp )
 
@@ -410,7 +410,7 @@ def delete_user(userId):
     userdb.delete_user(userId)
     flash("Gebruiker verwijderd!", "warning")
 
-    return render_template('users.html')
+    return redirect(url_for('users'))
 
 @app.route('/login')
 def show_login():
