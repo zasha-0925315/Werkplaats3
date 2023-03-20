@@ -5,24 +5,16 @@
 {% endblock head %}
 {% block content %}
     <div>
-        <h1>Gebruiker {{gb}}</h1>
-        <div id="table">
-            <table id="user">
-                <thead>
-                    <tr>
-                        <th>Gebruikersid</th>
-                        <th>Gebruikersnaam</th>
-                        <th>Wachtwoord</th>
-                        <th>Type</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div>
+        <h1>Gebruiker {{gb}}</h1>            
+        <div id="user">
             <form action="">
+                <label for="">Gebruikersid</label>
                 <input name="id" value="{{id}}" readonly>
+                <label for="">Gebruikersnaam</label>
                 <input type="text" name="gebruikersnaam" value="{{gb}}">
+                <label for="">Wachtwoord</label>
                 <input type="text" name="wachtwoord" value="{{ww}}">
+                <label for="">Type</label>
                 <input type="checkbox" name="type" value="{{tp}}" {{ "checked" if tp == 1 }}>
             </form>
         </div>
