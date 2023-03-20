@@ -389,6 +389,12 @@ def update_user(userId):
     json = request.get_json()
     print(json)
 
+    user_id = json.get('user_id')
+    gebruikersnaam = json.get('gebruikersnaam')
+    wachtwoord = json.get('wachtwoord')
+    is_admin = json.get('is_admin')
+    print(user_id, gebruikersnaam, wachtwoord, is_admin)
+
     userdb.update_user(userId)
     flash("Gebruiker bewerkt!", "info")
 
