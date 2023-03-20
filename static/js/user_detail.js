@@ -1,9 +1,21 @@
 //do we even need async here?
 
+let tering = document.querySelector('input[name=user_id').value;
+let tyfus = document.querySelector('input[name=is_admin').value;
 
+let fuck = parseInt(tering);
+let arse = parseInt(tyfus);
 
+//console.log(fuck, arse);
 
+let shit = JSON.stringify({
+    user_id : fuck,
+    gebruikersnaam : document.querySelector('input[name=gebruikersnaam').value,
+    wachtwoord : document.querySelector('input[name=wachtwoord').value,
+    is_admin : arse
+});
 
+console.log(shit);
 
 async function update_user(id){
     try {

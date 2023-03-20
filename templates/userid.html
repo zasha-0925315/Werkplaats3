@@ -9,14 +9,14 @@
         <div>
             <form id="user" method="POST" action="/user/{{id}}">
                 <input type="hidden" name="_method" value="PATCH">
-                <label for="user_id">Gebruikersid</label>
-                <input class="id" name="id" value="{{id}}" readonly>
+                <label for="id">Gebruikersid</label>
+                <input class="id" name="user_id" value="{{id}}" readonly>
                 <label for="gebruikersnaam">Gebruikersnaam</label>
                 <input type="text" name="gebruikersnaam" value="{{gb}}">
                 <label for="wachtwoord">Wachtwoord</label>
                 <input type="text" name="wachtwoord" value="{{ww}}">
-                <label for="is_admin">Type</label>
-                <input type="checkbox" name="type" value="{{tp}}" {{ "checked" if tp == 1 }}>
+                <label for="type">Type</label>
+                <input type="checkbox" name="is_admin" value="{{tp}}" {{ "checked" if tp == 1 }}>
             </form>
         </div>
         <div id="admin_stuff">
