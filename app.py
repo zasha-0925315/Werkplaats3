@@ -348,4 +348,4 @@ def logout():
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
-    #app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG, ssl_context=FLASK_RUN_CERT)
+    #app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG, ssl_context=ctx)
