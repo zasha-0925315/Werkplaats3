@@ -30,7 +30,7 @@ async function update_user(id){
                 'Content-Type' : 'application/json'
             },
             body: toJson()
-        })
+        });
 
         console.log("I need scissors! 61!")
 
@@ -43,11 +43,8 @@ async function update_user(id){
 async function delete_user(id){
     try {
         fetch('/user/' + id, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        })
+            method: 'DELETE'
+        });
 
         console.log("delet")
 
