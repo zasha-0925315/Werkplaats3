@@ -59,16 +59,13 @@ function makeQuestion(meetinginfo) {
         });
     } else {
         questionButton.addEventListener('click', function () {
-            if (question.value !== '') {
-                // if (messageQuestion) {
-                //     messageQuestion.remove();
-                noVraag();
-                console.log(noVraag)
-                // }
-            }
-        })
+            noVraag();
+            console.log(noVraag)
+        }
+        )
     }
-}
+};
+
 
 
 
