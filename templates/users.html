@@ -5,12 +5,12 @@
 {% endblock head %}
 {% block content %}
     <main>
-        <h1>Gebruikers</h1>
+        <h1>Login</h1>
         <div id="user_table">
             <table>
                 <thead>
                     <tr>
-                        <th>Gebruikersid</th>
+                        <th id="doei">id</th>
                         <th>Email</th>
                         <th>Docent</th>
                         <th>Type</th>
@@ -21,7 +21,7 @@
         </div>
         {% if session.username == 'admin' %}
             <div id="admin_stuff">
-                <button><span><a href="/admin/user/add">Voeg gebruiker toe</a></span></button>
+                <button><span><a href="/admin/user/add">Voeg login toe</a></span></button>
             </div>
         {% endif %}
     </main>

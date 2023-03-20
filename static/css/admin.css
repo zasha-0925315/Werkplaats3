@@ -9,10 +9,14 @@
     text-decoration: none;
 }
 
-#user label{
+#user label {
     font-weight: 800;
 }
 
 .id{
     cursor: not-allowed;
+}
+
+#doei {
+    display: none;
 }

@@ -30,7 +30,7 @@ function fill_table(obj){
 
     for(const user of users){
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + user["id"] + '</td>'
+        tr.innerHTML = '<td id="doei">' + user["id"] + '</td>'
         + '<td>' + user["email"] + '</td>'
         + '<td>' + user["docent"] + '</td>'
         + '<td>' + user["is_admin"] + '</td>';
