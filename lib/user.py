@@ -64,8 +64,6 @@ class UserManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            print(gebruikersnaam, wachtwoord, admin, id)
-
             cursor.execute(f"UPDATE gebruikers SET gebruikersnaam = ?, wachtwoord = ?, is_admin = ? WHERE user_id = ?", [gebruikersnaam, wachtwoord, admin, id])
             conn.commit() 
 
