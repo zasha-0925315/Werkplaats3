@@ -636,6 +636,7 @@ def enrollmentid(enrollmentId):
         return redirect(url_for('link'))
     
     enrollment = enrollmentdb.get_single_enrollment(enrollmentId)
+    class_list = classdb.get_class()
 
     if enrollment is None:
         return redirect(url_for('admin_enrollment'))
@@ -646,7 +647,30 @@ def enrollmentid(enrollmentId):
     achternaam = enrollment[4]
     klas = enrollment[2]
 
-    return render_template('enrollmentid.html', enid = enrollmentId, id=id, stnr=stnr, voornaam=voornaam, achternaam=achternaam, klas=klas)
+    return render_template('enrollmentid.html', enid = enrollmentId, id=id, stnr=stnr, voornaam=voornaam, achternaam=achternaam, klas=klas, klassen=class_list)
+
+@app.put('/enrollment/<enrollmentId>')
+def update_enrollment(enrollmentId):
+
+    enrollment_json = request.get_json()
+    print(enrollment_json)
+
+    id = enrollment_json.get('id')
+    klas = enrollment_json.get('klas')
+
+    print(id, klas)
+
+    enrollmentdb.edit_enrollment(id, klas)
+    flash("Inschrijving is bewerkt!", "info")
+
+    return redirect(url_for('admin_teacher'))
+
+@app.delete('/enrollment/<enrollmentId>')
+def delete_enrollment(enrollmentId):
+
+    enrollmentdb.delete_enrollment(enrollmentId)
+    
+    return flash("Inschrijving is verwijderd!", "warning")
 
 @app.route('/login')
 def show_login():
