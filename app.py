@@ -655,12 +655,12 @@ def update_enrollment(enrollmentId):
     enrollment_json = request.get_json()
     print(enrollment_json)
 
-    id = enrollment_json.get('id')
+    student = enrollment_json.get('student')
     klas = enrollment_json.get('klas')
 
     print(id, klas)
 
-    enrollmentdb.edit_enrollment(id, klas)
+    enrollmentdb.edit_enrollment(student, klas)
     flash("Inschrijving is bewerkt!", "info")
 
     return redirect(url_for('admin_teacher'))

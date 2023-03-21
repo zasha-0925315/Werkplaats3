@@ -23,7 +23,7 @@
                     <td>{{voornaam}}</td>
                     <td>{{achternaam}}</td>
                     <td>
-                        <select><option disabled selected>{{klas}}</option>
+                        <select id="klas"><option disabled selected>{{klas}}</option>
                             {% for klas in klassen %}
                                 <option>{{ klas[0] }}</option>
                             {% endfor %}
@@ -40,5 +40,5 @@
 {% endblock %}
 {% block script %}
     {{ super() }}
-    <script src="/static/js/user_detail.js"></script>
+    <script src="/static/js/enrollment_detail.js"></script>
 {% endblock script %}
