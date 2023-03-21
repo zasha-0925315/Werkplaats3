@@ -50,7 +50,7 @@ checkindb = CheckinManagement(DB_FILE)
 # routes
 @app.before_request
 def check_login():
-    if request.endpoint not in ["base","show_login", "handle_login"]:
+    if request.endpoint not in ["base","show_login", "handle_login", 'meeting']:
         if not session.get("logged_in", "username"):
             return redirect(url_for('show_login'))
 
@@ -71,8 +71,8 @@ def qr():
 
 @app.route('/meeting')
 def meeting():
-    if not session.get('logged_in'):
-        return redirect(url_for('show_login'))
+    # if not session.get('logged_in'):
+    #     return redirect(url_for('show_login'))
     
     return render_template('meeting_list.html')
 
@@ -113,6 +113,8 @@ def meeting_post():
 
 @app.route('/meeting/<meetingId>', methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
 def meetingid(meetingId):
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
     match request.method:
         case 'GET':
             meeting_info = meetingdb.get_meeting(meetingId)
@@ -691,6 +693,8 @@ def register():
 
 @app.route("/QRgen/<meetingId>", methods = ["GET"])
 def qrgen(meetingId):
+    if not session.get('logged_in'):
+       return redirect(url_for('show_login'))
     match request.method:
       case 'GET':
        meeting_info = meetingdb.get_meeting(meetingId)
