@@ -30,7 +30,7 @@ class TeacherManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("SELECT * FROM docent")
+            cursor.execute("SELECT * FROM docent WHERE id = ?", [id])
             teacher = cursor.fetchone()
             conn.commit() 
 
@@ -110,7 +110,7 @@ class TeacherManagement(Database):
             cursor = conn.cursor()
 
             cursor.execute(f"UPDATE docent SET voornaam = ?, achternaam = ?, email = ? WHERE id = ?", [voornaam, achternaam, email, id])
-            cursor.execute(f"UPDATE docent SET email = (SELECT email FROM login WHERE email = docent.email)")
+            cursor.execute(f"UPDATE login SET email = (SELECT email FROM docent WHERE id = login.docent)")
             conn.commit() 
 
             conn.close()
