@@ -9,4 +9,49 @@ class EnrollmentManagement(Database):
         super().__init__(db_file)
         
     def get_enrollment(self):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+            cursor.row_factory = sqlite3.Row 
+
+            cursor.execute(f"SELECT inschrijving.id, inschrijving.student, inschrijving.klas, student.voornaam, student.achternaam "
+                           f"FROM inschrijving INNER JOIN student "
+                           f"ON inschrijving.student=student.id")
+            enrollment = cursor.fetchall()
+
+            e_list = []
+            for enrollments in enrollment:
+                e_list.append({e: enrollments[e] for e in enrollments.keys()})
+            print(e_list)
+
+            conn.commit()
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return e_list
+    
+    def get_single_enrollment(self, id):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+ 
+            cursor.execute(f"SELECT inschrijving.id, inschrijving.student, inschrijving.klas, student.voornaam, student.achternaam "
+                           f"FROM inschrijving INNER JOIN student "
+                           f"ON inschrijving.student=student.id "
+                           "WHERE inschrijving.id = ?", [id])
+            enrollment = cursor.fetchone()
+
+            print(enrollment)
+
+            conn.commit()
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return enrollment
+
+    def edit_enrollment(self):
         pass

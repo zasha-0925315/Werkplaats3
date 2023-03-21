@@ -18,12 +18,10 @@ async function get_accounts(){
     }
 }
 
-
 function fill_table(obj){
     const table = document.querySelector("#user_table table");
     const accounts = obj.accounts;
     const tb = document.querySelector("#user_table tbody");
-    
     
     tb.replaceChildren()
     table.appendChild(tb);

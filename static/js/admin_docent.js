@@ -28,7 +28,7 @@ function fill_table(docenten){
         + '<td>' + docent["voornaam"] + '</td>'
         + '<td>' + docent["achternaam"] + '</td>'
         + '<td>' + docent["email"] + '</td>'
-        + '<td>' + docent["wachtwoord"] + '</td>'
+        + '<td id="doei">' + docent["wachtwoord"] + '</td>'
         + '<td>' + docent["is_admin"] + '</td>';
         tb.appendChild(tr);
     }
