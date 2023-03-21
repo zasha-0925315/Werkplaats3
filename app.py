@@ -652,10 +652,11 @@ def add_enrollment_post():
 
     print(student, klas)
 
-    enrollmentdb.add_enrollment(student, klas)
+    #enrollmentdb.add_enrollment(student, klas)
 
     flash("asdfghjkl!", "info")
-    return redirect(url_for('admin_enrollment'))
+    #return redirect(url_for('admin_enrollment'))
+    return redirect(url_for('add_enrollment'))
 
 @app.route('/enrollment/<enrollmentId>')
 def enrollmentid(enrollmentId):
