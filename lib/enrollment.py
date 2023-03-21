@@ -53,8 +53,8 @@ class EnrollmentManagement(Database):
             raise e
         return enrollment
 
-    def edit_enrollment(self):
+    def edit_enrollment(self, id, klas):
         pass
 
-    def delete_enrollment(self):
+    def delete_enrollment(self, id):
         pass
