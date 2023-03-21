@@ -110,7 +110,7 @@ class TeacherManagement(Database):
             cursor = conn.cursor()
 
             cursor.execute(f"UPDATE docent SET voornaam = ?, achternaam = ?, email = ? WHERE id = ?", [voornaam, achternaam, email, id])
-            cursor.execute(f"UPDATE docent SET email = (SELECT email FROM login WHERE email = docent.docent)", [email])
+            cursor.execute(f"UPDATE docent SET email = (SELECT email FROM login WHERE email = docent.email)")
             conn.commit() 
 
             conn.close()
