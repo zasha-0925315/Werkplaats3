@@ -5,13 +5,11 @@
 {% endblock head %}
 {% block content %}
     <div id="checkin_content">
-        <div id="checkin_box">
-            <h3 id="checkin_text" ->Check-In</h3>
-              </div>
+            <h3 id="checkin_text">Check-In</h3>
                <span id="message"></span>
                 <div id="answer_box">
                    <div id="questions_input">
-                    <label id="student_text">Studenten id</br>
+                    <label id="student_text">Studenten Id:</br>
                         <input id ='studentid' name="studentid" minlength="7" maxlength="7"></label>
                         {% if question is not none %}
                     <label id="question_text">{{ question }}<br>
