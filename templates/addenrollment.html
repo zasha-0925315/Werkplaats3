@@ -11,13 +11,13 @@
                 <label for="student">Student</label>
                 <select id="student"><option disabled selected>Kies student</option>
                     {% for student in studenten %}
-                        <option value="{{student[0]}}">{{student[0]}}</option>
+                        <option name ="student" value="{{student}}">{{student[0]}}</option>
                     {% endfor %}
                 </select>
                 <label for="klas">Klas</label>
                 <select id="klas"><option disabled selected>Kies klas</option>
                     {% for klas in klassen %}
-                        <option value="{{klas[0]}}">{{klas[0]}}</option>
+                        <option name="klas" value="{{klas}}">{{klas[0]}}</option>
                     {% endfor %}
                 </select>
                 <button type="submit" id="admin_stuff" class="button1">Voeg student aan klas toe</a></button>

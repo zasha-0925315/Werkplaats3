@@ -32,9 +32,7 @@ class StudentManagement(Database):
             cursor.execute("SELECT id FROM student")
             students = cursor.fetchall()
 
-            print(students)
             conn.commit() 
-
             conn.close()
 
         except OperationalError as e:
