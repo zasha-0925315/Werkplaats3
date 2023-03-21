@@ -613,6 +613,14 @@ def delete_account(accountId):
     
     return flash("Gebruiker verwijderd!", "warning")
 
+@app.route('/admin/enrollment')
+def admin_enrollment():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    return render_template('enrollment.html')
+
 @app.route('/login')
 def show_login():
     session["username"] = request.form.get("username")

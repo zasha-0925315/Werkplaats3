@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Inschrijvingen{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <main>
+        <div id="enrollment_table">
+            <h1>Inschrijvingen</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                    </tr>
+                </thead>
+              <tbody></tbody>
+            </table>
+        </div>
+        <div id="admin_stuff">
+            <button><span><a href="/admin">aaa</a></span></button>
+            <button><span><a href="/admin">aaa</a></span></button>
+        </div>
+    </main>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/.js"></script>
+{% endblock script %}
