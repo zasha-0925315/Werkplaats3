@@ -48,7 +48,7 @@ header button:hover {
     transition: 200ms;
 }
 
-header button a:hover {
+header button:hover a {
     color: var(--hr-red);
 }
 
