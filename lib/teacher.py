@@ -73,7 +73,7 @@ class TeacherManagement(Database):
             raise e
         return t_list
 
-    def add_teacher(self, voornaam, achternaam, email):
+    def add_teacher(self, id, voornaam, achternaam, email):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()

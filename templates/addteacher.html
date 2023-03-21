@@ -7,15 +7,15 @@
     <div>
         <h1>Voeg een nieuwe docent toe</h1>            
         <div>
-            <form id="user" method="POST" action="/admin/teacher/add">
+            <form id="teacher" method="POST" action="/admin/teacher/add">
                 <label for="id">Docentencode</label>
-                <input type="number" name="id" value="{{id}}">
+                <input type="text" name="docentencode" value="{{docentencode}}">
                 <label for="voornaam">Voornaam</label>
                 <input type="text" name="voornaam" value="{{voornaam}}">
                 <label for="achternaam">Achternaam</label>
                 <input type="text" name="achternaam" value="{{achternaam}}">
                 <label for="email">Email</label>
-                <input type="text" name="achternaam" value="{{email}}">
+                <input type="email" pattern=".+@hr\.nl" name="email" value="{{email}}" required>
                 <button><span><type="submit" id="admin_stuff">Voeg docent toe</a></span></button>
             </form>
             
