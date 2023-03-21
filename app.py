@@ -59,7 +59,7 @@ def check_login():
 
 @app.route("/", methods=["GET","POST"])
 def link():
-    teacher_list = teacherdb.get_teacher()
+    teacher_list = teacherdb.get_all_teachers()
     return render_template('link.html', teachers=teacher_list)
 
 # Url for QR Code scanning
@@ -88,7 +88,7 @@ def creat_meeting():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     
-    teacher_list = teacherdb.get_teacher()
+    teacher_list = teacherdb.get_all_teachers()
     class_list = classdb.get_class()
     
     return render_template('create_meeting.html', teachers=teacher_list, classes=class_list)
@@ -267,7 +267,7 @@ def api_get_teachers():
 def teacher():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
-    t_list = teacherdb.get_teacher()
+    t_list = teacherdb.get_all_teachers()
     return render_template('teacher.html', teachers=t_list)
 
 @app.post('/teacher') # shortcut voor methods = ["POST"]
