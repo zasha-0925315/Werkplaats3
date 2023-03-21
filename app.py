@@ -57,7 +57,7 @@ def check_login():
 # def index():
 #     return render_template("index.html", title=index)
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/link", methods=["GET","POST"])
 def link():
     teacher_list = teacherdb.get_all_teachers()
     return render_template('link.html', teachers=teacher_list)
@@ -169,9 +169,6 @@ def api_get_docentmeeting():
 def checked_in():
     return render_template('checkedin.html')
 
-@app.route('/checkin/<meetingId>')
-def checkin():
-    return render_template('checkin.html')
 
 @app.route('/checkin/<meetingId>', methods=["GET", "POST"])
 def checkin_id(meetingId):
@@ -319,7 +316,7 @@ def admin():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('index'))
     return render_template('admin.html')
 
 @app.route('/admin/klas')
@@ -643,7 +640,7 @@ def handle_login():
 @app.route("/logout")
 def logout():
     session.pop('logged_in', 'username')
-    return redirect(url_for("link"))
+    return redirect(url_for("index"))
 
 @app.route("/register")
 def register():
@@ -667,6 +664,11 @@ def QR_checkin(meetingId):
 @app.route("/teapot")
 def teapot():
     return render_template("teapot.html"), 418
+
+@app.route('/index')
+@app.route('/')
+def index():
+    return render_template('home.html')
 
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')

@@ -13,6 +13,7 @@
 @import "qr.css";
 @import "checkin.css";
 @import "admin.css";
+@import 'home.css';
 
 :root {
     --main-font: 'Poppins', sans-serif;
