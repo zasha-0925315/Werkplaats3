@@ -23,7 +23,7 @@
                     <td>{{voornaam}}</td>
                     <td>{{achternaam}}</td>
                     <td>
-                        <select><option disabled selected>{{klas}}</option>
+                        <select id="klas"><option disabled selected>{{klas}}</option>
                             {% for klas in klassen %}
                                 <option>{{ klas[0] }}</option>
                             {% endfor %}
@@ -33,12 +33,12 @@
             </table>
         </div>
         <div id="admin_stuff">
-            <button><span><a href="" onclick="update_enrollment('{{id}}')">Bewerk inschrijving</a></span></button>
-            <button><span><a href="" onclick="delete_enrollment('{{id}}')">Verwijder inschrijving</a></span></button>
+            <button><span><a href="" onclick="update_enrollment('{{id}}')" class="button1">Bewerk inschrijving</a></span></button>
+            <button><span><a href="" onclick="delete_enrollment('{{id}}')" class="button1">Verwijder inschrijving</a></span></button>
         </div>
     </div>
 {% endblock %}
 {% block script %}
     {{ super() }}
-    <script src="/static/js/user_detail.js"></script>
+    <script src="/static/js/enrollment_detail.js"></script>
 {% endblock script %}

@@ -53,8 +53,44 @@ class EnrollmentManagement(Database):
             raise e
         return enrollment
 
-    def edit_enrollment(self, id, klas):
-        pass
+    def add_enrollment(self, student, klas):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+ 
+            cursor.execute(f"INSERT INTO inschrijving (klas, student) VALUES(?, ?)", [klas, student])
+
+            conn.commit()
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+
+    def edit_enrollment(self, student, klas):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+ 
+            cursor.execute(f"UPDATE inschrijving SET klas = ? WHERE student = ?", [klas, student])
+
+            conn.commit()
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
 
     def delete_enrollment(self, id):
-        pass
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+ 
+            cursor.execute(f"DELETE FROM inschrijving WHERE id = ?", [id])
+  
+            conn.commit()
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e

@@ -7,7 +7,7 @@ function toJson(){
         student : student,
         voornaam : document.getElementById("inschrijving").rows[1].cells[2].innerHTML,
         achternaam : document.getElementById("inschrijving").rows[1].cells[3].innerHTML,
-        klas : document.getElementById("inschrijving").rows[1].cells[4].innerHTML
+        klas : document.getElementById("klas").value
     });
 
     return json
@@ -21,12 +21,13 @@ async function update_enrollment(id){
                 'Content-Type' : 'application/json'
             },
             body: toJson()
-        });
+        }).then(()=> {
+            window.location.reload();
+        })
 
         console.log("Kidneys!! I've got new kidneys! ...I don't like the colour.")
 
     } catch(error) {
-
         console.log(error);
     }
 }

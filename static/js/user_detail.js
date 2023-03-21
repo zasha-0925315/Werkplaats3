@@ -23,7 +23,9 @@ async function update_account(id){
                 'Content-Type' : 'application/json'
             },
             body: toJson()
-        });
+        }).then(()=> {
+            window.location.reload();
+        })
 
         console.log("I hear it's amazing when the famous purple stuffed worm in flap-jaw space with the tuning fork does a raw blink on Hara-Kiri Rock.")
 

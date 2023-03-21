@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Nieuwe inschrijving{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <main>
+        <h1>Voeg student toe aan een klas</h1>            
+        <div>
+            <form id="inschrijving" method="POST" action="/admin/enrollment/add">
+                <label for="student">Student</label>
+                <select id="student" name="student"><option disabled selected>Kies student</option>
+                    {% for student in studenten %}
+                        <option value="{{student[0]}}">{{student[0]}}</option>
+                    {% endfor %}
+                </select>
+                <label for="klas">Klas</label>
+                <select id="klas" name="klas"><option disabled selected>Kies klas</option>
+                    {% for klas in klassen %}
+                        <option value="{{klas[0]}}">{{klas[0]}}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" id="admin_stuff" class="button1">Voeg student aan klas toe</a></button>
+            </form>
+        </div>
+    </main>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}
