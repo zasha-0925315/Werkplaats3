@@ -16,7 +16,10 @@
     margin-bottom: 5px;
 }
 
-#user label {
+#user label, 
+#student label, 
+#inschrijving label,
+#teacher label {
     font-weight: 800;
 }
 
