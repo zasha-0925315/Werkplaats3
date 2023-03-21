@@ -12,6 +12,7 @@ from lib.login import AccountManagement
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
+from lib.enrollment import EnrollmentManagement
 from lib.meeting import MeetingManagement
 from lib.presence import PresenceManagement
 from lib.checkin import CheckinManagement
@@ -41,6 +42,7 @@ logindb = AccountManagement(DB_FILE)
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
+enrollmentdb = EnrollmentManagement(DB_FILE)
 meetingdb = MeetingManagement(DB_FILE)
 presencedb = PresenceManagement(DB_FILE)
 checkindb = CheckinManagement(DB_FILE)
@@ -613,6 +615,14 @@ def delete_account(accountId):
     
     return flash("Gebruiker verwijderd!", "warning")
 
+@app.route('/api/inschrijvingen')
+def api_get_enrollments():
+    e_list = enrollmentdb.get_enrollment()
+
+    return jsonify({
+        'inschrijvingen' : e_list
+    })
+
 @app.route('/admin/enrollment')
 def admin_enrollment():
     if not session.get('logged_in'):
@@ -620,6 +630,26 @@ def admin_enrollment():
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     return render_template('enrollment.html')
+
+@app.route('/enrollment/<enrollmentId>')
+def enrollmentid(enrollmentId):
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    enrollment = enrollmentdb.get_single_enrollment(enrollmentId)
+
+    if enrollment is None:
+        return redirect(url_for('admin_enrollment'))
+    
+    id = enrollment[0]
+    stnr = enrollment[1]
+    voornaam = enrollment[3]
+    achternaam = enrollment[4]
+    klas = enrollment[2]
+
+    return render_template('enrollmentid.html', enid = enrollmentId, id=id, stnr=stnr, voornaam=voornaam, achternaam=achternaam, klas=klas)
 
 @app.route('/login')
 def show_login():

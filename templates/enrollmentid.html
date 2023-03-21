@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Login details{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <h1>Inschrijving van {{voornaam + " "+ achternaam}}</h1>
+        <div id="table">
+            <table id="inschrijving">
+                <thead>
+                    <tr>
+                        <th id="doei">id</th>
+                        <th>Studentennummer</th>
+                        <th>Voornaam</th>
+                        <th>Achternaam</th>
+                        <th>Klas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td id="doei" name="id">{{id}}</td>
+                    <td>{{stnr}}</td>
+                    <td>{{voornaam}}</td>
+                    <td>{{achternaam}}</td>
+                    <td>{{klas}}</td>
+                </tbody>
+            </table>
+        </div>
+        <div id="admin_stuff">
+            <button><span><a href="" onclick="update_enrollment('{{id}}')">Bewerk inschrijving</a></span></button>
+            <button><span><a href="" onclick="delete_enrollment('{{id}}')">Verwijder inschrijving</a></span></button>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="/static/js/user_detail.js"></script>
+{% endblock script %}
