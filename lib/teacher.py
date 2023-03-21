@@ -8,12 +8,12 @@ class TeacherManagement(Database):
     def __init__(self, db_file):
         super().__init__(db_file)
 
-    def get_teacher(self, id):
+    def get_teacher(self):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("SELECT * FROM docent WHERE id = ?", [id])
+            cursor.execute("SELECT * FROM docent")
             teacher = cursor.fetchone()
             conn.commit() 
 
