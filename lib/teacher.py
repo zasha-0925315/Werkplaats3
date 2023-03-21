@@ -8,7 +8,24 @@ class TeacherManagement(Database):
     def __init__(self, db_file):
         super().__init__(db_file)
 
-    def get_teacher(self):
+    def get_all_teachers(self):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute("SELECT * FROM docent")
+            teacher = cursor.fetchall()
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+
+        return teacher
+    
+    def get_teacher(self, id):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
@@ -93,6 +110,7 @@ class TeacherManagement(Database):
             cursor = conn.cursor()
 
             cursor.execute(f"UPDATE docent SET voornaam = ?, achternaam = ?, email = ? WHERE id = ?", [voornaam, achternaam, email, id])
+            cursor.execute(f"UPDATE docent SET email = (SELECT email FROM login WHERE email = docent.docent)", [email])
             conn.commit() 
 
             conn.close()
