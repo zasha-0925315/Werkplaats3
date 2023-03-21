@@ -22,7 +22,13 @@
                     <td>{{stnr}}</td>
                     <td>{{voornaam}}</td>
                     <td>{{achternaam}}</td>
-                    <td>{{klas}}</td>
+                    <td>
+                        <select><option disabled selected>{{klas}}</option>
+                            {% for klas in klassen %}
+                                <option>{{ klas[0] }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
                 </tbody>
             </table>
         </div>
