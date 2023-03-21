@@ -1,11 +1,11 @@
-async function get_users(){
+async function get_accounts(){
     try {
-        const response = await fetch('../api/users');
-        const users = await response.json();
+        const response = await fetch('../api/accounts');
+        const accounts = await response.json();
 
-        console.log(`${JSON.stringify(users)}`);
+        console.log(`${JSON.stringify(accounts)}`);
 
-        fill_table(users)
+        fill_table(accounts)
 
     } catch(error) {
         const err = document.querySelector("#user_table")
@@ -21,28 +21,28 @@ async function get_users(){
 
 function fill_table(obj){
     const table = document.querySelector("#user_table table");
-    const users = obj.users;
+    const accounts = obj.accounts;
     const tb = document.querySelector("#user_table tbody");
     
     
     tb.replaceChildren()
     table.appendChild(tb);
 
-    for(const user of users){
+    for(const account of accounts){
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td id="doei">' + user["id"] + '</td>'
-        + '<td>' + user["email"] + '</td>'
-        + '<td>' + user["docent"] + '</td>'
-        + '<td>' + user["is_admin"] + '</td>';
+        tr.innerHTML = '<td id="doei">' + account["id"] + '</td>'
+        + '<td>' + account["email"] + '</td>'
+        + '<td>' + account["docent"] + '</td>'
+        + '<td>' + account["is_admin"] + '</td>';
         tb.appendChild(tr);
     }
 // copypasta click function
 document.querySelectorAll("#user_table tbody tr").forEach(row => {
     row.addEventListener("click", function (){
-        window.location.href = "/user/" + this.cells[0].innerHTML
+        window.location.href = "/account/" + this.cells[0].innerHTML
     }, false)
 })
 
 }
 
-document.addEventListener('DOMContentLoaded', get_users());
+document.addEventListener('DOMContentLoaded', get_accounts());

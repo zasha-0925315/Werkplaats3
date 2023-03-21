@@ -21,7 +21,7 @@ async function update_docent(id){
             body: toJson()
         });
 
-        console.log("You're pretty good!")
+        console.log("Allons-y")
 
     } catch(error) {
 
@@ -35,7 +35,7 @@ async function delete_docent(id){
             method: 'DELETE'
         })
 
-        console.log("Snake? Snake?! SNAAAAAKKKKEEEE!!!!")
+        console.log("Nope. Not gettin' outta this chair.")
 
     } catch(error) {
 

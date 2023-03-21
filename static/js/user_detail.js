@@ -15,9 +15,9 @@ function toJson(){
     return json
 }
 
-async function update_user(id){
+async function update_account(id){
     try {
-        fetch('/user/' + id, {
+        fetch('/account/' + id, {
             method: 'PUT',
             headers: {
                 'Content-Type' : 'application/json'
@@ -33,9 +33,9 @@ async function update_user(id){
     }
 }
 
-async function delete_user(id){
+async function delete_account(id){
     try {
-        fetch('/user/' + id, {
+        fetch('/account/' + id, {
             method: 'DELETE'
         })
 

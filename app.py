@@ -521,53 +521,53 @@ def add_teacher_post():
     flash("Docent aangemaakt!", "info")
     return redirect(url_for('admin_teacher'))
 
-@app.route('/api/users')
-def api_get_users():
-    user_list = logindb.get_account_json()
+@app.route('/api/accounts')
+def api_get_accounts():
+    account_list = logindb.get_account_json()
     #print(user_list)
     return jsonify({ 
-        'users' : user_list
+        'accounts' : account_list
     })
 
-@app.route('/admin/users')
-def users():
+@app.route('/admin/accounts')
+def accounts():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     return render_template('users.html')
 
-@app.route('/user/<userId>')
-def userid(userId):
+@app.route('/account/<accountId>')
+def accountid(accountId):
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
 
-    user_info = logindb.get_account_detail(userId)
+    account_info = logindb.get_account_detail(accountId)
 
-    if user_info is None:
+    if account_info is None:
         flash("Gebruiker verwijderd of bestaat niet!", "warning")
-        return redirect(url_for('users'))
+        return redirect(url_for('accounts'))
     
-    id = user_info[0]
-    em = user_info[1]
-    ww = user_info[2]
-    dc = user_info[3]
-    tp = user_info[4]
+    id = account_info[0]
+    em = account_info[1]
+    ww = account_info[2]
+    dc = account_info[3]
+    tp = account_info[4]
 
-    return render_template('userid.html', userid = userId, id=id, em=em, ww=ww, dc=dc, tp=tp )
+    return render_template('userid.html', accountid = accountId, id=id, em=em, ww=ww, dc=dc, tp=tp )
 
-@app.route('/admin/user/add')
-def add_user():
+@app.route('/admin/account/add')
+def add_account():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
     return render_template('adduser.html')
 
-@app.post('/admin/user/add')
-def add_user_post():
+@app.post('/admin/account/add')
+def add_account_post():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
@@ -586,10 +586,10 @@ def add_user_post():
     logindb.create_account(email, wachtwoord, docent, admin)
 
     flash("Gebruiker aangemaakt!", "info")
-    return redirect(url_for('users'))
+    return redirect(url_for('accounts'))
 
-@app.put('/user/<userId>')
-def update_user(userId):
+@app.put('/account/<account>')
+def update_account(accountId):
 
     acc_json = request.get_json()
     print(acc_json)
@@ -606,10 +606,10 @@ def update_user(userId):
 
     return redirect('users.html')
 
-@app.delete('/user/<userId>')
-def delete_user(userId):
+@app.delete('/account/<accountId>')
+def delete_account(accountId):
 
-    logindb.delete_account(userId)
+    logindb.delete_account(accountId)
     
     return flash("Gebruiker verwijderd!", "warning")
 
