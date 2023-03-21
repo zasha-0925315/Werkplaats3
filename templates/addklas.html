@@ -6,11 +6,11 @@
 {% block content %}
     <div>
         <h1>Voeg een nieuwe klas toe</h1>            
-        <div>
+        <div id="add_class_content">
             <form id="user" method="POST" action="/admin/klas/add">
                 <label for="klas">Klas</label>
                 <input type="text" name="klas" value="{{klas}}">
-                <button type="submit" id="admin_stuff" class="button1">Voeg klas toe</a></button>
+                <button type="submit" id="admin_stuff" class="button1">Voeg klas toe</button>
             </form>
         </div>
     </div>

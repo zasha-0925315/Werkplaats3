@@ -14,13 +14,12 @@
                     </tr>
                 </thead>
             </table>
-        </div>
-        
         {% if session.username == 'admin' %}
             <div id="admin_stuff">
-                <button><span><a href="/admin/klas/add">Voeg klas toe</a></span></button>
+                <button class="button1"><a href="/admin/klas/add">Voeg klas toe</a></button>
             </div>
         {% endif %}
+        </div>
     </main>
 {% endblock %}
 {% block script %}

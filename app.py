@@ -668,7 +668,10 @@ def teapot():
 @app.route('/index')
 @app.route('/')
 def index():
-    return render_template('home.html')
+    if session.get('logged_in'):
+     return redirect('link')
+    else:
+     return render_template('home.html')
 
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')
