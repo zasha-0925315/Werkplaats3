@@ -50,7 +50,7 @@ checkindb = CheckinManagement(DB_FILE)
 # routes
 @app.before_request
 def check_login():
-    if request.endpoint not in ["base","show_login", "handle_login"]:
+    if request.endpoint not in ["base","show_login", "handle_login", 'meeting']:
         if not session.get("logged_in", "username"):
             return redirect(url_for('show_login'))
 
@@ -73,7 +73,6 @@ def qr():
 def meeting():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
-    
     return render_template('meeting_list.html')
 
 @app.route('/api/meeting')
@@ -113,6 +112,8 @@ def meeting_post():
 
 @app.route('/meeting/<meetingId>', methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
 def meetingid(meetingId):
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
     match request.method:
         case 'GET':
             meeting_info = meetingdb.get_meeting(meetingId)
@@ -191,17 +192,6 @@ def patch_checkin(meetingId):
      print (json_data)
      return json.jsonify()
 
-@app.route('/overzicht', methods =["GET"])
-def overzicht():
-   results = checkindb.get_results()
-   return render_template('overzicht.html', results=results)
-
-@app.route('/overzicht/<meetingId>', methods =["GET"])
-def get_overzicht(meetingId):
-  match request.method:
-      case 'GET':
-          meeting_list = meetingdb.get_meeting(meetingId)
-          return render_template('overzicht.html', meetings=meeting_list, meetingId=meetingId)
 
 @app.route('/sign_out/<meetingId>')
 def sign_out(meetingId):
@@ -732,6 +722,8 @@ def register():
 
 @app.route("/QRgen/<meetingId>", methods = ["GET"])
 def qrgen(meetingId):
+    if not session.get('logged_in'):
+       return redirect(url_for('show_login'))
     match request.method:
       case 'GET':
        meeting_info = meetingdb.get_meeting(meetingId)
@@ -752,7 +744,14 @@ def teapot():
 @app.route('/index')
 @app.route('/')
 def index():
-    return render_template('home.html')
+    if session.get('logged_in'):
+     return redirect('link')
+    else:
+     return render_template('home.html')
+    
+@app.route('/signout_meeting')
+def signout_meeting():
+    return render_template('signout_meeting.html')
 
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')

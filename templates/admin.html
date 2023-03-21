@@ -5,12 +5,12 @@
 {% endblock head %}
 {% block content %}
 <main>
-    <h1>Aaaadmin panle</h1>
+    <h1 id="admin_stuff">Admin Panel</h1>
     <div id="admin-panel">
-        <p><button class="button1"><a href="/admin/student">Studenten</a></button></p>
-        <p><button class="button1"><a href="/admin/klas">Klassen</a></button></p>
-        <p><button class="button1"><a href="/admin/teacher">Docenten</a></button></p>
-        <p><button class="button1"><a href="/admin/enrollment">Inschrijvingen</a></button></p>
+        <p><a href="/admin/student"><button class="button3">Studenten</button></a></p>
+        <p><a href="/admin/klas"><button class="button3">Klassen</button></a></p>
+        <p><a href="/admin/teacher"><button class="button3">Docenten</button></a></p>
+        <p><a href="/admin/enrollment"><button class="button3">Inschrijvingen</button></a></p>
     </div>
 </main>
 {% endblock %}

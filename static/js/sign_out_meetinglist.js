@@ -1,8 +1,10 @@
+// same as meeting_list.js but for sign out //
+
 async function get_meetings() {
     try {
         const response = await fetch('../api/meeting');
         const meetings = await response.json();
-
+        console.log(meetings['meetings'][0]['date'] + "" + meetings['meetings'][0]['start_time'])
         fill_table(meetings["meetings"])
         search_table(meetings);
 
@@ -60,7 +62,7 @@ function fill_table(meeting_list) {
             + '<td>' + meeting["start_time"] + '</td>'
             + '<td>' + meeting["end_time"] + '</td>';
         tr.addEventListener("click", function () {
-            window.location.href = "/meeting/" + meeting["id"]
+            window.location.href = "/sign_out/" + meeting["id"]
         })
         tb.appendChild(tr);
     }

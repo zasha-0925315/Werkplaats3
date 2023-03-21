@@ -1,5 +1,5 @@
 // Get the list of meetings
-async function getMeeting () {
+async function getMeeting() {
     try {
         const response = await fetch('../api/class/json');
         const data = await response.json();
@@ -22,17 +22,17 @@ async function getMeeting () {
 const teacherSelectBox = document.querySelector("#Select-Teacher")
 
 // add an eventlistenter to the change of the <select>
-function selectTeacher(meetingArray){
+function selectTeacher(meetingArray) {
     teacherSelectBox.addEventListener("change", function () {
         createTable(meetingArray)
     });
 }
 
 // create the table
-function createTable(meetingArray){
+function createTable(meetingArray) {
     if (meetingArray.length > 0) {
         const tbody = document.querySelector("#docent-body")
-        let currentDate = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf("T"));
+        let currentDate = new Date().toISOString().slice(0, new Date().toISOString().lastIndexOf("T"));
         let dateFiltered = meetingArray.filter(filterDate)
         let planningLength = 0
         let maxLength = 3
@@ -42,9 +42,9 @@ function createTable(meetingArray){
         tbody.replaceChildren()
 
         while (planningLength < arrayLength && planningLength < maxLength) {
-            if (dateFiltered[planningLength]["teacher"].includes(teacherSelectBox.value)){
+            if (dateFiltered[planningLength]["teacher"].includes(teacherSelectBox.value)) {
                 console.log(dateFiltered[planningLength]["teacher"])
-                    tbody.innerHTML +=
+                tbody.innerHTML +=
                     "<td><strong> " + dateFiltered[planningLength]["name"] + "</strong></td>" + " " +
                     "<td><small>" + dateFiltered[planningLength]["date"] + "</small></td>" + " " +
                     "<td><small>" + dateFiltered[planningLength]["start_time"] + "</small></td>" + " " +
@@ -52,13 +52,13 @@ function createTable(meetingArray){
             }
             planningLength++
         }
-        if (tbody.innerHTML === ""){
-            tbody.innerHTML = "<td>Geen aankonde bijeenkomsten</td>"
+        if (tbody.innerHTML === "") {
+            tbody.innerHTML = "<td>Geen aankomende bijeenkomsten</td>"
         }
         function filterDate(meetingArray) {
             return meetingArray["date"] >= currentDate
         }
-    }else{
+    } else {
         console.log("kio")
     }
 }
