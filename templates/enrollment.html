@@ -10,21 +10,22 @@
             <table>
                 <thead>
                     <tr>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
+                        <th id="doei">id</th>
+                        <th>Studentennummer</th>
+                        <th>Voornaam</th>
+                        <th>Achternaam</th>
+                        <th>Klas</th>
                     </tr>
                 </thead>
               <tbody></tbody>
             </table>
         </div>
         <div id="admin_stuff">
-            <button><span><a href="/admin">aaa</a></span></button>
-            <button><span><a href="/admin">aaa</a></span></button>
+            <button><span><a href="/admin/enrollment">Voeg nieuwe inschrijving toe</a></span></button>
         </div>
     </main>
 {% endblock %}
 {% block script %}
     {{ super() }}
-    <script src="../static/js/.js"></script>
+    <script src="/static/js/enrollment.js"></script>
 {% endblock script %}
