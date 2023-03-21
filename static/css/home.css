@@ -3,6 +3,7 @@
     color: var(--white);
     border: none;
     border-radius: var(--border-radius-button);
+    border-radius: 50px;
     height: fit-content;
     width: fit-content;
     line-height: 16px;
@@ -12,6 +13,7 @@
     height: 200px;
     width: 300px;
     font-size: 50px;
+    cursor: pointer;
 }
 
 .button2 a {
@@ -23,9 +25,4 @@
     background-color: var(--hr-darker-red);
     transition: all 200ms;
     transform: scale(1.05)
-}
-
-#button2 {
-    cursor: pointer;
-    margin-bottom: 5px;
 }

@@ -3,12 +3,17 @@
 #admin-panel,
 #admin_stuff {
     text-align: center;
-    margin: auto;
+
 }
 
+#admin_student_add,
 #admin-panel a,
 #admin_stuff a {
     text-decoration: none;
+}
+
+#admin_student_add {
+    margin-bottom: 5px;
 }
 
 #user label {
@@ -26,4 +31,34 @@
 #add_class_content {
     display: flex;
     justify-content: space-around;
+}
+
+.button3 {
+    background-color: var(--hr-red);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius-button);
+    border-radius: 50px;
+    height: fit-content;
+    width: fit-content;
+    line-height: 16px;
+    padding: 10px;
+    margin-left: 4px;
+    text-decoration: none;
+    width: 300px;
+    height: 100px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.button3 a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.button3:hover {
+    background-color: var(--hr-darker-red);
+    transition: all 200ms;
+    transform: scale(1.05)
 }
