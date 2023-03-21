@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Meeting{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+<main>
+    <h1>Aaaadmin panle</h1>
+    <div id="admin-panel">
+        <p><button><a href="/admin/student">Studenten</a></button></p>
+        <p><button><a href="/admin/klas">Klassen</a></button></p>
+        <p><button><a href="/admin/teacher">Docenten</a></button></p>
+        <p><button><a href="/admin/enrollment">Inschrijvingen</a></button></p>
+    </div>
+</main>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}

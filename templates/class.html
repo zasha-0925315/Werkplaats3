@@ -15,6 +15,12 @@
                 </thead>
             </table>
         </div>
+        
+        {% if session.username == 'admin' %}
+            <div id="admin_stuff">
+                <button><span><a href="/admin/klas/add">Voeg klas toe</a></span></button>
+            </div>
+        {% endif %}
     </main>
 {% endblock %}
 {% block script %}

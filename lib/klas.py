@@ -40,3 +40,46 @@ class ClassManagement(Database):
             print("yeet")
             raise e
         return enrollment
+    
+    def add_class(self, klas):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"INSERT INTO klas (id) VALUES (?)", [klas])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+
+    def edit_class(self, klas):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"UPDATE klas SET id = ? WHERE id = ?", [klas])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+
+
+    def delete_class(self, klas):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute(f"DELETE FROM klas WHERE id = ?", [klas])
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e

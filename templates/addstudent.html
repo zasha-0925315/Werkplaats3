@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Nieuwe student{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <h1>Voeg een nieuwe student toe</h1>            
+        <div>
+            <form id="user" method="POST" action="/admin/student/add">
+                <label for="studentennummer">Studentennummer</label>
+                <input type="number" name="studentennummer" value="{{studentennummer}}">
+                <label for="voornaam">Voornaam</label>
+                <input type="text" name="voornaam" value="{{voornaam}}">
+                <label for="achternaam">Achternaam</label>
+                <input type="text" name="achternaam" value="{{achternaam}}">
+                <button><span><type="submit" id="admin_stuff">Voeg student toe</a></span></button>
+            </form>
+            
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}

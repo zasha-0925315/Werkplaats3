@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Nieuwe docent{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <h1>Voeg een nieuwe docent toe</h1>            
+        <div>
+            <form id="teacher" method="POST" action="/admin/teacher/add">
+                <label for="id">Docentencode</label>
+                <input type="text" name="docentencode" value="{{docentencode}}">
+                <label for="voornaam">Voornaam</label>
+                <input type="text" name="voornaam" value="{{voornaam}}">
+                <label for="achternaam">Achternaam</label>
+                <input type="text" name="achternaam" value="{{achternaam}}">
+                <label for="email">Email</label>
+                <input type="email" pattern=".+@hr\.nl" name="email" value="{{email}}" required>
+                <button><span><type="submit" id="admin_stuff">Voeg docent toe</a></span></button>
+            </form>
+            
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock script %}

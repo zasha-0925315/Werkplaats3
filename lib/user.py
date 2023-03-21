@@ -2,18 +2,19 @@ import sqlite3
 from sqlite3 import OperationalError
 from lib.db import Database
 
-class UserManagement(Database):
-    """regelt de users enzo"""
+class Login(Database):
+    """regelt login enzo"""
 
     def __init__(self, db_file):
         super().__init__(db_file)
 
-    def create_user(self):
+    def login_user(self, usn, pwd):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("")
+            cursor.execute("SELECT * FROM login WHERE gebruikersnaam = ? AND wachtwoord = ?", usn, pwd)
+            user = cursor.fetchone()
             conn.commit() 
 
             conn.close()
@@ -21,45 +22,4 @@ class UserManagement(Database):
         except OperationalError as e:
             print("yeet")
             raise e
-
-    def get_user(self):
-        try:
-            conn = sqlite3.connect(self.db_file)
-            cursor = conn.cursor()
-
-            cursor.execute("")
-            conn.commit() 
-
-            conn.close()
-
-        except OperationalError as e:
-            print("yeet")
-            raise e
-
-    def update_user(self):
-        try:
-            conn = sqlite3.connect(self.db_file)
-            cursor = conn.cursor()
-
-            cursor.execute("")
-            conn.commit() 
-
-            conn.close()
-
-        except OperationalError as e:
-            print("yeet")
-            raise e
-
-    def delete_user(self):
-        try:
-            conn = sqlite3.connect(self.db_file)
-            cursor = conn.cursor()
-
-            cursor.execute("")
-            conn.commit() 
-
-            conn.close()
-
-        except OperationalError as e:
-            print("yeet")
-            raise e
+        return user

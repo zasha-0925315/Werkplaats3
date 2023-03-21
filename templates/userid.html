@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Login details{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <div>
+        <h1>Login details van {{em}}</h1>
+        <div id="table">
+            <table id="user">
+                <thead>
+                    <tr>
+                        <th id="doei">id</th>
+                        <th>Email</th>
+                        <th>Wachtwoord</th>
+                        <th>Docentcode</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td id="doei" name="id">{{id}}</td>
+                    <td>{{em}}</td>
+                    <td contenteditable="true">{{ww}}</td>
+                    <td>{{dc}}</td>
+                    <td contenteditable="true">{{tp}}</td>
+                </tbody>
+            </table>
+        </div>
+        <div id="admin_stuff">
+            <button><span><a href="" onclick="update_account('{{id}}')">Bewerk login details</a></span></button>
+            <button><span><a href="" onclick="delete_account('{{id}}')">Verwijder login details</a></span></button>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="/static/js/user_detail.js"></script>
+{% endblock script %}
