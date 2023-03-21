@@ -19,7 +19,9 @@ async function update_docent(id){
                 'Content-Type' : 'application/json'
             },
             body: toJson()
-        });
+        }).then(()=> {
+            window.location.reload();
+        })
 
         console.log("Allons-y")
 

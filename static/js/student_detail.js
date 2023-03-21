@@ -20,7 +20,9 @@ async function update_student(id){
                 'Content-Type' : 'application/json'
             },
             body: toJson()
-        });
+        }).then(()=> {
+            window.location.reload();
+        })
 
         console.log("You're pretty good!")
 

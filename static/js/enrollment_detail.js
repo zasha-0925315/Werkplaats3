@@ -21,12 +21,13 @@ async function update_enrollment(id){
                 'Content-Type' : 'application/json'
             },
             body: toJson()
-        });
+        }).then(()=> {
+            window.location.reload();
+        })
 
         console.log("Kidneys!! I've got new kidneys! ...I don't like the colour.")
 
     } catch(error) {
-
         console.log(error);
     }
 }

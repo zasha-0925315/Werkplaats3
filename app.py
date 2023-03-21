@@ -628,6 +628,35 @@ def admin_enrollment():
         return redirect(url_for('link'))
     return render_template('enrollment.html')
 
+@app.route('/admin/enrollment/add')
+def add_enrollment():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    class_list = classdb.get_class()
+    s_list = studentdb.get_all_students()
+
+    return render_template('addenrollment.html', klassen=class_list, studenten=s_list)
+
+@app.post('/admin/enrollment/add')
+def add_enrollment_post():
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
+    elif not session.get('username') == 'admin':
+        return redirect(url_for('link'))
+    
+    student = request.form.get('student')
+    klas = request.form.get('klas')
+
+    print(student, klas)
+
+    enrollmentdb.add_enrollment(student, klas)
+
+    flash("asdfghjkl!", "info")
+    return redirect(url_for('admin_enrollment'))
+
 @app.route('/enrollment/<enrollmentId>')
 def enrollmentid(enrollmentId):
     if not session.get('logged_in'):
@@ -648,6 +677,7 @@ def enrollmentid(enrollmentId):
     klas = enrollment[2]
 
     return render_template('enrollmentid.html', enid = enrollmentId, id=id, stnr=stnr, voornaam=voornaam, achternaam=achternaam, klas=klas, klassen=class_list)
+
 
 @app.put('/enrollment/<enrollmentId>')
 def update_enrollment(enrollmentId):

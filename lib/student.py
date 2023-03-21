@@ -14,7 +14,25 @@ class StudentManagement(Database):
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM student WHERE id = ?", [studentennummer])
-            students = cursor.fetchone()
+            student = cursor.fetchone()
+            conn.commit() 
+
+            conn.close()
+
+        except OperationalError as e:
+            print("yeet")
+            raise e
+        return student
+    
+    def get_all_students(self):
+        try:
+            conn = sqlite3.connect(self.db_file)
+            cursor = conn.cursor()
+
+            cursor.execute("SELECT id FROM student")
+            students = cursor.fetchall()
+
+            print(students)
             conn.commit() 
 
             conn.close()
