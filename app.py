@@ -71,9 +71,8 @@ def qr():
 
 @app.route('/meeting')
 def meeting():
-    # if not session.get('logged_in'):
-    #     return redirect(url_for('show_login'))
-    
+    if not session.get('logged_in'):
+        return redirect(url_for('show_login'))
     return render_template('meeting_list.html')
 
 @app.route('/api/meeting')
