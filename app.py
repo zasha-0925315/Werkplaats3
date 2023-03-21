@@ -648,6 +648,29 @@ def enrollmentid(enrollmentId):
 
     return render_template('enrollmentid.html', enid = enrollmentId, id=id, stnr=stnr, voornaam=voornaam, achternaam=achternaam, klas=klas)
 
+@app.put('/enrollment/<enrollmentId>')
+def update_enrollment(enrollmentId):
+
+    enrollment_json = request.get_json()
+    print(enrollment_json)
+
+    id = enrollment_json.get('id')
+    klas = enrollment_json.get('klas')
+
+    print(id, klas)
+
+    enrollmentdb.edit_enrollment(id, klas)
+    flash("Inschrijving is bewerkt!", "info")
+
+    return redirect(url_for('admin_teacher'))
+
+@app.delete('/enrollment/<enrollmentId>')
+def delete_enrollment(enrollmentId):
+
+    enrollmentdb.delete_enrollment(enrollmentId)
+    
+    return flash("Inschrijving is verwijderd!", "warning")
+
 @app.route('/login')
 def show_login():
     session["username"] = request.form.get("username")

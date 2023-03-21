@@ -55,3 +55,6 @@ class EnrollmentManagement(Database):
 
     def edit_enrollment(self):
         pass
+
+    def delete_enrollment(self):
+        pass
