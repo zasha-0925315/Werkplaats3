@@ -25,3 +25,7 @@ tr td th {
     background-color: transparent;
     padding: 5px;
 }
+
+#test #tabel {
+    margin-bottom: 5px;
+}

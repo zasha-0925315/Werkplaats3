@@ -1,11 +1,13 @@
 /* kek */
 
-#admin-panel, #admin_stuff {
+#admin-panel,
+#admin_stuff {
     text-align: center;
     margin: auto;
 }
 
-#admin-panel a, #admin_stuff a {
+#admin-panel a,
+#admin_stuff a {
     text-decoration: none;
 }
 
@@ -13,10 +15,15 @@
     font-weight: 800;
 }
 
-.id{
+.id {
     cursor: not-allowed;
 }
 
 #doei {
     display: none;
+}
+
+#add_class_content {
+    display: flex;
+    justify-content: space-around;
 }
