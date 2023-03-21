@@ -719,6 +719,10 @@ def index():
      return redirect('link')
     else:
      return render_template('home.html')
+    
+@app.route('/signout_meeting')
+def signout_meeting():
+    return render_template('signout_meeting.html')
 
 if __name__ == "__main__":
     #ctx = ('zeehond.crt', 'zeehond.key')

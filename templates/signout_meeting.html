@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Meetings{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block content %}
+    <main>
+        <h1>Bijeenkomsten</h1>
+        <div class="meeting-link">
+
+        </div>
+        <div id="search_container">
+            <label>
+                <input type="search" id="search_input" placeholder="Zoek">
+            </label>
+        </div>
+        <div id="meeting_list_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Dag</th>
+                        <th>Begin tijd</th>
+                        <th>Eind tijd</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="../static/js/sign_out_meetinglist.js"></script>
+{% endblock script %}

@@ -5,24 +5,25 @@ const message = document.querySelector("#message")
 const url = window.location.pathname.split('/')
 const urlId = url[2]
 
-signOutButton.addEventListener("click", function (){
+signOutButton.addEventListener("click", function () {
   if (studentId.value.length === 7) {
     fetch('/sign_out/' + urlId, {
-      method : 'PATCH',
-      body : JSON.stringify( {
-        'presence' : 2,
-        'meeting' : urlId,
-        'student' : studentId.value,
-        'reason' : reason.value
+      method: 'PATCH',
+      body: JSON.stringify({
+        'presence': 2,
+        'meeting': urlId,
+        'student': studentId.value,
+        'reason': reason.value
       }),
       headers: {
         'Content-type': 'application/json'
       }
     })
     message.innerHTML = "<p style='color: green'>Afgemeld</p>"
-  }else{
+  } else {
     message.innerHTML = "<p style='color: red'>Foute id</p>"
   }
 
 
 }, false)
+
