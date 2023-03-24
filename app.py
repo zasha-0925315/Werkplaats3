@@ -176,7 +176,7 @@ def checked_in():
     return render_template('checkedin.html')
 
 
-@app.route('/checkin/<meetingId>', methods=["GET", "POST"])
+@app.route('/checkin/<meetingId>', methods=["GET"])
 def checkin_id(meetingId):
          meeting_info = meetingdb.get_meeting(meetingId)
          question = meeting_info[0]["question"]
@@ -186,13 +186,14 @@ def checkin_id(meetingId):
 def post_checkin(meetingId):
     json_data = request.get_json()
     checkindb.post_answers(json_data)
+    print(json_data)
     return json.jsonify()
 
 @app.patch('/checkin/<meetingId>')
 def patch_checkin(meetingId):
      json_data = request.get_json()
      checkindb.patch_checkin(json_data)
-     print (json_data)
+     print 
      return json.jsonify()
 
 
