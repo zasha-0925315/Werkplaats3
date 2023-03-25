@@ -12,9 +12,8 @@ class Login(Database):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
-            
-            cursor.execute("SELECT * FROM login WHERE email = ? AND wachtwoord = ?", usn, pwd)
 
+            cursor.execute("SELECT * FROM login WHERE email = ? AND wachtwoord = ?", usn, pwd)
             user = cursor.fetchone()
             conn.commit() 
 
@@ -23,5 +22,4 @@ class Login(Database):
         except OperationalError as e:
             print("yeet")
             raise e
-            
         return user

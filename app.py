@@ -1,12 +1,11 @@
 import ast
 import os
+
 import datetime
 
 from os import environ, path
 from dotenv import load_dotenv
-
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
-#from flask_sqlalchemy import SQLAlchemy
 
 from lib.account import AccountManagement
 from lib.login import Login
@@ -37,8 +36,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 
 # database shiz
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
-#DB_INFO = {'host' : environ.get("DB_HOST"), 'user' : environ.get("DB_USER"), 'password' : environ.get("DB_PASSWORD"), 'database': environ.get("DB_NAME")}
-print(DB_INFO)
 
 accdb = AccountManagement(DB_FILE)
 logindb = Login(DB_FILE)
@@ -53,21 +50,14 @@ checkindb = CheckinManagement(DB_FILE)
 # routes
 @app.before_request
 def check_login():
-    if request.endpoint not in ["base", "show_login", "handle_login", 'meeting']:
+    if request.endpoint not in ["base","show_login", "handle_login", 'meeting']:
         if not session.get("logged_in", "username"):
             return redirect(url_for('show_login'))
 
 # Main route
-@app.route("/")
-@app.route("/index")
-def index():
-    #if not session.get('logged_in')
-    #    return redirect(url_for('login'))
-    return render_template("index.html", title=index)
-
-@app.route("/base")
-def base():
-    return render_template("base.html")
+# @app.route("/")
+# def index():
+#     return render_template("index.html", title=index)
 
 @app.route("/dashboard", methods=["GET","POST"])
 def dashboard():
@@ -728,7 +718,11 @@ def handle_login():
 def logout():
     session.pop('logged_in', 'username')
     return redirect(url_for("index"))
-   
+
+@app.route("/register")
+def register():
+    return render_template('register.html', title=register)    
+
 @app.route("/QRgen/<meetingId>", methods = ["GET"])
 def qrgen(meetingId):
     if not session.get('logged_in'):

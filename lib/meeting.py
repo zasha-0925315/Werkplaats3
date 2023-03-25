@@ -42,24 +42,6 @@ class MeetingManagement:
             raise e
 
     def get_meeting(self, meetingid):
-        pass
-
-
-    def create_meeting(self):
-        try:
-            conn = sqlite3.connect(self.db_file)
-            cursor = conn.cursor()
-
-            cursor.execute("")
-            conn.commit() 
-
-            conn.close()
-
-        except mysql.connector.Error as e:
-            print("yeet")
-            raise e
-
-    def get_meeting(self):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
@@ -87,13 +69,10 @@ class MeetingManagement:
         return meeting_info
 
     def get_all_meetings(self):
-            pass
-
-    def update_meeting(self):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
-            
+
             cursor.execute(f"SELECT * FROM meeting")
             meeting_all_info = cursor.fetchall()
             meeting_info = []
@@ -116,16 +95,4 @@ class MeetingManagement:
             raise e
         return meeting_info
 
-    def delete_meeting(self):
-        try:
-            conn = sqlite3.connect(self.db_file)
-            cursor = conn.cursor()
 
-            cursor.execute("")
-            conn.commit() 
-
-            conn.close()
-
-        except mysql.connector.Error as e:
-            print("yeet")
-            raise e

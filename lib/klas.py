@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import OperationalError
 from lib.db import Database
 
+
 class ClassManagement(Database):
     """regelt de klassen enzo"""
 
@@ -14,9 +15,7 @@ class ClassManagement(Database):
             cursor = conn.cursor()
 
             cursor.execute("SELECT * FROM klas")
-
             classes = cursor.fetchall()
-
             conn.commit() 
 
             conn.close()
@@ -24,9 +23,7 @@ class ClassManagement(Database):
         except OperationalError as e:
             print("yeet")
             raise e
-
         return classes
-
 
     def get_enrollment(self):
         try:
@@ -79,7 +76,6 @@ class ClassManagement(Database):
             cursor = conn.cursor()
 
             cursor.execute(f"DELETE FROM klas WHERE id = ?", [klas])
-
             conn.commit() 
 
             conn.close()
