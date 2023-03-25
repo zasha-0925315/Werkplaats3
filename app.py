@@ -7,8 +7,8 @@ from os import environ, path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 
-from lib.login import AccountManagement
-#from lib.user import Login
+from lib.account import AccountManagement
+#from lib.login import Login
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
@@ -37,8 +37,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 # database shiz
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
-logindb = AccountManagement(DB_FILE)
-#userdb = UserManagement(DB_FILE)
+accdb = AccountManagement(DB_FILE)
+#logindb = Login(DB_FILE)
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
@@ -512,7 +512,7 @@ def add_teacher_post():
 
 @app.route('/api/accounts')
 def api_get_accounts():
-    account_list = logindb.get_account_json()
+    account_list = accdb.get_account_json()
     #print(user_list)
     return jsonify({ 
         'accounts' : account_list
@@ -533,7 +533,7 @@ def accountid(accountId):
     elif not session.get('username') == 'admin':
         return redirect(url_for('link'))
 
-    account_info = logindb.get_account_detail(accountId)
+    account_info = accdb.get_account_detail(accountId)
 
     if account_info is None:
         flash("Gebruiker verwijderd of bestaat niet!", "warning")
@@ -572,7 +572,7 @@ def add_account_post():
     else:
         admin = 0
 
-    logindb.create_account(email, wachtwoord, docent, admin)
+    accdb.create_account(email, wachtwoord, docent, admin)
 
     flash("Gebruiker aangemaakt!", "info")
     return redirect(url_for('accounts'))
@@ -590,7 +590,7 @@ def update_account(accountId):
     is_admin = acc_json.get('is_admin')
     print(id, email, wachtwoord, docent, is_admin)
 
-    logindb.update_account(email, wachtwoord, docent, is_admin, id)
+    accdb.update_account(email, wachtwoord, docent, is_admin, id)
     flash("Gebruiker bewerkt!", "info")
 
     return redirect('users.html')
@@ -598,7 +598,7 @@ def update_account(accountId):
 @app.delete('/account/<accountId>')
 def delete_account(accountId):
 
-    logindb.delete_account(accountId)
+    accdb.delete_account(accountId)
     
     return flash("Gebruiker verwijderd!", "warning")
 

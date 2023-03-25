@@ -13,7 +13,7 @@
                         <th id="doei">id</th>
                         <th>Email</th>
                         <th>Docent</th>
-                        <th>Type</th>
+                        <th>Admin</th>
                     </tr>
                 </thead>
               <tbody></tbody>
@@ -21,7 +21,7 @@
         </div>
         {% if session.username == 'admin' %}
             <div id="admin_stuff">
-                <button class="button1"><a href="/admin/account/add">Voeg login toe</a></button>
+                <span><button class="button1"><a href="/admin/account/add">Voeg login toe</a></button></span>
             </div>
         {% endif %}
     </main>

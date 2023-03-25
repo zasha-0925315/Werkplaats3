@@ -96,6 +96,7 @@ class TeacherManagement(Database):
             cursor = conn.cursor()
 
             cursor.execute("INSERT INTO docent (id, voornaam, achternaam, email) VALUES (?, ?, ?, ?)", [id, voornaam, achternaam, email])
+            cursor.execute("INSERT INTO login (email, docent) VALUES (?, ?)", [email, id])
             conn.commit() 
 
             conn.close()
