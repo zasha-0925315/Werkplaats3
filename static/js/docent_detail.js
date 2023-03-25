@@ -35,6 +35,8 @@ async function delete_docent(id){
     try {
         fetch('/admin/teacher/' + id, {
             method: 'DELETE'
+        }).then(()=> {
+            window.location.assign('/admin/teacher');
         })
 
         console.log("Nope. Not gettin' outta this chair.")

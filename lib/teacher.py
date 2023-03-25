@@ -72,7 +72,7 @@ class TeacherManagement(Database):
             cursor = conn.cursor()
             cursor.row_factory = sqlite3.Row  # geen idee wat dit is, but whatever works
 
-            cursor.execute(f"SELECT docent.id, docent.voornaam, docent.achternaam, docent.email, login.wachtwoord, login.is_admin "
+            cursor.execute(f"SELECT docent.id, docent.voornaam, docent.achternaam, docent.email, docent.is_verwijderd, login.wachtwoord, login.is_admin "
                            f"FROM docent INNER JOIN login "
                            f"ON docent.id=login.docent")
             teacher = cursor.fetchall()

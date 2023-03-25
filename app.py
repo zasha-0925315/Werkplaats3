@@ -450,7 +450,6 @@ def admin_teacherid(teacherId):
     docent_info = teacherdb.get_teacher(teacherId)
 
     if docent_info is None:
-        flash("Docent is verwijderd!", "warning")
         return redirect(url_for('admin_teacher'))
 
     id = docent_info[0]
@@ -483,7 +482,8 @@ def delete_teacher(teacherId):
 
     teacherdb.delete_teacher(teacherId)
     
-    return flash("Docent is verwijderd!", "warning")
+    flash("Docent is verwijderd!", "warning")
+    return redirect(url_for('admin_teacher'))
 
 @app.route('/admin/teacher/add')
 def add_teacher():
@@ -667,7 +667,6 @@ def enrollmentid(enrollmentId):
     klas = enrollment[2]
 
     return render_template('enrollmentid.html', enid = enrollmentId, id=id, stnr=stnr, voornaam=voornaam, achternaam=achternaam, klas=klas, klassen=class_list)
-
 
 @app.put('/enrollment/<enrollmentId>')
 def update_enrollment(enrollmentId):
