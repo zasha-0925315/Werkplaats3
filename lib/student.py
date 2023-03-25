@@ -134,8 +134,9 @@ class StudentManagement(Database):
         try:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
-
+            
             cursor.execute(f"DELETE FROM student WHERE id = ?", [studentennummer])
+
             conn.commit() 
 
             conn.close()
