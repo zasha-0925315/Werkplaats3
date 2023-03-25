@@ -13,7 +13,7 @@ class Login(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("SELECT * FROM login WHERE gebruikersnaam = ? AND wachtwoord = ?", usn, pwd)
+            cursor.execute("SELECT * FROM login WHERE email = ? AND wachtwoord = ?", usn, pwd)
             user = cursor.fetchone()
             conn.commit() 
 

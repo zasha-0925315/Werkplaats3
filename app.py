@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
 
 from lib.account import AccountManagement
-#from lib.login import Login
+from lib.login import Login
 from lib.student import StudentManagement
 from lib.teacher import TeacherManagement
 from lib.klas import ClassManagement
@@ -38,7 +38,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
 
 accdb = AccountManagement(DB_FILE)
-#logindb = Login(DB_FILE)
+logindb = Login(DB_FILE)
 studentdb = StudentManagement(DB_FILE)
 teacherdb = TeacherManagement(DB_FILE)
 classdb = ClassManagement(DB_FILE)
