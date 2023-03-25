@@ -105,7 +105,7 @@ class CheckinManagement:
              conn = sqlite3.connect(self.db_file)
              cursor = conn.cursor()
 
-             cursor.execute(f"INSERT INTO vraagresultaten(studentid, resultaat, meeting)"
+             cursor.execute(f"INSERT INTO Vraagresultaten(studentid, resultaat, meeting)"
                             f"VALUES(?, ?, ?)", (json_student, json_result, json_meeting))
              conn.commit()
              conn.close()

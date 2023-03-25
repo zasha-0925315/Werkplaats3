@@ -59,10 +59,12 @@ def check_login():
 # def index():
 #     return render_template("index.html", title=index)
 
-@app.route("/link", methods=["GET","POST"])
-def link():
+@app.route("/dashboard", methods=["GET","POST"])
+def dashboard():
+    if not session.get('logged_in'):
+     return redirect(url_for('show_login'))
     teacher_list = teacherdb.get_all_teachers()
-    return render_template('link.html', teachers=teacher_list)
+    return render_template('dashboard.html', teachers=teacher_list)
 
 # Url for QR Code scanning
 @app.route('/QR')
@@ -126,6 +128,7 @@ def meetingid(meetingId):
              meeting_info = meetingdb.get_meeting(meetingId)
              question = str(request.form.get('question'))
              checkindb.add_question(question)
+             print(question)
              return render_template('meetingid.html', meetingId=meetingId, question=question, meeting_info=meeting_info)
         case 'PUT':
             print("PUT")
@@ -173,7 +176,7 @@ def checked_in():
     return render_template('checkedin.html')
 
 
-@app.route('/checkin/<meetingId>', methods=["GET", "POST"])
+@app.route('/checkin/<meetingId>', methods=["GET"])
 def checkin_id(meetingId):
          meeting_info = meetingdb.get_meeting(meetingId)
          question = meeting_info[0]["question"]
@@ -183,13 +186,14 @@ def checkin_id(meetingId):
 def post_checkin(meetingId):
     json_data = request.get_json()
     checkindb.post_answers(json_data)
+    print(json_data)
     return json.jsonify()
 
 @app.patch('/checkin/<meetingId>')
 def patch_checkin(meetingId):
      json_data = request.get_json()
      checkindb.patch_checkin(json_data)
-     print (json_data)
+     print 
      return json.jsonify()
 
 
@@ -316,7 +320,7 @@ def admin_klas():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('class.html')
 
 @app.route('/admin/klas/add')
@@ -324,7 +328,7 @@ def add_klas():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('addklas.html')
 
 @app.post('/admin/klas/add')
@@ -332,7 +336,7 @@ def add_klas_post():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     klas = request.form.get('klas').strip()
 
@@ -354,7 +358,7 @@ def admin_student():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('adminstudent.html')
 
 @app.route('/admin/student/<studentId>')
@@ -362,7 +366,7 @@ def admin_studentid(studentId):
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     student_info = studentdb.get_student(studentId)
 
@@ -405,7 +409,7 @@ def add_student():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('addstudent.html')
 
 @app.post('/admin/student/add')
@@ -413,7 +417,7 @@ def add_student_post():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     studentennummer = request.form.get('studentennummer').strip()
     voornaam = request.form.get('voornaam').strip()
@@ -437,7 +441,7 @@ def admin_teacher():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('adminteacher.html')
 
 @app.route('/admin/teacher/<teacherId>')
@@ -445,7 +449,7 @@ def admin_teacherid(teacherId):
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     docent_info = teacherdb.get_teacher(teacherId)
 
@@ -490,7 +494,7 @@ def add_teacher():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('addteacher.html')
 
 @app.post('/admin/teacher/add')
@@ -498,7 +502,7 @@ def add_teacher_post():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     docentencode = request.form.get('docentencode').strip()
     voornaam = request.form.get('voornaam').strip()
@@ -523,7 +527,7 @@ def accounts():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('users.html')
 
 @app.route('/account/<accountId>')
@@ -531,7 +535,7 @@ def accountid(accountId):
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
 
     account_info = accdb.get_account_detail(accountId)
 
@@ -552,7 +556,7 @@ def add_account():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('adduser.html')
 
 @app.post('/admin/account/add')
@@ -560,7 +564,7 @@ def add_account_post():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     email = request.form.get('email').strip()
     wachtwoord = request.form.get('wachtwoord')
@@ -615,7 +619,7 @@ def admin_enrollment():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     return render_template('enrollment.html')
 
 @app.route('/admin/enrollment/add')
@@ -623,7 +627,7 @@ def add_enrollment():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     class_list = classdb.get_class()
     s_list = studentdb.get_all_students()
@@ -635,7 +639,7 @@ def add_enrollment_post():
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     student = request.form.get('student')
     klas = request.form.get('klas')
@@ -652,7 +656,7 @@ def enrollmentid(enrollmentId):
     if not session.get('logged_in'):
         return redirect(url_for('show_login'))
     elif not session.get('username') == 'admin':
-        return redirect(url_for('link'))
+        return redirect(url_for('dashboard'))
     
     enrollment = enrollmentdb.get_single_enrollment(enrollmentId)
     class_list = classdb.get_class()
@@ -695,7 +699,7 @@ def delete_enrollment(enrollmentId):
 def show_login():
     session["username"] = request.form.get("username")
     if session.get('logged_in'):
-        return redirect(url_for("link"))
+        return redirect(url_for("dashboard"))
     else:
         return render_template('login.html')
       
@@ -708,7 +712,7 @@ def handle_login():
     else:
         flash("Invalid Password or Username.", "warning")
         return render_template("login.html")
-    return redirect(url_for('link'))
+    return redirect(url_for('dashboard'))
 
 @app.route("/logout")
 def logout():
@@ -744,7 +748,7 @@ def teapot():
 @app.route('/')
 def index():
     if session.get('logged_in'):
-     return redirect('link')
+     return redirect('dashboard')
     else:
      return render_template('home.html')
     
