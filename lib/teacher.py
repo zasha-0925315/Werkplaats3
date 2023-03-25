@@ -13,7 +13,7 @@ class TeacherManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("SELECT * FROM docent")
+            cursor.execute("SELECT * FROM docent WHERE is_verwijderd = 0")
             teacher = cursor.fetchall()
             conn.commit() 
 
@@ -48,7 +48,7 @@ class TeacherManagement(Database):
             cursor = conn.cursor()
             cursor.row_factory = sqlite3.Row
 
-            cursor.execute("SELECT * FROM docent")
+            cursor.execute("SELECT * FROM docent WHERE is_verwijderd = 0")
             teacher = cursor.fetchall()
 
             t_list = []
@@ -124,7 +124,7 @@ class TeacherManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"DELETE FROM docent WHERE id = ?", [id])
+            cursor.execute(f"UPDATE docent SET is_verwijderd = 1 WHERE id = ?", [id])
             conn.commit() 
 
             conn.close()
