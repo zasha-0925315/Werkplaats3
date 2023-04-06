@@ -37,4 +37,4 @@ function fill_table(obj) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', get_teachers());
+document.addEventListener('DOMContentLoaded', get_teachers);

@@ -80,6 +80,4 @@ function log(){
         console.log("vul alles in")
       message.innerHTML = "Vul alles in"
     }
-
-
 }

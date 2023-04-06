@@ -58,4 +58,4 @@ function fill_table(presence_list){
     }
 }
 
-document.addEventListener('DOMContentLoaded', get_student_presence());
+document.addEventListener('DOMContentLoaded', get_student_presence);

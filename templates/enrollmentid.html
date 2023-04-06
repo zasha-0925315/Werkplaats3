@@ -18,17 +18,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
                     <td id="doei" name="id">{{id}}</td>
                     <td>{{stnr}}</td>
                     <td>{{voornaam}}</td>
                     <td>{{achternaam}}</td>
                     <td>
-                        <select id="klas"><option disabled selected>{{klas}}</option>
-                            {% for klas in klassen %}
-                                <option>{{ klas[0] }}</option>
-                            {% endfor %}
-                        </select>
+                        <label>
+                            <select id="klas"><option disabled selected>{{klas}}</option>
+                                {% for klas in klassen %}
+                                    <option>{{ klas[0] }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
                     </td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>

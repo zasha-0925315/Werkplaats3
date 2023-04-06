@@ -7,7 +7,7 @@ const timerx = document.querySelector('#timer')
 console.log(timerx)
 
 function generateCode() {
-    if (meetingId) { // laat pas de QR code zien als er daadwerkelijk text is ingevoerd
+    if (meetingId) {
         let qr = new QRious({
             foreground: "#D30F4C",
             background: "#FFFFFF",

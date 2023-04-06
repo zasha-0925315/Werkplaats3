@@ -34,13 +34,12 @@ function fill_table(obj){
         + '<td>' + account["is_admin"] + '</td>';
         tb.appendChild(tr);
     }
-// copypasta click function
-document.querySelectorAll("#user_table tbody tr").forEach(row => {
-    row.addEventListener("click", function (){
-        window.location.href = "/account/" + this.cells[0].innerHTML
-    }, false)
-})
-
+    // copypasta click function
+    document.querySelectorAll("#user_table tbody tr").forEach(row => {
+        row.addEventListener("click", function (){
+            window.location.href = "/account/" + this.cells[0].innerHTML
+        }, false)
+    })
 }
 
-document.addEventListener('DOMContentLoaded', get_accounts());
+document.addEventListener('DOMContentLoaded', get_accounts);

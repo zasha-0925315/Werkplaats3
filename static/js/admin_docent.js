@@ -32,13 +32,12 @@ function fill_table(docenten){
         + '<td>' + docent["is_verwijderd"] + '</td>';
         tb.appendChild(tr);
     }
-// a click function for all rows that redirects to the student page of the selected row
-document.querySelectorAll("#docent_table tbody tr").forEach(row => {
-    row.addEventListener("click", function (){
-        window.location.href = "/admin/teacher/" + this.cells[0].innerHTML
-    }, false)
-})
-
+    // a click function for all rows that redirects to the student page of the selected row
+    document.querySelectorAll("#docent_table tbody tr").forEach(row => {
+        row.addEventListener("click", function (){
+            window.location.href = "/admin/teacher/" + this.cells[0].innerHTML
+        }, false)
+    })
 }
 
-document.addEventListener('DOMContentLoaded', get_docenten());
+document.addEventListener('DOMContentLoaded', get_docenten);

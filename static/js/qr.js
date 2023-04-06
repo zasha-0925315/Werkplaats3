@@ -5,8 +5,6 @@ const qrScanner = document.querySelector('#qrscan-container')
 const qrText = document.querySelector('#QR_Scan_Text')
 
 function decode(qrReader, selectedDeviceId) {
-    /*console.log(selectedDeviceId)
-    qrRes.textContent = selectedDeviceId;*/
     qrReader.decodeOnceFromVideoDevice(selectedDeviceId, 'qrscan')
         .then((result) => {
             console.log(result)
@@ -23,9 +21,4 @@ function decode(qrReader, selectedDeviceId) {
         });
 }
 
-function doSomething() {
-    console.warn("camera ded");
-}
-
 decode(qrReader, inputId);
-doSomething();

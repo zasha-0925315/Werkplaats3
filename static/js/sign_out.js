@@ -23,7 +23,5 @@ signOutButton.addEventListener("click", function () {
   } else {
     message.innerHTML = "<p style='color: red'>Foute id</p>"
   }
-
-
 }, false)
 

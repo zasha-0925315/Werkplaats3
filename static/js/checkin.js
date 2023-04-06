@@ -54,21 +54,6 @@ function displayMessage() {
     document.querySelector('#message').style.color = 'red';
 }
 
-// fetch question from meeting // 
-function fetchQuestion() {
-    fetch('/checkin/' + urlId, {
-        method: 'POST',
-        body: JSON.stringify({
-            'result': question.value,
-            'student id': studentId.value,
-            'meeting': urlId
-        }),
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
-}
-
 /* checks if student has put in 7 characters..
 displays an error message if the student has not. */
 
@@ -117,8 +102,5 @@ checkinButton.addEventListener('click', function () {
 });
 
 get_meeting()
-
-
-let interval_id = setInterval(get_meeting, 1000)
 
 document.addEventListener('DOMContentLoaded', checkDate)

@@ -61,13 +61,12 @@ function fill_table(student_list){
         + '<td>' + student["klas"] + '</td>';
         tb.appendChild(tr);
     }
-// a click function for all rows that redirects to the student page of the selected row
-document.querySelectorAll("#student_table tbody tr").forEach(row => {
-    row.addEventListener("click", function (){
-        window.location.href = "/student/" + this.cells[0].innerHTML
-    }, false)
-})
-
+    // a click function for all rows that redirects to the student page of the selected row
+    document.querySelectorAll("#student_table tbody tr").forEach(row => {
+        row.addEventListener("click", function (){
+            window.location.href = "/student/" + this.cells[0].innerHTML
+        }, false)
+    })
 }
 
-document.addEventListener('DOMContentLoaded', get_students());
+document.addEventListener('DOMContentLoaded', get_students);

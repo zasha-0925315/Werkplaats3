@@ -66,4 +66,4 @@ function fill_table(meeting_list) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', get_meetings());
+document.addEventListener('DOMContentLoaded', get_meetings);

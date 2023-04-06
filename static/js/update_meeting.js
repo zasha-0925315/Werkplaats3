@@ -8,8 +8,6 @@ const urlyx = window.location.pathname.split('/')
 const urlId = urlyx[2]
 const url = '/api/checkin/' + urlId
 
-
-
 // hide the antwoord table first.. //
 table.style.display = 'None'
 tb.style.display = 'None'
@@ -48,7 +46,8 @@ function makeQuestion(meetinginfo) {
     if (timeleft > 0) {
         questionButton.addEventListener('click', function () {
             if (question.value !== '') {
-                get_question(), changeTitle();
+                get_question()
+                changeTitle();
                 if (messageQuestion) {
                     messageQuestion.remove();
                     console.log(message)
@@ -64,7 +63,7 @@ function makeQuestion(meetinginfo) {
         }
         )
     }
-};
+}
 
 
 
@@ -87,24 +86,16 @@ async function get_question() {
 
 // changes Vraag Header Text to the value inputted in the input field //
 function changeTitle() {
-    question_title = question.value
+    let question_title = question.value
     localStorage.setItem('QuestionTitle', question_title)
     document.querySelector('#question_title').innerHTML = question_title
 }
 
-// loads the title from localStorage, at the bottom of the js file we load it again //
-// function loadTitle() {
-//     const questionTitle = localStorage.getItem('QuestionTitle')
-//     if (questionTitle) {
-//         document.querySelector('#question_title').innerHTML = questionTitle;
-
-//     }
-// }
 // error message //
 function checkVraag() {
     message = 'Vul een vraag in ..' + '<br>'
     document.querySelector('#message_question').innerHTML = message;
-};
+}
 
 function noVraag() {
     message = 'Meeting is voorbij' + '<br>'
@@ -122,24 +113,19 @@ function disappearTable() {
     tb.style.display = 'None';
 }
 // if 'maak vraag' question has value then it will trigger the JSON function and change the title. if there is no value it will trigger a message that warns the user
-//
 function yesQuestion() {
     if (question.value !== '') {
-        get_question(), changeTitle();
+        get_question()
+        changeTitle();
         if (messageQuestion) {
             messageQuestion.remove();
             console.log(message)
-
         }
     } else {
         checkVraag();
     }
-};
-
-function nopeQuestion() {
-    console.log("hhhh?")
-
 }
+
 // toggles ON/OFF the answer table in meetingid.html //
 AnswersButton.addEventListener('click', function () {
     if (table.style.display === 'none') {
@@ -179,10 +165,10 @@ function fillAnswers(answers) {
         console.log(answer)
         tb.appendChild(tr);
     }
-};
+}
 
 // loads the answers only if the DOM is loaded //
 // loadTitle();
 get_meetingq()
 
-document.addEventListener('DOMContentLoaded', get_answers());
+document.addEventListener('DOMContentLoaded', get_answers);

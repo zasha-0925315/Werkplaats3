@@ -5,25 +5,21 @@
 {% endblock head %}
 {% block content %}
         <main>
-          <!-- <div class="login-container"> -->
             <form action="/handle_login" method="POST" class="login-form">
-                        <p class="login-header"><b>Log in</b></p>
-                        {{ message }}
-                        <p class="username-field">
-                            <label for="username"><b>Student number or personnel code</b></label><br>
-                            <input id="username" type="username" name="username" class="login-field">
-                        </p>
-                        <p class="password-field">
-                            <label for="password"><b>Password</b></label><br>
-                            <input id="password" type="password" name="password" class="login-field">
-                        </p>
-                        <p class="submit-btn5">
-                            <input id="submit" type="submit" value="Login" class="submit">
-                        </p>
-                    </form>
-                </div>
-               </div>
-            </div>
+                <p class="login-header"><b>Log in</b></p>
+                    {{ message }}
+                <p class="username-field">
+                    <label for="username"><b>Student number or personnel code</b></label><br>
+                    <input id="username" type="text" name="username" class="login-field">
+                </p>
+                <p class="password-field">
+                    <label for="password"><b>Password</b></label><br>
+                    <input id="password" type="password" name="password" class="login-field">
+                </p>
+                <p class="submit-btn5">
+                    <input id="submit" type="submit" value="Login" class="submit">
+                </p>
+            </form>
         </main>
 {% endblock content %}
 
