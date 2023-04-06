@@ -21,7 +21,7 @@ studenten, klassen en "docenten" "verwijderen"
 - Docent met admin rechten kan de database aanpassen
 
 ## LET OP!!! :warning::biohazard:
-voor het testen van de QR scan vervang ```if __name__ == "__main__":``` met:
+voor het testen van de QR scan vervang ```if __name__ == "__main__":``` in app.py met:
 ```
 if __name__ == "__main__":
      ctx = ('zeehond.crt', 'zeehond.key')
