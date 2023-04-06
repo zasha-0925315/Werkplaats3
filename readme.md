@@ -20,7 +20,7 @@ een overzicht met alle meetings & kan de antwoorden van de studenten zien per me
 studenten, klassen en "docenten" "verwijderen"
 - Docent met admin rechten kan de database aanpassen
 
-## LET OP!!! :skull:
+## LET OP!!! :warning:
 voor het testen van de QR scan vervang ```if __name__ == "__main__":``` met:
 ```
 if __name__ == "__main__":
