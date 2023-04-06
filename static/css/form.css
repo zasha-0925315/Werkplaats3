@@ -12,7 +12,6 @@ form div {
 form div label {
     display: flex;
     align-items: baseline;
-
 }
 
 select, input {

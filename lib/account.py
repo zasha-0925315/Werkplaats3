@@ -13,7 +13,8 @@ class AccountManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO login (email, wachtwoord, docent, is_admin) VALUES (?, ?, ?, ?)", [email, wachtwoord, docent, admin])
+            cursor.execute("INSERT INTO login (email, wachtwoord, docent, is_admin) "
+                           "VALUES (?, ?, ?, ?)", [email, wachtwoord, docent, admin])
             conn.commit() 
 
             conn.close()
@@ -64,7 +65,8 @@ class AccountManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"UPDATE login SET email = ?, wachtwoord = ?,docent = ?, is_admin = ? WHERE id = ?", [email, wachtwoord, docent, admin, id])
+            cursor.execute(f"UPDATE login SET email = ?, wachtwoord = ?,docent = ?, is_admin = ? "
+                           f"WHERE id = ?", [email, wachtwoord, docent, admin, id])
             conn.commit() 
 
             conn.close()
@@ -81,8 +83,9 @@ class AccountManagement(Database):
             cursor.execute(f"DELETE FROM login WHERE id = ?", [id])
             conn.commit()
 
-            #need to reset sqlite_sequence table bc user_id = autoincrement
-            reset_seq_qry = "UPDATE 'sqlite_sequence' SET 'seq' = (SELECT MAX('id') FROM 'login') WHERE 'name' = 'login'"
+            # need to reset sqlite_sequence table bc user_id = autoincrement
+            reset_seq_qry = "UPDATE 'sqlite_sequence' " \
+                            "SET 'seq' = (SELECT MAX('id') FROM 'login') WHERE 'name' = 'login'"
             cursor.execute(reset_seq_qry)
             conn.commit() 
 

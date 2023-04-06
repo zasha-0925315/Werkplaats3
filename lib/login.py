@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import OperationalError
 from lib.db import Database
 
+
 class Login(Database):
     """regelt login enzo"""
 

@@ -69,7 +69,6 @@ class ClassManagement(Database):
             print("yeet")
             raise e
 
-
     def delete_class(self, klas):
         try:
             conn = sqlite3.connect(self.db_file)

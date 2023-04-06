@@ -47,7 +47,6 @@
 #meeting2:hover,
 #meeting3:hover {
     transform: scale(1.05);
-
 }
 
 #meeting1 {
@@ -94,8 +93,6 @@
 #check-meeting-button:hover {
     filter: brightness(75%);
     transform: scale(1.05);
-
-
 }
 
 .Planning-text {

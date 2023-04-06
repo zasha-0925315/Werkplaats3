@@ -12,7 +12,6 @@
 #answer_box #questions_input {
     display: flex;
     flex-direction: column;
-
 }
 
 #checkin_content {
@@ -41,7 +40,6 @@
 #answer_box #questions_input {
     display: flex;
     flex-direction: column;
-
 }
 
 #checkin_content {
@@ -61,11 +59,6 @@
     text-align: center;
     margin-top: 20px;
     justify-content: space-around;
-}
-
-#th-spacing {
-    border-collapse: separate;
-    border-spacing: 10px;
 }
 
 #button_checkin {

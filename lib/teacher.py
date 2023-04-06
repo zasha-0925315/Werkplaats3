@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import OperationalError
 from lib.db import Database
 
+
 class TeacherManagement(Database):
     """regelt de docenten enzo"""
 
@@ -72,7 +73,8 @@ class TeacherManagement(Database):
             cursor = conn.cursor()
             cursor.row_factory = sqlite3.Row  # geen idee wat dit is, but whatever works
 
-            cursor.execute(f"SELECT docent.id, docent.voornaam, docent.achternaam, docent.email, docent.is_verwijderd, login.wachtwoord, login.is_admin "
+            cursor.execute(f"SELECT docent.id, docent.voornaam, docent.achternaam, docent.email, "
+                           f"docent.is_verwijderd, login.wachtwoord, login.is_admin "
                            f"FROM docent INNER JOIN login "
                            f"ON docent.id=login.docent")
             teacher = cursor.fetchall()
@@ -95,7 +97,8 @@ class TeacherManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO docent (id, voornaam, achternaam, email) VALUES (?, ?, ?, ?)", [id, voornaam, achternaam, email])
+            cursor.execute("INSERT INTO docent (id, voornaam, achternaam, email) "
+                           "VALUES (?, ?, ?, ?)", [id, voornaam, achternaam, email])
             cursor.execute("INSERT INTO login (email, docent) VALUES (?, ?)", [email, id])
             conn.commit() 
 
@@ -110,7 +113,8 @@ class TeacherManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"UPDATE docent SET voornaam = ?, achternaam = ?, email = ? WHERE id = ?", [voornaam, achternaam, email, id])
+            cursor.execute(f"UPDATE docent SET voornaam = ?, achternaam = ?, email = ? "
+                           f"WHERE id = ?", [voornaam, achternaam, email, id])
             cursor.execute(f"UPDATE login SET email = (SELECT email FROM docent WHERE id = login.docent)")
             conn.commit() 
 

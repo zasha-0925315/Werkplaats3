@@ -12,7 +12,6 @@
 #QR-Box {
     display: flex;
     justify-content: center;
-
 }
 
 #QR-Content {
@@ -22,20 +21,18 @@
 }
 
 #QR-Text {
-    margin: 0 auto;
-    margin-top: 50px;
+    margin: 50px auto 0;
 }
 
 #Checkin-sluit,
 #qr-gen {
     font-size: 15px;
     cursor: pointer;
-    padding: 12.5px 30px;
+    padding: 13px 30px;
     border-radius: 400px;
     color: #ffffff;
     background-color: #d30f4c;
-    border: none;
-    border-color: transparent;
+    border: none transparent;
     transition: 300ms;
     margin-top: 10px;
 }

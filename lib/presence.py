@@ -52,7 +52,8 @@ class PresenceManagement:
             cursor = conn.cursor()
 
             cursor.execute(f"UPDATE aanwezigheid SET aanwezigheid = ?, afgemeld_reden = ? "
-                           f"WHERE student = ? AND meeting = ?", (json_presence, json_reden, json_student, json_meeting))
+                           f"WHERE student = ? AND meeting = ?",
+                           (json_presence, json_reden, json_student, json_meeting))
             conn.commit()
             conn.close()
 

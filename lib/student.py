@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import OperationalError
 from lib.db import Database
 
+
 class StudentManagement(Database):
     """regelt de studenten enzo"""
 
@@ -107,7 +108,8 @@ class StudentManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO student (id, voornaam, achternaam) VALUES (?, ?, ?)", [studentennummer, voornaam, achternaam])
+            cursor.execute("INSERT INTO student (id, voornaam, achternaam) "
+                           "VALUES (?, ?, ?)", [studentennummer, voornaam, achternaam])
             conn.commit() 
 
             conn.close()
@@ -121,7 +123,8 @@ class StudentManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"UPDATE student SET voornaam = ?, achternaam = ? WHERE id = ?", [voornaam, achternaam, studentennummer])
+            cursor.execute(f"UPDATE student SET voornaam = ?, achternaam = ? "
+                           f"WHERE id = ?", [voornaam, achternaam, studentennummer])
             conn.commit() 
 
             conn.close()

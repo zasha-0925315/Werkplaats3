@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import OperationalError
 from lib.db import Database
 
+
 class EnrollmentManagement(Database):
     """regelt de inschrijvingen enzo"""
 
@@ -14,7 +15,8 @@ class EnrollmentManagement(Database):
             cursor = conn.cursor()
             cursor.row_factory = sqlite3.Row 
 
-            cursor.execute(f"SELECT inschrijving.id, inschrijving.student, inschrijving.klas, student.voornaam, student.achternaam "
+            cursor.execute(f"SELECT inschrijving.id, inschrijving.student, "
+                           f"inschrijving.klas, student.voornaam, student.achternaam "
                            f"FROM inschrijving INNER JOIN student "
                            f"ON inschrijving.student=student.id")
             enrollment = cursor.fetchall()
@@ -37,7 +39,8 @@ class EnrollmentManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
  
-            cursor.execute(f"SELECT inschrijving.id, inschrijving.student, inschrijving.klas, student.voornaam, student.achternaam "
+            cursor.execute(f"SELECT inschrijving.id, inschrijving.student, "
+                           f"inschrijving.klas, student.voornaam, student.achternaam "
                            f"FROM inschrijving INNER JOIN student "
                            f"ON inschrijving.student=student.id "
                            "WHERE inschrijving.id = ?", [id])

@@ -4,10 +4,7 @@
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 5px 0;
     border-radius: 0;
     border: 0;
     border-bottom: 2px solid #001e48;
@@ -23,16 +20,14 @@
     justify-content: center;
     width: 350px;
     height: 550px;
-    margin: 0 auto;
-    margin-top: 50px;
+    margin: 50px auto 0;
     padding-top: 20px;
 
 }
 
 .login-header {
     display: flex;
-    margin: 0 auto;
-    margin-top: 30px;
+    margin: 30px auto 0;
     font-size: 40px;
 
 }
@@ -40,16 +35,13 @@
 .centered {
     border-style: ridge;
     border-color: red;
-
-
 }
 
 .login-field {
     width: 300px;
     background-color: rgb(232, 240, 254);
-    border-width: 0px 0px 2px 0px;
+    border-width: 0 0 2px 0;
     border-color: black;
-
 }
 
 .submit-btn5 {
@@ -61,15 +53,13 @@
 .submit {
     font-size: 22px;
     cursor: pointer;
-    padding: 12.5px 60px;
+    padding: 13px 60px;
     border-radius: 500px;
     color: #ffffff;
     background-color: #d30f4c;
-    border: none;
-    border-color: transparent;
+    border: none transparent;
     transition: 300ms;
     margin-top: 10px;
-
 }
 
 .submit-btn5 :hover {
