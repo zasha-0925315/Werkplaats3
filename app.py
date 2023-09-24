@@ -23,7 +23,7 @@ load_dotenv(projpath)
 LISTEN_ALL = "0.0.0.0"
 FLASK_IP = LISTEN_ALL
 FLASK_PORT = 81
-FLASK_DEBUG = True
+FLASK_DEBUG = False
 # FLASK_RUN_CERT = "adhoc"
 
 # app config
