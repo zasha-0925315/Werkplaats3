@@ -119,7 +119,7 @@ class CheckinManagement:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"SELECT * FROM Vraagresultaten WHERE meeting = {meetingid}")
+            cursor.execute(f"SELECT * FROM Vraagresultaten WHERE meeting = ?", meetingid)
             results = cursor.fetchall()
             conn.commit()
             conn.close()
