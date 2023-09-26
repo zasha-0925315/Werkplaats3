@@ -51,7 +51,7 @@ function createTable(meetingArray) {
                 let escapedStartTime = _.escape(dateFiltered[planningLength]["start_time"])
                 let escapedEndTime = _.escape(dateFiltered[planningLength]["end_time"])
                 tbody.innerHTML +=
-                    "<td><strong> " + ${escapedName} + "</strong></td>" + " " +
+                    "<td><strong> " + escapedName + "</strong></td>" + " " +
                     "<td><small>" + escapedDate + "</small></td>" + " " +
                     "<td><small>" + escapedStartTime + "</small></td>" + " " +
                     "<td><small>" + escapedEndTime + "</small></td>"
