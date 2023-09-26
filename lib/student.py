@@ -92,7 +92,7 @@ class StudentManagement(Database):
 
             cursor.execute(f"SELECT student.id "
                            f"FROM inschrijving INNER JOIN student "
-                           f"ON inschrijving.student=student.id AND inschrijving.klas IN ({meeting_classes})")
+                           f"ON inschrijving.student=student.id AND inschrijving.klas IN ?", meeting_classes)
             students = cursor.fetchall()
             conn.commit()
 
