@@ -15,7 +15,7 @@ from lib.meeting import MeetingManagement
 from lib.presence import PresenceManagement
 from lib.checkin import CheckinManagement
 
-# no touch
+# no touchy
 projpath = path.join(path.dirname(__file__), '.env')
 load_dotenv(projpath)
 
