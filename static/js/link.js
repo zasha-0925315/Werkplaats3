@@ -46,11 +46,15 @@ function createTable(meetingArray) {
         while (planningLength < arrayLength && planningLength < maxLength) {
             if (dateFiltered[planningLength]["teacher"].includes(teacherSelectBox.value)) {
                 console.log(dateFiltered[planningLength]["teacher"])
-                tbody.innerHTML += escape(
-                    "<td><strong> " + dateFiltered[planningLength]["name"] + "</strong></td>" + " " +
-                    "<td><small>" + dateFiltered[planningLength]["date"] + "</small></td>" + " " +
-                    "<td><small>" + dateFiltered[planningLength]["start_time"] + "</small></td>" + " " +
-                    "<td><small>" + dateFiltered[planningLength]["end_time"] + "</small></td>")
+                let escapedName = _.escape(dateFiltered[planningLength]["name"])
+                let escapedDate = _.escape(dateFiltered[planningLength]["date"])
+                let escapedStartTime = _.escape(dateFiltered[planningLength]["start_time"])
+                let escapedEndTime = _.escape(dateFiltered[planningLength]["end_time"])
+                tbody.innerHTML +=
+                    "<td><strong> " + ${escapedName} + "</strong></td>" + " " +
+                    "<td><small>" + escapedDate + "</small></td>" + " " +
+                    "<td><small>" + escapedStartTime + "</small></td>" + " " +
+                    "<td><small>" + escapedEndTime + "</small></td>"
             }
             planningLength++
         }
