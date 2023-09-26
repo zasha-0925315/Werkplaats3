@@ -14,7 +14,7 @@ class StudentManagement(Database):
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute("SELECT * FROM student WHERE id = %s", (studentennummer))
+            cursor.execute("SELECT * FROM student WHERE id = ?", [studentennummer])
             student = cursor.fetchone()
             conn.commit() 
 
