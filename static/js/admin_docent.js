@@ -1,5 +1,3 @@
-import escape from 'lodash.escape';
-
 async function get_docenten(){
     try {
         const response = await fetch('../api/adminteacher');
@@ -26,12 +24,12 @@ function fill_table(docenten){
 
     for(const docent of docenten){
         let tr = document.createElement('tr');
-        tr.innerHTML = escape('<td>' + docent["id"] + '</td>'
+        tr.innerHTML = '<td>' + docent["id"] + '</td>'
         + '<td>' + docent["voornaam"] + '</td>'
         + '<td>' + docent["achternaam"] + '</td>'
         + '<td>' + docent["email"] + '</td>'
         + '<td>' + docent["is_admin"] + '</td>'
-        + '<td>' + docent["is_verwijderd"] + '</td>');
+        + '<td>' + docent["is_verwijderd"] + '</td>';
         tb.appendChild(tr);
     }
     // a click function for all rows that redirects to the student page of the selected row

@@ -1,5 +1,3 @@
-import escape from 'lodash.escape';
-
 async function get_students(){
     try {
         const response = await fetch('../api/student');
@@ -23,7 +21,7 @@ function fill_select(students){
     
     for(const student of students){
         let op = document.createElement('option');
-        op.innerHTML = escape(student["voornaam", "achternaam"]);
+        op.innerHTML = student["voornaam", "achternaam"];
         select.appendChild(op);
     }
 }

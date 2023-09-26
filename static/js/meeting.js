@@ -1,5 +1,3 @@
-import escape from 'lodash.escape';
-
 const get_meeting = async () => {
     try {
         const url = window.location.pathname.split('/')
@@ -49,22 +47,18 @@ const get_meeting = async () => {
 
                     switch (data["presence_list"][student_count]["presence"]) {
                         case 0:
-                            let studentAfwezig = escape(student_name + student_class + student_afwezig + student_check_in_time + presence_options)
-                            meetingInfo.innerHTML += studentAfwezig
+                            meetingInfo.innerHTML += student_name + student_class + student_afwezig + student_check_in_time + presence_options
                             break
                         case 1:
-                            let studentAanwezig = escape(student_name + student_class + student_aanwezig + student_check_in_time + presence_options)
-                            meetingInfo.innerHTML += studentAanwezig
+                            meetingInfo.innerHTML += student_name + student_class + student_aanwezig + student_check_in_time + presence_options
                             student_presence++
                             break
                         case 2:
-                            let studentAfgemeld = escape("<tr class='afgemeld_row'>" + student_name + student_class + student_afgemeld + student_check_in_time + presence_options +
-                                "<td class='afgemeld_reason'>" + afgemeld_reason + "</td>" + "</tr>")
-                            meetingInfo.innerHTML += studentAfgemeld
+                            meetingInfo.innerHTML += "<tr class='afgemeld_row'>" + student_name + student_class + student_afgemeld + student_check_in_time + presence_options +
+                                "<td class='afgemeld_reason'>" + afgemeld_reason + "</td>" + "</tr>"
                             break
                         default:
-                            let studentDefault = escape(student_name + student_class + student_error + presence_options)
-                            meetingInfo.innerHTML += studentDefault
+                            meetingInfo.innerHTML += student_name + student_class + student_error + presence_options
                     }
                     student_count++
                 }

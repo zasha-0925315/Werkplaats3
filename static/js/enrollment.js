@@ -1,5 +1,3 @@
-import escape from 'lodash.escape';
-
 async function get_enrollments(){
     try {
         const response = await fetch('../api/inschrijvingen');
@@ -28,11 +26,11 @@ function fill_table(obj){
 
     for(const enrollment of enrollments){
         let tr = document.createElement('tr');
-        tr.innerHTML = escape('<td id="doei">' + enrollment["id"] + '</td>'
+        tr.innerHTML = '<td id="doei">' + enrollment["id"] + '</td>'
         + '<td>' + enrollment["student"] + '</td>'
         + '<td>' + enrollment["voornaam"] + '</td>'
         + '<td>' + enrollment["achternaam"] + '</td>'
-        + '<td>' + enrollment["klas"] + '</td>');
+        + '<td>' + enrollment["klas"] + '</td>';
         tb.appendChild(tr);
     }
 // copypasta click function

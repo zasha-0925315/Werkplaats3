@@ -1,7 +1,0 @@
-{
-  "name": "Werkplaats3",
-  "version": "1.0.0",
-  "dependencies": {
-    "lodash.escape": "^4.0.1"
-  }
-}
