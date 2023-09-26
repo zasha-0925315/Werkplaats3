@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 // Get the list of meetings
 async function getMeeting() {
     try {
@@ -44,11 +46,15 @@ function createTable(meetingArray) {
         while (planningLength < arrayLength && planningLength < maxLength) {
             if (dateFiltered[planningLength]["teacher"].includes(teacherSelectBox.value)) {
                 console.log(dateFiltered[planningLength]["teacher"])
+                let escapedName = escape(dateFiltered[planningLength]["name"])
+                let escapedDate = escape(dateFiltered[planningLength]["date"])
+                let escapedStart = escape(dateFiltered[planningLength]["start_time"])
+                let escapedEnd = escape(dateFiltered[planningLength]["end_time"])
                 tbody.innerHTML +=
-                    "<td><strong> " + dateFiltered[planningLength]["name"] + "</strong></td>" + " " +
-                    "<td><small>" + dateFiltered[planningLength]["date"] + "</small></td>" + " " +
-                    "<td><small>" + dateFiltered[planningLength]["start_time"] + "</small></td>" + " " +
-                    "<td><small>" + dateFiltered[planningLength]["end_time"] + "</small></td>"
+                    "<td><strong> " + escapedName + "</strong></td>" + " " +
+                    "<td><small>" + escapedDate + "</small></td>" + " " +
+                    "<td><small>" + escapedStart + "</small></td>" + " " +
+                    "<td><small>" + escapedEnd + "</small></td>"
             }
             planningLength++
         }

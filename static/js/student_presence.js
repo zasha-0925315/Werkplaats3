@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 async function get_student_presence(){
     try {
         const url = window.location.pathname.split('/')
@@ -22,7 +24,9 @@ async function get_student_presence(){
 function fill_name(name){
     const namePlate = document.querySelector("#student_name")
     namePlate.replaceChildren()
-    namePlate.innerHTML = name["voornaam"] + " " + name["achternaam"]
+    let escaped_voornaam = escape(name["voornaam"])
+    let escaped_achternaam = escape(name["achternaam"])
+    namePlate.innerHTML = escaped_voornaam + " " + escaped_achternaam
 }
 
 function fill_table(presence_list){
@@ -46,8 +50,10 @@ function fill_table(presence_list){
                 presence = '<td class="maybe_presence">Afgemeld</td>'
                 break
         }
-        tr.innerHTML = '<td>' + data["naam"] + '</td>'
-        + '<td>' + data["datum"] + '</td>'
+        let escaped_naam = escape(data["naam"])
+        let escaped_datum = escape(data["datum"])
+        tr.innerHTML = '<td>' + escaped_naam + '</td>'
+        + '<td>' + escaped_datum + '</td>'
         + presence
 
         // a click function for all rows that redirects to the meeting page of the selected row

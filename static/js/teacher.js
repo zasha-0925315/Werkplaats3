@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 async function get_teachers() {
     try {
         const response = await fetch('../api/teacher');
@@ -28,10 +30,14 @@ function fill_table(obj) {
     for (const docent of docenten) {
 
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + docent.id + '</td>'
-            + '<td>' + docent.voornaam + '</td>' +
-            '<td>' + docent.achternaam + '</td>' +
-            '<td>' + docent.email + '</td>';
+        let escaped_id = escape(docent.id)
+        let escaped_voornaam = escape(docent.voornaam)
+        let escaped_achternaam = escape(docent.achternaam)
+        let escaped_email = escape(docent.email)
+        tr.innerHTML = '<td>' + escaped_id + '</td>'
+            + '<td>' + escaped_voornaam + '</td>' +
+            '<td>' + escaped_achternaam + '</td>' +
+            '<td>' + escaped_email + '</td>';
         tb.appendChild(tr);
 
     }

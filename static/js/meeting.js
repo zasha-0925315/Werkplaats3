@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 const get_meeting = async () => {
     try {
         const url = window.location.pathname.split('/')
@@ -20,23 +22,25 @@ const get_meeting = async () => {
                 meetingInfo.replaceChildren()
                 while (student_count < presence_length) {
 
-                    let afgemeld_reason = data["presence_list"][student_count]["afgemeld reason"]
+                    let afgemeld_reason = escape(data["presence_list"][student_count]["afgemeld reason"])
                     if (afgemeld_reason === null) {
                         afgemeld_reason = "Geen reden"
                     }
-
-                    let student_check_in_time = "<td>" + data["presence_list"][student_count]["check-in time"] + "</td>"
+                    let escaped_student_check_in_time = escape(data["presence_list"][student_count]["check-in time"])
+                    let student_check_in_time = "<td>" + escaped_student_check_in_time + "</td>"
                     if (data["presence_list"][student_count]["check-in time"] === null) {
                         student_check_in_time = "<td></td>"
                     }
+                    let escaped_first_name = escape(data["presence_list"][student_count]["first name"])
+                    let escaped_last_name = escape(data["presence_list"][student_count]["last name"])
+                    let escaped_class = escape(data["presence_list"][student_count]["class"])
 
-                    let student_name = "<td>" + data["presence_list"][student_count]["first name"] + " " + data["presence_list"][student_count]["last name"] + "</td>"
-                    let student_class = "<td>" + data["presence_list"][student_count]["class"] + "</td>"
+                    let student_name = "<td>" + escaped_first_name + " " + escaped_last_name + "</td>"
+                    let student_class = "<td>" + escaped_class + "</td>"
                     let student_afwezig = "<td class='no_presence'>Afwezig</td>"
                     let student_aanwezig = "<td class='yes_presence'>Aanwezig</td>"
                     let student_afgemeld = "<td class='maybe_presence'>Afgemeld</td>"
                     let student_error = "<td>" + "error" + "</td>"
-
                     let presence_options =
                         "<td class='presence_options'>" +
                         "<div id='button_presence_yes' class='button_presence' data-value='1' data-count=" + student_count + ">:)</div>" +

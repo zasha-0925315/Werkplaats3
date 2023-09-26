@@ -1,5 +1,7 @@
 // same as meeting_list.js but for sign out //
 
+import escape from 'lodash.escape';
+
 async function get_meetings() {
     try {
         const response = await fetch('../api/meeting');
@@ -57,10 +59,14 @@ function fill_table(meeting_list) {
     table.appendChild(tb);
     for (const meeting of meeting_list) {
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + meeting["name"] + '</td>'
-            + '<td>' + meeting["date"] + '</td>'
-            + '<td>' + meeting["start_time"] + '</td>'
-            + '<td>' + meeting["end_time"] + '</td>';
+        let escaped_name = escape(meeting["name"])
+        let escaped_date = escape(meeting["date"])
+        let escaped_start = escape(meeting["start_time"])
+        let escaped_end = escape(meeting["end_time"])
+        tr.innerHTML = '<td>' + escaped_name + '</td>'
+            + '<td>' + escaped_date + '</td>'
+            + '<td>' + escaped_start + '</td>'
+            + '<td>' + escaped_end + '</td>';
         tr.addEventListener("click", function () {
             window.location.href = "/sign_out/" + meeting["id"]
         })

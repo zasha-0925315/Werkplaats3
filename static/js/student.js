@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 async function get_students(){
     try {
         const response = await fetch('../api/student');
@@ -55,10 +57,14 @@ function fill_table(student_list){
     table.appendChild(tb);
     for(const student of student_list){
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + student["id"] + '</td>'
-        + '<td>' + student["voornaam"] + '</td>'
-        + '<td>' + student["achternaam"] + '</td>'
-        + '<td>' + student["klas"] + '</td>';
+        let escaped_id = escape(student["id"])
+        let escaped_voornaam = escape(student["voornaam"])
+        let escaped_achternaam = escape(student["achternaam"])
+        let escaped_klas = escape(student["klas"])
+        tr.innerHTML = '<td>' + escaped_id + '</td>'
+        + '<td>' + escaped_voornaam + '</td>'
+        + '<td>' + escaped_achternaam + '</td>'
+        + '<td>' + escaped_klas + '</td>';
         tb.appendChild(tr);
     }
     // a click function for all rows that redirects to the student page of the selected row

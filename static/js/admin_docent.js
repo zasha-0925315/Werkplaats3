@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 async function get_docenten(){
     try {
         const response = await fetch('../api/adminteacher');
@@ -24,12 +26,18 @@ function fill_table(docenten){
 
     for(const docent of docenten){
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + docent["id"] + '</td>'
-        + '<td>' + docent["voornaam"] + '</td>'
-        + '<td>' + docent["achternaam"] + '</td>'
-        + '<td>' + docent["email"] + '</td>'
-        + '<td>' + docent["is_admin"] + '</td>'
-        + '<td>' + docent["is_verwijderd"] + '</td>';
+        let escaped_id = escape(docent["id"])
+        let escaped_voornaam = escape(docent["voornaam"])
+        let escaped_achternaam = escape(docent["achternaam"])
+        let escaped_email = escape(docent["email"])
+        let escaped_is_admin = escape(docent["is_admin"])
+        let escaped_is_verwijderd = escape(docent["is_verwijderd"])
+        tr.innerHTML = '<td>' + escaped_id + '</td>'
+        + '<td>' + escaped_voornaam + '</td>'
+        + '<td>' + escaped_achternaam + '</td>'
+        + '<td>' + escaped_email + '</td>'
+        + '<td>' + escaped_is_admin + '</td>'
+        + '<td>' + escaped_is_verwijderd + '</td>';
         tb.appendChild(tr);
     }
     // a click function for all rows that redirects to the student page of the selected row

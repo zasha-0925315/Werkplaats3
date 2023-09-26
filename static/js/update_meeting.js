@@ -8,6 +8,8 @@ const urlyx = window.location.pathname.split('/')
 const urlId = urlyx[2]
 const url = '/api/checkin/' + urlId
 
+import escape from 'lodash.escape';
+
 // hide the antwoord table first.. //
 table.style.display = 'None'
 tb.style.display = 'None'
@@ -161,7 +163,8 @@ function fillAnswers(answers) {
 
     for (const answer of answers) {
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + answer[2] + "</td>"
+        let escaped_answer = escape(answer[2])
+        tr.innerHTML = '<td>' + escaped_answer + "</td>"
         console.log(answer)
         tb.appendChild(tr);
     }
