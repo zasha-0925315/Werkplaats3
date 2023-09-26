@@ -46,7 +46,7 @@ class MeetingManagement:
             conn = sqlite3.connect(self.db_file)
             cursor = conn.cursor()
 
-            cursor.execute(f"SELECT * FROM meeting WHERE id = ?", meetingid)
+            cursor.execute(f"SELECT * FROM meeting WHERE id = {meetingid}")
             meeting_db_info = cursor.fetchall()
             meeting_info = []
             for info in meeting_db_info:
