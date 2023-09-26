@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 async function get_accounts(){
     try {
         const response = await fetch('../api/accounts');
@@ -28,10 +30,10 @@ function fill_table(obj){
 
     for(const account of accounts){
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td id="doei">' + account["id"] + '</td>'
+        tr.innerHTML = escape('<td id="doei">' + account["id"] + '</td>'
         + '<td>' + account["email"] + '</td>'
         + '<td>' + account["docent"] + '</td>'
-        + '<td>' + account["is_admin"] + '</td>';
+        + '<td>' + account["is_admin"] + '</td>');
         tb.appendChild(tr);
     }
     // copypasta click function

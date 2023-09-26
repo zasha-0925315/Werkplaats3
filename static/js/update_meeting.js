@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 const question = document.querySelector('#question')
 const questionButton = document.querySelector('#button10')
 const AnswersButton = document.querySelector('#show_answers')
@@ -161,7 +163,7 @@ function fillAnswers(answers) {
 
     for (const answer of answers) {
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + answer[2] + "</td>"
+        tr.innerHTML = escape('<td>' + answer[2] + "</td>")
         console.log(answer)
         tb.appendChild(tr);
     }

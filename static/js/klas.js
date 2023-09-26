@@ -1,3 +1,5 @@
+import escape from 'lodash.escape';
+
 async function get_classes(){
     try {
         const response = await fetch('../api/klas');
@@ -28,7 +30,7 @@ function fill_table(obj){
     for(const klas of klassen){
         
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + klas + '</td>';
+        tr.innerHTML = escape('<td>' + klas + '</td>');
         tb.appendChild(tr);
     }
 }
