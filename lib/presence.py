@@ -20,7 +20,7 @@ class PresenceManagement:
                            f"FROM aanwezigheid "
                            f"INNER JOIN student ON aanwezigheid.student=student.id "
                            f"INNER JOIN inschrijving ON student.id=inschrijving.student "
-                           f"AND aanwezigheid.meeting IN ({meetingid})")
+                           f"AND aanwezigheid.meeting IN ?", meetingid)
 
             presence_db_info = cursor.fetchall()
             conn.close()
@@ -73,7 +73,7 @@ class PresenceManagement:
                            f"FROM aanwezigheid "
                            f"INNER JOIN student ON aanwezigheid.student=student.id "
                            f"INNER JOIN meeting ON aanwezigheid.meeting=meeting.id "
-                           f"AND aanwezigheid.student IN ({student_id})")
+                           f"AND aanwezigheid.student IN ?", student_id)
 
             presence_student = cursor.fetchall()
 
