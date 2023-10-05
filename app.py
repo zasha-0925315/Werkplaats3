@@ -4,6 +4,7 @@ import os
 from os import environ, path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, json, jsonify, flash
+from flask_bcrypt import Bcrypt
 
 from lib.account import AccountManagement
 from lib.login import Login
@@ -19,6 +20,7 @@ from lib.checkin import CheckinManagement
 projpath = path.join(path.dirname(__file__), '.env')
 load_dotenv(projpath)
 
+
 # Flask server
 LISTEN_ALL = "0.0.0.0"
 FLASK_IP = LISTEN_ALL
@@ -31,6 +33,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['JSON_SORT_KEYS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = '../databases/demo_data.db'
+bcrypt = Bcrypt(app)
 
 # database shiz
 DB_FILE = os.path.join(app.root_path, "databases", "demo_data.db")
@@ -579,15 +582,16 @@ def add_account_post():
     
     email = request.form.get('email').strip()
     wachtwoord = request.form.get('wachtwoord')
+    hashed_wachtwoord = bcrypt.generate_password_hash(wachtwoord).decode('utf-8')
     docent = request.form.get('docent').strip()
-    admin =request.form.get('admin')
+    admin = request.form.get('admin')
 
     if admin == "on":
         admin = 1
     else:
         admin = 0
 
-    accdb.create_account(email, wachtwoord, docent, admin)
+    accdb.create_account(email, hashed_wachtwoord, docent, admin)
 
     flash("Gebruiker aangemaakt!", "info")
     return redirect(url_for('accounts'))
@@ -601,6 +605,7 @@ def update_account(accountId):
     id = acc_json.get('id')
     email = acc_json.get('email')
     wachtwoord = acc_json.get('wachtwoord')
+
     docent = acc_json.get('docent')
     is_admin = acc_json.get('is_admin')
 
@@ -721,8 +726,8 @@ def show_login():
 
 @app.post("/handle_login")
 def handle_login():
-    if request.form["password"] == "password" and request.form["username"] == "admin" or \
-            request.form["password"] == "password" and request.form["username"] == "docent":
+    if bcrypt.check_password_hash("password", request.form["password"]) and request.form["username"] == "admin" or \
+            bcrypt.check_password_hash("password", request.form["password"]) and request.form["username"] == "docent":
         session["logged_in"] = True
         session['username'] = request.form["username"]
     else:
