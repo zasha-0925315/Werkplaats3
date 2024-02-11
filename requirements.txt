@@ -9,3 +9,4 @@ mysql-connector-python
 python-dotenv
 email_validator
 pyopenssl
+dnspython>=2.6.0rc1 # not directly required, pinned by Snyk to avoid a vulnerability
